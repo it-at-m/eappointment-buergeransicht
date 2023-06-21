@@ -1,0 +1,121 @@
+#app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #2c3e50;
+}
+
+.button-submit {
+    margin-right: 1rem;
+    margin-top: 1rem;
+}
+
+.content {
+    margin-top: 20px;
+}
+
+.confirm-action {
+    margin-top: 2rem;
+}
+
+.v-alert {
+    margin: 0 0 20px 0;
+}
+
+.appointment-number {
+    font-size: 20px;
+    padding: 10px 0;
+}
+
+.popup-content {
+    font-size: 18px;
+    padding: 20px;
+}
+
+
+.calendar-container {
+}
+.v-btn--rounded {
+    border-radius: 0.25rem;
+    width: 100% !important;
+}
+.v-date-picker-table tbody .v-btn {
+    background: #32a852;
+    color: #fff;
+}
+.v-date-picker-table tbody .v-btn.v-btn--disabled  {
+    background: #cccccc;
+}
+.v-card {
+    text-align: center;
+}
+.v-card__text {
+    overflow-y: scroll;
+    padding: 0 !important;
+    max-height: 12rem;
+}
+.select-appointment {
+    padding: 0.5rem 0;
+}
+
+.v-picker {
+    margin-top: 0 !important;
+}
+.select-appointment:hover {
+    background: #cccccc;
+}
+.preselected-appointment, .select-appointment {
+    cursor: pointer;
+}
+
+.v-alert {
+    color: #fff !important;
+    margin: 10px;
+}
+
+.p-0 {
+    padding: 0;
+}
+
+.button-next {
+    margin-top: 4rem;
+}
+.filtered-service {
+    cursor: pointer;
+}
+.subservices .v-list-item {
+    border-bottom: #ccc solid 1px;
+    padding-left: 0;
+}
+.subservices .v-card__actions {
+    padding-left: 0;
+}
+h3 {
+    margin-top: 2rem;
+}
+.v-menu__content {
+    margin-left: 1rem;
+}
+
+.appointment-count {
+    margin: 0 0.5rem;
+}
+
+.appointment-count-button {
+    height: 2rem !important;
+    width: 2rem !important;
+}
+
+.appointment-count-button .v-icon {
+    height: 1rem !important;
+    width: 1rem !important;
+}
+
+.theme--light.v-btn.v-btn--has-bg.button-next,
+.theme--light.v-btn.v-btn--has-bg.button-submit {
+    background: #2c3e50;
+}
+
+.v-dialog__container {
+    display: block;
+}

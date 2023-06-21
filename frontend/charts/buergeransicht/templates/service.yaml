@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    description: The applications http port.
+  labels:
+    app: {{ .Release.Name }}
+    template: build-deploy
+  name: {{ .Release.Name }}
+spec:
+  ports:
+  - name: 8080-tcp
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    deployment: {{ .Release.Name }}

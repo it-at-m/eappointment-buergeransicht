@@ -1,0 +1,2852 @@
+{
+  "offices":[
+    {
+      "id":"10218",
+      "name":"Referat für Stadtplanung und Bauordnung"
+    },
+    {
+      "id":"10405",
+      "name":"KfZ Zulassungsstelle"
+    },
+    {
+      "id":"10406",
+      "name":"KfZ Zulassungsstelle"
+    },
+    {
+      "id":"10414",
+      "name":"KfZ Zulassungsstelle"
+    },
+    {
+      "id":"10416",
+      "name":"KfZ Zulassungsstelle"
+    },
+    {
+      "id":"10446",
+      "name":"Ausländerbehörde"
+    },
+    {
+      "id":"10454",
+      "name":"Ausländerbehörde"
+    },
+    {
+      "id":"10455",
+      "name":"Ausländerbehörde"
+    },
+    {
+      "id":"10461",
+      "name":"Ausländerbehörde"
+    },
+    {
+      "id":"10469",
+      "name":"Standesamt"
+    },
+    {
+      "id":"10470",
+      "name":"Standesamt"
+    },
+    {
+      "id":"10471",
+      "name":"Einbürgerung"
+    },
+    {
+      "id":"10473",
+      "name":"Standesamt"
+    },
+    {
+      "id":"10474",
+      "name":"Standesamt"
+    },
+    {
+      "id":"10476",
+      "name":"Standesamt"
+    },
+    {
+      "id":"10485",
+      "name":"Standesamt"
+    },
+    {
+      "id":"10489",
+      "name":"Bürgerbüro Ruppertstraße"
+    },
+    {
+      "id":"10492",
+      "name":"Bürgerbüro Ruppertstraße"
+    },
+    {
+      "id":"10500",
+      "name":"Bürgerbüro Ruppertstraße"
+    },
+    {
+      "id":"10502",
+      "name":"Bürgerbüro Ruppertstraße"
+    },
+    {
+      "id":"10506",
+      "name":"Versicherungsamt"
+    },
+    {
+      "id":"10512",
+      "name":"Versicherungsamt"
+    },
+    {
+      "id":"10515",
+      "name":"Versicherungsamt"
+    },
+    {
+      "id":"10546",
+      "name":"Gewerbeamt"
+    },
+    {
+      "id":"10640",
+      "name":"Amt für Ausbildungsförderung"
+    },
+    {
+      "id":"54260",
+      "name":"Standesamt München-Pasing"
+    },
+    {
+      "id":"54261",
+      "name":"Bürgerbüro Pasing"
+    },
+    {
+      "id":"54290",
+      "name":"Kommunale Verkehrsüberwachung"
+    },
+    {
+      "id":"54291",
+      "name":"Kommunale Verkehrsüberwachung"
+    },
+    {
+      "id":"101731",
+      "name":"Mietberatung"
+    },
+    {
+      "id":"102101",
+      "name":"KfZ Zulassungsstelle"
+    },
+    {
+      "id":"102432",
+      "name":"Führerscheinstelle"
+    },
+    {
+      "id":"102435",
+      "name":"Führerscheinstelle"
+    },
+    {
+      "id":"102436",
+      "name":"Führerscheinstelle"
+    },
+    {
+      "id":"102440",
+      "name":"Führerscheinstelle"
+    },
+    {
+      "id":"102522",
+      "name":"Bürgerbüro Orleansplatz"
+    },
+    {
+      "id":"102523",
+      "name":"Bürgerbüro Leonrodstraße"
+    },
+    {
+      "id":"102524",
+      "name":"Bürgerbüro Riesenfeldstraße"
+    },
+    {
+      "id":"102526",
+      "name":"Bürgerbüro Forstenrieder Allee"
+    },
+    {
+      "id":"1049618",
+      "name":"Veterinäramt"
+    },
+    {
+      "id":"1059485",
+      "name":"Ausländerbehörde (Asyl)"
+    },
+    {
+      "id":"1060066",
+      "name":"Bürgerbüro Orleansplatz"
+    },
+    {
+      "id":"1060068",
+      "name":"Bürgerbüro Orleansplatz"
+    },
+    {
+      "id":"1060069",
+      "name":"Bürgerbüro Orleansplatz"
+    },
+    {
+      "id":"1061927",
+      "name":"Standesamt"
+    },
+    {
+      "id":"1061934",
+      "name":"Führerscheinstelle"
+    },
+    {
+      "id":"1061963",
+      "name":"Fundbüro"
+    },
+    {
+      "id":"1061964",
+      "name":"Fundbüro"
+    },
+    {
+      "id":"1063278",
+      "name":"Gewerbeamt"
+    },
+    {
+      "id":"1063373",
+      "name":"Elternberatung"
+    },
+    {
+      "id":"1064291",
+      "name":"Standesamt"
+    },
+    {
+      "id":"1092697",
+      "name":"Ausländerbehörde"
+    },
+    {
+      "id":"1094898",
+      "name":"Führerscheinstelle"
+    },
+    {
+      "id":"10181768",
+      "name":"Bürgerbüro Pasing"
+    },
+    {
+      "id":"10181770",
+      "name":"Bürgerbüro Pasing"
+    },
+    {
+      "id":"10187259",
+      "name":"Ausländerbehörde"
+    },
+    {
+      "id":"10204386",
+      "name":"Bürgerbüro Riesenfeldstraße"
+    },
+    {
+      "id":"10204388",
+      "name":"Bürgerbüro Riesenfeldstraße"
+    },
+    {
+      "id":"10206241",
+      "name":"Bürgerbüro Leonrodstraße"
+    },
+    {
+      "id":"10227989",
+      "name":"Bürgerbüro Leonrodstraße"
+    },
+    {
+      "id":"10286848",
+      "name":"Bürgerbüro Forstenrieder Allee"
+    },
+    {
+      "id":"10286849",
+      "name":"Bürgerbüro Forstenrieder Allee"
+    },
+    {
+      "id":"10295168",
+      "name":"Standesamt"
+    },
+    {
+      "id":"10308013",
+      "name":"KfZ Zulassungsstelle"
+    },
+    {
+      "id":"10351880",
+      "name":"Standesamt München-Pasing Heiratsbüro"
+    },
+    {
+      "id":"10351881",
+      "name":"Standesamt München-Pasing Geburtenbüro"
+    },
+    {
+      "id":"10351882",
+      "name":"Standesamt München-Pasing Sterbebüro"
+    },
+    {
+      "id":"10351883",
+      "name":"Standesamt München-Pasing Urkundenstelle"
+    }
+  ],
+  "services":[
+    {
+      "id":"1063423",
+      "name":"Gewerbe anmelden / Zweitschrift beantragen",
+      "maxQuantity":3,
+      "combinable":[
+        1063423,
+        1063525,
+        1063659,
+        1063684,
+        1063689
+      ]
+    },
+    {
+      "id":"1063424",
+      "name":"Fahrzeug umschreiben innerhalb Münchens",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1063425",
+      "name":"Fabrikneues Fahrzeug anmelden",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1063426",
+      "name":"Beglaubigung von Dokumenten bis zu 5 Dokumenten",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1063428",
+      "name":"Beglaubigung von Unterschriften",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1063441",
+      "name":"Personalausweis",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1063453",
+      "name":"Reisepass",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1063464",
+      "name":"Kinderreisepass (bis 12 Jahre) beantragen",
+      "maxQuantity":5,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1063475",
+      "name":"Wohnsitz anmelden oder ummelden",
+      "maxQuantity":3,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1063486",
+      "name":"Wohnsitz abmelden",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1063505",
+      "name":"Melderegisterauskunft",
+      "maxQuantity":3,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1063519",
+      "name":"Fundsache abholen",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1063525",
+      "name":"Reisegewerbe-Erlaubnis beantragen",
+      "maxQuantity":3,
+      "combinable":[
+        1063423,
+        1063525,
+        1063659,
+        1063684,
+        1063689
+      ]
+    },
+    {
+      "id":"1063553",
+      "name":"Übermittlungssperre von Daten",
+      "maxQuantity":3,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1063565",
+      "name":"Führungszeugnis",
+      "maxQuantity":5,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1063576",
+      "name":"Meldebescheinigung",
+      "maxQuantity":5,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1063648",
+      "name":"Anmeldung einer Eheschließung",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1063655",
+      "name":"Sterbeurkunde",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1063659",
+      "name":"Bewachungsgewerbe – Erlaubnis beantragen",
+      "maxQuantity":3,
+      "combinable":[
+        1063423,
+        1063525,
+        1063659,
+        1063684,
+        1063689
+      ]
+    },
+    {
+      "id":"1063684",
+      "name":"Erlaubnis für Pfandleihergewerbe",
+      "maxQuantity":3,
+      "combinable":[
+        1063423,
+        1063525,
+        1063659,
+        1063684,
+        1063689
+      ]
+    },
+    {
+      "id":"1063689",
+      "name":"Erlaubnis für Versteigerergewerbe",
+      "maxQuantity":3,
+      "combinable":[
+        1063423,
+        1063525,
+        1063659,
+        1063684,
+        1063689
+      ]
+    },
+    {
+      "id":"1063712",
+      "name":"Güterkraftverkehr-Erlaubnis",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1063715",
+      "name":"Mietwagengenehmigung",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1063718",
+      "name":"Taxigenehmigung",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1063731",
+      "name":"Kirchenaustritt erklären",
+      "maxQuantity":5,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1063741",
+      "name":"Verpflichtungserklärung abgeben",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064033",
+      "name":"Auskunft aus dem Gewerbezentralregister – Natürliche Person",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064076",
+      "name":"Aus dem Ausland eingeführtes Fahrzeug anmelden",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064088",
+      "name":"Erlaubnis zum Daueraufenthalt-EU beantragen",
+      "maxQuantity":4,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064095",
+      "name":"Ehegattennachzug aus dem Ausland",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064101",
+      "name":"Niederlassungserlaubnis beantragen",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064109",
+      "name":"Niederlassungserlaubnis ab 16 Jahren",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064115",
+      "name":"Niederlassungserlaubnis für Familienangehörige von Deutschen",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064121",
+      "name":"Adressänderung in Fahrzeugpapiere eintragen lassen",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064130",
+      "name":"Namensänderung in den Fahrzeugpapieren",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064230",
+      "name":"Fahrerlaubnis – Erstantrag",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064233",
+      "name":"Ersatzführerschein nach Verlust oder Diebstahl",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064268",
+      "name":"Ausfuhrkennzeichen beantragen",
+      "maxQuantity":3,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064271",
+      "name":"Verlust oder Diebstahl der Kennzeichenschilder",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064275",
+      "name":"Verlust oder Diebstahl der Zulassungsbescheinigung Teil I",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064278",
+      "name":"Verlust oder Diebstahl der Zulassungsbescheinigung Teil II",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064284",
+      "name":"Erweiterung einer Fahrerlaubnis",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064287",
+      "name":"Umtausch in Kartenführerschein",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064305",
+      "name":"Fahrzeug abmelden",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064308",
+      "name":"Fahrzeug wieder anmelden",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064311",
+      "name":"Historisches Kennzeichen für Oldtimer beantragen",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064314",
+      "name":"Fahrzeug umschreiben von außerhalb nach München",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064323",
+      "name":"Kurzzeitkennzeichen beantragen",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064333",
+      "name":"Saisonkennzeichen beantragen",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064342",
+      "name":"Auskunft aus dem Fahrzeugregister beantragen",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064345",
+      "name":"Rotes Dauerkennzeichen für Oldtimer beantragen",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064348",
+      "name":"Führerschein mit 17",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064351",
+      "name":"Namensänderung im Führerschein",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064354",
+      "name":"Technische Änderungen in Fahrzeugpapiere eintragen lassen",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064361",
+      "name":"Verlängerung befristeter Führerschein-Klassen",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064364",
+      "name":"Fahrerlaubnis – Neuantrag nach Entzug oder Verzicht",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064374",
+      "name":"Rotes Dauerkennzeichen für Handel, Werkstätten und Hersteller beantragen",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064377",
+      "name":"Fahrschulerlaubnis",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1064381",
+      "name":"Fahrlehrererlaubnis",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1071754",
+      "name":"Karteikartenabschrift der Führerscheindaten",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1071760",
+      "name":"Personenbeförderungsschein – Verlängerung",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1071764",
+      "name":"Personenbeförderungsschein – Antrag",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1071835",
+      "name":"Umschreibung Dienstführerschein",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1071854",
+      "name":"Internationaler Führerschein",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1071896",
+      "name":"Umschreibung eines ausländischen Führerscheins",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1071907",
+      "name":"Einbürgerung",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1071926",
+      "name":"Feststellungsverfahren deutsche Staatsangehörigkeit",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1071944",
+      "name":"Umschreibung EU/EWR-Führerschein",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1071959",
+      "name":"Halter- und Datenbestätigungen für ein Kraftfahrzeug beantragen",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1072012",
+      "name":"EU-Parkausweis (hellblau) für Behinderte",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1072015",
+      "name":"Parkausweis für Handelsvertretungen",
+      "maxQuantity":3,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1072019",
+      "name":"Parkausweis für Handwerksbetriebe",
+      "maxQuantity":3,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1072022",
+      "name":"Parkausweis für gewerbliche Anlieger",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1072025",
+      "name":"Parkausweis für Soziale Dienste",
+      "maxQuantity":3,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1072037",
+      "name":"Parkausweis für Anwohner*innen – Umschreibung",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1072040",
+      "name":"Parkausweis für Anwohner*innen – Neuantrag nach Verlust",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1072043",
+      "name":"Parkausweis für Anwohner*innen – Neuantrag oder Verlängerung",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1073805",
+      "name":"Beratung zum Baurecht",
+      "maxQuantity":4,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1074552",
+      "name":"Mietberatung",
+      "maxQuantity":3,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1074970",
+      "name":"BAföG – Antrag Ausbildungsförderung",
+      "maxQuantity":3,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1075163",
+      "name":"Vaterschaftsanerkennung ohne Sorgerechtserklärung vor Geburt/Geburtsbeurkundung des Kindes",
+      "maxQuantity":3,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1075967",
+      "name":"Verpflichtung zur Erfüllung von Unterhaltsansprüchen beurkunden",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1076889",
+      "name":"Verlust oder Diebstahl Personalausweis",
+      "maxQuantity":5,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1078273",
+      "name":"Verlust oder Diebstahl Reisepass",
+      "maxQuantity":5,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1078314",
+      "name":"Vaterschaftsanerkennung ohne Sorgerechtserklärung mit bereits ausgestellter Geburtsurkunde für das Kind",
+      "maxQuantity":3,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1080455",
+      "name":"Rentenauskunft",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1080479",
+      "name":"Altersrenten",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1080486",
+      "name":"Erwerbsminderungsrenten",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1080494",
+      "name":"Hinterbliebenenrente",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1080498",
+      "name":"Kontenklärung",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1080502",
+      "name":"Wechselkennzeichen",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1080582",
+      "name":"Vorläufiger Reisepass",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1080625",
+      "name":"Blaue Karte EU – Ausländische Staatsangehörige",
+      "maxQuantity":5,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1080716",
+      "name":"Übertrag des Aufenthaltstitels in den neuen Pass",
+      "maxQuantity":4,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1080733",
+      "name":"Zufahrtserlaubnis für Oktoberfest und Oide Wiesn",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1080784",
+      "name":"Aufenthaltserlaubnis – Betriebliche Aus- und Weiterbildung",
+      "maxQuantity":4,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1080790",
+      "name":"Niederlassungserlaubnis für Fachkräfte",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1080812",
+      "name":"Niederlassungserlaubnis für Hochqualifizierte",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1080843",
+      "name":"Haushaltsbescheinigung beantragen",
+      "maxQuantity":5,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1083077",
+      "name":"Erwerb der deutschen Staatsangehörigkeit durch Geburt in Deutschland",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1086568",
+      "name":"Studium nach Au-pair-Aufenthalt oder freiwilligem sozialen Jahr",
+      "maxQuantity":4,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1086574",
+      "name":"Aufenthalts- und Arbeitserlaubnis – Nicht-EU-Bürger",
+      "maxQuantity":4,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1088158",
+      "name":"Kindernachzug beantragen",
+      "maxQuantity":4,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1088214",
+      "name":"Informationen für Werkvertragsarbeitnehmer",
+      "maxQuantity":4,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1089337",
+      "name":"Aufenthaltserlaubnis – Studium",
+      "maxQuantity":4,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"1099271",
+      "name":"Aufenthaltserlaubnis für Familienangehörige von Deutschen",
+      "maxQuantity":4,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10100253",
+      "name":"Familiennachzug zu Unionsbürger*innen und zu Staatsangehörigen aus Norwegen, Island und Liechtenstein",
+      "maxQuantity":4,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10112606",
+      "name":"Verlust des elektronischen Aufenthaltstitels",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10113239",
+      "name":"Elternberatung zur Kinderbetreuung",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10115737",
+      "name":"Internationalen Fahrzeugschein beantragen",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10176294",
+      "name":"Auskunft für die Abholung von Führerscheinen",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10176297",
+      "name":"Auskunft zur Begutachtung der Fahreignung bei Betäubungsmitteln und Arzneimitteln",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10176300",
+      "name":"Auskunft zur Entziehung des Führerscheins",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10176303",
+      "name":"Auskünfte zu laufenden Anträgen der Führerscheinstelle",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10176306",
+      "name":"Beratung zur Fahreignung",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10181808",
+      "name":"Personenbeförderungsschein – Verlust oder Diebstahl",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10183465",
+      "name":"Auskunft zur Begutachtung der Fahreignung (außer Betäubungsmitteln und Arzneimitteln)",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10185203",
+      "name":"Aufenthaltserlaubnis – Forschende",
+      "maxQuantity":4,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10206525",
+      "name":"Erlaubnis für eine selbständige Erwerbstätigkeit für Staatsangehörige aus Drittstaaten",
+      "maxQuantity":4,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10214046",
+      "name":"Aufenthalt zur medizinischen Behandlung – Botschaftspatienten",
+      "maxQuantity":4,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10216076",
+      "name":"Medizinische Rehabilitation beantragen",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10216080",
+      "name":"Auskünfte zur gesetzlichen Kranken- und sozialen Pflegeversicherung",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10216084",
+      "name":"Beitragserstattung aus der Rentenversicherung",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10216088",
+      "name":"Wartezeitauskunft der gesetzlichen Rentenversicherung",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10216196",
+      "name":"Aufenthalt zur medizinischen Behandlung – Privatpatienten und Selbstzahler",
+      "maxQuantity":4,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10224132",
+      "name":"Wohnsitz-Anmeldung mit Änderung der Fahrzeugpapiere",
+      "maxQuantity":3,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10224136",
+      "name":"Personendaten ändern",
+      "maxQuantity":3,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10225119",
+      "name":"Nachträgliches Einschalten eID-Funktion oder Änderung der PIN",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10225129",
+      "name":"Auskunft aus dem Gewerbezentralregister – Juristische Personen, Personenvereinigungen",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10225181",
+      "name":"Beglaubigung von bis zu 20 Dokumenten",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10225189",
+      "name":"Beglaubigung von mehr als 20 Dokumenten",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10225197",
+      "name":"Widerruf der Verlust- oder Diebstahlanzeige von Personalausweis oder Reisepass",
+      "maxQuantity":5,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10225205",
+      "name":"Ausweisdokumente für die ganze Familie",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10237047",
+      "name":"Schülersammelliste für eine schulische Reise",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10242339",
+      "name":"Adressänderung Personalausweis, Reisepass, eAT",
+      "maxQuantity":5,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10252758",
+      "name":"Auskunft/ Beratung bei Verkehrsverstößen in der Probezeit – Fahrerlaubnis auf Probe",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10252761",
+      "name":"Auskunft und Beratung zu Verkehrsstraftaten und Ordnungswidrigkeiten",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10256547",
+      "name":"Ersatzführerschein – Änderung von Auflagen und Beschränkungen",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10257774",
+      "name":"Aufenthaltserlaubnis – Studienvorbereitung",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10258792",
+      "name":"Aufenthaltserlaubnis – Doktoranden",
+      "maxQuantity":4,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10259580",
+      "name":"Aufenthaltserlaubnis – Qualifizierung als Ärztin/ Arzt",
+      "maxQuantity":4,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10260821",
+      "name":"Aufenthaltserlaubnis – Arbeitsplatzsuche nach dem Studium",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10261539",
+      "name":"Aufenthaltserlaubnis – Wissenschaftliches Personal",
+      "maxQuantity":4,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10271500",
+      "name":"Beibehaltungsgenehmigung der deutschen Staatsangehörigkeit beantragen",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10271503",
+      "name":"Verzicht auf die deutsche Staatsangehörigkeit",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10278357",
+      "name":"Aufenthaltserlaubnis –  Fachkräfte mit akademischer Ausbildung",
+      "maxQuantity":4,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10278373",
+      "name":"ICT-Karte (Intra-Corporate-Transfer)",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10286548",
+      "name":"Aufenthaltstitel – Geschäftsführer*innen",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10295182",
+      "name":"Personalausweis oder Reisepass abholen",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10297413",
+      "name":"Lebensbescheinigung beantragen",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10300769",
+      "name":"Erlaubnisurkunden ändern und Ersatzurkunden beantragen",
+      "maxQuantity":3,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10300793",
+      "name":"Fahrzeugabnahme für Taxi oder Mietwagen",
+      "maxQuantity":5,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10300808",
+      "name":"Fahrzeugwechsel bei Personenbeförderung",
+      "maxQuantity":5,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10300817",
+      "name":"Übertragung eines Taxi- oder Mietwagenunternehmens",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10305831",
+      "name":"Probleme bei Kfz-Versicherung oder KfZ-Steuer",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10306925",
+      "name":"eID-Karte beantragen (EU/EWR)",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10308316",
+      "name":"Gesundheitszeugnis (Hund, Katze, Frettchen, Vögel)",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10314100",
+      "name":"Erstauskunft zur Eheschließung mit Auslandsbezug",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10317592",
+      "name":"Bauberatung für laufende Bauvorhaben",
+      "maxQuantity":4,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10323113",
+      "name":"Erklärung zur Reihenfolge der Vornamen",
+      "maxQuantity":3,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10323118",
+      "name":"Erklärung zur Angabe des Geschlechts und zu Vornamen",
+      "maxQuantity":3,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10330030",
+      "name":"Niederlassungserlaubnis aus völkerrechtlichen, humanitären oder politischen Gründen",
+      "maxQuantity":4,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10331792",
+      "name":"Kfz-Angelegenheiten für auswärtige Autohäuser",
+      "maxQuantity":2,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10338647",
+      "name":"Verlorenes Fahrrad besichtigen und abholen",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    },
+    {
+      "id":"10338650",
+      "name":"Verlust melden – Fundsachen besichtigen",
+      "maxQuantity":1,
+      "combinable":[
+
+      ]
+    }
+  ],
+  "relations":[
+    {
+      "officeId":"10461",
+      "serviceId":"10100253"
+    },
+    {
+      "officeId":"10446",
+      "serviceId":"10112606"
+    },
+    {
+      "officeId":"1063373",
+      "serviceId":"10113239"
+    },
+    {
+      "officeId":"102436",
+      "serviceId":"10176294"
+    },
+    {
+      "officeId":"102432",
+      "serviceId":"10176297"
+    },
+    {
+      "officeId":"102432",
+      "serviceId":"10176300"
+    },
+    {
+      "officeId":"102432",
+      "serviceId":"10176303"
+    },
+    {
+      "officeId":"102432",
+      "serviceId":"10176306"
+    },
+    {
+      "officeId":"102435",
+      "serviceId":"10181808"
+    },
+    {
+      "officeId":"1094898",
+      "serviceId":"10183465"
+    },
+    {
+      "officeId":"1092697",
+      "serviceId":"10185203"
+    },
+    {
+      "officeId":"1092697",
+      "serviceId":"10206525"
+    },
+    {
+      "officeId":"10187259",
+      "serviceId":"10214046"
+    },
+    {
+      "officeId":"10515",
+      "serviceId":"10216076"
+    },
+    {
+      "officeId":"10512",
+      "serviceId":"10216080"
+    },
+    {
+      "officeId":"10515",
+      "serviceId":"10216084"
+    },
+    {
+      "officeId":"10512",
+      "serviceId":"10216088"
+    },
+    {
+      "officeId":"10187259",
+      "serviceId":"10216196"
+    },
+    {
+      "officeId":"102522",
+      "serviceId":"10224132"
+    },
+    {
+      "officeId":"102523",
+      "serviceId":"10224132"
+    },
+    {
+      "officeId":"102524",
+      "serviceId":"10224132"
+    },
+    {
+      "officeId":"102526",
+      "serviceId":"10224132"
+    },
+    {
+      "officeId":"10489",
+      "serviceId":"10224132"
+    },
+    {
+      "officeId":"54261",
+      "serviceId":"10224132"
+    },
+    {
+      "officeId":"102522",
+      "serviceId":"10224136"
+    },
+    {
+      "officeId":"102523",
+      "serviceId":"10224136"
+    },
+    {
+      "officeId":"102524",
+      "serviceId":"10224136"
+    },
+    {
+      "officeId":"102526",
+      "serviceId":"10224136"
+    },
+    {
+      "officeId":"10489",
+      "serviceId":"10224136"
+    },
+    {
+      "officeId":"54261",
+      "serviceId":"10224136"
+    },
+    {
+      "officeId":"102522",
+      "serviceId":"10225119"
+    },
+    {
+      "officeId":"102523",
+      "serviceId":"10225119"
+    },
+    {
+      "officeId":"102524",
+      "serviceId":"10225119"
+    },
+    {
+      "officeId":"102526",
+      "serviceId":"10225119"
+    },
+    {
+      "officeId":"10489",
+      "serviceId":"10225119"
+    },
+    {
+      "officeId":"54261",
+      "serviceId":"10225119"
+    },
+    {
+      "officeId":"10500",
+      "serviceId":"10225129"
+    },
+    {
+      "officeId":"102522",
+      "serviceId":"10225181"
+    },
+    {
+      "officeId":"102523",
+      "serviceId":"10225181"
+    },
+    {
+      "officeId":"102524",
+      "serviceId":"10225181"
+    },
+    {
+      "officeId":"102526",
+      "serviceId":"10225181"
+    },
+    {
+      "officeId":"10489",
+      "serviceId":"10225181"
+    },
+    {
+      "officeId":"54261",
+      "serviceId":"10225181"
+    },
+    {
+      "officeId":"102522",
+      "serviceId":"10225189"
+    },
+    {
+      "officeId":"102523",
+      "serviceId":"10225189"
+    },
+    {
+      "officeId":"102524",
+      "serviceId":"10225189"
+    },
+    {
+      "officeId":"102526",
+      "serviceId":"10225189"
+    },
+    {
+      "officeId":"10489",
+      "serviceId":"10225189"
+    },
+    {
+      "officeId":"54261",
+      "serviceId":"10225189"
+    },
+    {
+      "officeId":"102522",
+      "serviceId":"10225197"
+    },
+    {
+      "officeId":"102523",
+      "serviceId":"10225197"
+    },
+    {
+      "officeId":"102524",
+      "serviceId":"10225197"
+    },
+    {
+      "officeId":"102526",
+      "serviceId":"10225197"
+    },
+    {
+      "officeId":"10489",
+      "serviceId":"10225197"
+    },
+    {
+      "officeId":"54261",
+      "serviceId":"10225197"
+    },
+    {
+      "officeId":"102522",
+      "serviceId":"10225205"
+    },
+    {
+      "officeId":"102523",
+      "serviceId":"10225205"
+    },
+    {
+      "officeId":"102524",
+      "serviceId":"10225205"
+    },
+    {
+      "officeId":"102526",
+      "serviceId":"10225205"
+    },
+    {
+      "officeId":"10489",
+      "serviceId":"10225205"
+    },
+    {
+      "officeId":"54261",
+      "serviceId":"10225205"
+    },
+    {
+      "officeId":"10446",
+      "serviceId":"10237047"
+    },
+    {
+      "officeId":"102522",
+      "serviceId":"10242339"
+    },
+    {
+      "officeId":"102523",
+      "serviceId":"10242339"
+    },
+    {
+      "officeId":"102524",
+      "serviceId":"10242339"
+    },
+    {
+      "officeId":"102526",
+      "serviceId":"10242339"
+    },
+    {
+      "officeId":"10489",
+      "serviceId":"10242339"
+    },
+    {
+      "officeId":"54261",
+      "serviceId":"10242339"
+    },
+    {
+      "officeId":"102440",
+      "serviceId":"10252758"
+    },
+    {
+      "officeId":"102440",
+      "serviceId":"10252761"
+    },
+    {
+      "officeId":"102432",
+      "serviceId":"10256547"
+    },
+    {
+      "officeId":"10454",
+      "serviceId":"10257774"
+    },
+    {
+      "officeId":"10455",
+      "serviceId":"10258792"
+    },
+    {
+      "officeId":"10455",
+      "serviceId":"10259580"
+    },
+    {
+      "officeId":"10454",
+      "serviceId":"10260821"
+    },
+    {
+      "officeId":"10455",
+      "serviceId":"10261539"
+    },
+    {
+      "officeId":"10471",
+      "serviceId":"10271500"
+    },
+    {
+      "officeId":"10471",
+      "serviceId":"10271503"
+    },
+    {
+      "officeId":"1092697",
+      "serviceId":"10278357"
+    },
+    {
+      "officeId":"1092697",
+      "serviceId":"10278373"
+    },
+    {
+      "officeId":"1092697",
+      "serviceId":"10286548"
+    },
+    {
+      "officeId":"10181770",
+      "serviceId":"10295182"
+    },
+    {
+      "officeId":"10204388",
+      "serviceId":"10295182"
+    },
+    {
+      "officeId":"10227989",
+      "serviceId":"10295182"
+    },
+    {
+      "officeId":"10286849",
+      "serviceId":"10295182"
+    },
+    {
+      "officeId":"10492",
+      "serviceId":"10295182"
+    },
+    {
+      "officeId":"1060068",
+      "serviceId":"10295182"
+    },
+    {
+      "officeId":"10506",
+      "serviceId":"10297413"
+    },
+    {
+      "officeId":"1063278",
+      "serviceId":"10300769"
+    },
+    {
+      "officeId":"1063278",
+      "serviceId":"10300793"
+    },
+    {
+      "officeId":"1063278",
+      "serviceId":"10300808"
+    },
+    {
+      "officeId":"1063278",
+      "serviceId":"10300817"
+    },
+    {
+      "officeId":"10405",
+      "serviceId":"10305831"
+    },
+    {
+      "officeId":"102522",
+      "serviceId":"10306925"
+    },
+    {
+      "officeId":"102523",
+      "serviceId":"10306925"
+    },
+    {
+      "officeId":"102524",
+      "serviceId":"10306925"
+    },
+    {
+      "officeId":"102526",
+      "serviceId":"10306925"
+    },
+    {
+      "officeId":"10489",
+      "serviceId":"10306925"
+    },
+    {
+      "officeId":"54261",
+      "serviceId":"10306925"
+    },
+    {
+      "officeId":"1049618",
+      "serviceId":"10308316"
+    },
+    {
+      "officeId":"10351880",
+      "serviceId":"10314100"
+    },
+    {
+      "officeId":"10476",
+      "serviceId":"10314100"
+    },
+    {
+      "officeId":"10351883",
+      "serviceId":"10323113"
+    },
+    {
+      "officeId":"1061927",
+      "serviceId":"10323113"
+    },
+    {
+      "officeId":"10351883",
+      "serviceId":"10323118"
+    },
+    {
+      "officeId":"1061927",
+      "serviceId":"10323118"
+    },
+    {
+      "officeId":"1059485",
+      "serviceId":"10330030"
+    },
+    {
+      "officeId":"10414",
+      "serviceId":"10331792"
+    },
+    {
+      "officeId":"1061963",
+      "serviceId":"10338650"
+    },
+    {
+      "officeId":"10546",
+      "serviceId":"1063423"
+    },
+    {
+      "officeId":"10406",
+      "serviceId":"1063424"
+    },
+    {
+      "officeId":"10406",
+      "serviceId":"1063425"
+    },
+    {
+      "officeId":"102522",
+      "serviceId":"1063426"
+    },
+    {
+      "officeId":"102523",
+      "serviceId":"1063426"
+    },
+    {
+      "officeId":"102524",
+      "serviceId":"1063426"
+    },
+    {
+      "officeId":"102526",
+      "serviceId":"1063426"
+    },
+    {
+      "officeId":"10489",
+      "serviceId":"1063426"
+    },
+    {
+      "officeId":"54261",
+      "serviceId":"1063426"
+    },
+    {
+      "officeId":"102522",
+      "serviceId":"1063428"
+    },
+    {
+      "officeId":"102523",
+      "serviceId":"1063428"
+    },
+    {
+      "officeId":"102524",
+      "serviceId":"1063428"
+    },
+    {
+      "officeId":"102526",
+      "serviceId":"1063428"
+    },
+    {
+      "officeId":"10489",
+      "serviceId":"1063428"
+    },
+    {
+      "officeId":"54261",
+      "serviceId":"1063428"
+    },
+    {
+      "officeId":"102522",
+      "serviceId":"1063441"
+    },
+    {
+      "officeId":"102523",
+      "serviceId":"1063441"
+    },
+    {
+      "officeId":"102524",
+      "serviceId":"1063441"
+    },
+    {
+      "officeId":"102526",
+      "serviceId":"1063441"
+    },
+    {
+      "officeId":"10489",
+      "serviceId":"1063441"
+    },
+    {
+      "officeId":"54261",
+      "serviceId":"1063441"
+    },
+    {
+      "officeId":"102522",
+      "serviceId":"1063453"
+    },
+    {
+      "officeId":"102523",
+      "serviceId":"1063453"
+    },
+    {
+      "officeId":"102524",
+      "serviceId":"1063453"
+    },
+    {
+      "officeId":"102526",
+      "serviceId":"1063453"
+    },
+    {
+      "officeId":"10489",
+      "serviceId":"1063453"
+    },
+    {
+      "officeId":"54261",
+      "serviceId":"1063453"
+    },
+    {
+      "officeId":"102522",
+      "serviceId":"1063464"
+    },
+    {
+      "officeId":"102523",
+      "serviceId":"1063464"
+    },
+    {
+      "officeId":"102524",
+      "serviceId":"1063464"
+    },
+    {
+      "officeId":"102526",
+      "serviceId":"1063464"
+    },
+    {
+      "officeId":"10489",
+      "serviceId":"1063464"
+    },
+    {
+      "officeId":"54261",
+      "serviceId":"1063464"
+    },
+    {
+      "officeId":"102522",
+      "serviceId":"1063475"
+    },
+    {
+      "officeId":"102523",
+      "serviceId":"1063475"
+    },
+    {
+      "officeId":"102524",
+      "serviceId":"1063475"
+    },
+    {
+      "officeId":"102526",
+      "serviceId":"1063475"
+    },
+    {
+      "officeId":"10489",
+      "serviceId":"1063475"
+    },
+    {
+      "officeId":"54261",
+      "serviceId":"1063475"
+    },
+    {
+      "officeId":"102522",
+      "serviceId":"1063486"
+    },
+    {
+      "officeId":"102523",
+      "serviceId":"1063486"
+    },
+    {
+      "officeId":"102524",
+      "serviceId":"1063486"
+    },
+    {
+      "officeId":"102526",
+      "serviceId":"1063486"
+    },
+    {
+      "officeId":"10489",
+      "serviceId":"1063486"
+    },
+    {
+      "officeId":"54261",
+      "serviceId":"1063486"
+    },
+    {
+      "officeId":"1061964",
+      "serviceId":"1063519"
+    },
+    {
+      "officeId":"10546",
+      "serviceId":"1063525"
+    },
+    {
+      "officeId":"102522",
+      "serviceId":"1063553"
+    },
+    {
+      "officeId":"102523",
+      "serviceId":"1063553"
+    },
+    {
+      "officeId":"102524",
+      "serviceId":"1063553"
+    },
+    {
+      "officeId":"102526",
+      "serviceId":"1063553"
+    },
+    {
+      "officeId":"10489",
+      "serviceId":"1063553"
+    },
+    {
+      "officeId":"54261",
+      "serviceId":"1063553"
+    },
+    {
+      "officeId":"10500",
+      "serviceId":"1063565"
+    },
+    {
+      "officeId":"102523",
+      "serviceId":"1063576"
+    },
+    {
+      "officeId":"102524",
+      "serviceId":"1063576"
+    },
+    {
+      "officeId":"102526",
+      "serviceId":"1063576"
+    },
+    {
+      "officeId":"10500",
+      "serviceId":"1063576"
+    },
+    {
+      "officeId":"1060069",
+      "serviceId":"1063576"
+    },
+    {
+      "officeId":"54261",
+      "serviceId":"1063576"
+    },
+    {
+      "officeId":"10351880",
+      "serviceId":"1063648"
+    },
+    {
+      "officeId":"10470",
+      "serviceId":"1063648"
+    },
+    {
+      "officeId":"10351882",
+      "serviceId":"1063655"
+    },
+    {
+      "officeId":"10485",
+      "serviceId":"1063655"
+    },
+    {
+      "officeId":"1064291",
+      "serviceId":"1063655"
+    },
+    {
+      "officeId":"10546",
+      "serviceId":"1063659"
+    },
+    {
+      "officeId":"10546",
+      "serviceId":"1063684"
+    },
+    {
+      "officeId":"10546",
+      "serviceId":"1063689"
+    },
+    {
+      "officeId":"1063278",
+      "serviceId":"1063712"
+    },
+    {
+      "officeId":"1063278",
+      "serviceId":"1063715"
+    },
+    {
+      "officeId":"1063278",
+      "serviceId":"1063718"
+    },
+    {
+      "officeId":"10295168",
+      "serviceId":"1063731"
+    },
+    {
+      "officeId":"54260",
+      "serviceId":"1063731"
+    },
+    {
+      "officeId":"10446",
+      "serviceId":"1063741"
+    },
+    {
+      "officeId":"10500",
+      "serviceId":"1064033"
+    },
+    {
+      "officeId":"10308013",
+      "serviceId":"1064076"
+    },
+    {
+      "officeId":"10461",
+      "serviceId":"1064088"
+    },
+    {
+      "officeId":"10461",
+      "serviceId":"1064095"
+    },
+    {
+      "officeId":"10461",
+      "serviceId":"1064101"
+    },
+    {
+      "officeId":"10461",
+      "serviceId":"1064109"
+    },
+    {
+      "officeId":"10461",
+      "serviceId":"1064115"
+    },
+    {
+      "officeId":"10181768",
+      "serviceId":"1064121"
+    },
+    {
+      "officeId":"10204386",
+      "serviceId":"1064121"
+    },
+    {
+      "officeId":"10206241",
+      "serviceId":"1064121"
+    },
+    {
+      "officeId":"10286848",
+      "serviceId":"1064121"
+    },
+    {
+      "officeId":"10406",
+      "serviceId":"1064121"
+    },
+    {
+      "officeId":"10502",
+      "serviceId":"1064121"
+    },
+    {
+      "officeId":"1060066",
+      "serviceId":"1064121"
+    },
+    {
+      "officeId":"10181768",
+      "serviceId":"1064130"
+    },
+    {
+      "officeId":"10204386",
+      "serviceId":"1064130"
+    },
+    {
+      "officeId":"10206241",
+      "serviceId":"1064130"
+    },
+    {
+      "officeId":"10286848",
+      "serviceId":"1064130"
+    },
+    {
+      "officeId":"10406",
+      "serviceId":"1064130"
+    },
+    {
+      "officeId":"10502",
+      "serviceId":"1064130"
+    },
+    {
+      "officeId":"1060066",
+      "serviceId":"1064130"
+    },
+    {
+      "officeId":"102432",
+      "serviceId":"1064230"
+    },
+    {
+      "officeId":"102432",
+      "serviceId":"1064233"
+    },
+    {
+      "officeId":"10416",
+      "serviceId":"1064268"
+    },
+    {
+      "officeId":"10406",
+      "serviceId":"1064271"
+    },
+    {
+      "officeId":"10406",
+      "serviceId":"1064275"
+    },
+    {
+      "officeId":"10406",
+      "serviceId":"1064278"
+    },
+    {
+      "officeId":"102432",
+      "serviceId":"1064284"
+    },
+    {
+      "officeId":"102432",
+      "serviceId":"1064287"
+    },
+    {
+      "officeId":"10181768",
+      "serviceId":"1064305"
+    },
+    {
+      "officeId":"10204386",
+      "serviceId":"1064305"
+    },
+    {
+      "officeId":"10206241",
+      "serviceId":"1064305"
+    },
+    {
+      "officeId":"102101",
+      "serviceId":"1064305"
+    },
+    {
+      "officeId":"10286848",
+      "serviceId":"1064305"
+    },
+    {
+      "officeId":"10502",
+      "serviceId":"1064305"
+    },
+    {
+      "officeId":"1060066",
+      "serviceId":"1064305"
+    },
+    {
+      "officeId":"10181768",
+      "serviceId":"1064308"
+    },
+    {
+      "officeId":"10204386",
+      "serviceId":"1064308"
+    },
+    {
+      "officeId":"10206241",
+      "serviceId":"1064308"
+    },
+    {
+      "officeId":"10286848",
+      "serviceId":"1064308"
+    },
+    {
+      "officeId":"10406",
+      "serviceId":"1064308"
+    },
+    {
+      "officeId":"10502",
+      "serviceId":"1064308"
+    },
+    {
+      "officeId":"1060066",
+      "serviceId":"1064308"
+    },
+    {
+      "officeId":"10406",
+      "serviceId":"1064311"
+    },
+    {
+      "officeId":"10406",
+      "serviceId":"1064314"
+    },
+    {
+      "officeId":"10308013",
+      "serviceId":"1064323"
+    },
+    {
+      "officeId":"10406",
+      "serviceId":"1064333"
+    },
+    {
+      "officeId":"10406",
+      "serviceId":"1064342"
+    },
+    {
+      "officeId":"10406",
+      "serviceId":"1064345"
+    },
+    {
+      "officeId":"102432",
+      "serviceId":"1064348"
+    },
+    {
+      "officeId":"102432",
+      "serviceId":"1064351"
+    },
+    {
+      "officeId":"10406",
+      "serviceId":"1064354"
+    },
+    {
+      "officeId":"102432",
+      "serviceId":"1064361"
+    },
+    {
+      "officeId":"102432",
+      "serviceId":"1064364"
+    },
+    {
+      "officeId":"10416",
+      "serviceId":"1064374"
+    },
+    {
+      "officeId":"102440",
+      "serviceId":"1064377"
+    },
+    {
+      "officeId":"102440",
+      "serviceId":"1064381"
+    },
+    {
+      "officeId":"1061934",
+      "serviceId":"1071754"
+    },
+    {
+      "officeId":"102432",
+      "serviceId":"1071760"
+    },
+    {
+      "officeId":"102432",
+      "serviceId":"1071764"
+    },
+    {
+      "officeId":"1061934",
+      "serviceId":"1071835"
+    },
+    {
+      "officeId":"1061934",
+      "serviceId":"1071854"
+    },
+    {
+      "officeId":"1061934",
+      "serviceId":"1071896"
+    },
+    {
+      "officeId":"10471",
+      "serviceId":"1071907"
+    },
+    {
+      "officeId":"10471",
+      "serviceId":"1071926"
+    },
+    {
+      "officeId":"102432",
+      "serviceId":"1071944"
+    },
+    {
+      "officeId":"10406",
+      "serviceId":"1071959"
+    },
+    {
+      "officeId":"54291",
+      "serviceId":"1072012"
+    },
+    {
+      "officeId":"54291",
+      "serviceId":"1072015"
+    },
+    {
+      "officeId":"54291",
+      "serviceId":"1072019"
+    },
+    {
+      "officeId":"54290",
+      "serviceId":"1072022"
+    },
+    {
+      "officeId":"54291",
+      "serviceId":"1072025"
+    },
+    {
+      "officeId":"54290",
+      "serviceId":"1072037"
+    },
+    {
+      "officeId":"54290",
+      "serviceId":"1072040"
+    },
+    {
+      "officeId":"54290",
+      "serviceId":"1072043"
+    },
+    {
+      "officeId":"10218",
+      "serviceId":"1073805"
+    },
+    {
+      "officeId":"101731",
+      "serviceId":"1074552"
+    },
+    {
+      "officeId":"10640",
+      "serviceId":"1074970"
+    },
+    {
+      "officeId":"10469",
+      "serviceId":"1075163"
+    },
+    {
+      "officeId":"102522",
+      "serviceId":"1076889"
+    },
+    {
+      "officeId":"102523",
+      "serviceId":"1076889"
+    },
+    {
+      "officeId":"102524",
+      "serviceId":"1076889"
+    },
+    {
+      "officeId":"102526",
+      "serviceId":"1076889"
+    },
+    {
+      "officeId":"10489",
+      "serviceId":"1076889"
+    },
+    {
+      "officeId":"54261",
+      "serviceId":"1076889"
+    },
+    {
+      "officeId":"102522",
+      "serviceId":"1078273"
+    },
+    {
+      "officeId":"102523",
+      "serviceId":"1078273"
+    },
+    {
+      "officeId":"102524",
+      "serviceId":"1078273"
+    },
+    {
+      "officeId":"102526",
+      "serviceId":"1078273"
+    },
+    {
+      "officeId":"10489",
+      "serviceId":"1078273"
+    },
+    {
+      "officeId":"54261",
+      "serviceId":"1078273"
+    },
+    {
+      "officeId":"10351881",
+      "serviceId":"1078314"
+    },
+    {
+      "officeId":"1061927",
+      "serviceId":"1078314"
+    },
+    {
+      "officeId":"10512",
+      "serviceId":"1080455"
+    },
+    {
+      "officeId":"10515",
+      "serviceId":"1080479"
+    },
+    {
+      "officeId":"10515",
+      "serviceId":"1080486"
+    },
+    {
+      "officeId":"10515",
+      "serviceId":"1080494"
+    },
+    {
+      "officeId":"10515",
+      "serviceId":"1080498"
+    },
+    {
+      "officeId":"10406",
+      "serviceId":"1080502"
+    },
+    {
+      "officeId":"102522",
+      "serviceId":"1080582"
+    },
+    {
+      "officeId":"102523",
+      "serviceId":"1080582"
+    },
+    {
+      "officeId":"102524",
+      "serviceId":"1080582"
+    },
+    {
+      "officeId":"102526",
+      "serviceId":"1080582"
+    },
+    {
+      "officeId":"10489",
+      "serviceId":"1080582"
+    },
+    {
+      "officeId":"54261",
+      "serviceId":"1080582"
+    },
+    {
+      "officeId":"1092697",
+      "serviceId":"1080625"
+    },
+    {
+      "officeId":"10461",
+      "serviceId":"1080716"
+    },
+    {
+      "officeId":"10461",
+      "serviceId":"1080784"
+    },
+    {
+      "officeId":"1092697",
+      "serviceId":"1080790"
+    },
+    {
+      "officeId":"1092697",
+      "serviceId":"1080812"
+    },
+    {
+      "officeId":"102522",
+      "serviceId":"1080843"
+    },
+    {
+      "officeId":"102523",
+      "serviceId":"1080843"
+    },
+    {
+      "officeId":"102524",
+      "serviceId":"1080843"
+    },
+    {
+      "officeId":"102526",
+      "serviceId":"1080843"
+    },
+    {
+      "officeId":"10489",
+      "serviceId":"1080843"
+    },
+    {
+      "officeId":"54261",
+      "serviceId":"1080843"
+    },
+    {
+      "officeId":"10473",
+      "serviceId":"1083077"
+    },
+    {
+      "officeId":"10474",
+      "serviceId":"1083077"
+    },
+    {
+      "officeId":"54260",
+      "serviceId":"1083077"
+    },
+    {
+      "officeId":"10454",
+      "serviceId":"1086568"
+    },
+    {
+      "officeId":"10461",
+      "serviceId":"1086574"
+    },
+    {
+      "officeId":"10461",
+      "serviceId":"1088158"
+    },
+    {
+      "officeId":"10455",
+      "serviceId":"1088214"
+    },
+    {
+      "officeId":"10454",
+      "serviceId":"1089337"
+    },
+    {
+      "officeId":"10461",
+      "serviceId":"1099271"
+    }
+  ]
+}

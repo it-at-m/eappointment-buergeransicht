@@ -1,0 +1,90 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Release.Name }}
+  name: {{ .Release.Name }}
+  annotations:
+    image.openshift.io/triggers: >-
+      [
+        {
+          "from": {
+            "kind": "ImageStreamTag",
+            "name": "{{ .Release.Name }}:latest",
+            "namespace": "{{ .Release.Namespace }}"
+          },
+          "fieldPath": "spec.template.spec.containers[?(@.name==\"{{ .Release.Name }}\")].image"
+        }
+      ]
+spec:
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+        deployment: {{ .Release.Name }}
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: redirect
+        deployment: {{ .Release.Name }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/nginx-config.yaml") $ | sha256sum }}
+      name: {{ .Release.Name }}
+    spec:
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: {{ .Release.Name }}-nginx-config
+      containers:
+        - image: "image-registry.openshift-image-registry.svc:5000/{{ .Release.Namespace }}/{{ .Release.Name }}:latest"
+          imagePullPolicy: Always
+          lifecycle:
+            preStop:
+              exec:
+                command:
+                - sh
+                - -c
+                - sleep 10
+          name: {{ .Release.Name }}
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          # readinessProbe:
+          #   failureThreshold: 5
+          #   httpGet:
+          #     path: "/health"
+          #     port: 8080
+          #     scheme: HTTP
+          #   initialDelaySeconds: 60
+          #   periodSeconds: 20
+          #   successThreshold: 1
+          #   timeoutSeconds: 1
+          # livenessProbe:
+          #   failureThreshold: 5
+          #   httpGet:
+          #     path: "/health"
+          #     port: 8080
+          #     scheme: HTTP
+          #   initialDelaySeconds: 60
+          #   periodSeconds: 20
+          #   successThreshold: 1
+          #   timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: 250m
+              memory: 128Mi
+            requests:
+              cpu: 50m
+              memory: 64Mi
+          volumeMounts:
+            - name: nginx-config
+              subPath: cors.conf
+              mountPath: /opt/app-root/etc/nginx.default.d/cors.conf
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 75

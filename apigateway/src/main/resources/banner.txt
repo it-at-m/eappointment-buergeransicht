@@ -1,0 +1,16 @@
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+ZZZZZZ   MMMM   MMMM     SSSSSSS
+    ZZ   MM MM MM MM   SS
+   ZZ    MM  MMM  MM   SS
+  ZZ     MM   M   MM     SSSSSSS
+ ZZ      MM       MM           SS
+ZZ       MM       MM           SS
+ZZZZZZ   MM       MM    SSSSSSS
+
+
+
+ Application Name    : ${spring.application.name}
+ Spring Boot Version : ${spring-boot.formatted-version}
+---------------------------------------------------------------------------------------------------------------------------------------------------

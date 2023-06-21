@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# Load environment variables
+source .env
+
+# Remove old stack
+fin project rm -f
+
+# Boot project environment
+fin project start
+
+# Set npm configs required for muenchen.de network
+fin exec npm config set registry $NPM_REGISTRY
+fin exec npm config set always-auth true
+fin exec npm config set https-proxy $HTTPS_PROXY
+fin exec npm config set http-proxy $HTTP_PROXY
+
+# Log in on muenchen.de registry
+fin exec npm login
+
+# Install node packages
+fin exec npm install
