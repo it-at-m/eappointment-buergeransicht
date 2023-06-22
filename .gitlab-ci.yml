@@ -31,9 +31,7 @@ Compile:
     no_proxy: '${PROXY_NO_PROXY}'
     http_proxy: '${PROXY_HTTP_PROXY}'
     https_proxy: '${PROXY_HTTPS_PROXY}'
-  only:
-    variables:
-      - $ENVIRONMENT == $CI_COMMIT_BRANCH
+
   script:
     - 'rm -f "package-lock.json"'
     - 'npm install --include=dev'
