@@ -7,7 +7,6 @@
     <AppointmentForm />
   </v-app>
 </template>
-
 <script>
 import AppointmentForm from '@/components/AppointmentForm';
 import store from '@/store';
