@@ -1,6 +1,6 @@
 include:
   - project: "$CICD_PROJECT"
-    ref: "main"
+    ref: "dev"
     file:
       - ".gitlab-ci-frontend.yaml"
 
