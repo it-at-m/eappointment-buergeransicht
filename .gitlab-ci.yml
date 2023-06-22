@@ -2,7 +2,7 @@ include:
   - project: "$CICD_PROJECT"
     ref: "main"
     file:
-      - ".gitlab-ci.yml"
+      - ".gitlab-ci-frontend.yaml"
 
 stages:
   - Provision
