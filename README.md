@@ -65,7 +65,6 @@ This project is built with:
 * [vue-sfc-rollup](https://github.com/team-innovation/vue-sfc-rollup)
 * [Sping API-Gateway](https://spring.io/guides/gs/gateway/)
 
-
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
