@@ -23,9 +23,9 @@ spring:
         - id: backend
           uri: ${BACKEND_URI}
           predicates:
-            - Path=${PREDICATES_PATH}
+            - Path=${BACKEND_URI_PREDICATE}
           filters:
-            - RewritePath=${FILTERS_REWRITE_PATH}
+            - RewritePath=${BACKEND_URI_REWRITE_PATH}
             - RemoveResponseHeader=WWW-Authenticate
       default-filters:
         - RemoveResponseHeader=Expires
