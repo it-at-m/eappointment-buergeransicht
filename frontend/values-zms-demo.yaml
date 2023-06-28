@@ -1,9 +1,0 @@
-routes:
-  internal:
-    host: ${ROUTES_INTERNAL_HOST}
-    path: ${ROUTES_INTERNAL_PATH}
-  external:
-    host: ${ROUTES_EXTERNAL_HOST}
-    path: ${ROUTES_EXTERNAL_PATH}
-nginx:
-  cors: ${NGINX_CORS}
