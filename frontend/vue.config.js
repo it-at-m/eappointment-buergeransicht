@@ -10,5 +10,9 @@ export default defineConfig({
           output: 'asset-manifest.json'
         })
     )
+  },
+  devServer: {
+      port: "8082",  // this line to set the port
+      proxy: 'http://localhost:8082'
   }
 })

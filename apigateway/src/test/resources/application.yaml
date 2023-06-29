@@ -1,7 +1,5 @@
 spring:
 
-  # Define the local keycloak realm here
-
   # spring cloud gateway config
   cloud:
     gateway:
@@ -13,8 +11,8 @@ spring:
           # The cors configuration to allow frontend developers cross origin request via this api gateway
           '[/**]':
             allowedOrigins:
-              - "http://localhost:8080"
-              - "http://127.0.0.1:8080"
+              - "http://localhost:8082"
+              - "http://127.0.0.1:8082"
             allowedMethods: "*"
             allowedHeaders: "*"
             allowCredentials: true
@@ -37,4 +35,4 @@ spring:
     log-request-details: on
 
 server:
-  port: 8082
+  port: 8080
