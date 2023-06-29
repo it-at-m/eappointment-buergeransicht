@@ -7,7 +7,7 @@
   "type": "module",
   "scripts": {
     "init": "npm install",
-    "serve": "vue-cli-service serve --port 8081",
+    "serve": "vue-cli-service serve --port 8082",
     "build": "vue-cli-service lint --fix && vue-cli-service build",
     "post-build": "node ./processes/post-build.js",
     "lint": "vue-cli-service lint",
