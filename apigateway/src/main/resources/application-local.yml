@@ -1,8 +1,5 @@
 spring:
 
-  # Define the local keycloak realm here
-  realm: ${REALM}
-
   logging:
     level:
       org.springframework.cloud.gateway.filter.NettyWriteResponseFilter: DEBUG

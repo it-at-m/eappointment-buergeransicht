@@ -1,7 +1,6 @@
 spring:
 
   # Define the local keycloak realm here
-  realm: ${REALM}
 
   # spring cloud gateway config
   cloud:
