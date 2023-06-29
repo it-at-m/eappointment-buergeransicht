@@ -59,7 +59,8 @@ management:
     web:
       cors:
         allowedOrigins:
-          - ${ALLOWED_ORIGINS_MANAGEMENT}
+          - "http://localhost:8080"
+          - "http://127.0.0.1:8080"
         allowedMethods: "*"
         allowedHeaders: "*"
         allowCredentials: on
