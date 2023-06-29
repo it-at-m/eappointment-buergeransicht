@@ -12,7 +12,7 @@ export default defineConfig({
     )
   },
   devServer: {
-      port: "8082",  // this line to set the port
+      port: "8082",
       proxy: 'http://localhost:8082'
   }
 })

@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-fin exec npm run build --  --target wc --name zms-appointment ./src/main.js
