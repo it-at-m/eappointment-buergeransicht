@@ -7,10 +7,10 @@
   "type": "module",
   "scripts": {
     "init": "npm install",
-    "serve": "vue-cli-service serve --port 8082",
+    "serve": "vue-cli-service serve --port 8081",
     "build": "vue-cli-service lint --fix && vue-cli-service build",
     "post-build": "node ./processes/post-build.js",
-    "lint": "vue-cli-service lint",
+    "lint": "vue-cli-service lint --fix",
     "test:unit": "vue-cli-service test:unit --passWithNoTests",
     "test": "jest js --coverage"
   },
