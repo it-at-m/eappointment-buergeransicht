@@ -46,6 +46,8 @@ export default {
   mounted () {
     this.$store.state.settings.endpoints["VUE_APP_ZMS_API_BASE"] = this.baseUrl
 
+
+
     this.$store.dispatch('setUpServicesAndProviders', {
       preselectedService: this.serviceId ?? null,
       preselectedProvider: this.locationId ?? null

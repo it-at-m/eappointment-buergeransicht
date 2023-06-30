@@ -365,6 +365,10 @@ export default {
       return this.$store.state.activatedAppointment
     }
   },
+  mounted() {
+  console.log("Prints");
+    console.log(process.env.VUE_APP_API_URL);
+  },
   methods: {
     cancelAppointment(byRebooking = false) {
       if (this.$store.state.preselectedAppointment.dateFrom.unix() < moment().unix()) {

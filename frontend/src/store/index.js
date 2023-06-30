@@ -7,6 +7,8 @@ import mutations from './mutations.js'
 
 Vue.use(Vuex)
 
+
+
 const store = new Vuex.Store({
     state: {
         services: [],
@@ -33,7 +35,7 @@ const store = new Vuex.Store({
                 notice: '#607D8B'
             },
             endpoints: {
-                'VUE_APP_ZMS_API_BASE': 'http://localhost:8080',
+                'VUE_APP_ZMS_API_BASE': `${process.env.VUE_APP_API_URL}`,
                 'VUE_APP_ZMS_API_PROVIDERS_AND_SERVICES_ENDPOINT': '/api/offices-and-services',
                 'VUE_APP_ZMS_API_CALENDAR_ENDPOINT': '/api/available-days',
                 'VUE_APP_ZMS_API_AVAILABLE_TIME_SLOTS_ENDPOINT': '/api/available-appointments',
