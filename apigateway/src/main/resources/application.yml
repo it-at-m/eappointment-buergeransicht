@@ -1,3 +1,5 @@
+
+
 spring:
   application.name: @project.artifactId@
   banner.location: banner.txt
@@ -49,8 +51,6 @@ server:
     include-stacktrace: never
     whitelabel:
       enabled: false
-
-  # Define the keycloak development test and productive realm here
 
 management:
   endpoints:
