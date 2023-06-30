@@ -33,7 +33,7 @@ const store = new Vuex.Store({
                 notice: '#607D8B'
             },
             endpoints: {
-                'VUE_APP_ZMS_API_BASE': 'http://localhost:3001',
+                'VUE_APP_ZMS_API_BASE': 'http://localhost:8080',
                 'VUE_APP_ZMS_API_PROVIDERS_AND_SERVICES_ENDPOINT': '/api/offices-and-services',
                 'VUE_APP_ZMS_API_CALENDAR_ENDPOINT': '/api/available-days',
                 'VUE_APP_ZMS_API_AVAILABLE_TIME_SLOTS_ENDPOINT': '/api/available-appointments',

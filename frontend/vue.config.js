@@ -3,7 +3,7 @@ import WebpackAssetsManifest from 'webpack-assets-manifest'
 
 export default defineConfig({
   transpileDependencies: true,
-  publicPath: '/buergeransicht/',
+  publicPath: '',
   configureWebpack: config => {
     config.plugins = config.plugins.concat(
         new WebpackAssetsManifest({
