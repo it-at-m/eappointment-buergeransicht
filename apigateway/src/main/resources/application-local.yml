@@ -25,9 +25,9 @@ spring:
         - id: backend
           uri: "http://localhost:3001/"
           predicates:
-            - Path=/api/**
+            - Path=/api/backend/**
           filters:
-            - RewritePath=/api/(?<segment>.*), /api/$\{segment}
+            - RewritePath=/api/backend/(?<segment>.*), /api/$\{segment}
             - RemoveResponseHeader=WWW-Authenticate
       default-filters:
         - RemoveResponseHeader=Expires
