@@ -1,7 +1,7 @@
 import Vuex from 'vuex'
 import Vue from "vue";
 import FormData from "./modules/formData/index.js"
-import Api from "./modules/api/index.js"
+import Api from "./modules/api/backend/index.js"
 import actions from './actions.js'
 import mutations from './mutations.js'
 
@@ -36,15 +36,15 @@ const store = new Vuex.Store({
             },
             endpoints: {
                 'VUE_APP_ZMS_API_BASE': `${process.env.VUE_APP_API_URL}`,
-                'VUE_APP_ZMS_API_PROVIDERS_AND_SERVICES_ENDPOINT': '/api/offices-and-services',
-                'VUE_APP_ZMS_API_CALENDAR_ENDPOINT': '/api/available-days',
-                'VUE_APP_ZMS_API_AVAILABLE_TIME_SLOTS_ENDPOINT': '/api/available-appointments',
-                'VUE_APP_ZMS_API_RESERVE_APPOINTMENT_ENDPOINT': '/api/reserve-appointment',
-                'VUE_APP_ZMS_API_APPOINTMENT_ENDPOINT': '/api/appointment',
-                'VUE_APP_ZMS_API_UPDATE_APPOINTMENT_ENDPOINT': '/api/update-appointment',
-                'VUE_APP_ZMS_API_CONFIRM_RESERVATION_ENDPOINT': '/api/confirm-appointment',
-                'VUE_APP_ZMS_API_CANCEL_APPOINTMENT_ENDPOINT': '/api/cancel-appointment',
-                'VUE_APP_ZMS_API_PRECONFIRM_RESERVATION_ENDPOINT': '/api/preconfirm-appointment'
+                'VUE_APP_ZMS_API_PROVIDERS_AND_SERVICES_ENDPOINT': '/api/backend/offices-and-services',
+                'VUE_APP_ZMS_API_CALENDAR_ENDPOINT': '/api/backend/available-days',
+                'VUE_APP_ZMS_API_AVAILABLE_TIME_SLOTS_ENDPOINT': '/api/backend/available-appointments',
+                'VUE_APP_ZMS_API_RESERVE_APPOINTMENT_ENDPOINT': '/api/backend/reserve-appointment',
+                'VUE_APP_ZMS_API_APPOINTMENT_ENDPOINT': '/api/backend/appointment',
+                'VUE_APP_ZMS_API_UPDATE_APPOINTMENT_ENDPOINT': '/api/backend/update-appointment',
+                'VUE_APP_ZMS_API_CONFIRM_RESERVATION_ENDPOINT': '/api/backend/confirm-appointment',
+                'VUE_APP_ZMS_API_CANCEL_APPOINTMENT_ENDPOINT': '/api/backend/cancel-appointment',
+                'VUE_APP_ZMS_API_PRECONFIRM_RESERVATION_ENDPOINT': '/api/backend/preconfirm-appointment'
             }
         }
     },
