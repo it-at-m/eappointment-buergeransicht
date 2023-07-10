@@ -81,7 +81,9 @@ info.application.version: @project.version@
 
 ---
 spring:
-  profiles: no-security
+  config:
+    activate:
+      on-profile: no-security
   autoconfigure:
     exclude:
       - org.springframework.cloud.security.oauth2.gateway.TokenRelayAutoConfiguration
