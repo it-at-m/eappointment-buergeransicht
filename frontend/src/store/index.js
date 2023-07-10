@@ -1,7 +1,7 @@
 import Vuex from 'vuex'
 import Vue from "vue";
 import FormData from "./modules/formData/index.js"
-import Api from "./modules/api/backend/index.js"
+import Api from "./modules/api/index.js"
 import actions from './actions.js'
 import mutations from './mutations.js'
 
