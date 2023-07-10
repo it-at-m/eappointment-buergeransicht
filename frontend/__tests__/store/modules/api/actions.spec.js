@@ -1,4 +1,4 @@
-import actions from './../../../../src/store/modules/api/backend/actions'
+import actions from './../../../../src/store/modules/api/actions'
 import store from './../../../../src/store/index'
 import { enableFetchMocks } from 'jest-fetch-mock'
 import moment from "moment";
