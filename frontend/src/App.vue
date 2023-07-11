@@ -40,7 +40,9 @@ export default {
   },
   computed: {
     linkBaseUrl () {
-      return process.env.NODE_ENV === 'development' ? "" : this.baseUrl + "/"
+      let url = this.baseUrl;
+      if (!url.endsWith("/")) url += "/";
+      return this.baseUrl;
     }
   },
   mounted () {
