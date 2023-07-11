@@ -53,6 +53,7 @@
                       </v-col>
                     </v-row>
                   </template>
+
                   {{ $t('services') }}
                 </v-expansion-panel-header>
                 <v-expansion-panel-content>
@@ -328,7 +329,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts"> 
 import SwitchLanguage from './SwitchLanguage.vue'
 import ServiceFinder from './ServiceFinder.vue'
 import TheCalendar from './TheCalendar.vue'
