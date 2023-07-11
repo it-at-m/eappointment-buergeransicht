@@ -11,7 +11,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/it-at-m/eappointment-frontend">
+  <a href="https://github.com/it-at-m/eappointment-buergeransicht">
     <img src="images/logo.png" alt="Logo" height="200">
   </a>
 
@@ -87,7 +87,7 @@ Run the following commands in your library:
 Make sure you have provided all the necessary dependencies in your vuetify project and add the library vai `file path`:
 
 ```
-"eappointment-frontend": "file:../eappointment-frontend-1.0.1.tgz"
+"eappointment-buergeransicht": "file:../eappointment-buergeransicht-1.0.1.tgz"
 ```
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -124,14 +124,14 @@ it@m - opensource@muenchendigital.io
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/it-at-m/eappointment-frontend.svg?style=for-the-badge
-[contributors-url]: https://github.com/it-at-m/eappointment-frontend/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/it-at-m/eappointment-frontend.svg?style=for-the-badge
-[forks-url]: https://github.com/it-at-m/eappointment-frontend/network/members
-[stars-shield]: https://img.shields.io/github/stars/it-at-m/eappointment-frontend.svg?style=for-the-badge
-[stars-url]: https://github.com/it-at-m/eappointment-frontend/stargazers
-[issues-shield]: https://img.shields.io/github/issues/it-at-m/eappointment-frontend.svg?style=for-the-badge
-[issues-url]: https://github.com/it-at-m/eappointment-frontend/issues
-[license-shield]: https://img.shields.io/github/license/it-at-m/eappointment-frontend.svg?style=for-the-badge
-[license-url]: https://github.com/it-at-m/eappointment-frontend/blob/master/LICENSE
+[contributors-shield]: https://img.shields.io/github/contributors/it-at-m/eappointment-buergeransicht.svg?style=for-the-badge
+[contributors-url]: https://github.com/it-at-m/eappointment-buergeransicht/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/it-at-m/eappointment-buergeransicht.svg?style=for-the-badge
+[forks-url]: https://github.com/it-at-m/eappointment-buergeransicht/network/members
+[stars-shield]: https://img.shields.io/github/stars/it-at-m/eappointment-buergeransicht.svg?style=for-the-badge
+[stars-url]: https://github.com/it-at-m/eappointment-buergeransicht/stargazers
+[issues-shield]: https://img.shields.io/github/issues/it-at-m/eappointment-buergeransicht.svg?style=for-the-badge
+[issues-url]: https://github.com/it-at-m/eappointment-buergeransicht/issues
+[license-shield]: https://img.shields.io/github/license/it-at-m/eappointment-buergeransicht.svg?style=for-the-badge
+[license-url]: https://github.com/it-at-m/eappointment-buergeransicht/blob/master/LICENSE
 [product-screenshot]: images/screenshot.png

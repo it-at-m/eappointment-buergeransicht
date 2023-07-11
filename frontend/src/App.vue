@@ -4,13 +4,15 @@
     <link :href="`${linkBaseUrl}css/materialdesignicons.min.css`" rel="stylesheet">
     <link :href="`${linkBaseUrl}css/style.css`" rel="stylesheet">
 
-    <AppointmentForm />
+    <AppointmentForm v-if="stylesLoaded"/>
   </v-app>
 </template>
+
 <script>
+
 import AppointmentForm from '@/components/AppointmentForm';
-import store from '@/store';
-import translations from '@/translations';
+import translations from '@/translations/'
+import store from '@/store/'
 import Vue from "vue";
 import VueI18n from "vue-i18n";
 import Vuetify from "vuetify";
@@ -38,15 +40,19 @@ export default {
   components: {
     AppointmentForm
   },
+  data() {
+    return {
+      stylesLoaded: false,
+    }
+  },
   computed: {
     linkBaseUrl () {
       return process.env.NODE_ENV === 'development' ? "/buergeransicht/" : this.baseUrl + "/buergeransicht/"
     }
   },
   mounted () {
+    this.loadStylesHackyWay();
     this.$store.state.settings.endpoints["VUE_APP_ZMS_API_BASE"] = this.baseUrl
-
-
 
     this.$store.dispatch('setUpServicesAndProviders', {
       preselectedService: this.serviceId ?? null,
@@ -79,7 +85,32 @@ export default {
         })
       }
     })
-  }
+  },
+  methods: {
+    loadStylesHackyWay() {
+      const styles = [
+        `${this.linkBaseUrl}css/vuetify.min.css`,
+        `${this.linkBaseUrl}css/materialdesignicons.min.css`,
+        `${this.linkBaseUrl}css/style.css`,
+      ];
+      const promises = styles.map(style => {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = style;
+        return new Promise((resolve, reject) => {
+          link.onload = resolve;
+          link.onerror = reject;
+          document.head.appendChild(link);
+        });
+      });
+
+      Promise.all(promises).then(() => {
+        this.stylesLoaded = true;
+      }).catch((error) => {
+        console.error('Error loading styles:', error);
+      });
+    }
+  },
 }
 </script>
 

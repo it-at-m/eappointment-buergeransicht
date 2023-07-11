@@ -1,10 +1,10 @@
 import { mount } from '@vue/test-utils'
 import Vuex from 'vuex'
-import AppointmentForm from './../../src/components/AppointmentForm.vue'
+import AppointmentForm from '@/components/AppointmentForm';
 import Vuetify from 'vuetify'
 import VueI18n from 'vue-i18n'
-import translations from './../../src/translations'
-import store from './../../src/store'
+import translations from '@/translations/'
+import store from '@/store/'
 import Vue from 'vue'
 import moment from "moment";
 

@@ -3,8 +3,8 @@ import Vuex from 'vuex'
 import CustomerInfo from './../../src/components/CustomerInfo.vue'
 import Vuetify from 'vuetify'
 import VueI18n from 'vue-i18n'
-import translations from './../../src/translations'
-import store from './../../src/store'
+import translations from '@/translations/'
+import store from '@/store/'
 import Vue from 'vue'
 
 Vue.use(VueI18n)
@@ -77,7 +77,7 @@ describe('Customer info', () => {
         const emailErrorMessage = wrapper.find('#customer-email-section .v-messages__message')
 
         expect(wrapper.emitted().next).toBeUndefined()
-        expect(emailErrorMessage.text()).toBe('Muss eine gültige E-Mail-Adresse sein')
+        expect(emailErrorMessage.text()).toBe('Muss eine gültige E-Mail-Adresse sein.')
         expect(store.state.data.appointment.client).toBeUndefined()
         expect(dispatch).toHaveBeenCalledTimes(0)
     })
@@ -97,9 +97,9 @@ describe('Customer info', () => {
 
         expect(wrapper.emitted().next).toBeDefined()
         expect(dispatch).toHaveBeenCalledTimes(1)
-        /*expect(dispatch.mock.calls[0]).toStrictEqual([
+        expect(dispatch.mock.calls[0]).toStrictEqual([
             'updateAppointmentData',
             {"client": {"dataProtection": true, "email": "max@test.de", "name": "Max"}}
-        ])*/
+        ])
     })
 })
