@@ -29,6 +29,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication(
         scanBasePackages = {"de.muenchen.zms"}
 )
+
 public class ApiGatewayApplication {
 
     public static void main(String[] args) {
