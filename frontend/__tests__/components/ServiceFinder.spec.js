@@ -3,8 +3,8 @@ import Vuex from 'vuex'
 import ServiceFinder from './../../src/components/ServiceFinder.vue'
 import Vuetify from 'vuetify'
 import VueI18n from 'vue-i18n'
-import translations from '@/translations/'
-import store from '@/store/'
+import translations from './../../src/translations'
+import store from './../../src/store'
 import Vue from 'vue'
 
 Vue.use(VueI18n)
