@@ -53,7 +53,6 @@
                       </v-col>
                     </v-row>
                   </template>
-
                   {{ $t('services') }}
                 </v-expansion-panel-header>
                 <v-expansion-panel-content>
