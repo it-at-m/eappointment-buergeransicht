@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" data-app>
     <v-app>
       <v-container>
         <v-row class="content" v-if="showLanguageSwitch">
