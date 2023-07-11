@@ -329,7 +329,7 @@
   </div>
 </template>
 
-<script lang="ts"> 
+<script>
 import SwitchLanguage from './SwitchLanguage.vue'
 import ServiceFinder from './ServiceFinder.vue'
 import TheCalendar from './TheCalendar.vue'
