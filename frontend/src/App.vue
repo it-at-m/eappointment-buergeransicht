@@ -8,7 +8,7 @@
   </v-app>
 </template>
 
-<script>
+<script type="text/javascript">
 
 import AppointmentForm from '@/components/AppointmentForm';
 import translations from '@/translations/'

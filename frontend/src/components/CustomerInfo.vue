@@ -57,7 +57,8 @@
     >{{ $t('nextToReservation') }}</v-btn>
   </div>
 </template>
-<script>
+
+<script type="text/javascript">
 import { validationMixin } from "vuelidate";
 import { required, email, maxLength } from "vuelidate/lib/validators";
 

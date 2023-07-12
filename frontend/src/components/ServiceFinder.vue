@@ -155,7 +155,8 @@
     </v-container>
   </div>
 </template>
-<script>
+
+<script type="text/javascript">
 import { mdiDomain, mdiMagnify, mdiPlus, mdiMinus } from '@mdi/js'
 
 export default {

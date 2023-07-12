@@ -1,6 +1,5 @@
 <template>
-  <div id="app">
-
+  <div>
       <v-container>
         <v-row class="content" v-if="showLanguageSwitch">
           <v-col cols="12">
@@ -329,7 +328,7 @@
   </div>
 </template>
 
-<script lang="ts"> 
+<script type="text/javascript"> 
 import SwitchLanguage from './SwitchLanguage.vue'
 import ServiceFinder from './ServiceFinder.vue'
 import TheCalendar from './TheCalendar.vue'

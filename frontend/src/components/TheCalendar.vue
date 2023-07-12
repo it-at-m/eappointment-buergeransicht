@@ -1,5 +1,5 @@
 <template>
-  <v-app class="calendar-container">
+  <div class="calendar-container">
     <v-container>
       <v-row>
         <v-col class="col-sm-12 col-lg-10 p-0">
@@ -99,9 +99,10 @@
          </div>
        </div>
      </div>
-  </v-app>
+  </div>
 </template>
-<script>
+
+<script type="text/javascript">
 import moment from 'moment'
 import { mdiCalendarClock } from '@mdi/js';
 

@@ -1,7 +1,6 @@
 import {mount, shallowMount} from '@vue/test-utils'
 import Vuex from 'vuex'
 import TheCalendar from './../../src/components/TheCalendar.vue'
-import Calendar2 from './../../src/components/TheCalendar.vue'
 import Vuetify from 'vuetify'
 import VueI18n from 'vue-i18n'
 import translations from './../../src/translations'
