@@ -1,10 +1,14 @@
 <template>
   <v-app>
+  <v-main>
+  <v-container>
     <link :href="`${linkBaseUrl}css/vuetify.min.css`" rel="stylesheet">
     <link :href="`${linkBaseUrl}css/materialdesignicons.min.css`" rel="stylesheet">
     <link :href="`${linkBaseUrl}css/style.css`" rel="stylesheet">
 
     <AppointmentForm v-if="stylesLoaded"/>
+    </v-container>
+    </v-main>
   </v-app>
 </template>
 
