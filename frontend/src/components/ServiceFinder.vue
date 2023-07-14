@@ -1,7 +1,13 @@
 <template>
   <div>
     <div ref="servicesDropDown"></div>
-
+    <v-autocomplete class="align-content-start service-finder-select" v-model="$store.state.data.service"
+      v-if="!$store.state.preselectedService" :items="services" :item-text="'name'" return-object
+      :label="$t('services')" filled @change="onChange" v-on:keyup.enter="suggest" clearable
+      :prepend-inner-icon="searchSvg" ref="autocomplete"
+      :menu-props="{ auto: true, overflowY: true, attach: $refs.servicesDropDown }"
+      :no-data-text="$t('noServiceFound')"></v-autocomplete>
+      <p>Testing something...</p>
     <v-alert v-if="this.filteredServices && this.filteredServices.length === 0" color="orange" dark border="top"
       icon="mdi-text-search" transition="scale-transition">
       {{ $t('noServiceFound') }}
