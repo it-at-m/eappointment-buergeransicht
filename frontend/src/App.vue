@@ -2,7 +2,6 @@
   <v-app data-app>
     <v-main>
       <v-container>
-
         <AppointmentForm v-if="stylesLoaded" />
       </v-container>
     </v-main>
@@ -14,13 +13,11 @@ import AppointmentForm from '@/components/AppointmentForm';
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 
-
 @Component({
 
   components: {
     AppointmentForm
   },
-
 
   data() {
     return {
