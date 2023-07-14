@@ -1,13 +1,13 @@
 <template>
   <v-app>
-  <v-main>
-  <v-container>
-    <link :href="`${linkBaseUrl}css/vuetify.min.css`" rel="stylesheet">
-    <link :href="`${linkBaseUrl}css/materialdesignicons.min.css`" rel="stylesheet">
-    <link :href="`${linkBaseUrl}css/style.css`" rel="stylesheet">
+    <v-main>
+      <v-container>
+        <link :href="`${linkBaseUrl}css/vuetify.min.css`" rel="stylesheet">
+        <link :href="`${linkBaseUrl}css/materialdesignicons.min.css`" rel="stylesheet">
+        <link :href="`${linkBaseUrl}css/style.css`" rel="stylesheet">
 
-    <AppointmentForm v-if="stylesLoaded"/>
-    </v-container>
+        <AppointmentForm v-if="stylesLoaded" />
+      </v-container>
     </v-main>
   </v-app>
 </template>
@@ -50,11 +50,11 @@ export default {
     }
   },
   computed: {
-    linkBaseUrl () {
+    linkBaseUrl() {
       return process.env.NODE_ENV === 'development' ? "/buergeransicht/" : this.baseUrl + "/buergeransicht/"
     }
   },
-  mounted () {
+  mounted() {
     this.loadStylesHackyWay();
     this.$store.state.settings.endpoints["VUE_APP_ZMS_API_BASE"] = this.baseUrl
 

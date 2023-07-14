@@ -3,26 +3,15 @@
     <v-container>
       <v-row>
         <v-col class="col-sm-12 col-lg-10 p-0">
-          <v-tabs
-              v-if="$store.state.data.service && $store.state.data.service.providers.length > 0"
-              color="primary"
-              show-arrows="mobile"
-              id="location-tabs"
-              ref="locationTabs"
-          >
+          <v-tabs v-if="$store.state.data.service && $store.state.data.service.providers.length > 0" color="primary"
+            show-arrows="mobile" id="location-tabs" ref="locationTabs">
             <template v-for="provider in $store.state.data.service.providers">
-              <v-tab
-                  v-if="shouldShowProvider(provider)"
-                  :key="provider.id + provider.name"
-                  @change="showForProvider(provider)"
-              >
+              <v-tab v-if="shouldShowProvider(provider)" :key="provider.id + provider.name"
+                @change="showForProvider(provider)">
                 {{ provider.name }}
               </v-tab>
 
-              <v-tab-item
-                  v-if="shouldShowProvider(provider)"
-                  :key="provider.id"
-              >
+              <v-tab-item v-if="shouldShowProvider(provider)" :key="provider.id">
               </v-tab-item>
             </template>
           </v-tabs>
@@ -30,75 +19,46 @@
       </v-row>
     </v-container>
 
-    <v-date-picker
-        full-width
-        v-model="date"
-        :allowed-dates="allowedDates"
-        class="mt-0"
-        :min="currentDate"
-        :first-day-of-week="1"
-        :locale="$i18n.locale"
-        :no-title="true"
-        @click:date="getAppointmentsOfDay(date)"
-    ></v-date-picker>
+    <v-date-picker full-width v-model="date" :allowed-dates="allowedDates" class="mt-0" :min="currentDate"
+      :first-day-of-week="1" :locale="$i18n.locale" :no-title="true"
+      @click:date="getAppointmentsOfDay(date)"></v-date-picker>
 
-    <v-alert
-        v-if="dateError"
-        :color="$store.state.settings.theme.error"
-    >
+    <v-alert v-if="dateError" :color="$store.state.settings.theme.error">
       {{ dateError }}
     </v-alert>
 
-     <div id="appointments"
-       tabindex="0"
-     >
-       <div
-           v-if="timeDialog"
-           class="appointment-container"
-           activator="parent"
-           width="500"
-       >
-         <div>
-           <div class="appointment-container-title">
-             <h2 tabindex="0">{{ $t('availableTimes') }}</h2>
-           </div>
+    <div id="appointments" tabindex="0">
+      <div v-if="timeDialog" class="appointment-container" activator="parent" width="500">
+        <div>
+          <div class="appointment-container-title">
+            <h2 tabindex="0">{{ $t('availableTimes') }}</h2>
+          </div>
 
-           <div class="appointment-container-subtitle grey lighten-2">
-             <h4 tabindex="0">{{ formatDay(date) }}</h4>
-           </div>
+          <div class="appointment-container-subtitle grey lighten-2">
+            <h4 tabindex="0">{{ formatDay(date) }}</h4>
+          </div>
 
-           <div>
-             <v-alert
-                 v-if="timeSlotError"
-                 :color="$store.state.settings.theme.error"
-             >
-               {{ timeSlotError }}
-             </v-alert>
-           </div>
+          <div>
+            <v-alert v-if="timeSlotError" :color="$store.state.settings.theme.error">
+              {{ timeSlotError }}
+            </v-alert>
+          </div>
 
-           <div
-                               v-for="(times, index) in timeSlotsInHours()"
-                               :key="index"
-           >
-             <div class="appointments-in-hours">
-               <div class="time-hour" tabindex="0">
-                 {{ times[0].format('H') }}:00-{{ times[0].format('H') }}:59
-               </div>
-               <div
-                   class="select-appointment"
-                   tabindex="0"
-                   v-for="timeSlot in times" :key="timeSlot.unix()"
-                   v-on:keyup.enter="chooseAppointment(timeSlot)"
-                   v-on:keyup.space="chooseAppointment(timeSlot)"
-                   @click="chooseAppointment(timeSlot)"
-               >
-                 {{ timeSlot.format('H:mm') }}
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
+          <div v-for="(times, index) in timeSlotsInHours()" :key="index">
+            <div class="appointments-in-hours">
+              <div class="time-hour" tabindex="0">
+                {{ times[0].format('H') }}:00-{{ times[0].format('H') }}:59
+              </div>
+              <div class="select-appointment" tabindex="0" v-for="timeSlot in times" :key="timeSlot.unix()"
+                v-on:keyup.enter="chooseAppointment(timeSlot)" v-on:keyup.space="chooseAppointment(timeSlot)"
+                @click="chooseAppointment(timeSlot)">
+                {{ timeSlot.format('H:mm') }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -122,33 +82,33 @@ export default {
     missingSlotsInARow: false
   }),
   methods: {
-    formatDay: function(date) {
+    formatDay: function (date) {
       return moment(date).format('dddd, DD.MM.YYYY')
     },
-    timeSlotsInHours: function() {
+    timeSlotsInHours: function () {
       const timesByHours = {}
 
-    this.timeSlots.forEach((time) => {
-      if (!Object.prototype.hasOwnProperty.call(timesByHours, time.format('H'))) {
-        timesByHours[time.format('H')] = [];
-      }
-      timesByHours[time.format('H')].push(time)
-    })
+      this.timeSlots.forEach((time) => {
+        if (!Object.prototype.hasOwnProperty.call(timesByHours, time.format('H'))) {
+          timesByHours[time.format('H')] = [];
+        }
+        timesByHours[time.format('H')].push(time)
+      })
       return timesByHours
     },
-    allowedDates: function(val) {
+    allowedDates: function (val) {
       const currentDate = moment(val, 'YYYY-MM-DD')
       return currentDate < this.maxDate
-          && this.selectableDates.includes(currentDate.format('YYYY-MM-DD'))
+        && this.selectableDates.includes(currentDate.format('YYYY-MM-DD'))
     },
-    shouldShowProvider: function(provider) {
+    shouldShowProvider: function (provider) {
       if (!this.$store.state.preselectedProvider) {
         return true
       }
 
       return provider.id === this.$store.state.preselectedProvider.id
     },
-    getAppointmentsOfDay: function(date, focus = true) {
+    getAppointmentsOfDay: function (date, focus = true) {
       this.timeSlotError = false
       this.dateError = false
       this.timeDialog = false
@@ -162,33 +122,33 @@ export default {
         }
       })
 
-      this.$store.dispatch('API/fetchAvailableTimeSlots', { date: momentDate, provider: {...this.provider, slots: 1}, serviceIds: Object.keys(selectedServices), serviceCounts: Object.values(selectedServices) })
-          .then(data => {
-            if (data.errorMessage) {
-              this.selectableDates = this.selectableDates.filter(selectableDate => {
-                return selectableDate !== date
-              })
+      this.$store.dispatch('API/fetchAvailableTimeSlots', { date: momentDate, provider: { ...this.provider, slots: 1 }, serviceIds: Object.keys(selectedServices), serviceCounts: Object.values(selectedServices) })
+        .then(data => {
+          if (data.errorMessage) {
+            this.selectableDates = this.selectableDates.filter(selectableDate => {
+              return selectableDate !== date
+            })
 
-              this.dateError = data.errorMessage
+            this.dateError = data.errorMessage
 
-              return
-            }
+            return
+          }
 
-            if (data.appointmentTimestamps) {
-              this.timeSlots = data.appointmentTimestamps
-            }
+          if (data.appointmentTimestamps) {
+            this.timeSlots = data.appointmentTimestamps
+          }
 
-            this.timeSlots = this.timeSlots.map((time) => moment.unix(time))
+          this.timeSlots = this.timeSlots.map((time) => moment.unix(time))
 
-            this.timeDialog = true
-            this.date = date
+          this.timeDialog = true
+          this.date = date
 
-            if (focus) {
-              window.location.hash = '#appointments'
-            }
-          })
+          if (focus) {
+            window.location.hash = '#appointments'
+          }
+        })
     },
-    chooseAppointment: function(timeSlot) {
+    chooseAppointment: function (timeSlot) {
       this.timeSlotError = false
       const selectedServices = {}
 
@@ -201,29 +161,29 @@ export default {
       const oldAppointment = this.$store.state.data.appointment
 
       this.$store.dispatch('API/reserveAppointment', { timeSlot, serviceIds: Object.keys(selectedServices), serviceCounts: Object.values(selectedServices), providerId: this.provider.id })
-          .then(data => {
-            if (data.errorMessage) {
-              this.timeSlotError = data.errorMessage
-              return
-            }
+        .then(data => {
+          if (data.errorMessage) {
+            this.timeSlotError = data.errorMessage
+            return
+          }
 
-            const appointment = data
-            appointment.provider = this.provider
-            appointment.officeName = this.provider.name
-            appointment.locationId = appointment.officeId
+          const appointment = data
+          appointment.provider = this.provider
+          appointment.officeName = this.provider.name
+          appointment.locationId = appointment.officeId
 
-            this.$store.commit('data/setAppointment', appointment)
-            this.timeDialog = false
-            this.$emit('next')
-          }, () => {
-            this.timeSlotError = this.$t('appointmentNotAvailable')
-          })
+          this.$store.commit('data/setAppointment', appointment)
+          this.timeDialog = false
+          this.$emit('next')
+        }, () => {
+          this.timeSlotError = this.$t('appointmentNotAvailable')
+        })
 
-      if (! this.timeSlotError && oldAppointment && ! this.$store.state.isRebooking) {
+      if (!this.timeSlotError && oldAppointment && !this.$store.state.isRebooking) {
         this.$store.dispatch('API/cancelAppointment', oldAppointment)
       }
     },
-    showForProvider: function(provider) {
+    showForProvider: function (provider) {
       this.dateError = false
       this.timeSlotError = false
       this.provider = provider
@@ -236,19 +196,19 @@ export default {
       })
 
       this.$store.dispatch('API/fetchAvailableDays', { provider: provider, serviceIds: Object.keys(selectedServices), serviceCounts: Object.values(selectedServices) })
-          .then(data => {
-            let availableDays = data.availableDays ?? []
-            if (data.errorMessage) {
-              this.dateError = data.errorMessage
-            }
+        .then(data => {
+          let availableDays = data.availableDays ?? []
+          if (data.errorMessage) {
+            this.dateError = data.errorMessage
+          }
 
-            this.selectableDates = availableDays
+          this.selectableDates = availableDays
 
-            this.getAppointmentsOfDay(availableDays[0], false)
-          })
+          this.getAppointmentsOfDay(availableDays[0], false)
+        })
     }
   },
-  mounted: function() {
+  mounted: function () {
     moment.locale('de')
 
     if (this.$store.state.preselectedProvider) {
@@ -264,27 +224,32 @@ export default {
 }
 </script>
 <style>
-.calendar-container {
-}
+.calendar-container {}
+
 .v-btn--rounded {
   border-radius: 0.25rem;
   width: 100% !important;
 }
+
 .v-date-picker-table tbody .v-btn {
   background: #32a852;
   color: #fff;
 }
-.v-date-picker-table tbody .v-btn.v-btn--disabled  {
+
+.v-date-picker-table tbody .v-btn.v-btn--disabled {
   background: #cccccc;
 }
+
 .v-card {
   text-align: center;
 }
+
 .v-card__text {
   overflow-y: scroll;
   padding: 0 !important;
   max-height: 12rem;
 }
+
 .select-appointment {
   border: #1b98d5 solid 1px;
   color: #1b98d5;
@@ -298,7 +263,8 @@ export default {
   margin-top: 0 !important;
 }
 
-.preselected-appointment, .select-appointment {
+.preselected-appointment,
+.select-appointment {
   cursor: pointer;
 }
 

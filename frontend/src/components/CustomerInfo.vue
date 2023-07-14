@@ -1,60 +1,26 @@
 <template>
   <div>
     <div id="customer-name-section">
-      <v-text-field
-          v-model="customer.name"
-          id="customer-name"
-          :error-messages="nameErrors"
-          @input="$v.name.$touch()"
-          @blur="$v.name.$touch()"
-          @change="changed"
-          counter="50"
-          filled
-          :label="$t('name')"
-      ></v-text-field>
+      <v-text-field v-model="customer.name" id="customer-name" :error-messages="nameErrors" @input="$v.name.$touch()"
+        @blur="$v.name.$touch()" @change="changed" counter="50" filled :label="$t('name')"></v-text-field>
     </div>
 
     <div id="customer-email-section">
-      <v-text-field
-          v-model="customer.email"
-          id="customer-email"
-          counter="50"
-          filled
-          :error-messages="emailErrors"
-          @input="$v.email.$touch()"
-          @blur="$v.email.$touch()"
-          @change="changed"
-          required
-          :label="$t('email')"
-      ></v-text-field>
+      <v-text-field v-model="customer.email" id="customer-email" counter="50" filled :error-messages="emailErrors"
+        @input="$v.email.$touch()" @blur="$v.email.$touch()" @change="changed" required
+        :label="$t('email')"></v-text-field>
     </div>
 
-    <v-checkbox
-        id="customer-data-protection"
-        v-model="customer.dataProtection"
-        label=""
-        :error-messages="dataProtectionErrors"
-        required
-        @input="$v.dataProtection.$touch()"
-        @blur="$v.dataProtection.$touch()"
-        @change="changed"
-    >
+    <v-checkbox id="customer-data-protection" v-model="customer.dataProtection" label=""
+      :error-messages="dataProtectionErrors" required @input="$v.dataProtection.$touch()"
+      @blur="$v.dataProtection.$touch()" @change="changed">
       <template v-slot:label>
-        <div
-            v-html="$t('privacyPolicyAccepted')"
-            @click.stop
-        ></div>
+        <div v-html="$t('privacyPolicyAccepted')" @click.stop></div>
       </template>
     </v-checkbox>
 
-    <v-btn
-        id="customer-submit-button"
-        class="button-next"
-        elevation="2"
-        depressed
-        color="primary"
-        @click="saveCustomer()"
-    >{{ $t('nextToReservation') }}</v-btn>
+    <v-btn id="customer-submit-button" class="button-next" elevation="2" depressed color="primary"
+      @click="saveCustomer()">{{ $t('nextToReservation') }}</v-btn>
   </div>
 </template>
 
@@ -112,24 +78,24 @@ export default {
     nameErrors() {
       const errors = [];
       if (!this.$v.name.$dirty) return errors;
-      ! this.$v.name.required && errors.push(this.$t('name') + ' ' + this.$t('isRequired'));
-      ! this.$v.name.maxLength && errors.push(this.$t('textLengthExceeded'));
+      !this.$v.name.required && errors.push(this.$t('name') + ' ' + this.$t('isRequired'));
+      !this.$v.name.maxLength && errors.push(this.$t('textLengthExceeded'));
 
       return errors;
     },
     emailErrors() {
       const errors = [];
       if (!this.$v.email.$dirty) return errors;
-      ! this.$v.email.email && errors.push(this.$t('mustBeValidEmail'));
-      ! this.$v.email.required && errors.push(this.$t('email') + ' ' + this.$t('isRequired'));
-      ! this.$v.email.maxLength && errors.push(this.$t('textLengthExceeded'));
+      !this.$v.email.email && errors.push(this.$t('mustBeValidEmail'));
+      !this.$v.email.required && errors.push(this.$t('email') + ' ' + this.$t('isRequired'));
+      !this.$v.email.maxLength && errors.push(this.$t('textLengthExceeded'));
 
       return errors;
     },
     dataProtectionErrors() {
       const errors = [];
       if (!this.$v.dataProtection.$dirty) return errors;
-      ! this.customer.dataProtection && errors.push(this.$t('acceptPrivacyPolicy'));
+      !this.customer.dataProtection && errors.push(this.$t('acceptPrivacyPolicy'));
 
       return errors;
     }
@@ -159,4 +125,5 @@ export default {
 }
 </script>
 <style>
+
 </style>
