@@ -18,7 +18,6 @@ import Vue from "vue";
 import { Component } from "vue-property-decorator";
 
 @Component({
-  props: ['serviceId', 'locationId', 'appointmentHash', 'confirmAppointmentHash'],
   components: {
     AppointmentForm
   },
@@ -29,12 +28,25 @@ import { Component } from "vue-property-decorator";
       emailLink: ''
     }
   },
-  computed: {
-    linkBaseUrl() {
-      return process.env.NODE_ENV === 'development' ? "/buergeransicht/" : `${process.env.VUE_APP_API_URL}` + "/buergeransicht/"
-    }
-  },
   mounted() {
+    const urlElements = window.location.hash.split('/')
+
+    if (urlElements.length >= 3 && urlElements[1] === 'services') {
+      this.$el.setAttribute('service-id', urlElements[2])
+    }
+
+    if (urlElements.length >= 5 && urlElements[3] === 'locations') {
+      this.$el.setAttribute('location-id', urlElements[4])
+    }
+
+    if (urlElements.length === 4 && urlElements[1] === 'appointment' && urlElements[2] === 'confirm') {
+      this.$el.setAttribute('confirm-appointment-hash', urlElements[3])
+    }
+
+    if (urlElements.length === 3 && urlElements[1] === 'appointment') {
+      this.$el.setAttribute('appointment-hash', urlElements[2])
+    }
+
     this.loadStylesHackyWay();
     this.$store.state.settings.endpoints["VUE_APP_ZMS_API_BASE"] = `${process.env.VUE_APP_API_URL}`
 
