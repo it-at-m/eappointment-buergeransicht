@@ -1,7 +1,7 @@
 <template>
   <div>
     <div ref="servicesDropDown"></div>
-    <v-autocomplete class="align-content-start service-finder-select" v-model="$store.state.data.service"
+    <v-autocomplete data-app class="align-content-start service-finder-select" v-model="$store.state.data.service"
       v-if="!$store.state.preselectedService" :items="services" :item-text="'name'" return-object
       :label="$t('services')" filled @change="onChange" v-on:keyup.enter="suggest" clearable
       :prepend-inner-icon="searchSvg" ref="autocomplete"

@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app data-app>
     <v-main>
       <v-container>
         <link :href="`${linkBaseUrl}css/vuetify.min.css`" rel="stylesheet">
