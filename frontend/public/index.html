@@ -9,13 +9,13 @@
 </head>
 
 <body>
-  <noscript>
-    <strong>Bitte JavaScript aktivieren um die ZMS Bürgeransicht zu nutzen.</strong>
-  </noscript>
-  <div id="app" >
-
-  </div>
-  <script>
+<noscript>
+  <strong>Bitte JavaScript aktivieren um die ZMS Bürgeransicht zu nutzen.</strong>
+</noscript>
+<div id="app">
+  <zms-appointment base-url="<%= VUE_APP_API_URL %>"></zms-appointment>
+</div>
+<script>
     const element = document.getElementsByTagName('zms-appointment')[0]
     const urlElements = window.location.hash.split('/')
 

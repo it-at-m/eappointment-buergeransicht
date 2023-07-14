@@ -2,7 +2,10 @@
   <v-app data-app>
     <v-main>
       <v-container>
-        
+        <link :href="`${linkBaseUrl}css/vuetify.min.css`" rel="stylesheet">
+        <link :href="`${linkBaseUrl}css/materialdesignicons.min.css`" rel="stylesheet">
+        <link :href="`${linkBaseUrl}css/style.css`" rel="stylesheet">
+
         <AppointmentForm v-if="stylesLoaded" />
       </v-container>
     </v-main>
@@ -11,15 +14,36 @@
 
 <script>
 import AppointmentForm from '@/components/AppointmentForm';
+import translations from '@/translations/'
+import store from '@/store/'
 import Vue from "vue";
-import { Component } from "vue-property-decorator";
-@Component({
-  props: ['serviceId', 'locationId', 'appointmentHash', 'confirmAppointmentHash'],
+import VueI18n from "vue-i18n";
+import Vuetify from "vuetify";
+
+Vue.use(VueI18n)
+Vue.use(Vuetify)
+
+const i18n = new VueI18n({
+  locale: store.state.locale,
+  messages: translations,
+})
+
+export default {
+  name: 'App',
+  store: store,
+  i18n: i18n,
+  vuetify: new Vuetify({
+    icons: {
+      iconfont: 'mdiSvg'
+    },
+    theme: {
+      defaultTheme: 'light'
+    }
+  }),
+  props: ['baseUrl', 'serviceId', 'locationId', 'appointmentHash', 'confirmAppointmentHash'],
   components: {
     AppointmentForm
   },
-  
-
   data() {
     return {
       stylesLoaded: false,
@@ -27,12 +51,12 @@ import { Component } from "vue-property-decorator";
   },
   computed: {
     linkBaseUrl() {
-      return process.env.NODE_ENV === 'development' ? "/buergeransicht/" : `${process.env.VUE_APP_API_URL}` + "/buergeransicht/"
+      return process.env.NODE_ENV === 'development' ? "/buergeransicht/" : this.baseUrl + "/buergeransicht/"
     }
   },
   mounted() {
     this.loadStylesHackyWay();
-    this.$store.state.settings.endpoints["VUE_APP_ZMS_API_BASE"] = `${process.env.VUE_APP_API_URL}`
+    this.$store.state.settings.endpoints["VUE_APP_ZMS_API_BASE"] = this.baseUrl
 
     this.$store.dispatch('setUpServicesAndProviders', {
       preselectedService: this.serviceId ?? null,
@@ -91,12 +115,6 @@ import { Component } from "vue-property-decorator";
       });
     }
   },
-})
-
-
-export default  class App extends Vue{
-
-
 }
 </script>
 
