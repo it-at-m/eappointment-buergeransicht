@@ -2,8 +2,11 @@
   <v-app data-app>
     <v-main>
       <v-container>
-        
         <AppointmentForm v-if="stylesLoaded" />
+        <div v-if="confirmedAppointment">
+          <p>You have confirmed your appointment. Please check your email for further instructions.</p>
+          <a :href="emailLink">Go to Email</a>
+        </div>
       </v-container>
     </v-main>
   </v-app>
@@ -13,16 +16,17 @@
 import AppointmentForm from '@/components/AppointmentForm';
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
+
 @Component({
   props: ['serviceId', 'locationId', 'appointmentHash', 'confirmAppointmentHash'],
   components: {
     AppointmentForm
   },
-  
-
   data() {
     return {
       stylesLoaded: false,
+      confirmedAppointment: false,
+      emailLink: ''
     }
   },
   computed: {
@@ -54,6 +58,8 @@ import { Component } from "vue-property-decorator";
           console.log("success", success);
           if (success) {
             this.$store.state.activatedAppointment = success
+            this.confirmedAppointment = true
+            this.emailLink = success.emailLink
           } else {
             this.$store.dispatch('setUpAppointment', {
               appointmentHash: this.confirmAppointmentHash
@@ -90,14 +96,10 @@ import { Component } from "vue-property-decorator";
         console.error('Error loading styles:', error);
       });
     }
-  },
+  }
 })
 
-
-export default  class App extends Vue{
-
-
-}
+export default class App extends Vue {}
 </script>
 
 <style>
