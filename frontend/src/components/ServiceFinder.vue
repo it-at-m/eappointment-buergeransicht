@@ -155,7 +155,7 @@
   </div>
 </template>
 
-<script type="text/javascript">
+<script>
 import { mdiDomain, mdiMagnify, mdiPlus, mdiMinus } from '@mdi/js'
 
 export default {

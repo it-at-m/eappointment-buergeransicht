@@ -58,7 +58,7 @@
   </div>
 </template>
 
-<script type="text/javascript">
+<script>
 import { validationMixin } from "vuelidate";
 import { required, email, maxLength } from "vuelidate/lib/validators";
 

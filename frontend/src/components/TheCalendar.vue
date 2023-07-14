@@ -102,7 +102,7 @@
   </div>
 </template>
 
-<script type="text/javascript">
+<script>
 import moment from 'moment'
 import { mdiCalendarClock } from '@mdi/js';
 

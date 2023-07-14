@@ -55,7 +55,7 @@
 
                   {{ $t('services') }}
                 </v-expansion-panel-header>
-                <v-expansion-panel-content>
+                <v-expansion-panel-content data-app>
                   <ServiceFinder @next="openPanel(2)" @changed="openPanel(1)" />
                 </v-expansion-panel-content>
               </v-expansion-panel>
@@ -328,7 +328,7 @@
   </div>
 </template>
 
-<script type="text/javascript"> 
+<script> 
 import SwitchLanguage from './SwitchLanguage.vue'
 import ServiceFinder from './ServiceFinder.vue'
 import TheCalendar from './TheCalendar.vue'

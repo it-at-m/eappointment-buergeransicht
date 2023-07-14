@@ -1,40 +1,39 @@
 <!DOCTYPE html>
 <html lang="">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>ZMS Bürgeransicht</title>
-  </head>
-  <body>
-    <noscript>
-      <strong>Bitte JavaScript aktivieren um die ZMS Bürgeransicht zu nutzen.</strong>
-    </noscript>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>ZMS Bürgeransicht</title>
+</head>
+<body>
+  <noscript>
+    <strong>Bitte JavaScript aktivieren um die ZMS Bürgeransicht zu nutzen.</strong>
+  </noscript>
+  <div id="app">
+    <zms-appointment base-url="<%= VUE_APP_API_URL %>"></zms-appointment>
+  </div>
+  <script>
+    const element = document.getElementsByTagName('zms-appointment')[0]
+    const urlElements = window.location.hash.split('/')
 
+    if (urlElements.length >= 3 && urlElements[1] === 'services') {
+      element.setAttribute('service-id', urlElements[2])
+    }
 
-    <div id="app">
-    <zms-appointment
-            base-url="<%= VUE_APP_API_URL %>"></zms-appointment></div>
-    <script type="text/javascript">
-        const element = document.getElementsByTagName('zms-appointment')[0]
-        const urlElements = window.location.hash.split('/')
+    if (urlElements.length >= 5 && urlElements[3] === 'locations') {
+      element.setAttribute('location-id', urlElements[4])
+    }
 
-        if (urlElements.length >= 3 && urlElements[1] === 'services') {
-            element.setAttribute('service-id', urlElements[2])
-        }
+    if (urlElements.length === 4 && urlElements[1] === 'appointment' && urlElements[2] === 'confirm') {
+      element.setAttribute('confirm-appointment-hash', urlElements[3])
+    }
 
-        if (urlElements.length >= 5 && urlElements[3] === 'locations') {
-            element.setAttribute('location-id', urlElements[4])
-        }
+    if (urlElements.length === 3 && urlElements[1] === 'appointment') {
+      element.setAttribute('appointment-hash', urlElements[2])
+    }
+  </script>
 
-        if (urlElements.length === 4 && urlElements[1] === 'appointment' && urlElements[2] === 'confirm') {
-            element.setAttribute('confirm-appointment-hash', urlElements[3])
-        }
+</body>
 
-        if (urlElements.length === 3 && urlElements[1] === 'appointment') {
-            element.setAttribute('appointment-hash', urlElements[2])
-        }
-    </script>
-
-  </body>
 </html>
