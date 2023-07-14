@@ -10,6 +10,7 @@
 
 <script type="text/javascript">
 
+
 import AppointmentForm from '@/components/AppointmentForm';
 import translations from '@/translations/'
 import store from '@/store/'
@@ -26,6 +27,7 @@ const i18n = new VueI18n({
 })
 
 export default {
+  name: 'App',
   store: store,
   i18n: i18n,
   vuetify: new Vuetify({

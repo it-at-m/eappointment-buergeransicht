@@ -18,7 +18,6 @@
         :menu-props="{ auto: true, overflowY: true }"
         :no-data-text="$t('noServiceFound')"
     ></v-autocomplete>
-
     <v-alert
         v-if="this.filteredServices && this.filteredServices.length === 0"
         color="orange"
