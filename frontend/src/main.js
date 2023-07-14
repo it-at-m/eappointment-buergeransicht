@@ -19,9 +19,9 @@ const vuetify = new Vuetify({
   theme: {
     themes: {
       light: {
-        primary: '#2c3e50', // Set your primary color here
-        secondary: '#1b98d5', // Set your secondary color here
-        accent: '#32a852',
+        primary: '#2c3e50', // Set your primary color here KVR Farbe
+        secondary: '#1b98d5', // Set your secondary color here KVR Farbe
+        accent: '#32a852', // Set your accent color here KVR Farbe
       },
     },
   },
