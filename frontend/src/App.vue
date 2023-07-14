@@ -2,11 +2,8 @@
   <v-app data-app>
     <v-main>
       <v-container>
+
         <AppointmentForm v-if="stylesLoaded" />
-        <div v-if="confirmedAppointment">
-          <p>You have confirmed your appointment. Please check your email for further instructions.</p>
-          <a :href="emailLink">Go to Email</a>
-        </div>
       </v-container>
     </v-main>
   </v-app>
@@ -17,35 +14,62 @@ import AppointmentForm from '@/components/AppointmentForm';
 import Vue from "vue";
 import { Component } from "vue-property-decorator";
 
+
 @Component({
+
   components: {
     AppointmentForm
   },
+
+
   data() {
     return {
       stylesLoaded: false,
-      confirmedAppointment: false,
-      emailLink: ''
+    }
+  },
+  computed: {
+    linkBaseUrl() {
+      return process.env.NODE_ENV === 'development' ? "/buergeransicht/" : `${process.env.VUE_APP_API_URL}` + "/buergeransicht/"
     }
   },
   mounted() {
+
     const urlElements = window.location.hash.split('/')
 
     if (urlElements.length >= 3 && urlElements[1] === 'services') {
-      this.$el.setAttribute('service-id', urlElements[2])
+      this.$el.setAttribute('service-id', urlElements[2]);
+      // Trigger the corresponding store action or mutation
+      this.$store.dispatch('setService', urlElements[2]);
     }
 
     if (urlElements.length >= 5 && urlElements[3] === 'locations') {
-      this.$el.setAttribute('location-id', urlElements[4])
+      this.$el.setAttribute('location-id', urlElements[4]);
+      // Trigger the corresponding store action or mutation
+      this.$store.dispatch('setLocation', urlElements[4]);
     }
 
     if (urlElements.length === 4 && urlElements[1] === 'appointment' && urlElements[2] === 'confirm') {
-      this.$el.setAttribute('confirm-appointment-hash', urlElements[3])
+      this.$el.setAttribute('confirm-appointment-hash', urlElements[3]);
+      // Trigger the confirmReservation store action
+      this.$store.dispatch('confirmReservation', { appointmentHash: urlElements[3] }).then((success) => {
+        console.log("success", success);
+        if (success) {
+          this.$store.state.activatedAppointment = success;
+        } else {
+          this.$store.dispatch('setUpAppointment', { appointmentHash: urlElements[3] });
+        }
+
+        this.$store.state.openedPanel = 3;
+        this.$store.state.confirmedAppointment = true;
+      });
     }
 
     if (urlElements.length === 3 && urlElements[1] === 'appointment') {
-      this.$el.setAttribute('appointment-hash', urlElements[2])
+      this.$el.setAttribute('appointment-hash', urlElements[2]);
+      // Trigger the corresponding store action or mutation
+      this.$store.dispatch('setAppointment', urlElements[2]);
     }
+
 
     this.loadStylesHackyWay();
     this.$store.state.settings.endpoints["VUE_APP_ZMS_API_BASE"] = `${process.env.VUE_APP_API_URL}`
@@ -70,8 +94,6 @@ import { Component } from "vue-property-decorator";
           console.log("success", success);
           if (success) {
             this.$store.state.activatedAppointment = success
-            this.confirmedAppointment = true
-            this.emailLink = success.emailLink
           } else {
             this.$store.dispatch('setUpAppointment', {
               appointmentHash: this.confirmAppointmentHash
@@ -108,10 +130,14 @@ import { Component } from "vue-property-decorator";
         console.error('Error loading styles:', error);
       });
     }
-  }
+  },
 })
 
-export default class App extends Vue {}
+
+export default class App extends Vue {
+
+
+}
 </script>
 
 <style>
