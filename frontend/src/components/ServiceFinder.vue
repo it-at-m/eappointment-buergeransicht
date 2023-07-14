@@ -1,7 +1,6 @@
 <template>
   <div>
     <v-autocomplete
-        data-app
         class="align-content-start service-finder-select"
         v-model="$store.state.data.service"
         v-if="! $store.state.preselectedService"
