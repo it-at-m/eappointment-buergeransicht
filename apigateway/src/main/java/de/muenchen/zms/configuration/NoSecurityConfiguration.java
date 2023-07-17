@@ -17,14 +17,18 @@ public class NoSecurityConfiguration {
 
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
+        // @formatter:off
         return http
                 .authorizeExchange()
-                        .anyExchange().permitAll()
-                /*.and()
-                    .cors()*/
+                .anyExchange().permitAll()
                 .and()
-                    .csrf().disable()
+                .cors()
+                .and()
+                .csrf().disable()
                 .build();
+        // @formatter:on
     }
+
+
 
 }
