@@ -20,7 +20,7 @@
         </appender>
 
         <!-- Logger -->
-        <logger name="de.muenchen.kobit"
+        <logger name="de.muenchen.zms"
                 level="info"
                 additivity="false">
             <appender-ref ref="STDOUT" />
@@ -90,7 +90,7 @@
         </appender>
 
         <!-- Logger -->
-        <logger name="de.muenchen.kobit"
+        <logger name="de.muenchen.zms"
                 level="info"
                 additivity="false">
             <appender-ref ref="JSON_STDOUT" />
