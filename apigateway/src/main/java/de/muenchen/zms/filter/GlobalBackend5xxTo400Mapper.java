@@ -18,7 +18,6 @@ import org.springframework.core.io.buffer.DataBufferFactory;
 import org.springframework.core.io.buffer.DefaultDataBuffer;
 import org.springframework.core.io.buffer.DefaultDataBufferFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
@@ -29,8 +28,8 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
- * This {@link GlobalFilter} replaces the body by a generic error body, when a server responses
- * with a {@link HttpStatus#INTERNAL_SERVER_ERROR}.
+ * This {@link GlobalFilter} replaces the body by a generic error body when a server responds
+ * with an {@link HttpStatus#INTERNAL_SERVER_ERROR}.
  */
 @Component
 @Slf4j
@@ -63,9 +62,9 @@ public class GlobalBackend5xxTo400Mapper implements GlobalFilter, Ordered {
 
             @Override
             public Mono<Void> writeWith(Publisher<? extends DataBuffer> body) {
-                final HttpStatusCode responseHttpStatus = getDelegate().getStatusCode();
+                final HttpStatus responseHttpStatus = getDelegate().getStatusCode();
 
-                final Flux<? extends DataBuffer> flux = (Flux<? extends DataBuffer>) body;
+                final Flux<? extends DataBuffer> flux = Flux.from(body);
 
                 if (body instanceof Flux && responseHttpStatus.is5xxServerError()) {
 
