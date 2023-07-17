@@ -9,10 +9,10 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.server.*;
 
+import java.net.URI;
+
 import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
 import static org.springframework.web.reactive.function.server.RouterFunctions.resources;
-import static org.springframework.web.reactive.function.server.RouterFunctions.route;
-import static org.springframework.web.reactive.function.server.ServerResponse.ok;
 
 @Configuration
 @Slf4j
@@ -22,16 +22,30 @@ public class GuiConfiguration {
     public RouterFunction<ServerResponse> indexRouter(@Value("classpath:/static/index.html") final Resource indexHtml) {
         log.debug("Location of gui entry point: {}", indexHtml);
 
+        RequestPredicate indexPredicate = GET("/buergeransicht");
+        HandlerFunction<ServerResponse> indexHandler = request ->
+                ServerResponse.ok().contentType(MediaType.TEXT_HTML).bodyValue(indexHtml);
+
         // Serve index.html at /buergeransicht
-        RouterFunction<ServerResponse> indexRoute = route(GET("/buergeransicht"),
-                request -> ok().contentType(MediaType.TEXT_HTML).bodyValue(indexHtml));
+        RouterFunction<ServerResponse> indexRoute = RouterFunctions.route(indexPredicate, indexHandler);
+
+        // Serve index.html also at /buergeransicht/
+        RequestPredicate indexPredicateRoot = GET("/buergeransicht/");
+        RouterFunction<ServerResponse> indexRouteRoot = RouterFunctions.route(indexPredicateRoot, indexHandler);
 
         // Serve static files from /buergeransicht/**
         RouterFunction<ServerResponse> staticResourceRoute = resources("/buergeransicht/**",
                 new ClassPathResource("static/"));
 
         // Combine the routes
-        return indexRoute.and(staticResourceRoute);
+        return RouterFunctions.nest(indexPredicate, indexRoute)
+                .andRoute(indexPredicateRoot, indexHandler)
+                .and(staticResourceRoute);
     }
+
+
+
+
+
 
 }

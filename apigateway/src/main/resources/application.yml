@@ -95,3 +95,5 @@ spring:
         - RemoveResponseHeader=Expires
         - RemoveRequestHeader=cookie
         - RemoveRequestHeader=x-xsrf-token
+config:
+  map5xxto400: true
