@@ -11,8 +11,12 @@
     <packaging>pom</packaging>
     <name>frontend</name>
 
+    <properties>
+        <sonar.scanner.version>3.9.0.2155</sonar.scanner.version>
+    </properties>
 
-     <scm>
+
+    <scm>
         <connection>scm:git:https://git.muenchen.de/itm-km55/zms/buergeransicht.git</connection>
         <developerConnection>scm:git:https://git.muenchen.de/itm-km55/zms/buergeransicht.git</developerConnection>
         <url>https://git.muenchen.de/itm-km55/zms/buergeransicht</url>
@@ -29,6 +33,11 @@
                 <configuration>
                     <tag>RT-REL-${project.version}</tag>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>${sonar.scanner.version}</version>
             </plugin>
         </plugins>
     </build>

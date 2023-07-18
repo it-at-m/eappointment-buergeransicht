@@ -31,6 +31,7 @@
         <hazelcast.version>4.2.8</hazelcast.version>
         <apache.commons.lang.version>3.12.0</apache.commons.lang.version>
         <logstash.encoder.version>7.2</logstash.encoder.version>
+        <jacoco.version>0.8.7</jacoco.version>
     </properties>
 
 
@@ -210,6 +211,25 @@
                 <configuration>
                     <!-- Your configuration goes here -->
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
