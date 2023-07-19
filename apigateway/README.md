@@ -11,7 +11,6 @@ mvn install
 mvn spotless:apply
 ```
 
-
 ### IntelliJ Local Environment Configuration
 First under Run click on Edit Configurations Create a new application with the name: ```zms-apigateway```
 
