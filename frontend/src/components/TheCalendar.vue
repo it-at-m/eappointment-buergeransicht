@@ -20,7 +20,7 @@
     </v-container>
 
     <v-date-picker full-width v-model="date" :allowed-dates="allowedDates" class="mt-0" :min="currentDate"
-      :first-day-of-week="1" :locale="$i18n.locale" :no-title="true"
+      :first-day-of-week="1" :locale="$i18n.locale" :no-title="true" :weekday-format="getWeekday"
       @click:date="getAppointmentsOfDay(date)"></v-date-picker>
 
     <v-alert v-if="dateError" :color="$store.state.settings.theme.error">
@@ -34,7 +34,7 @@
             <h2 tabindex="0">{{ $t('availableTimes') }}</h2>
           </div>
 
-          <div class="appointment-container-subtitle grey lighten-2">
+          <div class="appointment-container-subtitle lighten-2">
             <h4 tabindex="0">{{ formatDay(date) }}</h4>
           </div>
 
@@ -65,6 +65,7 @@
 <script>
 import moment from 'moment'
 import { mdiCalendarClock } from '@mdi/js';
+import 'moment/locale/de';
 
 export default {
   name: 'TheCalendar',
@@ -82,8 +83,8 @@ export default {
     missingSlotsInARow: false
   }),
   methods: {
-    formatDay: function (date) {
-      return moment(date).format('dddd, DD.MM.YYYY')
+    formatDay: function(date) {
+      return moment(date).locale('de').format('dddd, DD.MM.YYYY')
     },
     timeSlotsInHours: function () {
       const timesByHours = {}
@@ -107,6 +108,9 @@ export default {
       }
 
       return provider.id === this.$store.state.preselectedProvider.id
+    },
+    getWeekday: function(date) {
+      return moment(date).format('dddd').slice(0, 2)
     },
     getAppointmentsOfDay: function (date, focus = true) {
       this.timeSlotError = false

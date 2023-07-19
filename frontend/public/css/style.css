@@ -40,7 +40,7 @@
     width: 100% !important;
 }
 .v-date-picker-table tbody .v-btn {
-    background: #32a852;
+    background: #005A9F;
     color: #fff;
 }
 .v-date-picker-table tbody .v-btn.v-btn--disabled  {
@@ -62,7 +62,7 @@
     margin-top: 0 !important;
 }
 .select-appointment:hover {
-    background: #cccccc;
+    background: #F2F6FA;
 }
 .preselected-appointment, .select-appointment {
     cursor: pointer;
@@ -113,7 +113,7 @@ h3 {
 
 .theme--light.v-btn.v-btn--has-bg.button-next,
 .theme--light.v-btn.v-btn--has-bg.button-submit {
-    background: #2c3e50;
+    background: #005A9F;
 }
 
 .v-dialog__container {
@@ -121,7 +121,7 @@ h3 {
 }
 
 .appointment-container {
-    padding: 12px;
+    padding: 12px 0;
 }
 
 .appointment-container-title {
@@ -131,32 +131,102 @@ h3 {
 .appointment-container-subtitle {
     padding: 6px;
     margin-bottom: 12px;
+    background: #F2F6FA;
 }
 
 .time-hour {
     position: absolute;
-    left: 12px;
+    left: 0;
     font-size: 14px;
     line-height: 34px;
-}
-
-@media only screen and (max-width: 600px) {
-    .time-hour {
-        font-size: 12px;
-    }
 }
 
 .appointments-in-hours {
     width: 100%;
     padding-left: 22%;
     float: left;
+    position: relative;
+    border-bottom: #BDD4EA solid 1px;
+    margin-bottom: 5px;
 }
 
 .select-appointment {
-    border: #1b98d5 solid 1px;
-    color: #1b98d5;
+    border: #005A9F solid 1px;
+    color: #005A9F;
     padding: 4px 6px;
     margin-right: 8px;
     margin-bottom: 8px;
     float: left;
+}
+
+.v-date-picker-table tbody .v-btn,
+.v-date-picker-table tbody .v-btn.v-btn--disabled {
+    background: #ffffff;
+    font-size: 14px;
+    color: #005A9F;
+    border-radius: 0;
+}
+
+.v-date-picker-table tbody .v-btn.v-btn--active {
+    background: #005A9F;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+#appointments {
+    width: 592px;
+    margin: 0 auto;
+}
+
+.v-picker__body {
+    width: 592px !important;
+    border: #BDD4EA solid 1px;
+    padding: 0 0 20px;
+    margin: 20px auto 10px !important;
+    border-radius: 0 !important;
+}
+
+.v-date-picker-header, .v-date-picker-table {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.v-date-picker-header {
+    border-bottom: #BDD4EA solid 1px;
+    background: #F2F6FA;
+}
+
+.theme--light.v-date-picker-table tbody {
+    border-top: #BDD4EA solid 1px;
+}
+
+.theme--light.v-date-picker-table {
+    border-collapse: collapse;
+}
+
+.theme--light.v-date-picker-table thead th {
+    border-bottom: #BDD4EA solid 1px;
+}
+
+.v-date-picker-table td, .v-date-picker-table th {
+    padding: 2px 18px;
+}
+
+@media only screen and (max-width: 600px) {
+    .time-hour {
+        font-size: 12px;
+    }
+
+    .v-picker__body {
+        width: 100% !important;
+    }
+
+    #appointments {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .v-date-picker-table td, .v-date-picker-table th {
+        padding: 2px 8px;
+    }
 }
