@@ -8,6 +8,7 @@ mvn install
 
 ### For clean code run in the /buergeransicht/apigateway folder after making changes before committing:
 
+
 ```
 mvn spotless:apply
 ```
