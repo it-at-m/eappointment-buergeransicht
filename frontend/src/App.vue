@@ -51,42 +51,44 @@ export default {
   },
   mounted () {
     this.loadStylesHackyWay();
-    this.$store.state.settings.endpoints["VUE_APP_ZMS_API_BASE"] =
-        process.env.NODE_ENV === 'development' ? 'http://localhost:8080' : `${process.env.VUE_APP_API_URL}`
-
-    this.$store.dispatch('setUpServicesAndProviders', {
-      preselectedService: this.serviceId ?? null,
-      preselectedProvider: this.locationId ?? null
-    }).then(() => {
-      if (this.appointmentHash) {
-        this.$store.dispatch('setUpAppointment', {
-          appointmentHash: this.appointmentHash
-        })
-
-        this.$store.state.openedPanel = 3
-        this.$store.state.confirmedAppointment = true
-      }
-
-      if (this.confirmAppointmentHash) {
-        this.$store.dispatch('confirmReservation', {
-          appointmentHash: this.confirmAppointmentHash
-        }).then((success) => {
-          console.log("success", success);
-          if (success) {
-            this.$store.state.activatedAppointment = success
-          } else {
-            this.$store.dispatch('setUpAppointment', {
-              appointmentHash: this.confirmAppointmentHash
-            })
-          }
-
-          this.$store.state.openedPanel = 3
-          this.$store.state.confirmedAppointment = true
-        })
-      }
-    })
   },
   methods: {
+    loadData() {
+    this.$store.state.settings.endpoints["VUE_APP_ZMS_API_BASE"] =
+            process.env.NODE_ENV === 'development' ? 'http://localhost:8080' : `${process.env.VUE_APP_API_URL}`
+
+        this.$store.dispatch('setUpServicesAndProviders', {
+          preselectedService: this.serviceId ?? null,
+          preselectedProvider: this.locationId ?? null
+        }).then(() => {
+          if (this.appointmentHash) {
+            this.$store.dispatch('setUpAppointment', {
+              appointmentHash: this.appointmentHash
+            })
+
+            this.$store.state.openedPanel = 3
+            this.$store.state.confirmedAppointment = true
+          }
+
+          if (this.confirmAppointmentHash) {
+            this.$store.dispatch('confirmReservation', {
+              appointmentHash: this.confirmAppointmentHash
+            }).then((success) => {
+              console.log("success", success);
+              if (success) {
+                this.$store.state.activatedAppointment = success
+              } else {
+                this.$store.dispatch('setUpAppointment', {
+                  appointmentHash: this.confirmAppointmentHash
+                })
+              }
+
+              this.$store.state.openedPanel = 3
+              this.$store.state.confirmedAppointment = true
+            })
+          }
+        })
+    },
     loadStylesHackyWay() {
       const styles = [
         `${this.linkBaseUrl}css/vuetify.min.css`,
@@ -106,6 +108,7 @@ export default {
 
       Promise.all(promises).then(() => {
         this.stylesLoaded = true;
+        this.loadData();
       }).catch((error) => {
         console.error('Error loading styles:', error);
       });
