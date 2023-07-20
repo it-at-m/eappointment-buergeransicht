@@ -1,75 +1,58 @@
 <template>
-  <v-app data-app>
-    <v-main>
-      <v-container>
-        <AppointmentForm v-if="stylesLoaded" />
-      </v-container>
-    </v-main>
+  <v-app>
+    <link :href="`${linkBaseUrl}css/vuetify.min.css`" rel="stylesheet">
+    <link :href="`${linkBaseUrl}css/materialdesignicons.min.css`" rel="stylesheet">
+    <link :href="`${linkBaseUrl}css/style.css`" rel="stylesheet">
+
+    <AppointmentForm v-if="stylesLoaded"/>
   </v-app>
 </template>
 
 <script>
 import AppointmentForm from '@/components/AppointmentForm';
+import store from "@/store";
+import translations from "@/translations";
 import Vue from "vue";
-import { Component } from "vue-property-decorator";
+import VueI18n from "vue-i18n";
+import Vuetify from "vuetify";
 
-@Component({
+Vue.use(VueI18n)
+Vue.use(Vuetify)
 
+const i18n = new VueI18n({
+  locale: store.state.locale,
+  messages: translations,
+})
+
+export default {
+  store: store,
+  i18n: i18n,
+  vuetify: new Vuetify({
+    icons: {
+      iconfont: 'mdiSvg'
+    },
+    theme: {
+      defaultTheme: 'light'
+    }
+  }),
+  props: ['baseUrl', 'serviceId', 'locationId', 'appointmentHash', 'confirmAppointmentHash'],
   components: {
     AppointmentForm
   },
-
   data() {
     return {
       stylesLoaded: false,
     }
   },
   computed: {
-    linkBaseUrl() {
-      return process.env.NODE_ENV === 'development' ? "/buergeransicht/" : `${process.env.VUE_APP_API_URL}` + "/buergeransicht/"
+    linkBaseUrl () {
+      return process.env.NODE_ENV === 'development' ? "" : this.baseUrl + "/"
     }
   },
-  mounted() {
-
-    const urlElements = window.location.hash.split('/')
-
-    if (urlElements.length >= 3 && urlElements[1] === 'services') {
-      this.$el.setAttribute('service-id', urlElements[2]);
-      // Trigger the corresponding store action or mutation
-      this.$store.dispatch('setService', urlElements[2]);
-    }
-
-    if (urlElements.length >= 5 && urlElements[3] === 'locations') {
-      this.$el.setAttribute('location-id', urlElements[4]);
-      // Trigger the corresponding store action or mutation
-      this.$store.dispatch('setLocation', urlElements[4]);
-    }
-
-    if (urlElements.length === 4 && urlElements[1] === 'appointment' && urlElements[2] === 'confirm') {
-      this.$el.setAttribute('confirm-appointment-hash', urlElements[3]);
-      // Trigger the confirmReservation store action
-      this.$store.dispatch('confirmReservation', { appointmentHash: urlElements[3] }).then((success) => {
-        console.log("success", success);
-        if (success) {
-          this.$store.state.activatedAppointment = success;
-        } else {
-          this.$store.dispatch('setUpAppointment', { appointmentHash: urlElements[3] });
-        }
-
-        this.$store.state.openedPanel = 3;
-        this.$store.state.confirmedAppointment = true;
-      });
-    }
-
-    if (urlElements.length === 3 && urlElements[1] === 'appointment') {
-      this.$el.setAttribute('appointment-hash', urlElements[2]);
-      // Trigger the corresponding store action or mutation
-      this.$store.dispatch('setAppointment', urlElements[2]);
-    }
-
-
+  mounted () {
     this.loadStylesHackyWay();
-    this.$store.state.settings.endpoints["VUE_APP_ZMS_API_BASE"] = `${process.env.VUE_APP_API_URL}`
+    this.$store.state.settings.endpoints["VUE_APP_ZMS_API_BASE"] =
+        process.env.NODE_ENV === 'development' ? 'http://localhost:8080' : `${process.env.VUE_APP_API_URL}`
 
     this.$store.dispatch('setUpServicesAndProviders', {
       preselectedService: this.serviceId ?? null,
@@ -128,12 +111,6 @@ import { Component } from "vue-property-decorator";
       });
     }
   },
-})
-
-
-export default class App extends Vue {
-
-
 }
 </script>
 
