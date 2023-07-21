@@ -13,13 +13,11 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
-import org.springframework.security.web.server.csrf.CookieServerCsrfTokenRepository;
 import org.springframework.security.web.server.util.matcher.ServerWebExchangeMatchers;
 
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.reactive.CorsConfigurationSource;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
-
 
 import java.util.Arrays;
 
@@ -35,10 +33,35 @@ public class SecurityConfiguration {
     @Value("${spring.session.timeout:36000}")
     private long springSessionTimeoutSeconds;
 
+    @Value("${ALLOWED_ORIGIN_1}")
+    private String allowedOrigin1;
+
+    @Value("${ALLOWED_ORIGIN_2}")
+    private String allowedOrigin2;
+
+    @Value("${ALLOWED_ORIGIN_3}")
+    private String allowedOrigin3;
+
+    @Value("${ALLOWED_ORIGIN_4}")
+    private String allowedOrigin4;
+
+    @Value("${ALLOWED_ORIGIN_5}")
+    private String allowedOrigin5;
+
+    @Value("${ALLOWED_ORIGIN_6}")
+    private String allowedOrigin6;
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:8082"));
+        configuration.setAllowedOrigins(Arrays.asList(
+                "http://localhost:8082",
+                allowedOrigin1,
+                allowedOrigin2,
+                allowedOrigin3,
+                allowedOrigin4,
+                allowedOrigin5,
+                allowedOrigin6));
         configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH"));
         // setAllowCredentials(true) is important, otherwise:
         // The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '*' when the request's credentials mode is 'include'.
