@@ -32,42 +32,13 @@ public class SecurityConfiguration {
 
     private static final String LOGOUT_SUCCESS_URL = "/loggedout.html";
 
-    @Value("${spring.session.timeout:36000}")
-    private long springSessionTimeoutSeconds;
-
-    @Value("${ALLOWED_ORIGIN_1}")
-    private String allowedOrigin1;
-
-    @Value("${ALLOWED_ORIGIN_2}")
-    private String allowedOrigin2;
-
-    @Value("${ALLOWED_ORIGIN_3}")
-    private String allowedOrigin3;
-
-    @Value("${ALLOWED_ORIGIN_4}")
-    private String allowedOrigin4;
-
-    @Value("${ALLOWED_ORIGIN_5}")
-    private String allowedOrigin5;
-
-    @Value("${ALLOWED_ORIGIN_6}")
-    private String allowedOrigin6;
-
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(SecurityConfiguration.class);
 
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList(
-                "http://localhost:8082",
-                allowedOrigin1,
-                allowedOrigin2,
-                allowedOrigin3,
-                allowedOrigin4,
-                allowedOrigin5,
-                allowedOrigin6));
+                "http://localhost:8082"));
         configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH"));
         // setAllowCredentials(true) is important, otherwise:
         // The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '*' when the request's credentials mode is 'include'.
@@ -75,8 +46,6 @@ public class SecurityConfiguration {
         // setAllowedHeaders is important! Without it, OPTIONS preflight request
         // will fail with 403 Invalid CORS request
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
-
-        LOGGER.info("Allowed origins: {}", configuration.getAllowedOrigins());
 
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

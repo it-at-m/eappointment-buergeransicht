@@ -22,6 +22,12 @@ spring:
             allowedOrigins:
               - "http://localhost:8082"
               - "http://127.0.0.1:8082"
+              - ${ALLOWED_ORIGIN_1}
+              - ${ALLOWED_ORIGIN_2}
+              - ${ALLOWED_ORIGIN_3}
+              - ${ALLOWED_ORIGIN_4}
+              - ${ALLOWED_ORIGIN_5}
+              - ${ALLOWED_ORIGIN_6}
             allowedMethods: "*"
             allowedHeaders: "*"
             allowCredentials: true
