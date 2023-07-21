@@ -46,7 +46,7 @@ export default {
   },
   computed: {
     linkBaseUrl () {
-      let baseUrl = this.baseUrl ?? ''
+      let baseUrl = this.baseUrl ?? '/buergeransicht/'
       return process.env.NODE_ENV === 'development' ? "/buergeransicht/" : baseUrl + "/"
     }
   },
