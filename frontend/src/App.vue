@@ -46,7 +46,7 @@ export default {
   },
   computed: {
     linkBaseUrl () {
-      if (process.env.NODE_ENV === 'development' || typeof this.baseUrl === undefined) {
+      if (process.env.NODE_ENV === 'development' || typeof this.baseUrl === 'undefined') {
         return '/buergeransicht/'
       }
 
