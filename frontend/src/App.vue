@@ -50,7 +50,7 @@ export default {
         return '/buergeransicht/'
       }
 
-      return this.baseUrl
+      return this.baseUrl + '/'
     }
   },
   mounted () {
