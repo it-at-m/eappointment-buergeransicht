@@ -55,7 +55,7 @@ export default {
   methods: {
     loadData() {
     this.$store.state.settings.endpoints["VUE_APP_ZMS_API_BASE"] =
-            process.env.NODE_ENV === 'development' ? 'http://localhost:8080' : this.baseUrl + "/"
+            process.env.NODE_ENV === 'development' ? 'http://localhost:8080' : this.baseUrl
 
         this.$store.dispatch('setUpServicesAndProviders', {
           preselectedService: this.serviceId ?? null,
