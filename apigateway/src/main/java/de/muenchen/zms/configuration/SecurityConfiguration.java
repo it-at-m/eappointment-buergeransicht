@@ -62,12 +62,12 @@ public class SecurityConfiguration {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(Arrays.asList(
                 "http://localhost:8082",
-                allowedOrigin1,
-                allowedOrigin2,
-                allowedOrigin3,
-                allowedOrigin4,
-                allowedOrigin5,
-                allowedOrigin6));
+                "http://" + allowedOrigin1,
+                "https://" + allowedOrigin2,
+                "https://" + allowedOrigin3,
+                "https://" + allowedOrigin4,
+                "https://" + allowedOrigin5,
+                "https://" + allowedOrigin6));
         configuration.setAllowedMethods(Arrays.asList("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH"));
         // setAllowCredentials(true) is important, otherwise:
         // The value of the 'Access-Control-Allow-Origin' header in the response must not be the wildcard '*' when the request's credentials mode is 'include'.
