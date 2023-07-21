@@ -13,8 +13,8 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/buergeransicht/js/**")
-                .addResourceLocations("classpath:/public/buergeransicht/js/")
+        registry.addResourceHandler("/buergeransicht/**")
+                .addResourceLocations("classpath:/public/buergeransicht/")
                 .setCachePeriod(3600)
                 .resourceChain(true)
                 .addResolver(new PathResourceResolver() {
@@ -26,3 +26,4 @@ public class WebConfig implements WebMvcConfigurer {
                 });
     }
 }
+
