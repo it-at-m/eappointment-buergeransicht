@@ -5,6 +5,8 @@
 package de.muenchen.zms.configuration;
 
 import de.muenchen.zms.util.GatewayUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -51,6 +53,10 @@ public class SecurityConfiguration {
     @Value("${ALLOWED_ORIGIN_6}")
     private String allowedOrigin6;
 
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(SecurityConfiguration.class);
+
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
@@ -69,6 +75,9 @@ public class SecurityConfiguration {
         // setAllowedHeaders is important! Without it, OPTIONS preflight request
         // will fail with 403 Invalid CORS request
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
+
+        LOGGER.info("Allowed origins: {}", configuration.getAllowedOrigins());
+
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
