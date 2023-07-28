@@ -121,6 +121,7 @@ export default {
         ...{ client: this.customer }
       })
       this.$emit('next')
+      window.scrollTo(0, 0)
       this.$v.$reset()
     }
   },
