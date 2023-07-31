@@ -1,14 +1,15 @@
 <template>
   <div>
     <div id="customer-name-section">
-      <v-text-field v-model="customer.name" id="customer-name" :error-messages="nameErrors" @input="$v.name.$touch()"
-        @blur="$v.name.$touch()" @change="changed" counter="50" filled :label="$t('name')"></v-text-field>
+      <v-text-field v-model="customer.name" id="customer-name" :error-messages="nameErrors" 
+        @input="$v.name.$touch()" @blur="$v.name.$touch()" @change="changed" 
+        counter="50" filled :label="$t('name')" :disabled="isPreselectedAppointment"></v-text-field>
     </div>
 
     <div id="customer-email-section">
-      <v-text-field v-model="customer.email" id="customer-email" counter="50" filled :error-messages="emailErrors"
-        @input="$v.email.$touch()" @blur="$v.email.$touch()" @change="changed" required
-        :label="$t('email')"></v-text-field>
+      <v-text-field v-model="customer.email" id="customer-email" counter="50" filled 
+        :error-messages="emailErrors" @input="$v.email.$touch()" @blur="$v.email.$touch()" 
+        @change="changed" required :label="$t('email')" :disabled="isPreselectedAppointment"></v-text-field>
     </div>
 
     <v-checkbox id="customer-data-protection" v-model="customer.dataProtection" label=""
@@ -98,6 +99,10 @@ export default {
       !this.customer.dataProtection && errors.push(this.$t('acceptPrivacyPolicy'));
 
       return errors;
+    },
+    isPreselectedAppointment() {
+      
+      return this.$store.state.preselectedAppointment !== null;
     }
   },
   methods: {
