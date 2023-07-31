@@ -285,7 +285,6 @@ export default {
       this.$store.dispatch('startRebooking')
     },
     stopRebooking() {
-      console.log("stopRebooking")
       this.$store.dispatch('stopRebooking')
     },
     startOver() {

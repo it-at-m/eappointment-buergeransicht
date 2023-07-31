@@ -146,7 +146,6 @@ export default {
         store.state.confirmedAppointment = true
 
         store.commit('selectProviderWithId', store.state.preselectedAppointment.providerId)
-        //store.commit('data/setCustomerData', store.state.preselectedAppointment.customer)
         store.commit('data/setAppointment', store.state.preselectedAppointment)
     }
 }
