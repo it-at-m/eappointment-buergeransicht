@@ -1,11 +1,4 @@
 spring:
-
-  logging:
-    level:
-      org.springframework.cloud.gateway.filter.NettyWriteResponseFilter: DEBUG
-
-
-
   application.name: @project.artifactId@
   banner.location: banner.txt
   main:
