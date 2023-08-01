@@ -1,4 +1,13 @@
 spring:
+
+  logging:
+    level:
+      root: INFO
+      org.springframework.web: INFO
+      com.your-package: DEBUG
+
+
+
   application.name: @project.artifactId@
   banner.location: banner.txt
   main:
