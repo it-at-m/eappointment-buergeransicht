@@ -79,6 +79,8 @@ public class GlobalBackend5xxTo400Mapper implements GlobalFilter, Ordered {
                                 String responseBody = new String(content, StandardCharsets.UTF_8);
                                 log.error("Error: 5xx vom Backend:  requestId: {}, method: {}, url: {}, \nresponse body :{}, statusCode: {}", request.getId(),
                                         request.getMethod(), request.getURI(), responseBody, responseHttpStatus);
+                                log.info("Request: requestId: {}, method: {}, url: {}, \nresponse body :{}, statusCode: {}", request.getId(),
+                                        request.getMethod(), request.getURI(), responseBody, responseHttpStatus);
 
                                 // Response manipulieren
                                 final DataBuffer newDataBuffer;
