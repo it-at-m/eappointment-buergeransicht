@@ -55,11 +55,17 @@ export default {
     name: {
       get() {
         return this.customer.name
+      },
+      set(newValue) {
+        return this.customer.name = newValue
       }
     },
     email: {
       get() {
         return this.customer.email
+      },
+      set(newValue) {
+        return this.customer.email = newValue
       }
     },
     dataProtection: {
@@ -110,10 +116,24 @@ export default {
         return
       }
 
-      this.$store.dispatch('updateAppointmentData', {
-        ...this.$store.state.data.appointment,
-        ...{ client: this.customer }
-      })
+      if (this.isPreselectedAppointment) {
+        // Only update the dataProtection field if isPreselectedAppointment is true
+        this.$store.dispatch('updateAppointmentData', {
+          ...this.$store.state.data.appointment,
+          client: {
+            ...this.$store.state.data.appointment.client,
+            dataProtection: this.customer.dataProtection
+          }
+        })
+      } else {
+        // If isPreselectedAppointment is false, update all fields
+        this.$store.dispatch('updateAppointmentData', {
+          ...this.$store.state.data.appointment,
+          ...{ client: this.customer }
+        })
+      }
+
+      
       this.$emit('next')
       this.$v.$reset()
     }
