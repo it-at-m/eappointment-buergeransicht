@@ -55,17 +55,11 @@ export default {
     name: {
       get() {
         return this.customer.name
-      },
-      set(newValue) {
-        return this.customer.name = newValue
       }
     },
     email: {
       get() {
         return this.customer.email
-      },
-      set(newValue) {
-        return this.customer.email = newValue
       }
     },
     dataProtection: {
