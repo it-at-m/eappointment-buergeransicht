@@ -110,33 +110,28 @@ export default {
       this.$emit('changed')
     },
     saveCustomer() {
-      this.$v.$touch()
+        this.$v.$touch()
 
-      if (this.emailErrors.length || this.nameErrors.length || this.dataProtectionErrors.length) {
-        return
-      }
+        if (this.emailErrors.length || this.nameErrors.length || this.dataProtectionErrors.length) {
+          return
+        }
 
-      if (this.isPreselectedAppointment) {
-        // Only update the dataProtection field if isPreselectedAppointment is true
+        let savedCustomer = this.$store.state.data.customer;
+
+        if (this.isPreselectedAppointment) {
+          this.customer.name = savedCustomer.name;
+          this.customer.email = savedCustomer.email;
+        }
+
         this.$store.dispatch('updateAppointmentData', {
           ...this.$store.state.data.appointment,
-          client: {
-            ...this.$store.state.data.appointment.client,
-            dataProtection: this.customer.dataProtection
-          }
+          client: this.customer
         })
-      } else {
-        // If isPreselectedAppointment is false, update all fields
-        this.$store.dispatch('updateAppointmentData', {
-          ...this.$store.state.data.appointment,
-          ...{ client: this.customer }
-        })
+        
+        this.$emit('next')
+        this.$v.$reset()
       }
 
-      
-      this.$emit('next')
-      this.$v.$reset()
-    }
   },
   mounted() {
     this.customer = this.$store.state.data.customer
