@@ -2,13 +2,13 @@
   <div>
     <div id="customer-name-section">
       <v-text-field v-model="customer.name" id="customer-name" :error-messages="nameErrors" 
-        @input="$v.name.$touch()" @blur="$v.name.$touch()" @change="changed" 
+        @blur="$v.name.$touch()" @change="changed" 
         counter="50" filled :label="$t('name')" :disabled="isPreselectedAppointment"></v-text-field>
     </div>
 
     <div id="customer-email-section">
       <v-text-field v-model="customer.email" id="customer-email" counter="50" filled 
-        :error-messages="emailErrors" @input="$v.email.$touch()" @blur="$v.email.$touch()" 
+        :error-messages="emailErrors" @blur="$v.email.$touch()" 
         @change="changed" required :label="$t('email')" :disabled="isPreselectedAppointment"></v-text-field>
     </div>
 
@@ -79,7 +79,7 @@ export default {
     nameErrors() {
       const errors = [];
       if (!this.$v.name.$dirty) return errors;
-      !this.$v.name.required && errors.push(this.$t('name') + ' ' + this.$t('isRequired'));
+      !this.$v.name.required && errors.push(this.$t('nameIsRequired'));
       !this.$v.name.maxLength && errors.push(this.$t('textLengthExceeded'));
 
       return errors;
@@ -88,7 +88,7 @@ export default {
       const errors = [];
       if (!this.$v.email.$dirty) return errors;
       !this.$v.email.email && errors.push(this.$t('mustBeValidEmail'));
-      !this.$v.email.required && errors.push(this.$t('email') + ' ' + this.$t('isRequired'));
+      !this.$v.email.required && errors.push(this.$t('emailIsRequired'));
       !this.$v.email.maxLength && errors.push(this.$t('textLengthExceeded'));
 
       return errors;
