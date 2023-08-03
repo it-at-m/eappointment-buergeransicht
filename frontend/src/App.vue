@@ -82,7 +82,6 @@ export default {
           this.$store.dispatch('confirmReservation', {
             appointmentHash: this.confirmAppointmentHash
           }).then((success) => {
-            console.log("success", success);
             if (success) {
               this.$store.state.activatedAppointment = success
             } else {
