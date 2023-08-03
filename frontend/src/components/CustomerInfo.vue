@@ -87,7 +87,7 @@ export default {
     emailErrors() {
       const errors = [];
       if (!this.$v.email.$dirty) return errors;
-      !this.$v.email.email && errors.push(this.$t('mustBeValidEmail'));
+      !this.$v.email.email && errors.push(this.$t('emailIsRequired'));
       !this.$v.email.required && errors.push(this.$t('emailIsRequired'));
       !this.$v.email.maxLength && errors.push(this.$t('textLengthExceeded'));
 
