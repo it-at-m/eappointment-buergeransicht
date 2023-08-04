@@ -3,13 +3,13 @@
     <div id="customer-name-section">
       <v-text-field v-model="customer.name" id="customer-name" :error-messages="nameErrors" 
         @blur="$v.name.$touch()" @change="changed" 
-        counter="50" filled :label="$t('name')" :disabled="isPreselectedAppointment"></v-text-field>
+        counter="50" filled :label="$t('name')" ></v-text-field>
     </div>
 
     <div id="customer-email-section">
       <v-text-field v-model="customer.email" id="customer-email" counter="50" filled 
         :error-messages="emailErrors" @blur="$v.email.$touch()" 
-        @change="changed" required :label="$t('email')" :disabled="isPreselectedAppointment"></v-text-field>
+        @change="changed" required :label="$t('email')" -field>
     </div>
 
     <v-checkbox id="customer-data-protection" v-model="customer.dataProtection" label=""
