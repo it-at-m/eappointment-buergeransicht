@@ -327,7 +327,7 @@ describe('Calendar', () => {
         await wrapper.vm.$nextTick()
 
         expect(mockCallback).toHaveBeenCalledTimes(1)
-        expect(wrapper.vm.timeSlotError).toBe('Failed.')
+        expect(wrapper.vm.timeSlotError).toBe('Etwas ist schief gelaufen. Bitte versuchen Sie es mit einem anderen Termin.')
     })
 
     it('chooseAppointment method fails to reserve appointment because time slot is not available', async () => {
