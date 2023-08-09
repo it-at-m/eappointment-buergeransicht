@@ -166,6 +166,11 @@ export default {
 
       this.$store.dispatch('API/reserveAppointment', { timeSlot, serviceIds: Object.keys(selectedServices), serviceCounts: Object.values(selectedServices), providerId: this.provider.id })
         .then(data => {
+          if (data.errorMessage) {
+            this.timeSlotError = data.errorMessage
+            return
+          }
+
           if (data.error) {
             this.timeSlotError = this.$t('errorTryAgainLater')
             return
