@@ -336,7 +336,7 @@ export default {
     getSelectedAppointment() {
       const appointment = this.$store.state.data.appointment
 
-      if (!appointment) {
+      if (!appointment || !appointment.timestamp) {
         return ''
       }
 
