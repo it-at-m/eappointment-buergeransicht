@@ -230,3 +230,7 @@ h3 {
         padding: 2px 8px;
     }
 }
+
+.v-messages.error--text .v-messages__message {
+    color: #B71C1C;
+}
