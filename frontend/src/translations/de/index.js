@@ -37,7 +37,7 @@ export default {
   wantToStartOverAppointment: "Wollen Sie Terminbuchung neu anfangen? Der jetztige Termin wird nicht gebucht werden.",
   wantToRebookAppointment: "Wollen Sie diesen Termin umbuchen?",
   privacyPolicyAccepted: "<a href=\"https://stadt.muenchen.de/infos/dsgvo-datenschutzgrundverordnung.html\" target='_blank'>Datenschutzhinweise</a> zur Kenntnis genommen",
-  nameIsRequired:'Bitte geben Sie eine gültigen Name ein.',
+  nameIsRequired:'Bitte geben Sie einen gültigen Namen ein.',
   emailIsRequired: 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
   acceptPrivacyPolicy: 'Das Akzeptieren der Datenschutzrichtlinie ist erforderlich.',
   mustBeValidEmail: 'Muss eine gültige E-Mail-Adresse sein.',
