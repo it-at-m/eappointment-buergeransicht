@@ -67,7 +67,7 @@
               </v-expansion-panel-header>
               <v-expansion-panel-content>
                 <TheCalendar @next="openPanel(3)"
-                  :key="$store.state.data.service && $store.state.step === 2 ? $store.state.data.service.id : 0" />
+                  :key="$store.state.data.service?.id" />
               </v-expansion-panel-content>
             </v-expansion-panel>
 
