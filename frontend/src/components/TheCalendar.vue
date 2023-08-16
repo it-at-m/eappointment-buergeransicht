@@ -182,7 +182,6 @@ export default {
           appointment.locationId = appointment.officeId
 
           this.$store.commit('data/setAppointment', appointment)
-          this.timeDialog = false
           this.$emit('next')
           window.scrollTo(0, 0)
         }, () => {
