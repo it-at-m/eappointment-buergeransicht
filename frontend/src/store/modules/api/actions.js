@@ -16,6 +16,10 @@ export default {
                     return response.json();
                 })
                 .then(data => {
+                    if (data.error) {
+                        reject(data)
+                    }
+
                     resolve(data)
                 }, error => {
                     reject(error)
@@ -38,6 +42,10 @@ export default {
                     return response.json();
                 })
                 .then(data => {
+                    if (data.error) {
+                        reject(data)
+                    }
+
                     resolve(data)
                 }, error => {
                     reject(error)
@@ -63,6 +71,10 @@ export default {
                     })
                 ))
                 .then(data => {
+                    if (data.error) {
+                        reject(data)
+                    }
+
                     resolve(data)
                 }, error => {
                     reject(error)
@@ -86,6 +98,10 @@ export default {
                     return response.json();
                 })
                 .then(data => {
+                    if (data.error) {
+                        reject(data)
+                    }
+
                     resolve(data)
                 }, error => {
                     reject(error)
@@ -101,6 +117,10 @@ export default {
                     return response.json();
                 })
                 .then(data => {
+                    if (data.error) {
+                        reject(data)
+                    }
+
                     resolve(data)
                 }, error => {
                     reject(error)
@@ -120,6 +140,10 @@ export default {
                     return response.json();
                 })
                 .then(data => {
+                    if (data.error) {
+                        reject(data)
+                    }
+
                     resolve(data)
                 }, error => {
                     reject(error)
@@ -141,6 +165,10 @@ export default {
                     return response.json();
                 })
                 .then(data => {
+                    if (data.error) {
+                        reject(data)
+                    }
+
                     resolve(data)
                 }, error => {
                     reject(error)
@@ -169,6 +197,10 @@ export default {
                 return response.json();
             })
             .then(data => {
+                if (data.error) {
+                    reject(data)
+                }
+
                 resolve(data)
             }, error => {
                 reject(error)
@@ -193,6 +225,10 @@ export default {
                     return response.json();
                 })
                 .then(data => {
+                    if (data.error) {
+                        reject(data)
+                    }
+                    
                     resolve(data)
                 }, error => {
                     reject(error)

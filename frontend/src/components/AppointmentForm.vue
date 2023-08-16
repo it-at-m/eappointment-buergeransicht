@@ -67,7 +67,7 @@
               </v-expansion-panel-header>
               <v-expansion-panel-content>
                 <TheCalendar @next="openPanel(3)"
-                  :key="$store.state.data.service?.id" />
+                  :key="$store.state.data.service ? $store.state.data.service.id : 0" />
               </v-expansion-panel-content>
             </v-expansion-panel>
 
@@ -336,7 +336,7 @@ export default {
     getSelectedAppointment() {
       const appointment = this.$store.state.data.appointment
 
-      if (!appointment) {
+      if (!appointment || !appointment.timestamp) {
         return ''
       }
 

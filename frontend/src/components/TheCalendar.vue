@@ -171,6 +171,11 @@ export default {
             return
           }
 
+          if (data.error) {
+            this.timeSlotError = this.$t('errorTryAgainLater')
+            return
+          }
+
           const appointment = data
           appointment.provider = this.provider
           appointment.officeName = this.provider.name
@@ -179,6 +184,7 @@ export default {
           this.$store.commit('data/setAppointment', appointment)
           this.timeDialog = false
           this.$emit('next')
+          window.scrollTo(0, 0)
         }, () => {
           this.timeSlotError = this.$t('appointmentNotAvailable')
         })

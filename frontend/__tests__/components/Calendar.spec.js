@@ -315,7 +315,7 @@ describe('Calendar', () => {
             if (method === 'API/reserveAppointment') {
                 return new Promise((resolve, reject) => {
                     resolve({
-                        'errorMessage': 'Failed.'
+                        'error': 'Failed.'
                     })
                 })
             }
@@ -327,7 +327,7 @@ describe('Calendar', () => {
         await wrapper.vm.$nextTick()
 
         expect(mockCallback).toHaveBeenCalledTimes(1)
-        expect(wrapper.vm.timeSlotError).toBe('Failed.')
+        expect(wrapper.vm.timeSlotError).toBe('Etwas ist schief gelaufen. Bitte versuchen Sie es mit einem anderen Termin.')
     })
 
     it('chooseAppointment method fails to reserve appointment because time slot is not available', async () => {
@@ -335,7 +335,7 @@ describe('Calendar', () => {
             if (method === 'API/reserveAppointment') {
                 return new Promise((resolve, reject) => {
                     reject({
-                        'errorMessage': 'Failed.'
+                        'error': 'Failed.'
                     })
                 })
             }
