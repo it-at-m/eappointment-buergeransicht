@@ -34,7 +34,7 @@ export default {
   location: "Standort",
   yourAppointmentNumber: "Ihre Terminnummer",
   wantToCancelAppointment: "Wollen Sie diesen Termin absagen?",
-  wantToStartOverAppointment: "Wollen Sie Terminbuchung neu anfangen? Der jetztige Termin wird nicht gebucht werden.",
+  wantToStartOverAppointment: "Wollen Sie die Terminbuchung wirklich abbrechen? Der jetzige Termin wird nicht gebucht!",
   wantToRebookAppointment: "Wollen Sie diesen Termin umbuchen?",
   privacyPolicyAccepted: "<a href=\"https://stadt.muenchen.de/infos/dsgvo-datenschutzgrundverordnung.html\" target='_blank'>Datenschutzhinweise</a> zur Kenntnis genommen",
   nameIsRequired:'Bitte geben Sie einen gültigen Namen ein.',
