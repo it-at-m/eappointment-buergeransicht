@@ -117,7 +117,8 @@
                 </template>
                 <v-card>
                   <div class="popup-content">
-                    {{ $t('wantToStartOverAppointment') }}
+                    {{ $t('wantToStartOverAppointment') }}<br>
+                    {{ $t('currentAppointmentWillBeCanceled') }}
                   </div>
                   <v-card-actions>
                     <v-spacer></v-spacer>
