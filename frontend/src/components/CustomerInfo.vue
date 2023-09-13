@@ -21,7 +21,10 @@
     </v-checkbox>
 
     <v-btn id="customer-submit-button" class="button-next" elevation="2" depressed color="primary"
-      @click="saveCustomer()">{{ $t('nextToReservation') }}</v-btn>
+      @click="saveCustomer()">
+      <span class="desktop">{{ $t('nextToReservation') }}</span>
+      <span class="mobile">{{ $t('finishReservation') }}</span>
+    </v-btn>
   </div>
 </template>
 

@@ -212,7 +212,23 @@ h3 {
     padding: 2px 18px;
 }
 
+.desktop {
+    display: block;
+}
+
+.mobile {
+    display: none;
+}
+
 @media only screen and (max-width: 600px) {
+    .desktop {
+        display: none;
+    }
+
+    .mobile {
+        display: block;
+    }
+
     .time-hour {
         font-size: 12px;
     }

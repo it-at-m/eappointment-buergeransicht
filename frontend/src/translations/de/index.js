@@ -6,6 +6,7 @@ export default {
   next: "Weiter",
   nextToAppointment: "Weiter zur Terminauswahl",
   nextToReservation: "Weiter zum Abschluss der Reservierung",
+  finishReservation: "Reservierung abschließen",
   availableTimes: "Verfügbare Uhrzeiten",
   cancel: "Abbrechen",
   yes: "Ja",
