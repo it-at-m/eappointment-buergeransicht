@@ -238,6 +238,7 @@ describe('Actions', () => {
             officeName: 'Office name',
             familyName: 'Max',
             email: 'max@gmail.com',
+            telephone: '',
             timestamp: 1589373217,
             processId: 111,
             authKey: 'abc'

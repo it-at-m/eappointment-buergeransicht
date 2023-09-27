@@ -12,6 +12,12 @@
         @change="changed" required :label="$t('email')" :disabled="isPreselectedAppointment"></v-text-field>
     </div>
 
+    <div id="customer-telephone-section">
+      <v-text-field v-model="customer.telephone" id="customer-telephone" counter="50" filled
+        :error-messages="telephoneErrors" @blur="$v.telephone.$touch()"
+        @change="changed" :label="$t('telephone')" :disabled="isPreselectedAppointment"></v-text-field>
+    </div>
+
     <v-checkbox id="customer-data-protection" v-model="customer.dataProtection" label=""
       :error-messages="dataProtectionErrors" required @input="$v.dataProtection.$touch()"
       @blur="$v.dataProtection.$touch()" @change="changed">
@@ -45,6 +51,13 @@ export default {
       email,
       maxLength: maxLength(50)
     },
+    telephone: {
+      telephone: value => {
+        const regex = /^\+[1-9]{1}[0-9]{0,2}[1-9][0-9]{6,14}$/;
+        return regex.test(value);
+      },
+      maxLength: maxLength(50)
+    },
     dataProtection: {
       required
     }
@@ -71,6 +84,14 @@ export default {
         return this.customer.email = newValue
       }
     },
+    telephone: {
+      get() {
+        return this.customer.telephone
+      },
+      set(newValue) {
+        return this.customer.telephone = newValue
+      }
+    },
     dataProtection: {
       get() {
         return this.customer.dataProtection
@@ -93,6 +114,14 @@ export default {
       !this.$v.email.email && errors.push(this.$t('emailIsRequired'));
       !this.$v.email.required && errors.push(this.$t('emailIsRequired'));
       !this.$v.email.maxLength && errors.push(this.$t('textLengthExceeded'));
+
+      return errors;
+    },
+    telephoneErrors() {
+      const errors = [];
+      if (!this.$v.telephone.$dirty) return errors;
+      !this.$v.telephone.telephone && errors.push(this.$t('telephoneIsRequired'));
+      !this.$v.telephone.maxLength && errors.push(this.$t('textLengthExceeded'));
 
       return errors;
     },

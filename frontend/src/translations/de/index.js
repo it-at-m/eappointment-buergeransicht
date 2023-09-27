@@ -32,6 +32,7 @@ export default {
   pleaseCheckOnceAgain: "Bitte überprüfen Sie noch einmal Ihre Daten und schließen Sie die Reservierung ab.",
   name: "Name",
   email: "E-Mail-Adresse",
+  telephone: "Telefon",
   location: "Standort",
   yourAppointmentNumber: "Ihre Terminnummer",
   wantToCancelAppointment: "Wollen Sie diesen Termin absagen?",
@@ -41,8 +42,10 @@ export default {
   privacyPolicyAccepted: "<a href=\"https://stadt.muenchen.de/infos/dsgvo-datenschutzgrundverordnung.html\" target='_blank'>Datenschutzhinweise</a> zur Kenntnis genommen",
   nameIsRequired:'Bitte geben Sie einen gültigen Namen ein.',
   emailIsRequired: 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
+  telephoneIsRequired: 'Bitte geben Sie eine gültige Telefonnummer ein.',
   acceptPrivacyPolicy: 'Das Akzeptieren der Datenschutzrichtlinie ist erforderlich.',
   mustBeValidEmail: 'Muss eine gültige E-Mail-Adresse sein.',
+  mustBeValidTelephone: 'Muss eine gültige Telefonnummer sein.',
   languages: {
     de: 'Deutsch',
     en: 'Englisch',

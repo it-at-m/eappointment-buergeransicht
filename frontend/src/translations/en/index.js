@@ -31,7 +31,8 @@ export default {
   wantToRebookAppointment: "Do you want to reschedule this appointment?",
   privacyPolicyAccepted: "<a href=\"https://stadt.muenchen.de/infos/dsgvo-datenschutzgrundverordnung.html\" target='_blank'>Privacy policy</a> accepted",
   acceptPrivacyPolicy: 'Accepting the privacy policy is required',
-  mustBeValidEmail: 'Must be valid e-mail',
+  mustBeValidEmail: 'Must be a valid e-mail.',
+  mustBeValidTelephone: 'Must be a valid phone number.',
   languages: {
     de: 'German',
     en: 'English',

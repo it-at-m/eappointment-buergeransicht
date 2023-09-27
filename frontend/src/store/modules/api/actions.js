@@ -184,7 +184,8 @@ export default {
                     "processId": appointment.processId,
                     "authKey": appointment.authKey,
                     "familyName": appointment.familyName,
-                    "email": appointment.email
+                    "email": appointment.email,
+                    "telephone": appointment.telephone,
                 })
             };
 

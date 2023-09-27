@@ -4,6 +4,7 @@ export default {
     updateAppointmentData(store, appointment) {
         appointment.familyName = appointment.client.name
         appointment.email = appointment.client.email
+        appointment.telephone = appointment.client.telephone
 
         store.dispatch('API/updateAppointmentData', appointment)
             .then((data) => {
@@ -112,6 +113,7 @@ export default {
         const customer = {
             name: appointmentData.familyName,
             email: appointmentData.email,
+            telephone: appointmentData.telephone,
             dataProtection: true
         }
 
