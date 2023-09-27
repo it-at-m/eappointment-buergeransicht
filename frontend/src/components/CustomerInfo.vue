@@ -119,7 +119,7 @@ export default {
     },
     telephoneErrors() {
       const errors = [];
-      if (!this.$v.telephone.$dirty) return errors;
+      if (!this.$v.telephone.$dirty || !this.customer.telephone) return errors;
       !this.$v.telephone.telephone && errors.push(this.$t('telephoneIsRequired'));
       !this.$v.telephone.maxLength && errors.push(this.$t('textLengthExceeded'));
 
