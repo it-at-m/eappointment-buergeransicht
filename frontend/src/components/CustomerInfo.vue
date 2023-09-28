@@ -23,7 +23,7 @@
     <v-btn
       id="customer-submit-button"
       class="button-next"
-      aria-label="{{ $t('nextToReservation') }}"
+      :aria-label="$t('nextToReservation')"
       elevation="2"
       depressed
       color="primary"
