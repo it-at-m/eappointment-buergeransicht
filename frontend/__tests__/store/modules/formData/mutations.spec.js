@@ -237,20 +237,8 @@ describe('Form data mutations', () => {
                 2,
                 3
             ],
-            subServiceCounts: {
-                2: 0,
-                3: 0
-            },
-            subServices: [
-                {
-                    id: 2,
-                    count: 0
-                },
-                {
-                    id: 3,
-                    count: 0
-                }
-            ]
+            subServiceCounts: {},
+            subServices: []
         })
     })
 
