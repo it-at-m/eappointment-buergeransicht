@@ -42,6 +42,7 @@ export default {
 
         if (! service.subServices) {
             if (service.subServiceCounts) {
+                service.subServices = []
                 for (const [subServiceId, subServiceCount] of Object.entries(service.subServiceCounts)) {
                     service.subServices.push({
                         id: subServiceId,
