@@ -41,14 +41,22 @@ export default {
         }
 
         if (! service.subServices) {
-            service.subServices = combinable.map((subServiceId) => {
-                return {
-                    id: subServiceId,
-                    count: service.subServiceCounts && service.subServiceCounts[subServiceId]
-                        ? service.subServiceCounts[subServiceId]
-                        : 0
+            if (service.subServiceCounts) {
+                service.subServices = []
+                for (const [subServiceId, subServiceCount] of Object.entries(service.subServiceCounts)) {
+                    service.subServices.push({
+                        id: parseInt(subServiceId),
+                        count: subServiceCount
+                    })
                 }
-            })
+            } else {
+                service.subServices = combinable.map((subServiceId) => {
+                    return {
+                        id: subServiceId,
+                        count: 0
+                    }
+                })
+            }
         }
 
         service.subServices.forEach((service) => {
