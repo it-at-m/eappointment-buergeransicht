@@ -45,7 +45,7 @@ export default {
                 service.subServices = []
                 for (const [subServiceId, subServiceCount] of Object.entries(service.subServiceCounts)) {
                     service.subServices.push({
-                        id: subServiceId,
+                        id: parseInt(subServiceId),
                         count: subServiceCount
                     })
                 }

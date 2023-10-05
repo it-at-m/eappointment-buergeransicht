@@ -226,9 +226,7 @@ describe('Form data mutations', () => {
         })
 
         expect(state.appointmentCounts).toStrictEqual({
-            1: 2,
-            2: 0,
-            3: 0
+            1: 2
         })
         expect(state.appointmentCount).toBe(2)
         expect(state.service).toStrictEqual({
