@@ -23,6 +23,7 @@ const store = new Vuex.Store({
         preselectedService: null,
         preselectedAppointment: null,
         providers: [],
+        scope: [],
         error: null,
         errorMessage: null,
         settings: {
