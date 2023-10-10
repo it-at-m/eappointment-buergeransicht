@@ -229,7 +229,7 @@ import SwitchLanguage from './SwitchLanguage.vue'
 import ServiceFinder from './ServiceFinder.vue'
 import TheCalendar from './TheCalendar.vue'
 import CustomerInfo from './CustomerInfo.vue'
-import moment from "moment";
+import moment from "moment"
 
 export default {
   name: 'AppointmentForm',

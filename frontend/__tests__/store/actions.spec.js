@@ -305,3 +305,65 @@ describe('Actions', () => {
 
 
 })
+
+
+describe('Phone number validation', () => {
+
+    // 1. Ensure an empty phone number passes when it's optional
+    it('allows empty telephone number when it is not required', async () => {
+        const res = await actions.updateAppointmentData(store, {
+            processId: 'aaa',
+            authKey: 'bbb',
+            familyName: 'Musterman',
+            email: 'test@gmail.com',
+            telephone: ''
+        })
+
+        expect(fetch.mock.calls.length).toEqual(1);
+        expect(fetch.mock.calls[0][1].body).toBe(JSON.stringify({
+            "processId": 'aaa',
+            "authKey": 'bbb',
+            "familyName": 'Musterman',
+            "email": 'test@gmail.com',
+            "telephone": ''
+        }))
+    })
+
+    // 2. Validate that a correct phone number format is accepted
+    it('accepts valid telephone number format', async () => {
+        const res = await actions.updateAppointmentData(store, {
+            processId: 'aaa',
+            authKey: 'bbb',
+            familyName: 'Musterman',
+            email: 'test@gmail.com',
+            telephone: '+1234567890'  // valid format
+        })
+
+        expect(fetch.mock.calls.length).toEqual(1);
+        expect(fetch.mock.calls[0][1].body).toBe(JSON.stringify({
+            "processId": 'aaa',
+            "authKey": 'bbb',
+            "familyName": 'Musterman',
+            "email": 'test@gmail.com',
+            "telephone": '+1234567890'
+        }))
+    })
+
+    // 3. Ensure incorrect phone number format is rejected
+    it('rejects invalid telephone number format', async () => {
+        try {
+            await actions.updateAppointmentData(store, {
+                processId: 'aaa',
+                authKey: 'bbb',
+                familyName: 'Musterman',
+                email: 'test@gmail.com',
+                telephone: '123-456-7890'  // invalid format
+            })
+        } catch (e) {
+            expect(e.message).toBe('Invalid telephone number format');
+        }
+
+        expect(fetch.mock.calls.length).toEqual(0); // no API call made due to validation failure
+    })
+
+})

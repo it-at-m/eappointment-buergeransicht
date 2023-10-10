@@ -1,7 +1,7 @@
 import actions from './../../../../src/store/modules/api/actions'
 import store from './../../../../src/store/index'
 import { enableFetchMocks } from 'jest-fetch-mock'
-import moment from "moment";
+import moment from "moment"
 enableFetchMocks()
 Date.now = jest.fn().mockReturnValue(new Date('2020-05-13T12:33:37.000Z'))
 
@@ -80,10 +80,10 @@ describe('API actions', () => {
     })
 
     it('fetchAppointment calls API to fetch appointment', async () => {
-        const res = await actions.fetchAppointment(store, {processId: 'aaa', authKey: 'bbb'})
+        const res = await actions.fetchAppointment(store, {processId: 'aaa', authKey: 'bbb', scope: 'ccc'})
 
         expect(fetch.mock.calls.length).toEqual(1);
-        expect(fetch.mock.calls[0][0]).toBe('http://localhost:8082/api/backend/appointment?processId=aaa&authKey=bbb')
+        expect(fetch.mock.calls[0][0]).toBe('http://localhost:8082/api/backend/appointment?processId=aaa&authKey=bbb&scope=ccc"')
     })
 
     it('fetchAvailableTimeSlots calls API to fetch available time slots', async () => {

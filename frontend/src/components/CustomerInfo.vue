@@ -173,9 +173,7 @@ export default {
       this.$v.$reset()
     },
     validTelephoneFormat(value) {
-      // The regex ensures the string starts with an optional + followed by digits only
       const phoneRegex = /^\+?\d+$/;
-      // Allow blank or undefined values
       return !value || phoneRegex.test(value);
     }
   },
