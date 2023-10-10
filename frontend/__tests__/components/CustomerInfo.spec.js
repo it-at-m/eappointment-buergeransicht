@@ -30,10 +30,6 @@ const wrapper = mount(CustomerInfo, {
     propsData: {
         telephoneRequired: false, // or whatever the desired value is
         telephoneActivated: false, // or whatever the desired value is
-        scope: {
-            telephoneRequired: false, // or whatever the desired value is
-            telephoneActivated: false // or whatever the desired value is
-        }
     }
 })
 
@@ -42,6 +38,15 @@ describe('Customer info', () => {
     const emailInput = wrapper.find('#customer-email')
     const dataProtectionCheckbox = wrapper.find('#customer-data-protection')
     const submitButton = wrapper.find('#customer-submit-button')
+
+
+    beforeEach(() => {
+        store.state.data.appointment.scope = {
+          telephoneActivated: 0,
+          telephoneRequired: 0
+        };
+      });      
+
 
     it('Component is shown', () => {
         expect(wrapper.exists()).toBe(true)
