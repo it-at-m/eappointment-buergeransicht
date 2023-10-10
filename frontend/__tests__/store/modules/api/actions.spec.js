@@ -83,7 +83,7 @@ describe('API actions', () => {
         const res = await actions.fetchAppointment(store, {processId: 'aaa', authKey: 'bbb', scope: 'ccc'})
 
         expect(fetch.mock.calls.length).toEqual(1);
-        expect(fetch.mock.calls[0][0]).toBe('http://localhost:8082/api/backend/appointment?processId=aaa&authKey=bbb&scope=ccc"')
+        expect(fetch.mock.calls[0][0]).toBe('http://localhost:8082/api/backend/appointment?processId=aaa&authKey=bbb&scope=ccc')
     })
 
     it('fetchAvailableTimeSlots calls API to fetch available time slots', async () => {
