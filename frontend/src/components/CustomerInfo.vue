@@ -102,10 +102,14 @@ export default {
       }
     },
     isTelephoneActivated() {
-      return this.$store.state.data.appointment.scope.telephoneActivated == 1;
+        return this.$store.state.data.appointment &&
+               this.$store.state.data.appointment.scope &&
+               this.$store.state.data.appointment.scope.telephoneActivated == 1;
     },
     isTelephoneRequired() {
-      return this.$store.state.data.appointment.scope.telephoneRequired == 1;
+        return this.$store.state.data.appointment &&
+               this.$store.state.data.appointment.scope &&
+               this.$store.state.data.appointment.scope.telephoneRequired == 1;
     },
     nameErrors() {
       const errors = [];

@@ -37,15 +37,7 @@ describe('Customer info', () => {
     const nameInput = wrapper.find('#customer-name')
     const emailInput = wrapper.find('#customer-email')
     const dataProtectionCheckbox = wrapper.find('#customer-data-protection')
-    const submitButton = wrapper.find('#customer-submit-button')
-
-
-    beforeEach(() => {
-        store.state.data.appointment.scope = {
-          telephoneActivated: 0,
-          telephoneRequired: 0
-        };
-      });      
+    const submitButton = wrapper.find('#customer-submit-button') 
 
 
     it('Component is shown', () => {
