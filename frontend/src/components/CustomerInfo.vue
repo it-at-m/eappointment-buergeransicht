@@ -1,45 +1,21 @@
 <template>
   <div ref="mainDiv">
-    <p><b>Hinweis: Die mit * gekennzeichneten Eingabefelder sind Pflichtfelder.</b></p>
     <div id="customer-name-section">
       <v-text-field v-model="customer.name" id="customer-name" :error-messages="nameErrors" @blur="$v.name.$touch()"
-        @change="changed" counter="50" filled :label="$t('name')" :disabled="isPreselectedAppointment"></v-text-field>
+        @change="changed" counter="50" :maxlength="50" filled :label="$t('name')" :disabled="isPreselectedAppointment"></v-text-field>
     </div>
 
     <div id="customer-email-section">
-      <v-text-field v-model="customer.email" id="customer-email" counter="50" filled :error-messages="emailErrors"
+      <v-text-field v-model="customer.email" id="customer-email" counter="50" :maxlength="50" filled :error-messages="emailErrors"
         @blur="$v.email.$touch()" @change="changed" required :label="$t('email')"
         :disabled="isPreselectedAppointment"></v-text-field>
     </div>
 
     <div id="customer-telephone-section" v-if="isTelephoneActivated">
-        <v-row no-gutters>
-          <v-col cols="12" sm="4" md="3" lg="2" xl="1" class="pr-2 mb-0">
-            <v-select 
-              v-model="selectedCountryCode"
-              id="country-code"
-              :items="countryCodes"
-              :label="(isTelephoneRequired) ? $t('countryCodeRequired') : $t('countryCode')"
-              :attach="attachedElement"
-              :menu-props="{ offsetY: true, bottom: true, nudgeBottom: 300 }">
-            </v-select>
-          </v-col>
-          <v-col cols="12" sm="8" md="9"  lg="10" xl="11">
-            <v-text-field 
-              v-model="telephone" 
-              id="customer-telephone" 
-              counter="16" 
-              filled 
-              :error-messages="telephoneErrors"
-              @blur="handleTelephoneBlur()" 
-              @input="validateTelephone()" 
-              @change="changed"
-              :label="(isTelephoneRequired) ? $t('telephoneRequired') : $t('telephone')"
-              :disabled="isPreselectedAppointment">
-            </v-text-field>
-          </v-col>
-        </v-row>
-      </div>
+      <v-text-field v-model="customer.telephone" id="customer-telephone" counter="20" :maxlength="20"  filled :error-messages="telephoneErrors"
+        @blur="$v.telephone.$touch()" @change="changed" required :label="(isTelephoneRequired) ? $t('telephoneRequired') : $t('telephone')"
+        :disabled="isPreselectedAppointment"></v-text-field>
+    </div>
 
     <v-checkbox id="customer-data-protection" v-model="customer.dataProtection" label=""
       :error-messages="dataProtectionErrors" required @input="$v.dataProtection.$touch()"
@@ -48,6 +24,8 @@
         <div v-html="$t('privacyPolicyAccepted')" @click.stop></div>
       </template>
     </v-checkbox>
+
+    <p>Hinweis: Die mit * gekennzeichneten Eingabefelder sind Pflichtfelder.</p>
 
     <v-btn id="customer-submit-button" class="button-next" elevation="2" depressed color="primary"
       @click="saveCustomer()">
@@ -64,48 +42,33 @@ import { required, email, maxLength } from "vuelidate/lib/validators";
 export default {
   name: 'CustomerInfo',
   mixins: [validationMixin],
-  validations: {
-    name: {
-      required,
-      maxLength: maxLength(50)
-    },
-    email: {
-      required,
-      email,
-      maxLength: maxLength(50)
-    },
-    telephone: {
-      maxLength: maxLength(19)
-    },
-    dataProtection: {
-      required
-    }
+  validations() {
+    return {
+      name: {
+        required,
+        maxLength: maxLength(50)
+      },
+      email: {
+        required,
+        email,
+        maxLength: maxLength(50)
+      },
+      telephone: {
+        required: this.isTelephoneRequired ? required : () => true,
+        maxLength: maxLength(20),
+        validFormat: this.validTelephoneFormat
+      },
+      dataProtection: {
+        required
+      }
+    };
   },
   data() {
     return {
       attachedElement: null,
-      customer: {},
-      countryCodes: [
-        { text: 'DE (+49)', value: '+49' },
-        { text: 'AT (+43)', value: '+43' },
-      ],
-      selectedCountryCode: '+49',
-      hasTelephoneLengthExceeded: false,
-      phoneNumberNotInFormat: false,
-      hasTelephoneBlurred: false,
-      isTelephoneEmpty: false,
+      customer: {}
     };
   },
-  watch: {
-    selectedCountryCode(newCode, oldCode) {
-      if (this.customer.telephone === oldCode) {
-        this.customer.telephone = newCode;
-      } else if (this.customer.telephone && oldCode) {
-        this.customer.telephone = this.customer.telephone.replace(oldCode, newCode);
-      }
-    },
-  },
-
   computed: {
     name: {
       get() {
@@ -125,17 +88,10 @@ export default {
     },
     telephone: {
       get() {
-        return this.customer.telephone ? this.customer.telephone.replace(this.selectedCountryCode, '') : '';
+        return this.customer.telephone
       },
       set(newValue) {
-        if (newValue === '') {
-          this.customer.telephone = '';
-        } else if (newValue === this.selectedCountryCode) {
-          this.customer.telephone = this.selectedCountryCode;
-        } else {
-          this.customer.telephone = this.selectedCountryCode + newValue;
-        }
-        this.$v.telephone.$touch();
+        return this.customer.telephone = newValue
       }
     },
     isTelephoneActivated() {
@@ -170,15 +126,13 @@ export default {
       return errors;
     },
     telephoneErrors() {
+
       const errors = [];
-      if (!this.$v.telephone.$dirty && !this.hasTelephoneBeenTouched) return errors;
-      if (this.hasTelephoneLengthExceeded) {
-        errors.push(this.$t('textLengthExceeded'));
-      }
-      if (this.phoneNumberNotInFormat) {
-        errors.push(this.$t('telephoneIsRequired'));
-      }
-      this.isTelephoneEmpty && errors.push(this.$t('telephoneIsRequired'));
+      if (!this.$v.telephone.$dirty) return errors;
+      !this.$v.telephone.required && errors.push(this.$t('telephoneIsRequired'));
+      !this.$v.telephone.maxLength && errors.push(this.$t('textLengthExceeded'));
+      !this.$v.telephone.validFormat && errors.push(this.$t('mustBeValidTelephone'));
+
 
       return errors;
     },
@@ -199,10 +153,6 @@ export default {
     changed() {
       this.$emit('changed')
     },
-    handleTelephoneBlur() {
-      this.hasTelephoneBlurred = true;
-      this.validateTelephone();
-    },
     saveCustomer() {
       this.$v.$touch()
 
@@ -222,30 +172,11 @@ export default {
       window.scrollTo(0, 0)
       this.$v.$reset()
     },
-    validateTelephone() {
-      if (!this.hasTelephoneBlurred) return;
-      this.isTelephoneEmpty = false;
-
-      if (this.customer.telephone && this.customer.telephone.trim() !== '') {
-        if (this.customer.telephone.length > 19) {
-          this.hasTelephoneLengthExceeded = true;
-        } else {
-          this.hasTelephoneLengthExceeded = false;
-        }
-
-        const regexPattern = /^\+[1-9]{1}[0-9]{0,2}[1-9][0-9]{6,14}$/;
-        this.phoneNumberNotInFormat = !regexPattern.test(this.customer.telephone);
-
-      } else {
-        this.phoneNumberNotInFormat = false;
-
-        if (this.isTelephoneRequired) {
-          this.isTelephoneEmpty = true;
-        }
-      }
-
-      this.$v.telephone.$touch();
-    }
+    validTelephoneFormat(value) {
+      // The regex ensures the string starts with an optional + followed by digits only
+      const phoneRegex = /^\+?\d+$/;
+      return phoneRegex.test(value);
+    },
 
   },
   mounted() {

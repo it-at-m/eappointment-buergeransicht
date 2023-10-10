@@ -232,7 +232,6 @@ export default {
 }
 </script>
 <style>
-.calendar-container {}
 
 .v-btn--rounded {
   border-radius: 0.25rem;
