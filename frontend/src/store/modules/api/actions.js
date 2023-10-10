@@ -1,14 +1,15 @@
 import moment from "moment";
 
 export default {
-    confirmReservation(store, { processId, authKey }) {
+    confirmReservation(store, { processId, authKey, scope }) {
         return new Promise((resolve, reject) => {
             const requestOptions = {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     "processId": processId,
-                    "authKey": authKey
+                    "authKey": authKey,
+                    "scope": scope
                 })
             };
             fetch(store.rootState.settings.endpoints.VUE_APP_ZMS_API_BASE + store.rootState.settings.endpoints.VUE_APP_ZMS_API_CONFIRM_RESERVATION_ENDPOINT, requestOptions)
@@ -26,14 +27,15 @@ export default {
                 })
         })
     },
-    preconfirmReservation(store, { processId, authKey }) {
+    preconfirmReservation(store, { processId, authKey, scope }) {
         return new Promise((resolve, reject) => {
             const requestOptions = {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     "processId": processId,
-                    "authKey": authKey
+                    "authKey": authKey,
+                    "scope": scope
                 })
             };
 
@@ -52,14 +54,15 @@ export default {
                 })
         })
     },
-    cancelAppointment(store, { processId, authKey }) {
+    cancelAppointment(store, { processId, authKey, scope }) {
         return new Promise((resolve, reject) => {
             const requestOptions = {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     "processId": processId,
-                    "authKey": authKey
+                    "authKey": authKey,
+                    "scope": scope
                 })
             };
 
@@ -127,10 +130,11 @@ export default {
                 })
         })
     },
-    fetchAppointment(store, { processId, authKey }) {
+    fetchAppointment(store, { processId, authKey, scope }) {
         const params = {
             'processId': processId,
-            'authKey': authKey
+            'authKey': authKey,
+            'scope': scope
         }
 
         return new Promise((resolve, reject) => {
@@ -183,6 +187,7 @@ export default {
                 body: JSON.stringify({
                     "processId": appointment.processId,
                     "authKey": appointment.authKey,
+                    "scope": appointment.scope,
                     "familyName": appointment.familyName,
                     "email": appointment.email,
                     "telephone": appointment.telephone,
@@ -191,7 +196,8 @@ export default {
 
             fetch(store.rootState.settings.endpoints.VUE_APP_ZMS_API_BASE + store.rootState.settings.endpoints.VUE_APP_ZMS_API_UPDATE_APPOINTMENT_ENDPOINT
                 .replace('{appointmentId}', appointment.processId)
-                .replace('{authKey}', appointment.authKey),
+                .replace('{authKey}', appointment.authKey)
+                .replace('{scope}', appointment.scope),
                 requestOptions
             )
             .then((response) => {
@@ -220,7 +226,6 @@ export default {
                     "serviceId": serviceIds
                 })
             };
-
             fetch(store.rootState.settings.endpoints.VUE_APP_ZMS_API_BASE + store.rootState.settings.endpoints.VUE_APP_ZMS_API_RESERVE_APPOINTMENT_ENDPOINT, requestOptions)
                 .then((response) => {
                     return response.json();

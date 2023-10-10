@@ -175,7 +175,6 @@ export default {
             this.timeSlotError = this.$t('errorTryAgainLater')
             return
           }
-
           const appointment = data
           appointment.provider = this.provider
           appointment.officeName = this.provider.name

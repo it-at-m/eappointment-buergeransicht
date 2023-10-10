@@ -1,5 +1,6 @@
 <template>
   <div ref="mainDiv">
+    <p><b>Hinweis: Die mit * gekennzeichneten Eingabefelder sind Pflichtfelder.</b></p>
     <div id="customer-name-section">
       <v-text-field v-model="customer.name" id="customer-name" :error-messages="nameErrors" @blur="$v.name.$touch()"
         @change="changed" counter="50" filled :label="$t('name')" :disabled="isPreselectedAppointment"></v-text-field>
@@ -11,25 +12,34 @@
         :disabled="isPreselectedAppointment"></v-text-field>
     </div>
 
-
-
-    <div id="customer-telephone-section">
-      <div class="telephone-wrapper">
-
-        <v-select v-model="selectedCountryCode" :items="countryCodes" label="Country Code" :attach="attachedElement"
-          :menu-props="{ offsetY: true }" class="telephone-country-code"></v-select>
-
-        <v-text-field v-model="telephone" id="customer-telephone" counter="16" filled :error-messages="telephoneErrors"
-          @blur="handleTelephoneBlur()" @input="validateTelephone()" @change="changed" :label="$t('telephone')"
-          :disabled="isPreselectedAppointment" class="telephone-input">
-        </v-text-field>
-
-
+    <div id="customer-telephone-section" v-if="isTelephoneActivated">
+        <v-row no-gutters>
+          <v-col cols="12" sm="4" md="3" lg="2" xl="1" class="pr-2 mb-0">
+            <v-select 
+              v-model="selectedCountryCode"
+              id="country-code"
+              :items="countryCodes"
+              :label="(isTelephoneRequired) ? $t('countryCodeRequired') : $t('countryCode')"
+              :attach="attachedElement"
+              :menu-props="{ offsetY: true, bottom: true, nudgeBottom: 300 }">
+            </v-select>
+          </v-col>
+          <v-col cols="12" sm="8" md="9"  lg="10" xl="11">
+            <v-text-field 
+              v-model="telephone" 
+              id="customer-telephone" 
+              counter="16" 
+              filled 
+              :error-messages="telephoneErrors"
+              @blur="handleTelephoneBlur()" 
+              @input="validateTelephone()" 
+              @change="changed"
+              :label="(isTelephoneRequired) ? $t('telephoneRequired') : $t('telephone')"
+              :disabled="isPreselectedAppointment">
+            </v-text-field>
+          </v-col>
+        </v-row>
       </div>
-    </div>
-    <!-- ... remaining components ... -->
-
-
 
     <v-checkbox id="customer-data-protection" v-model="customer.dataProtection" label=""
       :error-messages="dataProtectionErrors" required @input="$v.dataProtection.$touch()"
@@ -76,26 +86,24 @@ export default {
       attachedElement: null,
       customer: {},
       countryCodes: [
-        { text: 'Germany (+49)', value: '+49' },
-        { text: 'Austria (+43)', value: '+43' },
+        { text: 'DE (+49)', value: '+49' },
+        { text: 'AT (+43)', value: '+43' },
       ],
-      selectedCountryCode: '+49',  // default to Germany
+      selectedCountryCode: '+49',
       hasTelephoneLengthExceeded: false,
       phoneNumberNotInFormat: false,
       hasTelephoneBlurred: false,
+      isTelephoneEmpty: false,
     };
   },
   watch: {
     selectedCountryCode(newCode, oldCode) {
       if (this.customer.telephone === oldCode) {
-        // If the old telephone was just the old prefix, set it to the new prefix
         this.customer.telephone = newCode;
       } else if (this.customer.telephone && oldCode) {
-        // Replace the old country code with the new one if present
         this.customer.telephone = this.customer.telephone.replace(oldCode, newCode);
       }
     },
-
   },
 
   computed: {
@@ -117,7 +125,6 @@ export default {
     },
     telephone: {
       get() {
-        // When getting the value, strip out the country code
         return this.customer.telephone ? this.customer.telephone.replace(this.selectedCountryCode, '') : '';
       },
       set(newValue) {
@@ -128,11 +135,14 @@ export default {
         } else {
           this.customer.telephone = this.selectedCountryCode + newValue;
         }
-        //console.log("Set telephone: ", this.customer.telephone); // Add this line
         this.$v.telephone.$touch();
-
       }
-
+    },
+    isTelephoneActivated() {
+      return this.$store.state.data.appointment.scope.telephoneActivated == 1;
+    },
+    isTelephoneRequired() {
+      return this.$store.state.data.appointment.scope.telephoneRequired == 1;
     },
     dataProtection: {
       get() {
@@ -159,21 +169,19 @@ export default {
 
       return errors;
     },
-
-    // ... other computed properties ...
     telephoneErrors() {
       const errors = [];
-      if (!this.$v.telephone.$dirty && !this.hasTelephoneBeenTouched) return errors; // Check for our flag here
+      if (!this.$v.telephone.$dirty && !this.hasTelephoneBeenTouched) return errors;
       if (this.hasTelephoneLengthExceeded) {
         errors.push(this.$t('textLengthExceeded'));
       }
       if (this.phoneNumberNotInFormat) {
-        errors.push(this.$t('phoneNumber should be in international format starting with "+" followed by country code and local number'));
+        errors.push(this.$t('telephoneIsRequired'));
       }
+      this.isTelephoneEmpty && errors.push(this.$t('telephoneIsRequired'));
+
       return errors;
     },
-
-
 
     dataProtectionErrors() {
       const errors = [];
@@ -201,7 +209,6 @@ export default {
       if (this.emailErrors.length || this.nameErrors.length || this.dataProtectionErrors.length || this.telephoneErrors.length) {
         return
       }
-      //const fullTelephone = this.selectedCountryCode + this.customer.telephone;
       this.$store.dispatch('updateAppointmentData', {
         ...this.$store.state.data.appointment,
         ...{
@@ -214,11 +221,11 @@ export default {
       this.$emit('next')
       window.scrollTo(0, 0)
       this.$v.$reset()
-      console.log(this.$store.state.data.appointment.telephone);
     },
     validateTelephone() {
       if (!this.hasTelephoneBlurred) return;
-      // Only check the phone number format if the phone number exists and is not undefined
+      this.isTelephoneEmpty = false;
+
       if (this.customer.telephone && this.customer.telephone.trim() !== '') {
         if (this.customer.telephone.length > 19) {
           this.hasTelephoneLengthExceeded = true;
@@ -226,23 +233,19 @@ export default {
           this.hasTelephoneLengthExceeded = false;
         }
 
-        // Define the regex pattern
         const regexPattern = /^\+[1-9]{1}[0-9]{0,2}[1-9][0-9]{6,14}$/;
+        this.phoneNumberNotInFormat = !regexPattern.test(this.customer.telephone);
 
-
-        if (!regexPattern.test(this.customer.telephone)) {
-          this.phoneNumberNotInFormat = true;
-        } else {
-          this.phoneNumberNotInFormat = false;
-        }
       } else {
-        this.phoneNumberNotInFormat = false; // Reset the error if the field is empty or undefined
+        this.phoneNumberNotInFormat = false;
+
+        if (this.isTelephoneRequired) {
+          this.isTelephoneEmpty = true;
+        }
       }
 
       this.$v.telephone.$touch();
     }
-
-
 
   },
   mounted() {
@@ -253,21 +256,4 @@ export default {
 }
 </script>
 <style scoped>
-.telephone-wrapper {
-  display: flex;
-  align-items: center;
-  /* This will ensure the items are vertically aligned in the center */
-  gap: 10px;
-  /* Gap between the v-select and the v-text-field */
-}
-
-.telephone-country-code {
-  flex: 1;
-  /* Takes up equal width as the v-text-field */
-}
-
-.telephone-input {
-  flex: 1;
-  /* Takes up equal width as the v-select */
-}
 </style>

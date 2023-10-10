@@ -52,7 +52,7 @@ export default {
 
         try {
             appointmentData = JSON.parse(window.atob(appointmentHash))
-            if (typeof appointmentData.id === undefined || typeof appointmentData.authKey === undefined) {
+            if (typeof appointmentData.id === undefined || typeof appointmentData.authKey === undefined || typeof appointmentData.scope === undefined) {
                 store.state.errorCode = 'appointmentDoesntExist'
                 return
             }
@@ -62,7 +62,7 @@ export default {
         }
 
         return new Promise((resolve) => {
-            store.dispatch('API/confirmReservation', { processId: appointmentData.id, authKey: appointmentData.authKey })
+            store.dispatch('API/confirmReservation', { processId: appointmentData.id, authKey: appointmentData.authKey, scope: appointmentData.scope })
                 .then((data) => {
                     store.dispatch('setAppointmentFromResponse', data)
 
@@ -78,7 +78,7 @@ export default {
         try {
             appointmentData = JSON.parse(window.atob(appointmentHash))
 
-            if (typeof appointmentData.id === undefined || typeof appointmentData.authKey === undefined) {
+            if (typeof appointmentData.id === undefined || typeof appointmentData.authKey === undefined  || typeof appointmentData.scope === undefined) {
                 store.state.errorCode = 'appointmentDoesntExist'
                 return
             }
@@ -87,7 +87,7 @@ export default {
             return
         }
 
-        store.dispatch('API/fetchAppointment', { processId: appointmentData.id, authKey: appointmentData.authKey })
+        store.dispatch('API/fetchAppointment', { processId: appointmentData.id, authKey: appointmentData.authKey, scope: appointmentData.scope })
             .then(data => {
                 if (data.errorMessage) {
                     store.state.errorMessage = data.errorMessage
@@ -124,6 +124,7 @@ export default {
             location: appointmentData.officeName,
             processId: appointmentData.processId,
             authKey: appointmentData.authKey,
+            scope: appointmentData.scope,
             serviceId: appointmentData.serviceId,
             serviceCount: appointmentData.serviceCount,
             ...customer
