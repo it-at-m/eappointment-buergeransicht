@@ -27,7 +27,9 @@ const wrapper = mount(CustomerInfo, {
             iconfont: 'mdiSvg'
         }
     }),
-    propsData: {}
+    propsData: {
+        telephoneRequired: false // or whatever the desired value is
+    }
 })
 
 describe('Customer info', () => {
