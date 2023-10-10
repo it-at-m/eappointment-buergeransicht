@@ -28,7 +28,8 @@ const wrapper = mount(CustomerInfo, {
         }
     }),
     propsData: {
-        telephoneRequired: false // or whatever the desired value is
+        telephoneRequired: false, // or whatever the desired value is
+        telephoneActivated: false // or whatever the desired value is
     }
 })
 
