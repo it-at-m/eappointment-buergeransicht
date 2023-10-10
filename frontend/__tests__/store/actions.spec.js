@@ -222,6 +222,7 @@ describe('Actions', () => {
             serviceCount: 2,
             name: 'Max',
             email: 'max@gmail.com',
+            telephone: '+1234567890',
             dataProtection: true
         }
 
@@ -238,7 +239,7 @@ describe('Actions', () => {
             officeName: 'Office name',
             familyName: 'Max',
             email: 'max@gmail.com',
-            telephone: '',
+            telephone: '+1234567890',
             timestamp: 1589373217,
             processId: 111,
             authKey: 'abc'
