@@ -13,7 +13,7 @@
 
     <div id="customer-telephone-section" v-if="isTelephoneActivated">
       <v-text-field v-model="customer.telephone" id="customer-telephone" counter="20" :maxlength="20"  filled :error-messages="telephoneErrors"
-        @blur="$v.telephone.$touch()" @change="changed" required :label="(isTelephoneRequired) ? $t('telephoneRequired') : $t('telephone')"
+        @blur="$v.telephone.$touch()" @change="changed" :label="(isTelephoneRequired) ? $t('telephoneRequired') : $t('telephone')"
         :disabled="isPreselectedAppointment"></v-text-field>
     </div>
 
@@ -93,12 +93,6 @@ export default {
         return this.customer.telephone = newValue
       }
     },
-    isTelephoneActivated() {
-      return this.$store.state.data.appointment.scope.telephoneActivated == 1;
-    },
-    isTelephoneRequired() {
-      return this.$store.state.data.appointment.scope.telephoneRequired == 1;
-    },
     dataProtection: {
       get() {
         return this.customer.dataProtection
@@ -106,6 +100,12 @@ export default {
       set(newValue) {
         return this.customer.dataProtection = newValue
       }
+    },
+    isTelephoneActivated() {
+      return this.$store.state.data.appointment.scope.telephoneActivated == 1;
+    },
+    isTelephoneRequired() {
+      return this.$store.state.data.appointment.scope.telephoneRequired == 1;
     },
     nameErrors() {
       const errors = [];
