@@ -65,7 +65,6 @@ export default {
   },
   data() {
     return {
-      attachedElement: null,
       customer: {}
     };
   },
@@ -178,8 +177,6 @@ export default {
     }
   },
   mounted() {
-    this.attachedElement = this.$refs.mainDiv.shadowRoot || this.$refs.mainDiv;
-    this.prevCountryCode = this.selectedCountryCode;
     this.customer = this.$store.state.data.customer;
   }
 }
