@@ -127,7 +127,72 @@ describe('Form data mutations', () => {
         expect(state.service).toBeNull()
     })
 
-    it('setService sets service in store', async () => {
+    it('setService sets service with subservices in store', async () => {
+        const state = {
+            service: {
+                id: 1,
+                name: 'Service',
+                maxQuantity: 3,
+                combinable: [
+                    2,
+                    3
+                ]
+            },
+            appointment: {
+                authKey: 'aaa',
+                processId: 'bbb'
+            },
+            appointmentCounts: {
+                1: 3
+            },
+            appointmentCount: 3
+        }
+
+        mutations.setService(state, {
+            id: 1,
+            name: 'Service 1',
+            count: 2,
+            combinable: [
+                1,
+                2
+            ],
+            subServiceCounts: {
+                2: 1,
+                3: 1
+            }
+        })
+
+        expect(state.appointmentCounts).toStrictEqual({
+            1: 2,
+            2: 1,
+            3: 1
+        })
+        expect(state.appointmentCount).toBe(2)
+        expect(state.service).toStrictEqual({
+            id: 1,
+            name: 'Service 1',
+            count: 2,
+            combinable: [
+                2
+            ],
+            subServiceCounts: {
+                2: 1,
+                3: 1
+            },
+            subServices: [
+                {
+                    id: 2,
+                    count: 1
+                },
+                {
+                    id: 3,
+                    count: 1
+                }
+            ]
+        })
+    })
+
+    it('setService sets service withouth subservices in store', async () => {
         const state = {
             service: {
                 id: 1,
@@ -157,15 +222,11 @@ describe('Form data mutations', () => {
                 2,
                 3
             ],
-            subServiceCounts: {
-                2: 1
-            }
+            subServiceCounts: {}
         })
 
         expect(state.appointmentCounts).toStrictEqual({
-            1: 2,
-            2: 1,
-            3: 0
+            1: 2
         })
         expect(state.appointmentCount).toBe(2)
         expect(state.service).toStrictEqual({
@@ -176,19 +237,8 @@ describe('Form data mutations', () => {
                 2,
                 3
             ],
-            subServiceCounts: {
-                2: 1
-            },
-            subServices: [
-                {
-                    id: 2,
-                    count: 1
-                },
-                {
-                    id: 3,
-                    count: 0
-                }
-            ]
+            subServiceCounts: {},
+            subServices: []
         })
     })
 

@@ -30,7 +30,7 @@
     <v-btn id="customer-submit-button" class="button-next" elevation="2" depressed color="primary"
       @click="saveCustomer()">
       <span class="desktop">{{ $t('nextToReservation') }}</span>
-      <span class="mobile">{{ $t('finishReservation') }}</span>
+      <span class="mobile">{{ $t('next') }}</span>
     </v-btn>
   </div>
 </template>
