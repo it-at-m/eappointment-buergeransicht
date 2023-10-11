@@ -82,8 +82,14 @@
                       <v-fade-transition leave-absolute>
                         <span v-if="!open" key="1">
                           <span v-if="$store.state.data.customer.name">
-                            <b>{{ $store.state.data.customer.name }} ({{ $store.state.data.customer.email }})</b>
-                          </span>
+                            <b>
+                                {{ $store.state.data.customer.name }} ({{ $store.state.data.customer.email }}
+                                <span v-if="$store.state.data.customer.telephone">
+                                  , {{ $store.state.data.customer.telephone }}
+                                </span>
+                                )
+                            </b>
+                        </span>
                         </span>
                       </v-fade-transition>
                     </v-col>
@@ -223,7 +229,7 @@ import SwitchLanguage from './SwitchLanguage.vue'
 import ServiceFinder from './ServiceFinder.vue'
 import TheCalendar from './TheCalendar.vue'
 import CustomerInfo from './CustomerInfo.vue'
-import moment from "moment";
+import moment from "moment"
 
 export default {
   name: 'AppointmentForm',

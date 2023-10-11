@@ -175,7 +175,6 @@ export default {
             this.timeSlotError = this.$t('errorTryAgainLater')
             return
           }
-
           const appointment = data
           appointment.provider = this.provider
           appointment.officeName = this.provider.name
@@ -233,7 +232,6 @@ export default {
 }
 </script>
 <style>
-.calendar-container {}
 
 .v-btn--rounded {
   border-radius: 0.25rem;

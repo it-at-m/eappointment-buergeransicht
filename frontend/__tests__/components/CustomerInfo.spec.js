@@ -27,14 +27,18 @@ const wrapper = mount(CustomerInfo, {
             iconfont: 'mdiSvg'
         }
     }),
-    propsData: {}
+    propsData: {
+        telephoneRequired: false, // or whatever the desired value is
+        telephoneActivated: false, // or whatever the desired value is
+    }
 })
 
 describe('Customer info', () => {
     const nameInput = wrapper.find('#customer-name')
     const emailInput = wrapper.find('#customer-email')
     const dataProtectionCheckbox = wrapper.find('#customer-data-protection')
-    const submitButton = wrapper.find('#customer-submit-button')
+    const submitButton = wrapper.find('#customer-submit-button') 
+
 
     it('Component is shown', () => {
         expect(wrapper.exists()).toBe(true)

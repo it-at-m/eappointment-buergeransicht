@@ -6,7 +6,7 @@ import VueI18n from 'vue-i18n'
 import translations from './../../src/translations'
 import store from './../../src/store'
 import Vue from 'vue'
-import moment from "moment";
+import moment from "moment"
 
 Vue.use(VueI18n)
 Vue.use(Vuetify)

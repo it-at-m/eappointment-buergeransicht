@@ -1,6 +1,6 @@
 import actions from './../../src/store/actions'
 import store from './../../src/store/index'
-import moment from "moment";
+import moment from "moment"
 
 describe('Actions', () => {
     it('updateAppointmentData sets customer data and updates appointment', async () => {
@@ -222,6 +222,7 @@ describe('Actions', () => {
             serviceCount: 2,
             name: 'Max',
             email: 'max@gmail.com',
+            telephone: '+1234567890',
             dataProtection: true
         }
 
@@ -238,6 +239,7 @@ describe('Actions', () => {
             officeName: 'Office name',
             familyName: 'Max',
             email: 'max@gmail.com',
+            telephone: '+1234567890',
             timestamp: 1589373217,
             processId: 111,
             authKey: 'abc'
