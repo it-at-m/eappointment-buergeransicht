@@ -215,12 +215,14 @@ describe('Form data mutations', () => {
         mutations.setCustomerData(state, {
             name: 'Max',
             email: 'max@gmail.com',
+            telephone: "123456789",
             dataProtection: true
         })
 
         expect(state.customer).toStrictEqual({
             name: 'Max',
             email: 'max@gmail.com',
+            telephone: "123456789",
             dataProtection: true
         })
     })
