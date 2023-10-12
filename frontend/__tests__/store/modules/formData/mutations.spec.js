@@ -266,6 +266,7 @@ describe('Form data mutations', () => {
             name: 'Max',
             email: 'max@gmail.com',
             telephone: "123456789",
+            childName: "Smith",
             dataProtection: true
         })
 
@@ -273,6 +274,7 @@ describe('Form data mutations', () => {
             name: 'Max',
             email: 'max@gmail.com',
             telephone: "123456789",
+            childName: "Smith",
             dataProtection: true
         })
     })

@@ -17,6 +17,12 @@
         :disabled="isPreselectedAppointment"></v-text-field>
     </div>
 
+    <div id="customer-child-name-section" v-if="isChildNameActivated">
+      <v-text-field v-model="customer.childName" id="customer-child-name" counter="20" :maxlength="20"  filled :error-messages="ChildNameErrors"
+        @blur="$v.childName.$touch()" @change="changed" :label="$t('childName')"
+        :disabled="isPreselectedAppointment"></v-text-field>
+    </div>
+
     <v-checkbox id="customer-data-protection" v-model="customer.dataProtection" label=""
       :error-messages="dataProtectionErrors" required @input="$v.dataProtection.$touch()"
       @blur="$v.dataProtection.$touch()" @change="changed">
@@ -58,6 +64,10 @@ export default {
         maxLength: maxLength(20),
         validFormat: this.validTelephoneFormat
       },
+      childName: {
+        required,
+        maxLength: maxLength(50)
+      },
       dataProtection: {
         required
       }
@@ -93,6 +103,14 @@ export default {
         return this.customer.telephone = newValue
       }
     },
+    childName: {
+      get() {
+        return this.customer.childName
+      },
+      set(newValue) {
+        return this.customer.childName = newValue
+      }
+    },
     dataProtection: {
       get() {
         return this.customer.dataProtection
@@ -100,6 +118,11 @@ export default {
       set(newValue) {
         return this.customer.dataProtection = newValue
       }
+    },
+    isChildNameActivated() {
+        return this.$store.state.data.appointment &&
+               this.$store.state.data.appointment.scope &&
+               this.$store.state.data.appointment.scope.childNameActivated == 1;
     },
     isTelephoneActivated() {
         return this.$store.state.data.appointment &&
@@ -129,14 +152,18 @@ export default {
       return errors;
     },
     telephoneErrors() {
-
       const errors = [];
       if (!this.$v.telephone.$dirty) return errors;
       !this.$v.telephone.required && errors.push(this.$t('telephoneIsRequired'));
       !this.$v.telephone.maxLength && errors.push(this.$t('textLengthExceeded'));
       !this.$v.telephone.validFormat && errors.push(this.$t('mustBeValidTelephone'));
-
-
+      return errors;
+    },
+    ChildNameErrors() {
+      const errors = [];
+      if (!this.$v.childName.$dirty) return errors;
+      !this.$v.childName.required && errors.push(this.$t('childNameIsRequired'));
+      !this.$v.childName.maxLength && errors.push(this.$t('textLengthExceeded'));
       return errors;
     },
 
@@ -159,7 +186,7 @@ export default {
     saveCustomer() {
       this.$v.$touch()
 
-      if (this.emailErrors.length || this.nameErrors.length || this.dataProtectionErrors.length || this.telephoneErrors.length) {
+      if (this.emailErrors.length || this.nameErrors.length || this.dataProtectionErrors.length || this.telephoneErrors.length || this.ChildNameErrors.length) {
         return
       }
       this.$store.dispatch('updateAppointmentData', {

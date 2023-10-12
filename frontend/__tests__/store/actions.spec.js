@@ -223,6 +223,7 @@ describe('Actions', () => {
             name: 'Max',
             email: 'max@gmail.com',
             telephone: '+1234567890',
+            childName: 'Smith',
             dataProtection: true
         }
 
@@ -240,6 +241,7 @@ describe('Actions', () => {
             familyName: 'Max',
             email: 'max@gmail.com',
             telephone: '+1234567890',
+            childName: 'Smith',
             timestamp: 1589373217,
             processId: 111,
             authKey: 'abc'

@@ -107,7 +107,8 @@ describe('API actions', () => {
             authKey: 'bbb',
             familyName: 'Musterman',
             email: 'test@gmail.com',
-            telephone: ''
+            telephone: '',
+            childName: ''
         })
 
         expect(fetch.mock.calls.length).toEqual(1);
@@ -117,7 +118,8 @@ describe('API actions', () => {
             "authKey": 'bbb',
             "familyName": 'Musterman',
             "email": 'test@gmail.com',
-            "telephone": ''
+            "telephone": '',
+            "childName": ''
         }))
     })
 

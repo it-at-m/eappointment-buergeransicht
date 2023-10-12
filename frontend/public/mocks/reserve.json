@@ -62,7 +62,8 @@
         "email": "",
         "emailSendCount": "0",
         "notificationsSendCount": "0",
-        "telephone": ""
+        "telephone": "",
+        "childName": ""
       }
     ],
     "createIP": "",
