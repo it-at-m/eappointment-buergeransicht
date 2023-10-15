@@ -30,7 +30,8 @@ const wrapper = mount(CustomerInfo, {
     propsData: {
         telephoneRequired: false,
         telephoneActivated: false,
-        childNameActivated: false,
+        customTextfieldRequired: false,
+        customTextfieldActivated: false,
     }
 })
 
@@ -38,7 +39,7 @@ describe('Customer info', () => {
     const nameInput = wrapper.find('#customer-name')
     const emailInput = wrapper.find('#customer-email')
     const telephoneInput = wrapper.find('#customer-telephone')
-    const childNameInput = wrapper.find('#customer-child-name')
+    const customTextfieldInput = wrapper.find('#customer-custom-textfield')
     const dataProtectionCheckbox = wrapper.find('#customer-data-protection')
     const submitButton = wrapper.find('#customer-submit-button') 
 

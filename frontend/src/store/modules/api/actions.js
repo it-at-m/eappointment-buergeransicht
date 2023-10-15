@@ -191,7 +191,7 @@ export default {
                     "familyName": appointment.familyName,
                     "email": appointment.email,
                     "telephone": appointment.telephone,
-                    "childName": appointment.childName
+                    "customTextfield": appointment.customTextfield
                 })
             };
 

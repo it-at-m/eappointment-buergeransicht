@@ -72,7 +72,7 @@ export default {
         state.customer.name = customer ? customer.name : null
         state.customer.email = customer ? customer.email : null
         state.customer.telephone = customer ? customer.telephone : null
-        state.customer.childName = customer ? customer.childName : null
+        state.customer.customTextfield = customer ? customer.customTextfield : null
         state.customer.dataProtection = customer ? customer.dataProtection : null
     }
 }

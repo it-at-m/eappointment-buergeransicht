@@ -16,10 +16,9 @@
         @blur="$v.telephone.$touch()" @change="changed" :label="(isTelephoneRequired) ? $t('telephoneRequired') : $t('telephone')"
         :disabled="isPreselectedAppointment"></v-text-field>
     </div>
-
-    <div id="customer-child-name-section" v-if="isChildNameActivated">
-      <v-text-field v-model="customer.childName" id="customer-child-name" counter="20" :maxlength="20"  filled :error-messages="ChildNameErrors"
-        @blur="$v.childName.$touch()" @change="changed" :label="$t('childName')"
+    <div id="customer-custom-textfield-section" v-if="isCustomTextfieldActivated">
+      <v-text-field v-model="customer.customTextfield" id="customer-custom-textfield" counter="20" :maxlength="20"  filled :error-messages="customTextfieldErrors"
+        @blur="$v.customTextfield.$touch()" @change="changed" :label="(isCustomTextfieldRequired ? 'Nachname des Kindes' + '*' : 'Nachname des Kindes')"
         :disabled="isPreselectedAppointment"></v-text-field>
     </div>
 
@@ -64,8 +63,8 @@ export default {
         maxLength: maxLength(20),
         validFormat: this.validTelephoneFormat
       },
-      childName: {
-        required,
+      customTextfield: {
+        required: this.isCustomTextfieldRequired ? required : () => true,
         maxLength: maxLength(50)
       },
       dataProtection: {
@@ -103,12 +102,12 @@ export default {
         return this.customer.telephone = newValue
       }
     },
-    childName: {
+    customTextfield: {
       get() {
-        return this.customer.childName
+        return this.customer.customTextfield
       },
       set(newValue) {
-        return this.customer.childName = newValue
+        return this.customer.customTextfield = newValue
       }
     },
     dataProtection: {
@@ -119,11 +118,21 @@ export default {
         return this.customer.dataProtection = newValue
       }
     },
-    isChildNameActivated() {
+    isCustomTextfieldActivated() {
         return this.$store.state.data.appointment &&
                this.$store.state.data.appointment.scope &&
-               this.$store.state.data.appointment.scope.childNameActivated == 1;
+               this.$store.state.data.appointment.scope.customTextfieldActivated == 1;
     },
+    isCustomTextfieldRequired() {
+        return this.$store.state.data.appointment &&
+               this.$store.state.data.appointment.scope &&
+               this.$store.state.data.appointment.scope.customTextfieldRequired == 1;
+    }, 
+    customTextfieldLabel() {
+        return this.$store.state.data.appointment &&
+               this.$store.state.data.appointment.scope &&
+               this.$store.state.data.appointment.scope.customTextfieldLabel;
+    },        
     isTelephoneActivated() {
         return this.$store.state.data.appointment &&
                this.$store.state.data.appointment.scope &&
@@ -159,11 +168,11 @@ export default {
       !this.$v.telephone.validFormat && errors.push(this.$t('mustBeValidTelephone'));
       return errors;
     },
-    ChildNameErrors() {
+    customTextfieldErrors() {
       const errors = [];
-      if (!this.$v.childName.$dirty) return errors;
-      !this.$v.childName.required && errors.push(this.$t('childNameIsRequired'));
-      !this.$v.childName.maxLength && errors.push(this.$t('textLengthExceeded'));
+      if (!this.$v.customTextfield.$dirty) return errors;
+      !this.$v.customTextfield.required && errors.push(this.$t('customTextfieldIsRequired'));
+      !this.$v.customTextfield.maxLength && errors.push(this.$t('textLengthExceeded'));
       return errors;
     },
 
@@ -186,7 +195,7 @@ export default {
     saveCustomer() {
       this.$v.$touch()
 
-      if (this.emailErrors.length || this.nameErrors.length || this.dataProtectionErrors.length || this.telephoneErrors.length || this.ChildNameErrors.length) {
+      if (this.emailErrors.length || this.nameErrors.length || this.dataProtectionErrors.length || this.telephoneErrors.length || this.customTextfieldErrors.length) {
         return
       }
       this.$store.dispatch('updateAppointmentData', {
