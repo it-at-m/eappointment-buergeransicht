@@ -8,7 +8,7 @@
   },
   "data": {
     "$schema": "https://schema.berlin.de/queuemanagement/process.json",
-    "amendment": "",
+    "customTextfield": "",
     "appointments": [
       {
         "date": 1648708200,
@@ -66,7 +66,8 @@
         "email": "",
         "emailSendCount": "0",
         "notificationsSendCount": "0",
-        "telephone": ""
+        "telephone": "",
+        "customTextfield": ""
       }
     ],
     "createIP": "",
@@ -280,12 +281,13 @@
         },
         "client": {
           "alternateAppointmentUrl": "",
-          "amendmentActivated": "0",
-          "amendmentLabel": "",
+          "customTextfieldLabel": "",
           "emailFrom": "",
           "emailRequired": 0,
           "telephoneActivated": "0",
-          "telephoneRequired": 0
+          "telephoneRequired": 0,
+          "customTextfieldActivated": "0",
+          "customTextfieldRequired": 0
         },
         "notifications": {
           "confirmationContent": "",
@@ -315,7 +317,7 @@
           "buttonName": "Termin Wartebereich BB Pasing",
           "confirmationEnabled": "0",
           "deactivatedText": "",
-          "notificationsAmendmentEnabled": "0",
+          "notificationscustomTextfieldEnabled": "0",
           "notificationsEnabled": "0",
           "notificationsDelay": "0"
         },

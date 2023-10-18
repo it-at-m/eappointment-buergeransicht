@@ -5,6 +5,7 @@ export default {
         appointment.familyName = appointment.client.name
         appointment.email = appointment.client.email
         appointment.telephone = appointment.client.telephone
+        appointment.customTextfield = appointment.client.customTextfield
 
         store.dispatch('API/updateAppointmentData', appointment)
             .then((data) => {
@@ -114,6 +115,7 @@ export default {
             name: appointmentData.familyName,
             email: appointmentData.email,
             telephone: appointmentData.telephone,
+            customTextfield: appointmentData.customTextfield,
             dataProtection: true
         }
 

@@ -8,7 +8,7 @@
   },
   "data": {
     "$schema": "https://schema.berlin.de/queuemanagement/process.json",
-    "amendment": "",
+    "customTextfield": "",
     "appointments": [
       {
         "date": 0,
@@ -35,7 +35,8 @@
         "email": "ext.dl.manjencic@muenchen.de",
         "emailSendCount": "0",
         "notificationsSendCount": "0",
-        "telephone": ""
+        "telephone": "",
+        "customTextfield": ""
       }
     ],
     "createIP": "",
@@ -71,7 +72,8 @@
       "preferences": {
         "client": {
           "emailRequired": 0,
-          "telephoneRequired": 0
+          "telephoneRequired": 0,
+          "customTextfieldRequired": 0
         },
         "workstation": {
           "emergencyRefreshInterval": "5"

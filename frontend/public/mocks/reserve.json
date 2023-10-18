@@ -8,7 +8,7 @@
   },
   "data": {
     "$schema": "https://schema.berlin.de/queuemanagement/process.json",
-    "amendment": "",
+    "customTextfield": "",
     "appointments": [
       {
         "date": 1648102200,
@@ -62,7 +62,8 @@
         "email": "",
         "emailSendCount": "0",
         "notificationsSendCount": "0",
-        "telephone": ""
+        "telephone": "",
+        "customTextfield": ""
       }
     ],
     "createIP": "",

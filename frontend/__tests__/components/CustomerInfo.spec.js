@@ -28,14 +28,18 @@ const wrapper = mount(CustomerInfo, {
         }
     }),
     propsData: {
-        telephoneRequired: false, // or whatever the desired value is
-        telephoneActivated: false, // or whatever the desired value is
+        telephoneRequired: false,
+        telephoneActivated: false,
+        customTextfieldRequired: false,
+        customTextfieldActivated: false,
     }
 })
 
 describe('Customer info', () => {
     const nameInput = wrapper.find('#customer-name')
     const emailInput = wrapper.find('#customer-email')
+    const telephoneInput = wrapper.find('#customer-telephone')
+    const customTextfieldInput = wrapper.find('#customer-custom-textfield')
     const dataProtectionCheckbox = wrapper.find('#customer-data-protection')
     const submitButton = wrapper.find('#customer-submit-button') 
 
@@ -98,6 +102,8 @@ describe('Customer info', () => {
 
         submitButton.trigger('click')
         await wrapper.vm.$nextTick()
+
+        console.log(store.state.data.appointment);
 
         expect(wrapper.emitted().next).toBeDefined()
         expect(dispatch).toHaveBeenCalledTimes(1)
