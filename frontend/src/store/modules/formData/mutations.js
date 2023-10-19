@@ -67,6 +67,7 @@ export default {
     },
     setAppointment (state, appointment) {
         state.appointment = appointment
+        state.appointment.scope.customTextfieldLabel = appointment ? appointment.scope.customTextfieldLabel: null
     },
     setCustomerData (state, customer) {
         state.customer.name = customer ? customer.name : null
@@ -74,6 +75,5 @@ export default {
         state.customer.telephone = customer ? customer.telephone : null
         state.customer.customTextfield = customer ? customer.customTextfield : null
         state.customer.dataProtection = customer ? customer.dataProtection : null
-        state.data.appointment.scope.customTextfieldLabel = data ? data.appointment.scope.customTextfieldLabel: null
     }
 }
