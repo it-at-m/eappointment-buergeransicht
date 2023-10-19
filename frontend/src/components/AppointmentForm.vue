@@ -88,7 +88,7 @@
                                   , {{ $store.state.data.customer.telephone }}
                                 </span>
                                 <span v-if="$store.state.data.customer.customTextfield">                               
-                                , {{ $store.state.data.appointment.scope.customTextfieldLabel }}: {{ $store.state.data.customer.customTextfield }})
+                                , {{ customTextfieldLabel }}: {{ $store.state.data.customer.customTextfield }})
                                 </span>
                             </b>
                         </span>
@@ -259,6 +259,11 @@ export default {
     },
     activatedAppointment() {
       return this.$store.state.activatedAppointment
+    },
+    customTextfieldLabel() {
+        return this.$store.state.data.appointment &&
+               this.$store.state.data.appointment.scope &&
+               this.$store.state.data.appointment.scope.customTextfieldLabel;
     }
   },
   methods: {

@@ -129,6 +129,7 @@ export default {
             scope: appointmentData.scope,
             serviceId: appointmentData.serviceId,
             serviceCount: appointmentData.serviceCount,
+            customTextfieldLabel: appointmentData.customTextfieldLabel,
             ...customer
         }
 
