@@ -18,7 +18,7 @@
     </div>
     <div id="customer-custom-textfield-section" v-if="isCustomTextfieldActivated">
       <v-text-field v-model="customer.customTextfield" id="customer-custom-textfield" counter="20" :maxlength="20"  filled :error-messages="customTextfieldErrors"
-        @blur="$v.customTextfield.$touch()" @change="changed" :label="(isCustomTextfieldRequired ? 'Nachname des Kindes' + '*' : 'Nachname des Kindes')"
+        @blur="$v.customTextfield.$touch()" @change="changed" :label="(isCustomTextfieldRequired ? customTextfieldLabel + '*' : customTextfieldLabel)"
         :disabled="isPreselectedAppointment"></v-text-field>
     </div>
 
