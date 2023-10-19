@@ -65,6 +65,10 @@ export default {
 
         state.service = service
     },
+    setScope (state, scope){
+        state.scope.customTextfieldLabel = scope ? scope.customTextfieldLabel : null
+
+    },
     setAppointment (state, appointment) {
         state.appointment = appointment
     },
