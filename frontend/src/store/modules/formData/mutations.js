@@ -74,5 +74,6 @@ export default {
         state.customer.telephone = customer ? customer.telephone : null
         state.customer.customTextfield = customer ? customer.customTextfield : null
         state.customer.dataProtection = customer ? customer.dataProtection : null
+        state.data.appointment.scope.customTextfieldLabel = data ? data.appointment.scope.customTextfieldLabel: null
     }
 }
