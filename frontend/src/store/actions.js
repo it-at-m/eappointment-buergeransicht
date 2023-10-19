@@ -132,8 +132,6 @@ export default {
             ...customer
         }
 
-        console.log(appointmentData);
-
         store.commit('data/setCustomerData', customer)
         store.commit('preselectAppointment', appointment)
         store.commit('data/setAppointment', appointment)

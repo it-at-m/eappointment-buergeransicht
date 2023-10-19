@@ -136,7 +136,6 @@ export default {
             'authKey': authKey,
             'scope': scope
         }
-
         return new Promise((resolve, reject) => {
             fetch(store.rootState.settings.endpoints.VUE_APP_ZMS_API_BASE + store.rootState.settings.endpoints.VUE_APP_ZMS_API_APPOINTMENT_ENDPOINT
                 + '?' + new URLSearchParams(params).toString())
