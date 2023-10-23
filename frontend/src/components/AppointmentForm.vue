@@ -88,8 +88,9 @@
                                 {{ $store.state.data.customer.telephone }},
                                 </span>
                                 <span v-if="$store.state.data.customer.customTextfield">                               
-                                {{ $store.state.data.customer.customTextfield }})
+                                {{ $store.state.data.customer.customTextfield }}
                                 </span>
+                                )
                             </b>
                         </span>
                         </span>
