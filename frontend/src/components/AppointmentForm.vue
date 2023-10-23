@@ -83,7 +83,7 @@
                         <span v-if="!open" key="1">
                           <span v-if="$store.state.data.customer.name">
                             <b>
-                              {{ $store.state.data.customer.name }} ({{ $store.state.data.customer.email }}
+                              {{ $store.state.data.customer.name }} ( {{ $store.state.data.customer.email }}
                               <span v-if="$store.state.data.customer.telephone">
                               , {{ $store.state.data.customer.telephone }}
                               </span>
