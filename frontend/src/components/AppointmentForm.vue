@@ -83,14 +83,7 @@
                         <span v-if="!open" key="1">
                           <span v-if="$store.state.data.customer.name">
                             <b>
-                                {{ $store.state.data.customer.name }} ({{ $store.state.data.customer.email }},
-                                <span v-if="$store.state.data.customer.telephone">
-                                {{ $store.state.data.customer.telephone }},
-                                </span>
-                                <span v-if="$store.state.data.customer.customTextfield">                               
-                                {{ $store.state.data.customer.customTextfield }}
-                                </span>
-                                )
+                                {{ $store.state.data.customer.name }} ({{ $store.state.data.customer.email }},<span v-if="$store.state.data.customer.telephone">{{ $store.state.data.customer.telephone }},</span><span v-if="$store.state.data.customer.customTextfield">{{ $store.state.data.customer.customTextfield }}</span>)
                             </b>
                         </span>
                         </span>
