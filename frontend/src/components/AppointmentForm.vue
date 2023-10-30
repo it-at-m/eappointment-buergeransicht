@@ -364,10 +364,17 @@ export default {
 
 <style scoped>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+}
+
+.theme--light.v-application{
+  color: #3a5368 !important;
+}
+
+.theme--light.v-expansion-panels .v-expansion-panel {
+  color: #3a5368 !important;
 }
 
 .button-submit {
