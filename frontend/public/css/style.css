@@ -3,8 +3,8 @@
     font-style: normal;
     font-weight: 300;
     font-display: swap;
-    src: url(/fonts/roboto-condensed/roboto-condensed-v19-latin-300.tff);
-    src: local(""), url(/fonts/roboto-condensed/roboto-condensed-v19-latin-300.tff?=#iefix) format("embedded-opentype"), url(/fonts/roboto-condensed/roboto-condensed-v19-latin-300.woff2) format("woff2"), url(/fonts/roboto-condensed/roboto-condensed-v19-latin-300.woff) format("woff"), url(/fonts/roboto-condensed/roboto-condensed-v19-latin-300.ttf) format("truetype"), url(/fonts/roboto-condensed/roboto-condensed-v19-latin-300.svg#RobotoCondensed) format("svg")
+    src: url(../fonts/roboto-condensed/roboto-condensed-v19-latin-300.tff);
+    src: local(""), url(../fonts/roboto-condensed/roboto-condensed-v19-latin-300.tff?=#iefix) format("embedded-opentype"), url(../fonts/roboto-condensed/roboto-condensed-v19-latin-300.woff2) format("woff2"), url(../fonts/roboto-condensed/roboto-condensed-v19-latin-300.woff) format("woff"), url(../fonts/roboto-condensed/roboto-condensed-v19-latin-300.ttf) format("truetype"), url(../fonts/roboto-condensed/roboto-condensed-v19-latin-300.svg#RobotoCondensed) format("svg")
 }
 
 @font-face {
@@ -12,8 +12,8 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url(/fonts/roboto-condensed/roboto-condensed-v19-latin-regular.tff);
-    src: local(""), url(/fonts/roboto-condensed/roboto-condensed-v19-latin-regular.tff?=#iefix) format("embedded-opentype"), url(/fonts/roboto-condensed/roboto-condensed-v19-latin-regular.woff2) format("woff2"), url(/fonts/roboto-condensed/roboto-condensed-v19-latin-regular.woff) format("woff"), url(/fonts/roboto-condensed/roboto-condensed-v19-latin-regular.ttf) format("truetype"), url(/fonts/roboto-condensed/roboto-condensed-v19-latin-regular.svg#RobotoCondensed) format("svg")
+    src: url(../fonts/roboto-condensed/roboto-condensed-v19-latin-regular.tff);
+    src: local(""), url(../fonts/roboto-condensed/roboto-condensed-v19-latin-regular.tff?=#iefix) format("embedded-opentype"), url(../fonts/roboto-condensed/roboto-condensed-v19-latin-regular.woff2) format("woff2"), url(../fonts/roboto-condensed/roboto-condensed-v19-latin-regular.woff) format("woff"), url(../fonts/roboto-condensed/roboto-condensed-v19-latin-regular.ttf) format("truetype"), url(../fonts/roboto-condensed/roboto-condensed-v19-latin-regular.svg#RobotoCondensed) format("svg")
 }
 
 @font-face {
@@ -21,8 +21,8 @@
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url(/fonts/roboto-condensed/roboto-condensed-v19-latin-700.tff);
-    src: local(""), url(/fonts/roboto-condensed/roboto-condensed-v19-latin-700.tff?=#iefix) format("embedded-opentype"), url(/fonts/roboto-condensed/roboto-condensed-v19-latin-700.woff2) format("woff2"), url(/fonts/roboto-condensed/roboto-condensed-v19-latin-700.woff) format("woff"), url(/fonts/roboto-condensed/roboto-condensed-v19-latin-700.ttf) format("truetype"), url(/fonts/roboto-condensed/roboto-condensed-v19-latin-700.svg#RobotoCondensed) format("svg")
+    src: url(../fonts/roboto-condensed/roboto-condensed-v19-latin-700.tff);
+    src: local(""), url(../fonts/roboto-condensed/roboto-condensed-v19-latin-700.tff?=#iefix) format("embedded-opentype"), url(../fonts/roboto-condensed/roboto-condensed-v19-latin-700.woff2) format("woff2"), url(../fonts/roboto-condensed/roboto-condensed-v19-latin-700.woff) format("woff"), url(../fonts/roboto-condensed/roboto-condensed-v19-latin-700.ttf) format("truetype"), url(../fonts/roboto-condensed/roboto-condensed-v19-latin-700.svg#RobotoCondensed) format("svg")
 }
 
 @font-face {
@@ -30,8 +30,8 @@
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url(/fonts/open-sans/open-sans-v27-latin-regular.tff);
-    src: local(""), url(/fonts/open-sans/open-sans-v27-latin-regular.tff?=#iefix) format("embedded-opentype"), url(/fonts/open-sans/open-sans-v27-latin-regular.woff2) format("woff2"), url(/fonts/open-sans/open-sans-v27-latin-regular.woff) format("woff"), url(/fonts/open-sans/open-sans-v27-latin-regular.ttf) format("truetype"), url(/fonts/open-sans/open-sans-v27-latin-regular.svg#OpenSans) format("svg")
+    src: url(../fonts/open-sans/open-sans-v27-latin-regular.tff);
+    src: local(""), url(../fonts/open-sans/open-sans-v27-latin-regular.tff?=#iefix) format("embedded-opentype"), url(../fonts/open-sans/open-sans-v27-latin-regular.woff2) format("woff2"), url(../fonts/open-sans/open-sans-v27-latin-regular.woff) format("woff"), url(../fonts/open-sans/open-sans-v27-latin-regular.ttf) format("truetype"), url(../fonts/open-sans/open-sans-v27-latin-regular.svg#OpenSans) format("svg")
 }
 
 @font-face {
@@ -39,8 +39,8 @@
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url(/fonts/open-sans/open-sans-v27-latin-700.tff);
-    src: local(""), url(/fonts/open-sans/open-sans-v27-latin-700.tff?=#iefix) format("embedded-opentype"), url(/fonts/open-sans/open-sans-v27-latin-700.woff2) format("woff2"), url(/fonts/open-sans/open-sans-v27-latin-700.woff) format("woff"), url(/fonts/open-sans/open-sans-v27-latin-700.ttf) format("truetype"), url(/fonts/open-sans/open-sans-v27-latin-700.svg#OpenSans) format("svg")
+    src: url(../fonts/open-sans/open-sans-v27-latin-700.tff);
+    src: local(""), url(../fonts/open-sans/open-sans-v27-latin-700.tff?=#iefix) format("embedded-opentype"), url(../fonts/open-sans/open-sans-v27-latin-700.woff2) format("woff2"), url(../fonts/open-sans/open-sans-v27-latin-700.woff) format("woff"), url(../fonts/open-sans/open-sans-v27-latin-700.ttf) format("truetype"), url(../fonts/open-sans/open-sans-v27-latin-700.svg#OpenSans) format("svg")
 }
 
 @font-face {
@@ -48,16 +48,25 @@
     font-style: italic;
     font-weight: 400;
     font-display: swap;
-    src: url(/fonts/open-sans/open-sans-v27-latin-italic.tff);
-    src: local(""), url(/fonts/open-sans/open-sans-v27-latin-italic.tff?=#iefix) format("embedded-opentype"), url(/fonts/open-sans/open-sans-v27-latin-italic.woff2) format("woff2"), url(/fonts/open-sans/open-sans-v27-latin-italic.woff) format("woff"), url(/fonts/open-sans/open-sans-v27-latin-italic.ttf) format("truetype"), url(/fonts/open-sans/open-sans-v27-latin-italic.svg#OpenSans) format("svg")
+    src: url(../fonts/open-sans/open-sans-v27-latin-italic.tff);
+    src: local(""), url(../fonts/open-sans/open-sans-v27-latin-italic.tff?=#iefix) format("embedded-opentype"), url(../fonts/open-sans/open-sans-v27-latin-italic.woff2) format("woff2"), url(../fonts/open-sans/open-sans-v27-latin-italic.woff) format("woff"), url(../fonts/open-sans/open-sans-v27-latin-italic.ttf) format("truetype"), url(../fonts/open-sans/open-sans-v27-latin-italic.svg#OpenSans) format("svg")
 }
 
+h1, h2, h3, h4, h5 {
+    font-family: Roboto Condensed, Arial, sans-serif;
+    color: #3a5368 !important;
+}
 
+p, span, div {
+    font-family: Open Sans, sans-serif;
+    color: #3a5368;
+}
 
 #app {
+    font-family: Open Sans, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #2c3e50;
+    color: #3a5368;
 }
 
 .button-submit {
@@ -88,27 +97,32 @@
 }
 
 
-.calendar-container {
-}
+.calendar-container {}
+
 .v-btn--rounded {
     border-radius: 0.25rem;
     width: 100% !important;
 }
+
 .v-date-picker-table tbody .v-btn {
     background: #005A9F;
     color: #fff;
 }
-.v-date-picker-table tbody .v-btn.v-btn--disabled  {
+
+.v-date-picker-table tbody .v-btn.v-btn--disabled {
     background: #cccccc;
 }
+
 .v-card {
     text-align: center;
 }
+
 .v-card__text {
     overflow-y: scroll;
     padding: 0 !important;
     max-height: 12rem;
 }
+
 .select-appointment {
     padding: 0.5rem 0;
 }
@@ -116,10 +130,13 @@
 .v-picker {
     margin-top: 0 !important;
 }
+
 .select-appointment:hover {
     background: #F2F6FA;
 }
-.preselected-appointment, .select-appointment {
+
+.preselected-appointment,
+.select-appointment {
     cursor: pointer;
 }
 
@@ -135,19 +152,24 @@
 .button-next {
     margin-top: 4rem;
 }
+
 .filtered-service {
     cursor: pointer;
 }
+
 .subservices .v-list-item {
     border-bottom: #ccc solid 1px;
     padding-left: 0;
 }
+
 .subservices .v-card__actions {
     padding-left: 0;
 }
+
 h3 {
     margin-top: 2rem;
 }
+
 .v-menu__content {
     margin-left: 1rem;
 }
@@ -241,7 +263,8 @@ h3 {
     border-radius: 0 !important;
 }
 
-.v-date-picker-header, .v-date-picker-table {
+.v-date-picker-header,
+.v-date-picker-table {
     padding-left: 0;
     padding-right: 0;
 }
@@ -263,7 +286,8 @@ h3 {
     border-bottom: #BDD4EA solid 1px;
 }
 
-.v-date-picker-table td, .v-date-picker-table th {
+.v-date-picker-table td,
+.v-date-picker-table th {
     padding: 2px 18px;
 }
 
@@ -297,7 +321,8 @@ h3 {
         margin: 0 auto;
     }
 
-    .v-date-picker-table td, .v-date-picker-table th {
+    .v-date-picker-table td,
+    .v-date-picker-table th {
         padding: 2px 8px;
     }
 }
@@ -309,4 +334,4 @@ h3 {
 .v-select__selections {
     padding-top: 4px !important;
     padding-bottom: 4px !important;
-  }
+}
