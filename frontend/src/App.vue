@@ -1,15 +1,17 @@
 <template>
   <v-app>
+    <SvgSprite />
     <link :href="`${linkBaseUrl}css/vuetify.min.css`" rel="stylesheet">
     <link :href="`${linkBaseUrl}css/materialdesignicons.min.css`" rel="stylesheet">
     <link :href="`${linkBaseUrl}css/style.css`" rel="stylesheet">
-
+    <link :href="`${linkBaseUrl}css/patternlab.css`" rel="stylesheet">
     <AppointmentForm v-if="stylesLoaded"/>
   </v-app>
 </template>
 
 <script>
 import AppointmentForm from '@/components/AppointmentForm';
+import SvgSprite from '@/components/SvgSprite'; // Import the SvgSprite component
 import store from "@/store";
 import translations from "@/translations";
 import Vue from "vue";
@@ -37,7 +39,8 @@ export default {
   }),
   props: ['baseUrl', 'serviceId', 'locationId', 'appointmentHash', 'confirmAppointmentHash'],
   components: {
-    AppointmentForm
+    AppointmentForm,
+    SvgSprite
   },
   data() {
     return {
@@ -101,6 +104,7 @@ export default {
         `${this.linkBaseUrl}css/vuetify.min.css`,
         `${this.linkBaseUrl}css/materialdesignicons.min.css`,
         `${this.linkBaseUrl}css/style.css`,
+        `${this.linkBaseUrl}css/patternlab.css`,
       ];
       const promises = styles.map(style => {
         const link = document.createElement('link');
