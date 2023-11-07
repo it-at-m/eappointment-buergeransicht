@@ -7,6 +7,7 @@ const state = {
     appointment: null,
     appointmentCounts: {},
     appointmentCount: 1,
+    maxSlotsExceeded: false,
     customer: {
         name: null,
         email: null,

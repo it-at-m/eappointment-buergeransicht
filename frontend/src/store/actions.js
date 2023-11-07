@@ -23,12 +23,17 @@ export default {
 
                     let requests = data.services.map(service => {
                         service.providers = []
+
                         data.relations.forEach(relation => {
                             if (relation.serviceId === service.id) {
+                                service.minSlots = service.minSlots
+                                    ? Math.min(service.minSlots, relation.slots)
+                                    : relation.slots
                                 const foundProvider = data.offices.filter(office => {
                                     return office.id === relation.officeId
                                 })[0]
 
+                                foundProvider.slots = relation.slots
                                 service.providers.push(foundProvider)
                             }
                         })

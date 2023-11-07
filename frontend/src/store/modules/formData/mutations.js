@@ -1,17 +1,40 @@
+const MAX_SLOTS = 25
+
+const checkMaxSlots = (state) => {
+    let minSlots = 0
+    for (var selectedServiceId in state.appointmentCounts) {
+        minSlots += state.appointmentCounts[selectedServiceId] * state.servicesById[selectedServiceId].minSlots
+    }
+
+    if (minSlots > MAX_SLOTS) {
+        state.maxSlotsExceeded = true
+    } else {
+        state.maxSlotsExceeded = false
+    }
+}
+
+const increaseAppointmentCount = (state, serviceId) => {
+    if (state.appointmentCounts[serviceId] < state.servicesById[serviceId].maxQuantity)
+    {
+      state.appointmentCounts[serviceId]++
+      state.appointmentCount++
+    }
+
+    checkMaxSlots(state)
+}
+
+const decreaseAppointmentCount = (state, serviceId) => {
+    if (state.appointmentCounts[serviceId] > 0) {
+      state.appointmentCounts[serviceId]--
+      state.appointmentCount--
+    }
+
+    checkMaxSlots(state)
+}
+
 export default {
-    increaseAppointmentCount (state, serviceId) {
-        if (state.appointmentCounts[serviceId] < state.servicesById[serviceId].maxQuantity)
-        {
-            state.appointmentCounts[serviceId]++
-            state.appointmentCount++
-        }
-    },
-    decreaseAppointmentCount (state, serviceId) {
-        if (state.appointmentCounts[serviceId] > 0) {
-            state.appointmentCounts[serviceId]--
-            state.appointmentCount--
-        }
-    },
+    increaseAppointmentCount,
+    decreaseAppointmentCount,
     reset (state) {
         state.service = null
         state.appointment = null
