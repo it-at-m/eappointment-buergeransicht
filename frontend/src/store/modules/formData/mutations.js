@@ -4,7 +4,6 @@ const checkMaxSlots = (state) => {
     let minSlots = 0
     for (var selectedServiceId in state.appointmentCounts) {
         minSlots += state.appointmentCounts[selectedServiceId] * state.servicesById[selectedServiceId].minSlots
-        console.log(minSlots)
     }
 
     if (minSlots > MAX_SLOTS) {
