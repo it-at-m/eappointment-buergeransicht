@@ -16,7 +16,7 @@ export default {
   rebookAppointment: "Termin umbuchen",
   confirmAppointment: "Reservierung abschließen",
   services: "Dienstleistungen",
-  chooseService: "Dienstleistungen wählen - TEST",
+  chooseService: "Dienstleistungen wählen",
   stepFrom: "Schritt {step} von {stepTotal}",
   appointmentIsConfirmed: "Ihr Termin wurde bestätigt.",
   appointmentIsPreconfirmed: "Ihr Termin wurde vorgemerkt.",

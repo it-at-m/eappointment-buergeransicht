@@ -1,4 +1,4 @@
-const MAX_SLOTS = 2
+const MAX_SLOTS = 25
 
 const checkMaxSlots = (state) => {
     let minSlots = 0
