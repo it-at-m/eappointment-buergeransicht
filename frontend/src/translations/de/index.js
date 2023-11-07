@@ -5,6 +5,7 @@ export default {
   language: "Sprache",
   next: "Weiter",
   nextToAppointment: "Weiter zur Terminauswahl",
+  AppointmentToLong: "Der Termin ist zu lang. Bitte wählen Sie weniger Dienstleistungen.",
   nextToReservation: "Weiter zum Abschluss der Reservierung",
   finishReservation: "Reservierung abschließen",
   availableTimes: "Verfügbare Uhrzeiten",

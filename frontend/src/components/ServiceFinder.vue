@@ -141,6 +141,14 @@
         </template>
       </v-list>
 
+        <v-alert
+            class="appointment-cancel"
+            v-if="$store.state.data.maxSlotsExceeded"
+            :color="$store.state.settings.theme.error"
+        >
+            {{ $t('AppointmentToLong') }}
+        </v-alert>
+
       <div>
         <v-btn
             class="button-next"
@@ -148,7 +156,7 @@
             depressed
             color="primary"
             @click="nextStep"
-            :disabled="! $store.state.data.service || $store.state.data.appointmentCount === 0"
+            :disabled="! $store.state.data.service || $store.state.data.appointmentCount === 0 || $store.state.data.maxSlotsExceeded"
         >{{ $t('nextToAppointment') }}</v-btn>
       </div>
     </v-container>
