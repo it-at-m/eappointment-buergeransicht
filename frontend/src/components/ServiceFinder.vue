@@ -68,6 +68,7 @@
                   class="appointment-count-button button-down"
                   :aria-label="`Anzahl der Dienstleistung verringern auf ` + (appointmentCounts[$store.state.data.service.id] - 1)"
                   :aria-describedby="`appointment-count-name-` + $store.state.data.service.id"
+                  :disabled="!canDecreaseAppointments($store.state.data.service)"
                   fab
                   @click="decreaseAppointments($store.state.data.service)"
               >
@@ -87,6 +88,7 @@
                   class="appointment-count-button"
                   :aria-label="`Anzahl der Dienstleistung erhöhen auf` + (appointmentCounts[$store.state.data.service.id] + 1)"
                   :aria-describedby="`appointment-count-name-` + $store.state.data.service.id"
+                  :disabled="!canIncreaseAppointments($store.state.data.service)"
                   fab
                   @click="increaseAppointments($store.state.data.service)"
               >
@@ -109,6 +111,7 @@
                       class="appointment-count-button button-down"
                       :aria-label="`Anzahl der Dienstleistung verringern auf ` + (appointmentCounts[subService.id] - 1)"
                       :aria-describedby="`appointment-count-name-` + subService.id"
+                      :disabled="!canDecreaseAppointments(subService)"
                       fab
                       @click="decreaseAppointments(subService)"
                   >
@@ -127,6 +130,7 @@
                       class="appointment-count-button"
                       :aria-label="`Anzahl der Dienstleistung erhöhen auf ` + (appointmentCounts[subService.id] + 1)"
                       :aria-describedby="`appointment-count-name-` + subService.id"
+                      :disabled="!canIncreaseAppointments(subService)"
                       fab
                       @click="increaseAppointments(subService)"
                   >
@@ -214,6 +218,22 @@ export default {
       this.$emit('changed')
       this.$store.commit('data/decreaseAppointmentCount', service.id)
       this.appointmentCountTriggered++
+    },
+    canIncreaseAppointments(service) {
+        if (this.$store.state.data.appointmentCounts[service.id] + 1
+            > this.$store.state.data.servicesById[service.id].maxQuantity
+        ) {
+            return false
+        }
+
+        return true
+    },
+    canDecreaseAppointments(service) {
+        if (this.$store.state.data.appointmentCounts[service.id] - 1 < 0) {
+          return false
+        }
+
+        return true
     },
     onChange(value) {
       if (!value) {

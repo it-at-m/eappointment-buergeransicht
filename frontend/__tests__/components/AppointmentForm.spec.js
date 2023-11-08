@@ -17,6 +17,24 @@ const i18n = new VueI18n({
     messages: translations,
 })
 
+store.state.data.servicesById = {
+    111: {
+        id: 111,
+        name: 'Service 1',
+        maxQuantity: 5
+    },
+    333: {
+        id: 333,
+        name: 'Service 3',
+        maxQuantity: 5
+    },
+    444: {
+        id: 444,
+        name: 'Service 4',
+        maxQuantity: 5
+    }
+}
+
 const wrapper = mount(AppointmentForm, {
     Vue,
     store,
@@ -415,15 +433,18 @@ describe('AppointmentForm', () => {
         wrapper.vm.$store.state.servicesById = {
             111: {
                 id: 111,
-                name: 'Service 1'
+                name: 'Service 1',
+                maxQuantity: 5
             },
             333: {
                 id: 333,
-                name: 'Service 3'
+                name: 'Service 3',
+                maxQuantity: 5
             },
             444: {
                 id: 444,
-                name: 'Service 4'
+                name: 'Service 4',
+                maxQuantity: 5
             }
         }
         wrapper.vm.$store.state.data.service = {
