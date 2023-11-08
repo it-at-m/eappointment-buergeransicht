@@ -176,12 +176,19 @@
               :color="confirmedAppointment ? $store.state.settings.theme.success : $store.state.settings.theme.error">
               {{ confirmedAppointment? $t('appointmentIsPreconfirmed'): $t('errorTryAgainLater') }}
             </v-alert>-->
-
+            <!--
             <v-alert class="appointment-activated" v-if="activatedAppointment && !appointmentCancelled"
               :color="$store.state.settings.theme.success">
               {{ $t('appointmentIsConfirmed') }}
-            </v-alert>
-
+            </v-alert>-->
+            <div class="m-banner m-banner--warning appointment-activated" role="alert" aria-label="Warnung" v-if="activatedAppointment && !appointmentCancelled">
+              <div class="container-fluid">
+                <svg aria-hidden="true" class="icon">
+                  <use xlink:href="#icon-warning"></use>
+                </svg>
+                <p>{{ $t('appointmentIsConfirmed') }}</p>
+              </div>
+            </div>
             <!--
             <v-alert class="appointment-confirmation-notice"
               v-if="!appointmentCancelled && confirmedAppointment !== null && $store.state.preselectedAppointment === null && $store.state.data.appointment !== null"

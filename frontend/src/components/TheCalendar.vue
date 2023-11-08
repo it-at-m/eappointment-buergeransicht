@@ -37,13 +37,38 @@
           <div class="appointment-container-subtitle lighten-2">
             <h4 tabindex="0">{{ formatDay(date) }}</h4>
           </div>
-
+          <!--
           <div>
-            <v-alert v-if="timeSlotError" :color="$store.state.settings.theme.error">
-              {{ timeSlotError }}
+            <v-alert :color="$store.state.settings.theme.error">
+              <p>{{ timeSlotError }}</p>
             </v-alert>
+          </div>-->
+          <div v-if="timeSlotError" class="m-component m-component-callout m-component-callout--warning m-component-callout--fullwidth">
+            <div>
+              <div class="m-component__grid">
+                <div class="m-component__column">
+                  <div class="m-callout m-callout--warning">
+                    <div class="m-callout__inner">
+                      <div class="m-callout__icon">
+                        <svg aria-hidden="true" class="icon">
+                          <use xlink:href="#icon-warning"></use>
+                        </svg>
+                        <span class="visually-hidden"></span>
+                      </div>
+                      <div class="m-callout__body">
+                        <div class="m-callout__body__inner">
+                          <h2 class="m-callout__headline">{{ $t('appointmentNotAvailableHeader') }}</h2>
+                          <div class="m-callout__content">
+                            <p>{{ timeSlotError }}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-
           <div v-for="(times, index) in timeSlotsInHours()" :key="index">
             <div class="appointments-in-hours">
               <div class="time-hour" tabindex="0">
