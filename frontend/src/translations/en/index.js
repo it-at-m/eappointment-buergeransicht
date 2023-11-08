@@ -12,7 +12,7 @@ export default {
   rebookAppointment: "Change appointment",
   confirmAppointment: "Reserve appointment",
   appointmentIsConfirmed: "Your appointment has been confirmed",
-  appointmentIsPreconfirmed: "Ihr Termin wurde vorgemerkt",
+  appointmentIsPreconfirmed: "Your appointment has been pre-booked",
   activationLinkExpired: "Your activation link has expired",
   errorTryAgainLater: "Something went wrong. Please, try with another appointment",
   appointmentNotAvailableHeader: "No appointments available",
