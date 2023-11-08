@@ -37,12 +37,6 @@
           <div class="appointment-container-subtitle lighten-2">
             <h4 tabindex="0">{{ formatDay(date) }}</h4>
           </div>
-          <!--
-          <div>
-            <v-alert :color="$store.state.settings.theme.error">
-              <p>{{ timeSlotError }}</p>
-            </v-alert>
-          </div>-->
           <div v-if="timeSlotError" class="m-component m-component-callout m-component-callout--warning m-component-callout--fullwidth">
             <div>
               <div class="m-component__grid">
