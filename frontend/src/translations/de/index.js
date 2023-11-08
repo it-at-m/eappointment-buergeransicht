@@ -1,7 +1,7 @@
 export default {
   appointmentDoesntExist: "Der Termin konnte nicht gefunden werden.",
   appointmentCanNotBeCanceled: "Der Termin kann nicht mehr storniert werden, da der Terminzeitpunkt in der Vergangenheit liegt.",
-  appointmentCanceled: "Termin wurde storniert.",
+  appointmentCanceled: "Ihr Termin wurde storniert.",
   language: "Sprache",
   next: "Weiter",
   nextToAppointment: "Weiter zur Terminauswahl",
