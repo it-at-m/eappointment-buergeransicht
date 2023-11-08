@@ -1029,7 +1029,7 @@ img.mde-lazyload.lazyloaded {
     width: .5rem;
     height: 1.5rem;
     content: "";
-    background-image: url(https://muenchen.de/themes/custom/muenchen/assets/svg/images/list-style-chevron--pillar.svg);
+    background-image: url(../svg/images/list-style-chevron--pillar.svg);
     background-repeat: no-repeat;
     background-position: 0 0;
     background-size: 100% 100%
@@ -2148,7 +2148,7 @@ img.mde-lazyload.lazyloaded {
     width: 24px;
     height: 24px;
     content: "";
-    background-image: url(https://muenchen.de/themes/custom/muenchen/assets/svg/images/list-style-chevron.svg);
+    background-image: url(../svg/images/list-style-chevron.svg);
     background-repeat: no-repeat;
     background-position: 0 0;
     background-size: 100% 100%
@@ -2172,7 +2172,7 @@ img.mde-lazyload.lazyloaded {
     width: 24px;
     height: 24px;
     content: "";
-    background-image: url(https://muenchen.de/themes/custom/muenchen/assets/svg/images/list-style-circle.svg);
+    background-image: url(../svg/images/list-style-circle.svg);
     background-repeat: no-repeat;
     background-position: 0 0;
     background-size: 100% 100%
@@ -2455,7 +2455,7 @@ img.mde-lazyload.lazyloaded {
     width: 24px;
     height: 24px;
     content: "";
-    background-image: url(https://muenchen.de/themes/custom/muenchen/assets/svg/images/list-style-chevron.svg);
+    background-image: url(../svg/images/list-style-chevron.svg);
     background-repeat: no-repeat;
     background-position: 0 0;
     background-size: 100% 100%
@@ -2479,7 +2479,7 @@ img.mde-lazyload.lazyloaded {
     width: 24px;
     height: 24px;
     content: "";
-    background-image: url(https://muenchen.de/themes/custom/muenchen/assets/svg/images/list-style-circle.svg);
+    background-image: url(../svg/images/list-style-circle.svg);
     background-repeat: no-repeat;
     background-position: 0 0;
     background-size: 100% 100%
@@ -5969,7 +5969,7 @@ input[type=search]::-webkit-search-cancel-button {
     -webkit-appearance: none;
     width: 1.5rem;
     height: 1.5rem;
-    background: url(https://muenchen.de/themes/custom/muenchen/assets/svg/images/close--mde-blue.svg) no-repeat 100% 100%
+    background: url(../svg/images/close--mde-blue.svg) no-repeat 100% 100%
 }
 
 input[type=search]:focus::-webkit-search-cancel-button {
@@ -6318,7 +6318,7 @@ input[type=search]:focus::-webkit-search-cancel-button {
 .m-checkboxes__label:after {
     top: .25rem;
     background-color: #005a9f;
-    background-image: url(https://muenchen.de/themes/custom/muenchen/assets/svg/images/check-light.svg);
+    background-image: url(../svg/images/check-light.svg);
     background-repeat: no-repeat;
     background-size: 100% 100%;
     opacity: 0
@@ -6509,7 +6509,7 @@ input[type=search]:focus::-webkit-search-cancel-button {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    background-image: url(https://muenchen.de/themes/custom/muenchen/assets/svg/images/map-pin.svg);
+    background-image: url(../svg/images/map-pin.svg);
     background-repeat: no-repeat;
     background-position: top .5rem left .75rem;
     background-size: 1.5rem 1.5rem
@@ -6527,7 +6527,7 @@ input[type=search]:focus::-webkit-search-cancel-button {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    background-image: url(https://muenchen.de/themes/custom/muenchen/assets/svg/images/public-transport.svg);
+    background-image: url(../svg/images/public-transport.svg);
     background-repeat: no-repeat;
     background-position: top .5rem left .75rem;
     background-size: 1.5rem 1.5rem
@@ -6542,7 +6542,7 @@ input[type=search]:focus::-webkit-search-cancel-button {
 
 .autocomplete-result-list--public-transport .autocomplete-result.active,
 .autocomplete-result-list--public-transport .autocomplete-result.selected {
-    background-image: url(https://muenchen.de/themes/custom/muenchen/assets/svg/images/public-transport.svg)
+    background-image: url(../svg/images/public-transport.svg)
 }
 
 .m-input-wrapper--multiselect,
@@ -6649,7 +6649,7 @@ input[type=search]:focus::-webkit-search-cancel-button {
     height: 1.25rem;
     content: "";
     background-color: #005a9f;
-    background-image: url(https://muenchen.de/themes/custom/muenchen/assets/svg/images/check-light.svg);
+    background-image: url(../svg/images/check-light.svg);
     background-repeat: no-repeat;
     background-size: 100% 100%;
     opacity: 0
@@ -11017,7 +11017,7 @@ p span[data-bs-toggle=tooltip] {
     width: 24px;
     height: 24px;
     content: "";
-    background-image: url(https://muenchen.de/themes/custom/muenchen/assets/svg/images/list-style-chevron.svg);
+    background-image: url(../svg/images/list-style-chevron.svg);
     background-repeat: no-repeat;
     background-position: 0 0;
     background-size: 100% 100%
@@ -11041,7 +11041,7 @@ p span[data-bs-toggle=tooltip] {
     width: 24px;
     height: 24px;
     content: "";
-    background-image: url(https://muenchen.de/themes/custom/muenchen/assets/svg/images/list-style-circle.svg);
+    background-image: url(../svg/images/list-style-circle.svg);
     background-repeat: no-repeat;
     background-position: 0 0;
     background-size: 100% 100%
@@ -13709,7 +13709,7 @@ p span[data-bs-toggle=tooltip] {
     width: 6rem;
     height: 6rem;
     content: "";
-    background-image: url(https://muenchen.de/themes/custom/muenchen/assets/svg/pictograms/pictogram-youtube.svg);
+    background-image: url(../svg/pictograms/pictogram-youtube.svg);
     background-repeat: no-repeat;
     background-position: 0 0;
     background-size: 100% 100%;
@@ -13927,7 +13927,7 @@ p span[data-bs-toggle=tooltip] {
     width: 24px;
     height: 24px;
     content: "";
-    background-image: url(https://muenchen.de/themes/custom/muenchen/assets/svg/images/list-style-chevron.svg);
+    background-image: url(../svg/images/list-style-chevron.svg);
     background-repeat: no-repeat;
     background-position: 0 0;
     background-size: 100% 100%
@@ -13951,7 +13951,7 @@ p span[data-bs-toggle=tooltip] {
     width: 24px;
     height: 24px;
     content: "";
-    background-image: url(https://muenchen.de/themes/custom/muenchen/assets/svg/images/list-style-circle.svg);
+    background-image: url(../svg/images/list-style-circle.svg);
     background-repeat: no-repeat;
     background-position: 0 0;
     background-size: 100% 100%
@@ -14023,7 +14023,7 @@ p span[data-bs-toggle=tooltip] {
 }
 
 .m-error-list__list>li:before {
-    background-image: url(https://muenchen.de/themes/custom/muenchen/assets/svg/images/list-style-chevron--error.svg) !important
+    background-image: url(../svg/images/list-style-chevron--error.svg) !important
 }
 
 .m-error-list a:not(.m-button),
@@ -15062,7 +15062,7 @@ p span[data-bs-toggle=tooltip] {
     width: 1.25rem;
     height: 1.25rem;
     content: "";
-    background-image: url(https://muenchen.de/themes/custom/muenchen/assets/svg/images/check-dark.svg);
+    background-image: url(../svg/images/check-dark.svg);
     background-repeat: no-repeat;
     background-size: 100% 100%;
     opacity: 0
@@ -22484,7 +22484,7 @@ p span[data-bs-toggle=tooltip] {
     width: 24px;
     height: 24px;
     content: "";
-    background-image: url(https://muenchen.de/themes/custom/muenchen/assets/svg/images/list-style-chevron.svg);
+    background-image: url(../svg/images/list-style-chevron.svg);
     background-repeat: no-repeat;
     background-position: 0 0;
     background-size: 100% 100%
@@ -22508,7 +22508,7 @@ p span[data-bs-toggle=tooltip] {
     width: 24px;
     height: 24px;
     content: "";
-    background-image: url(https://muenchen.de/themes/custom/muenchen/assets/svg/images/list-style-circle.svg);
+    background-image: url(../svg/images/list-style-circle.svg);
     background-repeat: no-repeat;
     background-position: 0 0;
     background-size: 100% 100%
@@ -23623,7 +23623,7 @@ p span[data-bs-toggle=tooltip] {
     width: 24px;
     height: 24px;
     content: "";
-    background-image: url(https://muenchen.de/themes/custom/muenchen/assets/svg/images/list-style-chevron.svg);
+    background-image: url(../svg/images/list-style-chevron.svg);
     background-repeat: no-repeat;
     background-position: 0 0;
     background-size: 100% 100%
@@ -23647,7 +23647,7 @@ p span[data-bs-toggle=tooltip] {
     width: 24px;
     height: 24px;
     content: "";
-    background-image: url(https://muenchen.de/themes/custom/muenchen/assets/svg/images/list-style-circle.svg);
+    background-image: url(../svg/images/list-style-circle.svg);
     background-repeat: no-repeat;
     background-position: 0 0;
     background-size: 100% 100%
@@ -24079,7 +24079,7 @@ p span[data-bs-toggle=tooltip] {
     width: 24px;
     height: 24px;
     content: "";
-    background-image: url(https://muenchen.de/themes/custom/muenchen/assets/svg/images/list-style-chevron.svg);
+    background-image: url(../svg/images/list-style-chevron.svg);
     background-repeat: no-repeat;
     background-position: 0 0;
     background-size: 100% 100%
@@ -24103,7 +24103,7 @@ p span[data-bs-toggle=tooltip] {
     width: 24px;
     height: 24px;
     content: "";
-    background-image: url(https://muenchen.de/themes/custom/muenchen/assets/svg/images/list-style-circle.svg);
+    background-image: url(../svg/images/list-style-circle.svg);
     background-repeat: no-repeat;
     background-position: 0 0;
     background-size: 100% 100%
@@ -24814,7 +24814,7 @@ p span[data-bs-toggle=tooltip] {
     width: 24px;
     height: 24px;
     content: "";
-    background-image: url(https://muenchen.de/themes/custom/muenchen/assets/svg/images/list-style-chevron.svg);
+    background-image: url(../svg/images/list-style-chevron.svg);
     background-repeat: no-repeat;
     background-position: 0 0;
     background-size: 100% 100%
@@ -24838,7 +24838,7 @@ p span[data-bs-toggle=tooltip] {
     width: 24px;
     height: 24px;
     content: "";
-    background-image: url(https://muenchen.de/themes/custom/muenchen/assets/svg/images/list-style-circle.svg);
+    background-image: url(../svg/images/list-style-circle.svg);
     background-repeat: no-repeat;
     background-position: 0 0;
     background-size: 100% 100%
@@ -28658,8 +28658,8 @@ body[data-ad-rollover-active=true] .site {
     font-style: normal;
     font-weight: 300;
     font-display: swap;
-    src: url(https://muenchen.de/themes/custom/muenchen/assets/fonts/roboto-condensed/roboto-condensed-v19-latin-300.eot);
-    src: local(""), url(https://muenchen.de/themes/custom/muenchen/assets/fonts/roboto-condensed/roboto-condensed-v19-latin-300.eot?=#iefix) format("embedded-opentype"), url(https://muenchen.de/themes/custom/muenchen/assets/fonts/roboto-condensed/roboto-condensed-v19-latin-300.woff2) format("woff2"), url(https://muenchen.de/themes/custom/muenchen/assets/fonts/roboto-condensed/roboto-condensed-v19-latin-300.woff) format("woff"), url(https://muenchen.de/themes/custom/muenchen/assets/fonts/roboto-condensed/roboto-condensed-v19-latin-300.ttf) format("truetype"), url(https://muenchen.de/themes/custom/muenchen/assets/fonts/roboto-condensed/roboto-condensed-v19-latin-300.svg#RobotoCondensed) format("svg")
+    src: url(../fonts/roboto-condensed/roboto-condensed-v19-latin-300.eot);
+    src: local(""), url(../fonts/roboto-condensed/roboto-condensed-v19-latin-300.eot?=#iefix) format("embedded-opentype"), url(../fonts/roboto-condensed/roboto-condensed-v19-latin-300.woff2) format("woff2"), url(../fonts/roboto-condensed/roboto-condensed-v19-latin-300.woff) format("woff"), url(../fonts/roboto-condensed/roboto-condensed-v19-latin-300.ttf) format("truetype"), url(../fonts/roboto-condensed/roboto-condensed-v19-latin-300.svg#RobotoCondensed) format("svg")
 }
 
 @font-face {
@@ -28667,8 +28667,8 @@ body[data-ad-rollover-active=true] .site {
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url(https://muenchen.de/themes/custom/muenchen/assets/fonts/roboto-condensed/roboto-condensed-v19-latin-regular.eot);
-    src: local(""), url(https://muenchen.de/themes/custom/muenchen/assets/fonts/roboto-condensed/roboto-condensed-v19-latin-regular.eot?=#iefix) format("embedded-opentype"), url(https://muenchen.de/themes/custom/muenchen/assets/fonts/roboto-condensed/roboto-condensed-v19-latin-regular.woff2) format("woff2"), url(https://muenchen.de/themes/custom/muenchen/assets/fonts/roboto-condensed/roboto-condensed-v19-latin-regular.woff) format("woff"), url(https://muenchen.de/themes/custom/muenchen/assets/fonts/roboto-condensed/roboto-condensed-v19-latin-regular.ttf) format("truetype"), url(https://muenchen.de/themes/custom/muenchen/assets/fonts/roboto-condensed/roboto-condensed-v19-latin-regular.svg#RobotoCondensed) format("svg")
+    src: url(../fonts/roboto-condensed/roboto-condensed-v19-latin-regular.eot);
+    src: local(""), url(../fonts/roboto-condensed/roboto-condensed-v19-latin-regular.eot?=#iefix) format("embedded-opentype"), url(../fonts/roboto-condensed/roboto-condensed-v19-latin-regular.woff2) format("woff2"), url(../fonts/roboto-condensed/roboto-condensed-v19-latin-regular.woff) format("woff"), url(../fonts/roboto-condensed/roboto-condensed-v19-latin-regular.ttf) format("truetype"), url(../fonts/roboto-condensed/roboto-condensed-v19-latin-regular.svg#RobotoCondensed) format("svg")
 }
 
 @font-face {
@@ -28676,8 +28676,8 @@ body[data-ad-rollover-active=true] .site {
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url(https://muenchen.de/themes/custom/muenchen/assets/fonts/roboto-condensed/roboto-condensed-v19-latin-700.eot);
-    src: local(""), url(https://muenchen.de/themes/custom/muenchen/assets/fonts/roboto-condensed/roboto-condensed-v19-latin-700.eot?=#iefix) format("embedded-opentype"), url(https://muenchen.de/themes/custom/muenchen/assets/fonts/roboto-condensed/roboto-condensed-v19-latin-700.woff2) format("woff2"), url(https://muenchen.de/themes/custom/muenchen/assets/fonts/roboto-condensed/roboto-condensed-v19-latin-700.woff) format("woff"), url(https://muenchen.de/themes/custom/muenchen/assets/fonts/roboto-condensed/roboto-condensed-v19-latin-700.ttf) format("truetype"), url(https://muenchen.de/themes/custom/muenchen/assets/fonts/roboto-condensed/roboto-condensed-v19-latin-700.svg#RobotoCondensed) format("svg")
+    src: url(../fonts/roboto-condensed/roboto-condensed-v19-latin-700.eot);
+    src: local(""), url(../fonts/roboto-condensed/roboto-condensed-v19-latin-700.eot?=#iefix) format("embedded-opentype"), url(../fonts/roboto-condensed/roboto-condensed-v19-latin-700.woff2) format("woff2"), url(../fonts/roboto-condensed/roboto-condensed-v19-latin-700.woff) format("woff"), url(../fonts/roboto-condensed/roboto-condensed-v19-latin-700.ttf) format("truetype"), url(../fonts/roboto-condensed/roboto-condensed-v19-latin-700.svg#RobotoCondensed) format("svg")
 }
 
 @font-face {
@@ -28685,8 +28685,8 @@ body[data-ad-rollover-active=true] .site {
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url(https://muenchen.de/themes/custom/muenchen/assets/fonts/open-sans/open-sans-v27-latin-regular.eot);
-    src: local(""), url(https://muenchen.de/themes/custom/muenchen/assets/fonts/open-sans/open-sans-v27-latin-regular.eot?=#iefix) format("embedded-opentype"), url(https://muenchen.de/themes/custom/muenchen/assets/fonts/open-sans/open-sans-v27-latin-regular.woff2) format("woff2"), url(https://muenchen.de/themes/custom/muenchen/assets/fonts/open-sans/open-sans-v27-latin-regular.woff) format("woff"), url(https://muenchen.de/themes/custom/muenchen/assets/fonts/open-sans/open-sans-v27-latin-regular.ttf) format("truetype"), url(https://muenchen.de/themes/custom/muenchen/assets/fonts/open-sans/open-sans-v27-latin-regular.svg#OpenSans) format("svg")
+    src: url(../fonts/open-sans/open-sans-v27-latin-regular.eot);
+    src: local(""), url(../fonts/open-sans/open-sans-v27-latin-regular.eot?=#iefix) format("embedded-opentype"), url(../fonts/open-sans/open-sans-v27-latin-regular.woff2) format("woff2"), url(../fonts/open-sans/open-sans-v27-latin-regular.woff) format("woff"), url(../fonts/open-sans/open-sans-v27-latin-regular.ttf) format("truetype"), url(../fonts/open-sans/open-sans-v27-latin-regular.svg#OpenSans) format("svg")
 }
 
 @font-face {
@@ -28694,8 +28694,8 @@ body[data-ad-rollover-active=true] .site {
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url(https://muenchen.de/themes/custom/muenchen/assets/fonts/open-sans/open-sans-v27-latin-700.eot);
-    src: local(""), url(https://muenchen.de/themes/custom/muenchen/assets/fonts/open-sans/open-sans-v27-latin-700.eot?=#iefix) format("embedded-opentype"), url(https://muenchen.de/themes/custom/muenchen/assets/fonts/open-sans/open-sans-v27-latin-700.woff2) format("woff2"), url(https://muenchen.de/themes/custom/muenchen/assets/fonts/open-sans/open-sans-v27-latin-700.woff) format("woff"), url(https://muenchen.de/themes/custom/muenchen/assets/fonts/open-sans/open-sans-v27-latin-700.ttf) format("truetype"), url(https://muenchen.de/themes/custom/muenchen/assets/fonts/open-sans/open-sans-v27-latin-700.svg#OpenSans) format("svg")
+    src: url(../fonts/open-sans/open-sans-v27-latin-700.eot);
+    src: local(""), url(../fonts/open-sans/open-sans-v27-latin-700.eot?=#iefix) format("embedded-opentype"), url(../fonts/open-sans/open-sans-v27-latin-700.woff2) format("woff2"), url(../fonts/open-sans/open-sans-v27-latin-700.woff) format("woff"), url(../fonts/open-sans/open-sans-v27-latin-700.ttf) format("truetype"), url(../fonts/open-sans/open-sans-v27-latin-700.svg#OpenSans) format("svg")
 }
 
 @font-face {
@@ -28703,8 +28703,8 @@ body[data-ad-rollover-active=true] .site {
     font-style: italic;
     font-weight: 400;
     font-display: swap;
-    src: url(https://muenchen.de/themes/custom/muenchen/assets/fonts/open-sans/open-sans-v27-latin-italic.eot);
-    src: local(""), url(https://muenchen.de/themes/custom/muenchen/assets/fonts/open-sans/open-sans-v27-latin-italic.eot?=#iefix) format("embedded-opentype"), url(https://muenchen.de/themes/custom/muenchen/assets/fonts/open-sans/open-sans-v27-latin-italic.woff2) format("woff2"), url(https://muenchen.de/themes/custom/muenchen/assets/fonts/open-sans/open-sans-v27-latin-italic.woff) format("woff"), url(https://muenchen.de/themes/custom/muenchen/assets/fonts/open-sans/open-sans-v27-latin-italic.ttf) format("truetype"), url(https://muenchen.de/themes/custom/muenchen/assets/fonts/open-sans/open-sans-v27-latin-italic.svg#OpenSans) format("svg")
+    src: url(../fonts/open-sans/open-sans-v27-latin-italic.eot);
+    src: local(""), url(../fonts/open-sans/open-sans-v27-latin-italic.eot?=#iefix) format("embedded-opentype"), url(../fonts/open-sans/open-sans-v27-latin-italic.woff2) format("woff2"), url(../fonts/open-sans/open-sans-v27-latin-italic.woff) format("woff"), url(../fonts/open-sans/open-sans-v27-latin-italic.ttf) format("truetype"), url(../fonts/open-sans/open-sans-v27-latin-italic.svg#OpenSans) format("svg")
 }
 
 *,
@@ -30006,7 +30006,7 @@ input[type=search]::-webkit-search-cancel-button {
     -webkit-appearance: none;
     width: 1.5rem;
     height: 1.5rem;
-    background: url(https://muenchen.de/themes/custom/muenchen/assets/svg/images/close--mde-blue.svg) no-repeat 100% 100%
+    background: url(../svg/images/close--mde-blue.svg) no-repeat 100% 100%
 }
 
 input[type=search]:focus::-webkit-search-cancel-button {
@@ -30424,7 +30424,7 @@ input[type=search]:focus::-webkit-search-cancel-button {
     height: 1.25rem;
     content: "";
     background-color: #005a9f;
-    background-image: url(https://muenchen.de/themes/custom/muenchen/assets/svg/images/check-light.svg);
+    background-image: url(../svg/images/check-light.svg);
     background-repeat: no-repeat;
     background-size: 100% 100%;
     opacity: 0
@@ -30657,7 +30657,7 @@ input[type=search]:focus::-webkit-search-cancel-button {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    background-image: url(https://muenchen.de/themes/custom/muenchen/assets/svg/images/map-pin.svg);
+    background-image: url(../svg/images/map-pin.svg);
     background-repeat: no-repeat;
     background-position: top .5rem left .75rem;
     background-size: 1.5rem 1.5rem
@@ -30675,7 +30675,7 @@ input[type=search]:focus::-webkit-search-cancel-button {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    background-image: url(https://muenchen.de/themes/custom/muenchen/assets/svg/images/public-transport.svg);
+    background-image: url(../svg/images/public-transport.svg);
     background-repeat: no-repeat;
     background-position: top .5rem left .75rem;
     background-size: 1.5rem 1.5rem
@@ -30690,7 +30690,7 @@ input[type=search]:focus::-webkit-search-cancel-button {
 
 .autocomplete-result-list--public-transport .autocomplete-result.active,
 .autocomplete-result-list--public-transport .autocomplete-result.selected {
-    background-image: url(https://muenchen.de/themes/custom/muenchen/assets/svg/images/public-transport.svg)
+    background-image: url(../svg/images/public-transport.svg)
 }
 
 .m-input-wrapper--multiselect,
@@ -30797,7 +30797,7 @@ input[type=search]:focus::-webkit-search-cancel-button {
     height: 1.25rem;
     content: "";
     background-color: #005a9f;
-    background-image: url(https://muenchen.de/themes/custom/muenchen/assets/svg/images/check-light.svg);
+    background-image: url(../svg/images/check-light.svg);
     background-repeat: no-repeat;
     background-size: 100% 100%;
     opacity: 0
