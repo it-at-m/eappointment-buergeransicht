@@ -174,14 +174,19 @@
                 <p>{{ $t('appointmentIsConfirmed') }}</p>
               </div>
             </div>
-            <v-alert class="appointment-cancel" v-if="appointmentCancelled !== null"
+            <div class="m-banner m-banner--warning appointment-cancel" role="alert" aria-label="Warnung" v-if="appointmentCancelled !== null"
               :color="appointmentCancelled ? $store.state.settings.theme.success : $store.state.settings.theme.error">
-              {{ appointmentCancelled? $t('appointmentCanceled'): $t('appointmentCanNotBeCanceled') }}
-            </v-alert>
-
+              <div class="container-fluid">
+                <svg aria-hidden="true" class="icon">
+                  <use xlink:href="#icon-warning"></use>
+                </svg>
+                <p>{{ appointmentCancelled? $t('appointmentCanceled'): $t('appointmentCanNotBeCanceled') }}</p>
+              </div>
+            </div>
             <v-btn v-if="$store.state.isRebooking" class="button-submit" elevation="2" depressed color="primary"
-              @click="stopRebooking">{{ $t('cancel') }}</v-btn>
-
+              @click="stopRebooking">
+              {{ $t('cancel') }}
+            </v-btn>
             <div
               v-if="$store.state.preselectedAppointment !== null && $store.state.errorMessage === null && !$store.state.isRebooking">
               <v-dialog v-model="rebookDialog" persistent max-width="290">
