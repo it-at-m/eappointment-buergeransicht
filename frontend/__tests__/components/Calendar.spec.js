@@ -347,7 +347,7 @@ describe('Calendar', () => {
         await wrapper.vm.$nextTick()
 
         expect(mockCallback).toHaveBeenCalledTimes(1)
-        expect(wrapper.vm.timeSlotError).toBe('Leider gibt es zu Ihrer Leistung aktuell keine freien Termine.\nVersuchen Sie es bitte ein andermal nochmal.')
+        expect(wrapper.vm.timeSlotError).toBe('Leider gibt es zu Ihrer Leistung aktuell keine freien Termine.\nVersuchen Sie es bitte ein andermal noch einmal.')
         expect(wrapper.emitted().next).not.toBeDefined()
     })
 

@@ -23,7 +23,7 @@ export default {
   activationLinkExpired: "Ihr Aktivierungslink ist abgelaufen.",
   errorTryAgainLater: "Etwas ist schief gelaufen. Bitte versuchen Sie es mit einem anderen Termin.",
   appointmentNotAvailableHeader: "Keine freien Termine verfügbar",
-  appointmentNotAvailable: "Leider gibt es zu Ihrer Leistung aktuell keine freien Termine. Versuchen Sie es bitte ein andermal noch einmal.",
+  appointmentNotAvailable: "Leider gibt es zu Ihrer Leistung aktuell keine freien Termine.\nVersuchen Sie es bitte ein andermal noch einmal.",
   appointmentPreconfirmedNotice: "Um die Reservierung abzuschließen, erhalten Sie sofort eine E-Mail mit einem Aktivierungslink. Bitte beachten Sie, dass die Reservierung verfällt, wenn Sie den Termin nicht mit diesem Link bestätigen.",
   appointment: "Termin",
   chooseAppointment: "Termin wählen",
