@@ -36,6 +36,9 @@ store.state.services = [
 ]
 
 store.state.data.appointmentCounts[1] = 0
+store.state.data.servicesById[1] = {
+    maxQuantity: 3
+}
 store.state.data.appointmentCount = 0
 
 const wrapper = mount(ServiceFinder, {
