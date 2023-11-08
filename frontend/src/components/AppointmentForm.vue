@@ -212,7 +212,6 @@
                   </v-card-actions>
                 </v-card>
               </v-dialog>
-
               <v-dialog v-model="cancelDialog" persistent max-width="290">
                 <template v-slot:activator="{ on, attrs }">
                   <v-btn
