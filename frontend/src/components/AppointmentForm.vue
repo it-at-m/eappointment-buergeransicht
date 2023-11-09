@@ -22,10 +22,10 @@
               <v-expansion-panel-header>
                 <template v-slot:default="{ open }">
                   <v-row no-gutters>
-                    <v-col cols="12" md="2">
-                      {{ $t('stepFrom').replace('{step}', 1).replace('{stepTotal}', 3) }}: {{ $t('chooseService') }}
+                    <v-col cols="12" md="3">
+                      {{ $t('stepFrom').replace('{step}', 1).replace('{stepTotal}', 3) }}:<br />{{ $t('chooseService') }}
                     </v-col>
-                    <v-col cols="12" md="10" class="text--secondary">
+                    <v-col cols="12" md="9" class="text--secondary">
                       <v-fade-transition leave-absolute>
                         <span v-if="!open" key="1">
                           <b>{{ getSelectedServices() }}</b>
@@ -50,10 +50,10 @@
               <v-expansion-panel-header>
                 <template v-slot:default="{ open }">
                   <v-row no-gutters>
-                    <v-col cols="12" md="2">
-                      {{ $t('stepFrom').replace('{step}', 2).replace('{stepTotal}', 3) }}: {{ $t('chooseAppointment') }}
+                    <v-col cols="12" md="3">
+                      {{ $t('stepFrom').replace('{step}', 2).replace('{stepTotal}', 3) }}:<br />{{ $t('chooseAppointment') }}
                     </v-col>
-                    <v-col cols="12" md="10" class="text--secondary">
+                    <v-col cols="12" md="9" class="text--secondary">
                       <v-fade-transition leave-absolute>
                         <span v-if="!open" key="1">
                           <b>{{ getSelectedAppointment() }}</b>
@@ -75,10 +75,10 @@
               <v-expansion-panel-header>
                 <template v-slot:default="{ open }">
                   <v-row no-gutters>
-                    <v-col cols="12" md="2">
-                      {{ $t('stepFrom').replace('{step}', 3).replace('{stepTotal}', 3) }}: {{ $t('typeContactData') }}
+                    <v-col cols="12" md="3">
+                      {{ $t('stepFrom').replace('{step}', 3).replace('{stepTotal}', 3) }}:<br />{{ $t('typeContactData') }}
                     </v-col>
-                    <v-col cols="12" md="10" class="text--secondary">
+                    <v-col cols="12" md="9" class="text--secondary">
                       <v-fade-transition leave-absolute>
                         <span v-if="!open" key="1">
                           <span v-if="$store.state.data.customer.name">

@@ -319,7 +319,7 @@ export default {
 .time-hour {
   position: absolute;
   left: 12px;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 34px;
 }
 
