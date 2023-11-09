@@ -166,7 +166,7 @@
                 </div>
               </div>
             </div>
-            <div class="m-banner m-banner--warning appointment-activated" role="alert" aria-label="Warnung" v-if="activatedAppointment && !appointmentCancelled">
+            <div class="m-banner m-banner--success appointment-activated" role="alert" aria-label="Warnung" v-if="activatedAppointment && !appointmentCancelled">
               <div class="container-fluid">
                 <svg aria-hidden="true" class="icon">
                   <use xlink:href="#icon-warning"></use>
@@ -174,7 +174,7 @@
                 <p>{{ $t('appointmentIsConfirmed') }}</p>
               </div>
             </div>
-            <div class="m-banner m-banner--warning appointment-cancel" role="alert" aria-label="Warnung" v-if="appointmentCancelled !== null"
+            <div class="m-banner m-banner--success appointment-cancel" role="alert" aria-label="Warnung" v-if="appointmentCancelled !== null"
               :color="appointmentCancelled ? $store.state.settings.theme.success : $store.state.settings.theme.error">
               <div class="container-fluid">
                 <svg aria-hidden="true" class="icon">

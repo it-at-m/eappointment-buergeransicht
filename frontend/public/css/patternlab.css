@@ -10670,6 +10670,11 @@ p span[data-bs-toggle=tooltip] {
     border-bottom: 1px solid #fdd1ac
 }
 
+.m-banner--success {
+    background-color: #f8faf6;
+    border-bottom: 1px solid #dfe1dd
+}
+
 .m-banner--emergency {
     padding-top: .625rem;
     padding-bottom: .625rem;
