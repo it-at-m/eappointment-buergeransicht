@@ -13,9 +13,14 @@
           <div class="appointment-number" v-if="$store.state.preselectedAppointment">
             {{ $t('yourAppointmentNumber') }}: <b>{{ $store.state.preselectedAppointment.processId }}</b>
           </div>
-          <v-alert v-if="$store.state.errorCode || $store.state.errorMessage" border="right" color="red" dark>
-            {{ $store.state.errorMessage ? $store.state.errorMessage : $t($store.state.errorCode) }}
-          </v-alert>
+          <div  v-if="$store.state.errorCode || $store.state.errorMessage" class="m-banner m-banner--emergency" role="alert" aria-label="Emergency">
+            <div class="container-fluid">
+              <svg aria-hidden="true" class="icon">
+                <use xlink:href="#icon-warning"></use>
+              </svg>
+              <p>{{ $store.state.errorMessage ? $store.state.errorMessage : $t($store.state.errorCode) }}</p>
+            </div>
+          </div>
 
           <v-expansion-panels v-model="$store.state.openedPanel" accordion>
             <v-expansion-panel id="panel1" :disabled="confirmedAppointment || $store.state.isRebooking">
