@@ -94,6 +94,10 @@ p, span, div, button, td, th, .v-label, .v-list-item__title {
     margin-top: 2rem;
 }
 
+.error-message {
+    margin-top: 2rem;
+}
+
 .v-alert {
     margin: 0 0 20px 0;
 }
