@@ -59,7 +59,7 @@
           v-html="$store.state.data.service.content">
       </div>
 
-      <h3>{{ $t('services') }}</h3>
+      <h3 class="subservices-title">{{ $t('services') }}</h3>
       <v-list two-line class="subservices">
         <v-list-item :key="$store.state.data.service.id + ' ' + appointmentCountTriggered">
           <v-card-actions>
@@ -290,7 +290,7 @@ export default {
 .subservices .v-card__actions {
   padding-left: 0;
 }
-h3 {
+.subservices-title {
   margin-top: 2rem;
 }
 .v-menu__content {
