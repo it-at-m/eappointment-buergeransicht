@@ -13,7 +13,7 @@
           <div class="appointment-number" v-if="$store.state.preselectedAppointment">
             {{ $t('yourAppointmentNumber') }}: <b>{{ $store.state.preselectedAppointment.processId }}</b>
           </div>
-          <div  v-if="$store.state.errorCode || $store.state.errorMessage" class="m-banner m-banner--emergency" role="alert" aria-label="Emergency">
+          <div v-if="$store.state.errorCode || $store.state.errorMessage" class="m-banner m-banner--emergency error-message" role="alert" aria-label="Emergency">
             <div class="container-fluid">
               <svg aria-hidden="true" class="icon">
                 <use xlink:href="#icon-warning"></use>
@@ -421,6 +421,10 @@ export default {
 
 .confirm-action {
   margin-top: 2rem;
+}
+
+.error-message {
+  margin-bottom: 2rem;
 }
 
 .v-alert {
