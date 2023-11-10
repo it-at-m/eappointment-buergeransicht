@@ -66,7 +66,7 @@
           <div v-for="(times, index) in timeSlotsInHours()" :key="index">
             <div class="appointments-in-hours">
               <div class="time-hour" tabindex="0">
-                {{ times[0].format('H') }}:00-{{ times[0].format('H') }}:59
+                <span class="time-start">{{ times[0].format('H') }}:00</span><span class="time-dash">-</span><span class="time-end">{{ times[0].format('H') }}:59</span>
               </div>
               <div class="select-appointment" tabindex="0" v-for="timeSlot in times" :key="timeSlot.unix()"
                 v-on:keyup.enter="chooseAppointment(timeSlot)" v-on:keyup.space="chooseAppointment(timeSlot)"
