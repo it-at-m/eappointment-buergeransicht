@@ -95,7 +95,7 @@ p, span, div, button, td, th, .v-label, .v-list-item__title {
 }
 
 .error-message {
-    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 .v-alert {
