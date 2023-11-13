@@ -40,7 +40,7 @@
                   <div class="m-callout__body__inner">
                     <h2 class="m-callout__headline">{{ $t('noAppointmentsAvailableHeader') }}</h2>
                     <div class="m-callout__content">
-                      <p>{{ dateError }}</p>
+                      <p>{{ $t('noAppointmentsAvailable') }}</p>
                     </div>
                   </div>
                 </div>
@@ -227,7 +227,7 @@ export default {
           this.$emit('next')
           window.scrollTo(0, 0)
         }, () => {
-          this.timeSlotError = this.$t('appointmentNotAvailable')
+          this.timeSlotError = this.$t('noAppointmentsAvailable')
         })
 
       if (!this.timeSlotError && oldAppointment && !this.$store.state.isRebooking) {

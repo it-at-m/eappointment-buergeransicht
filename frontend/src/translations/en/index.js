@@ -16,7 +16,7 @@ export default {
   activationLinkExpired: "Your activation link has expired",
   errorTryAgainLater: "Something went wrong. Please, try with another appointment",
   noAppointmentsAvailableHeader: "No appointments available",
-  appointmentNotAvailable: "Unfortunately there are currently no available appointments for your service.\nPlease try again another time.",
+  noAppointmentsAvailable: "Unfortunately there are currently no available appointments for your service.\nPlease try again another time.",
   appointmentPreconfirmedNotice: "Your appointment was initially reserved. To complete the reservation, you will immediately receive an email with an activation link. Please note that the reservation will expire if you do not confirm the appointment with this link.",
   appointment: "Appointment",
   textLengthExceeded: "The maximum length is exceeded",
