@@ -2,23 +2,26 @@
   <div ref="mainDiv">
     <div id="customer-name-section">
       <v-text-field v-model="customer.name" id="customer-name" :error-messages="nameErrors" @blur="$v.name.$touch()"
-        @change="changed" counter="50" :maxlength="50" filled :label="$t('name')" :disabled="isPreselectedAppointment"></v-text-field>
+        @change="changed" counter="50" :maxlength="50" filled :label="$t('name')"
+        :disabled="isPreselectedAppointment"></v-text-field>
     </div>
 
     <div id="customer-email-section">
-      <v-text-field v-model="customer.email" id="customer-email" counter="50" :maxlength="50" filled :error-messages="emailErrors"
-        @blur="$v.email.$touch()" @change="changed" required :label="$t('email')"
+      <v-text-field v-model="customer.email" id="customer-email" counter="50" :maxlength="50" filled
+        :error-messages="emailErrors" @blur="$v.email.$touch()" @change="changed" required :label="$t('email')"
         :disabled="isPreselectedAppointment"></v-text-field>
     </div>
 
     <div id="customer-telephone-section" v-if="isTelephoneActivated">
-      <v-text-field v-model="customer.telephone" id="customer-telephone" counter="20" :maxlength="20"  filled :error-messages="telephoneErrors"
-        @blur="$v.telephone.$touch()" @change="changed" :label="(isTelephoneRequired) ? $t('telephoneRequired') : $t('telephone')"
+      <v-text-field v-model="customer.telephone" id="customer-telephone" counter="20" :maxlength="20" filled
+        :error-messages="telephoneErrors" @blur="$v.telephone.$touch()" @change="changed"
+        :label="(isTelephoneRequired) ? $t('telephoneRequired') : $t('telephone')"
         :disabled="isPreselectedAppointment"></v-text-field>
     </div>
     <div id="customer-custom-textfield-section" v-if="isCustomTextfieldActivated">
-      <v-text-field v-model="customer.customTextfield" id="customer-custom-textfield" counter="20" :maxlength="20"  filled :error-messages="customTextfieldErrors"
-        @blur="$v.customTextfield.$touch()" @change="changed" :label="(isCustomTextfieldRequired ? customTextfieldLabel + '*' : customTextfieldLabel)"
+      <v-text-field v-model="customer.customTextfield" id="customer-custom-textfield" counter="20" :maxlength="20"
+        filled :error-messages="customTextfieldErrors" @blur="$v.customTextfield.$touch()" @change="changed"
+        :label="(isCustomTextfieldRequired ? customTextfieldLabel + '*' : customTextfieldLabel)"
         :disabled="isPreselectedAppointment"></v-text-field>
     </div>
 
@@ -32,11 +35,15 @@
 
     <p>Hinweis: Die mit * gekennzeichneten Eingabefelder sind Pflichtfelder.</p>
 
-    <v-btn id="customer-submit-button" class="button-next" elevation="2" depressed color="primary"
-      @click="saveCustomer()">
+    <button id="customer-submit-button" class="m-button m-button--primary m-button--animated-right button-next"
+      color="white" @click="saveCustomer()">
       <span class="desktop">{{ $t('nextToReservation') }}</span>
       <span class="mobile">{{ $t('next') }}</span>
-    </v-btn>
+      <svg aria-hidden="true" class="m-button__icon">
+        <use xlink:href="#icon-arrow-right"></use>
+      </svg>
+    </button>
+
   </div>
 </template>
 
@@ -119,29 +126,29 @@ export default {
       }
     },
     isCustomTextfieldActivated() {
-        return this.$store.state.data.appointment &&
-               this.$store.state.data.appointment.scope &&
-               this.$store.state.data.appointment.scope.customTextfieldActivated == 1;
+      return this.$store.state.data.appointment &&
+        this.$store.state.data.appointment.scope &&
+        this.$store.state.data.appointment.scope.customTextfieldActivated == 1;
     },
     isCustomTextfieldRequired() {
-        return this.$store.state.data.appointment &&
-               this.$store.state.data.appointment.scope &&
-               this.$store.state.data.appointment.scope.customTextfieldRequired == 1;
-    }, 
+      return this.$store.state.data.appointment &&
+        this.$store.state.data.appointment.scope &&
+        this.$store.state.data.appointment.scope.customTextfieldRequired == 1;
+    },
     customTextfieldLabel() {
-        return this.$store.state.data.appointment &&
-               this.$store.state.data.appointment.scope &&
-               this.$store.state.data.appointment.scope.customTextfieldLabel;
-    },        
+      return this.$store.state.data.appointment &&
+        this.$store.state.data.appointment.scope &&
+        this.$store.state.data.appointment.scope.customTextfieldLabel;
+    },
     isTelephoneActivated() {
-        return this.$store.state.data.appointment &&
-               this.$store.state.data.appointment.scope &&
-               this.$store.state.data.appointment.scope.telephoneActivated == 1;
+      return this.$store.state.data.appointment &&
+        this.$store.state.data.appointment.scope &&
+        this.$store.state.data.appointment.scope.telephoneActivated == 1;
     },
     isTelephoneRequired() {
-        return this.$store.state.data.appointment &&
-               this.$store.state.data.appointment.scope &&
-               this.$store.state.data.appointment.scope.telephoneRequired == 1;
+      return this.$store.state.data.appointment &&
+        this.$store.state.data.appointment.scope &&
+        this.$store.state.data.appointment.scope.telephoneRequired == 1;
     },
     nameErrors() {
       const errors = [];
@@ -222,4 +229,5 @@ export default {
 }
 </script>
 <style scoped>
+
 </style>

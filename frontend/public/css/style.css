@@ -86,6 +86,10 @@ p, span, div, button, td, th, .v-label, .v-list-item__title {
     margin-top: 1rem;
 }
 
+.button-yes {
+    margin-right: 1rem;
+}
+
 .content {
     margin-top: 20px;
 }
@@ -379,7 +383,11 @@ p, span, div, button, td, th, .v-label, .v-list-item__title {
     padding-bottom: 4px !important;
 }
 .service-finder-select .v-input__control .v-input__slot .v-select__slot input, .v-list-item__title, .v-messages, .v-label{
-    height: 26px !important;
+    height: 32px !important;
+    line-height: 32px;
+}
+.v-list-item .v-list-item__subtitle, .v-list-item .v-list-item__title {
+    line-height: 32px !important;
 }
 .v-messages{
     margin-top: 3px;

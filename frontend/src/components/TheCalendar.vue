@@ -37,7 +37,8 @@
           <div class="appointment-container-subtitle lighten-2">
             <h4 tabindex="0">{{ formatDay(date) }}</h4>
           </div>
-          <div v-if="timeSlotError" class="m-component m-component-callout m-component-callout--warning m-component-callout--fullwidth">
+          <div v-if="timeSlotError"
+            class="m-component m-component-callout m-component-callout--warning m-component-callout--fullwidth">
             <div>
               <div class="m-component__grid">
                 <div class="m-component__column">
@@ -66,7 +67,8 @@
           <div v-for="(times, index) in timeSlotsInHours()" :key="index">
             <div class="appointments-in-hours">
               <div class="time-hour" tabindex="0">
-                <span class="time-start">{{ times[0].format('H') }}:00</span><span class="time-dash">-</span><span class="time-end">{{ times[0].format('H') }}:59</span>
+                <span class="time-start">{{ times[0].format('H') }}:00</span><span class="time-dash">-</span><span
+                  class="time-end">{{ times[0].format('H') }}:59</span>
               </div>
               <div class="select-appointment" tabindex="0" v-for="timeSlot in times" :key="timeSlot.unix()"
                 v-on:keyup.enter="chooseAppointment(timeSlot)" v-on:keyup.space="chooseAppointment(timeSlot)"
@@ -102,7 +104,7 @@ export default {
     missingSlotsInARow: false
   }),
   methods: {
-    formatDay: function(date) {
+    formatDay: function (date) {
       return moment(date).locale('de').format('dddd, DD.MM.YYYY')
     },
     timeSlotsInHours: function () {
@@ -128,7 +130,7 @@ export default {
 
       return provider.id === this.$store.state.preselectedProvider.id
     },
-    getWeekday: function(date) {
+    getWeekday: function (date) {
       return moment(date).format('dddd').slice(0, 2)
     },
     getAppointmentsOfDay: function (date, focus = true) {
@@ -251,7 +253,6 @@ export default {
 }
 </script>
 <style>
-
 .v-btn--rounded {
   border-radius: 0.25rem;
   width: 100% !important;
