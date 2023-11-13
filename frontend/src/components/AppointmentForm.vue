@@ -141,9 +141,6 @@
                     class="m-button m-button--secondary m-button--animated-right button-submit" v-bind="attrs"
                     v-on="on">
                     <span>{{ $t('cancel') }}</span>
-                    <svg aria-hidden="true" class="m-button__icon">
-                      <use xlink:href="#icon-arrow-right"></use>
-                    </svg>
                   </button>
                 </template>
                 <v-card>
@@ -162,9 +159,6 @@
                     <button class="m-button m-button--secondary m-button--animated-right"
                       @click="starOverDialog = false">
                       <span>{{ $t('no') }}</span>
-                      <svg aria-hidden="true" class="m-button__icon">
-                        <use xlink:href="#icon-arrow-right"></use>
-                      </svg>
                     </button>
                   </v-card-actions>
                 </v-card>
@@ -225,9 +219,6 @@
             <button v-if="$store.state.isRebooking"
               class="m-button m-button--secondary m-button--animated-right button-submit" @click="stopRebooking">
               <span>{{ $t('cancel') }}</span>
-              <svg aria-hidden="true" class="m-button__icon">
-                <use xlink:href="#icon-arrow-right"></use>
-              </svg>
             </button>
             <div
               v-if="$store.state.preselectedAppointment !== null && $store.state.errorMessage === null && !$store.state.isRebooking">
@@ -258,9 +249,6 @@
                     <button class="m-button m-button--secondary m-button--animated-right"
                       @click="rebookDialog = false">
                       <span>{{ $t('no') }}</span>
-                      <svg aria-hidden="true" class="m-button__icon">
-                        <use xlink:href="#icon-arrow-right"></use>
-                      </svg>
                     </button>
                   </v-card-actions>
                 </v-card>
@@ -270,14 +258,13 @@
 
                   <button
                     v-if="appointmentCancelled === null && $store.state.errorCode !== 'appointmentCanNotBeCanceled'"
-                    class="m-button m-button--secondary m-button--animated-right button-submit" v-bind="attrs"
+                    class="m-button m-button--primary m-button--animated-right button-submit" v-bind="attrs"
                     v-on="on">
                     <span>{{ $t('cancelAppointment') }}</span>
                     <svg aria-hidden="true" class="m-button__icon">
-                      <use xlink:href="#icon-arrow-right"></use>
+                        <use xlink:href="#icon-arrow-right"></use>
                     </svg>
                   </button>
-
                 </template>
                 <v-card>
                   <div class="popup-content">
@@ -294,9 +281,6 @@
                     <button class="m-button m-button--secondary m-button--animated-right"
                       @click="cancelDialog = false">
                       <span>{{ $t('no') }}</span>
-                      <svg aria-hidden="true" class="m-button__icon">
-                        <use xlink:href="#icon-arrow-right"></use>
-                      </svg>
                     </button>
                   </v-card-actions>
                 </v-card>
