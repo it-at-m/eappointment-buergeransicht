@@ -5,10 +5,32 @@
       :label="$t('services')" filled @change="onChange" v-on:keyup.enter="suggest" clearable
       :prepend-inner-icon="searchSvg" ref="autocomplete" :menu-props="{ auto: true, overflowY: true }"
       :no-data-text="$t('noServiceFound')"></v-autocomplete>
-    <v-alert v-if="this.filteredServices && this.filteredServices.length === 0" color="orange" dark border="top"
-      icon="mdi-text-search" transition="scale-transition">
-      {{ $t('noServiceFound') }}
-    </v-alert>
+    <div v-if="this.filteredServices && this.filteredServices.length === 0"
+      class="m-component m-component-callout m-component-callout--warning m-component-callout--fullwidth">
+      <div>
+        <div class="m-component__grid">
+          <div class="m-component__column">
+            <div class="m-callout m-callout--warning">
+              <div class="m-callout__inner">
+                <div class="m-callout__icon">
+                  <svg aria-hidden="true" class="icon">
+                    <use xlink:href="#icon-warning"></use>
+                  </svg>
+                  <span class="visually-hidden"></span>
+                </div>
+                <div class="m-callout__body">
+                  <div class="m-callout__body__inner">
+                    <div class="m-callout__content">
+                      <p>{{ noServiceFound }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <v-list two-line v-else>
       <template v-for="(filteredService) in this.filteredServices">
         <v-list-item class="filtered-service" :key="filteredService.id" @click="onChange(filteredService)">
@@ -90,11 +112,32 @@
           </template>
         </template>
       </v-list>
-
-      <v-alert class="appointment-cancel" v-if="$store.state.data.maxSlotsExceeded"
-        :color="$store.state.settings.theme.error">
-        {{ $t('AppointmentToLong') }}
-      </v-alert>
+      <div v-if="$store.state.data.maxSlotsExceeded"
+        class="m-component m-component-callout m-component-callout--warning m-component-callout--fullwidth appointment-cancel">
+        <div>
+          <div class="m-component__grid">
+            <div class="m-component__column">
+              <div class="m-callout m-callout--warning">
+                <div class="m-callout__inner">
+                  <div class="m-callout__icon">
+                    <svg aria-hidden="true" class="icon">
+                      <use xlink:href="#icon-warning"></use>
+                    </svg>
+                    <span class="visually-hidden"></span>
+                  </div>
+                  <div class="m-callout__body">
+                    <div class="m-callout__body__inner">
+                      <div class="m-callout__content">
+                        <p>{{ $t('AppointmentToLong') }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <button class="m-button m-button--primary m-button--animated-right button-next" color="white" @click="nextStep"
         :disabled="!$store.state.data.service || $store.state.data.appointmentCount === 0 || $store.state.data.maxSlotsExceeded">
         <span>{{ $t('nextToAppointment') }}</span>

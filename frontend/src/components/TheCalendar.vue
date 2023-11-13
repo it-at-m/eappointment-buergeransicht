@@ -50,36 +50,34 @@
         </div>
       </div>
     </div>
-  </div>
+    <div id="appointments" tabindex="0">
+      <div v-if="timeDialog" class="appointment-container" activator="parent" width="500">
+        <div>
+          <div class="appointment-container-title">
+            <h2 tabindex="0">{{ $t('availableTimes') }}</h2>
+          </div>
 
-
-  <div id="appointments" tabindex="0">
-    <div v-if="timeDialog" class="appointment-container" activator="parent" width="500">
-      <div>
-        <div class="appointment-container-title">
-          <h2 tabindex="0">{{ $t('availableTimes') }}</h2>
-        </div>
-
-        <div class="appointment-container-subtitle lighten-2">
-          <h4 tabindex="0">{{ formatDay(date) }}</h4>
-        </div>
-        <div v-if="timeSlotError"
-          class="m-component m-component-callout m-component-callout--warning m-component-callout--fullwidth">
-          <div>
-            <div class="m-component__grid">
-              <div class="m-component__column">
-                <div class="m-callout m-callout--warning">
-                  <div class="m-callout__inner">
-                    <div class="m-callout__icon">
-                      <svg aria-hidden="true" class="icon">
-                        <use xlink:href="#icon-warning"></use>
-                      </svg>
-                      <span class="visually-hidden"></span>
-                    </div>
-                    <div class="m-callout__body">
-                      <div class="m-callout__body__inner">
-                        <div class="m-callout__content">
-                          <p>{{ timeSlotError }}</p>
+          <div class="appointment-container-subtitle lighten-2">
+            <h4 tabindex="0">{{ formatDay(date) }}</h4>
+          </div>
+          <div v-if="timeSlotError"
+            class="m-component m-component-callout m-component-callout--warning m-component-callout--fullwidth">
+            <div>
+              <div class="m-component__grid">
+                <div class="m-component__column">
+                  <div class="m-callout m-callout--warning">
+                    <div class="m-callout__inner">
+                      <div class="m-callout__icon">
+                        <svg aria-hidden="true" class="icon">
+                          <use xlink:href="#icon-warning"></use>
+                        </svg>
+                        <span class="visually-hidden"></span>
+                      </div>
+                      <div class="m-callout__body">
+                        <div class="m-callout__body__inner">
+                          <div class="m-callout__content">
+                            <p>{{ timeSlotError }}</p>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -88,23 +86,22 @@
               </div>
             </div>
           </div>
-        </div>
-        <div v-for="(times, index) in timeSlotsInHours()" :key="index">
-          <div class="appointments-in-hours">
-            <div class="time-hour" tabindex="0">
-              <span class="time-start">{{ times[0].format('H') }}:00</span><span class="time-dash">-</span><span
-                class="time-end">{{ times[0].format('H') }}:59</span>
-            </div>
-            <div class="select-appointment" tabindex="0" v-for="timeSlot in times" :key="timeSlot.unix()"
-              v-on:keyup.enter="chooseAppointment(timeSlot)" v-on:keyup.space="chooseAppointment(timeSlot)"
-              @click="chooseAppointment(timeSlot)">
-              {{ timeSlot.format('H:mm') }}
+          <div v-for="(times, index) in timeSlotsInHours()" :key="index">
+            <div class="appointments-in-hours">
+              <div class="time-hour" tabindex="0">
+                <span class="time-start">{{ times[0].format('H') }}:00</span><span class="time-dash">-</span><span
+                  class="time-end">{{ times[0].format('H') }}:59</span>
+              </div>
+              <div class="select-appointment" tabindex="0" v-for="timeSlot in times" :key="timeSlot.unix()"
+                v-on:keyup.enter="chooseAppointment(timeSlot)" v-on:keyup.space="chooseAppointment(timeSlot)"
+                @click="chooseAppointment(timeSlot)">
+                {{ timeSlot.format('H:mm') }}
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
   </div>
 </template>
 
