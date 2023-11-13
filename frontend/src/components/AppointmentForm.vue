@@ -249,14 +249,14 @@
                   </div>
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <button class="m-button m-button--primary m-button--animated-right button-yes" @click="startOver">
+                    <button class="m-button m-button--primary m-button--animated-right button-yes" @click="startRebooking">
                       <span>{{ $t('yes') }}</span>
                       <svg aria-hidden="true" class="m-button__icon">
                         <use xlink:href="#icon-arrow-right"></use>
                       </svg>
                     </button>
                     <button class="m-button m-button--secondary m-button--animated-right"
-                      @click="starOverDialog = false">
+                      @click="rebookDialog = false">
                       <span>{{ $t('no') }}</span>
                       <svg aria-hidden="true" class="m-button__icon">
                         <use xlink:href="#icon-arrow-right"></use>
@@ -285,14 +285,14 @@
                   </div>
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <button class="m-button m-button--primary m-button--animated-right button-yes" @click="startOver">
+                    <button class="m-button m-button--primary m-button--animated-right button-yes" @click="cancelAppointment">
                       <span>{{ $t('yes') }}</span>
                       <svg aria-hidden="true" class="m-button__icon">
                         <use xlink:href="#icon-arrow-right"></use>
                       </svg>
                     </button>
                     <button class="m-button m-button--secondary m-button--animated-right"
-                      @click="starOverDialog = false">
+                      @click="cancelDialog = false">
                       <span>{{ $t('no') }}</span>
                       <svg aria-hidden="true" class="m-button__icon">
                         <use xlink:href="#icon-arrow-right"></use>
