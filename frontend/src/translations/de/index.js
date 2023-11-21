@@ -32,7 +32,7 @@ export default {
   contactData: "Kontaktdaten",
   typeContactData: "Kontaktdaten eingeben",
   pleaseCheckOnceAgain: "Bitte überprüfen Sie noch einmal Ihre Daten und schließen Sie die Reservierung ab.",
-  name: "Name*",
+  name: "Vor - und Nachname*",
   nameIsRequired:'Bitte geben Sie einen gültigen Namen ein.',
   email: "E-Mail-Adresse*",
   emailIsRequired: 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
