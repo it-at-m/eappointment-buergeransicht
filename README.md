@@ -17,7 +17,6 @@
 
 <h3 align="center">E-appointment Frontend</h3>
 </div>
-
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
