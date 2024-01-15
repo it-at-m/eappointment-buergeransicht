@@ -7,7 +7,11 @@
         </v-col>
       </v-row>
 
-      <v-row class="content">
+      <v-alert v-if="maintenanceMode" border="right" color="blue-grey" dark>
+        {{ $t('maintenanceMode') }}
+      </v-alert>
+
+      <v-row class="content" v-else>
         <v-col cols="12">
 
           <div class="appointment-number" v-if="$store.state.preselectedAppointment">
@@ -251,6 +255,15 @@ export default {
     },
     activatedAppointment() {
       return this.$store.state.activatedAppointment
+    },
+    maintenanceMode () {
+      return this.$store.state.maintenanceMode
+    }
+  },
+  watch: {
+    maintenanceMode (newCount) {
+      // Our fancy notification (2).
+      console.log(`We have ${newCount} fruits now, yay!`)
     }
   },
   methods: {
