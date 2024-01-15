@@ -260,12 +260,6 @@ export default {
       return this.$store.state.maintenanceMode
     }
   },
-  watch: {
-    maintenanceMode (newCount) {
-      // Our fancy notification (2).
-      console.log(`We have ${newCount} fruits now, yay!`)
-    }
-  },
   methods: {
     cancelAppointment(byRebooking = false) {
       if (this.$store.state.preselectedAppointment.dateFrom.unix() < moment().unix()) {
