@@ -42,3 +42,5 @@ server:
   port: 8080
 config:
   map5xxto400: true
+
+info.appswitcher.url: https://test-url-appswitcher.muenchen.de

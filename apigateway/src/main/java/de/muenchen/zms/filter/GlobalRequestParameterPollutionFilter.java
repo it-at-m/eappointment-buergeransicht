@@ -6,6 +6,8 @@ package de.muenchen.zms.filter;
 
 import de.muenchen.zms.exception.ParameterPollutionException;
 import de.muenchen.zms.util.GatewayUtils;
+import java.util.List;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
@@ -18,10 +20,6 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
-
-import java.util.List;
-import java.util.Map;
-
 
 /**
  * This {@link GlobalFilter} is used to detect and to fend off a parameter pollution attack.
@@ -50,7 +48,7 @@ public class GlobalRequestParameterPollutionFilter implements GlobalFilter, Orde
         ServerHttpRequest request = exchange.getRequest();
         if (!CollectionUtils.isEmpty(request.getQueryParams())) {
             MultiValueMap<String, String> parameterMap = request.getQueryParams();
-            for(Map.Entry<String, List<String>> entry : parameterMap.entrySet()) {
+            for (Map.Entry<String, List<String>> entry : parameterMap.entrySet()) { 
                 String key = entry.getKey();
                 List<String> value = entry.getValue();
                 if (!CollectionUtils.isEmpty(value) && value.size() > 1) {

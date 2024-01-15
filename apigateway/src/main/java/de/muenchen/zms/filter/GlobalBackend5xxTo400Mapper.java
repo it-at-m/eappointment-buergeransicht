@@ -1,10 +1,10 @@
 /*
  * Copyright (c): it@M - Dienstleister für Informations- und Telekommunikationstechnik
- * der Landeshauptstadt München, ${year}
+ * der Landeshauptstadt München, 2023
  */
 package de.muenchen.zms.filter;
 
-import org.apache.commons.codec.binary.StringUtils;
+import com.hazelcast.org.apache.commons.codec.binary.StringUtils;
 import java.nio.charset.StandardCharsets;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
@@ -18,6 +18,7 @@ import org.springframework.core.io.buffer.DataBufferFactory;
 import org.springframework.core.io.buffer.DefaultDataBuffer;
 import org.springframework.core.io.buffer.DefaultDataBufferFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
@@ -28,8 +29,8 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
- * This {@link GlobalFilter} replaces the body by a generic error body when a server responds
- * with an {@link HttpStatus#INTERNAL_SERVER_ERROR}.
+ * This {@link GlobalFilter} replaces the body by a generic error body, when a server responses
+ * with a {@link HttpStatus#INTERNAL_SERVER_ERROR}.
  */
 @Component
 @Slf4j
@@ -62,9 +63,9 @@ public class GlobalBackend5xxTo400Mapper implements GlobalFilter, Ordered {
 
             @Override
             public Mono<Void> writeWith(Publisher<? extends DataBuffer> body) {
-                final HttpStatus responseHttpStatus = getDelegate().getStatusCode();
+                final HttpStatusCode responseHttpStatus = getDelegate().getStatusCode();
 
-                final Flux<? extends DataBuffer> flux = Flux.from(body);
+                final Flux<? extends DataBuffer> flux = (Flux<? extends DataBuffer>) body;
 
                 if (body instanceof Flux && responseHttpStatus.is5xxServerError()) {
 
@@ -77,7 +78,7 @@ public class GlobalBackend5xxTo400Mapper implements GlobalFilter, Ordered {
                                 byte[] content = new byte[joinedBuffers.readableByteCount()];
                                 joinedBuffers.read(content);
                                 String responseBody = new String(content, StandardCharsets.UTF_8);
-                                log.error("Error: 5xx vom Backend:  requestId: {}, method: {}, url: {}, \nresponse body :{}, statusCode: {}", request.getId(),
+                                log.error("Error: 5xx vom Backend:  requestId: {}, method: {}, url: {}, \nresponse body :{}, statusCode: {} ", request.getId(),
                                         request.getMethod(), request.getURI(), responseBody, responseHttpStatus);
 
                                 // Response manipulieren

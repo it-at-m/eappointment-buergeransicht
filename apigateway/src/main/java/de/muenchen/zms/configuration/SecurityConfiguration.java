@@ -5,6 +5,7 @@
 package de.muenchen.zms.configuration;
 
 import de.muenchen.zms.util.GatewayUtils;
+import java.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,13 +16,9 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.util.matcher.ServerWebExchangeMatchers;
-
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.reactive.CorsConfigurationSource;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
-
-import java.util.Arrays;
-
 
 @Configuration
 @Profile("!no-security")
@@ -34,22 +31,22 @@ public class SecurityConfiguration {
     @Value("${spring.session.timeout:36000}")
     private long springSessionTimeoutSeconds;
 
-    @Value("${ALLOWED_ORIGIN_1}")
+    @Value("${ALLOWED_ORIGIN_1:}")
     private String allowedOrigin1;
 
-    @Value("${ALLOWED_ORIGIN_2}")
+    @Value("${ALLOWED_ORIGIN_2:}")
     private String allowedOrigin2;
 
-    @Value("${ALLOWED_ORIGIN_3}")
+    @Value("${ALLOWED_ORIGIN_3:}")
     private String allowedOrigin3;
 
-    @Value("${ALLOWED_ORIGIN_4}")
+    @Value("${ALLOWED_ORIGIN_4:}")
     private String allowedOrigin4;
 
-    @Value("${ALLOWED_ORIGIN_5}")
+    @Value("${ALLOWED_ORIGIN_5:}")
     private String allowedOrigin5;
 
-    @Value("${ALLOWED_ORIGIN_6}")
+    @Value("${ALLOWED_ORIGIN_6:}")
     private String allowedOrigin6;
 
 
