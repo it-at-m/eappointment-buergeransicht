@@ -57,8 +57,21 @@ h1, h2, h3, h4, h5 {
     color: #3a5368 !important;
 }
 
-p, span, div, button, td, th {
+body {
     font-family: Open Sans, sans-serif;
+    font-size: 18px;
+}
+
+p, span, div, button, td, th, .v-label, .v-list-item__title {
+    font-family: Open Sans, sans-serif;
+    font-size: 15px;
+}
+
+@media (min-width:1200px) {
+    p, span, div, button, td, th, .v-label, .v-list-item__title {
+        font-family: Open Sans, sans-serif;
+        font-size: 18px;
+    }
 }
 
 #app {
@@ -73,12 +86,20 @@ p, span, div, button, td, th {
     margin-top: 1rem;
 }
 
+.button-yes {
+    margin-right: 1rem;
+}
+
 .content {
     margin-top: 20px;
 }
 
 .confirm-action {
     margin-top: 2rem;
+}
+
+.error-message {
+    margin-bottom: 2rem;
 }
 
 .v-alert {
@@ -165,7 +186,7 @@ p, span, div, button, td, th {
     padding-left: 0;
 }
 
-h3 {
+.subservices-title {
     margin-top: 2rem;
 }
 
@@ -213,9 +234,37 @@ h3 {
 .time-hour {
     position: absolute;
     left: 0;
-    font-size: 14px;
+    font-size: 18px;
     line-height: 34px;
 }
+
+/* For xs and sm screens */
+@media only screen and (max-width: 1200px) {
+    .time-hour {
+      white-space: nowrap;
+      padding-top: 10px;
+    }
+  
+    .time-hour .time-start,
+    .time-hour .time-end,
+    .time-hour .time-dash {
+      display: block;
+      line-height: 18px;
+    }
+
+    .appointments-in-hours{
+        min-height: 75px;
+    }
+  }
+  
+  /* For md screens and above */
+  @media only screen and (min-width: 1201px) {
+    .time-hour .time-start,
+    .time-hour .time-end,
+    .time-hour .time-dash {
+      display: inline;
+    }
+  }
 
 .appointments-in-hours {
     width: 100%;
@@ -238,24 +287,24 @@ h3 {
 .v-date-picker-table tbody .v-btn,
 .v-date-picker-table tbody .v-btn.v-btn--disabled {
     background: #ffffff;
-    font-size: 14px;
+    font-size: 18px;
     color: #005A9F;
     border-radius: 0;
 }
 
 .v-date-picker-table tbody .v-btn.v-btn--active {
     background: #005A9F;
-    font-size: 14px;
+    font-size: 18px;
     color: #ffffff;
 }
 
 #appointments {
-    width: 592px;
+    max-width: 592px;
     margin: 0 auto;
 }
 
 .v-picker__body {
-    width: 592px !important;
+    max-width: 592px !important;
     border: #BDD4EA solid 1px;
     padding: 0 0 20px;
     margin: 20px auto 10px !important;
@@ -329,8 +378,47 @@ h3 {
 .v-messages.error--text .v-messages__message {
     color: #B71C1C;
 }
-
 .v-select__selections {
     padding-top: 4px !important;
     padding-bottom: 4px !important;
+}
+.service-finder-select .v-input__control .v-input__slot .v-select__slot input, .v-list-item__title, .v-messages, .v-label{
+    height: 32px !important;
+    line-height: 32px;
+}
+.v-list-item .v-list-item__subtitle, .v-list-item .v-list-item__title {
+    line-height: 32px !important;
+}
+.v-messages{
+    margin-top: 3px;
+}
+
+.container-fluid{
+    margin: 0px 0px !important;
+    padding: 16px 24px !important;
+}
+
+.container-fluid p{
+    margin: 0px 0px !important;
+    padding: 0px 0px !important;
+}
+
+/* For xs and sm screens */
+@media only screen and (max-width: 960px) {
+    .v-expansion-panel-content__wrap{
+        padding: inherit 2px;
+    }
+    .v-expansion-panel-content__wrap .container {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .v-expansion-panel-header{
+        line-height: 1.25;
+    }
+    .v-slide-group__next, .v-slide-group__prev{
+        min-width: 0px;
+    }
+    .v-tab {
+        font-size: 12px;
+    }
 }

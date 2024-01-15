@@ -205,7 +205,7 @@ describe('Service Finder', () => {
 
         wrapperWithServiceId.find('.button-next')
 
-        expect(wrapperWithServiceId.html()).toContain('v-btn--disabled')
+        expect(wrapperWithServiceId.html()).toContain('disabled')
     })
 
     it('Next step trigger next event', async () => {

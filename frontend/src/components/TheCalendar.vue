@@ -23,10 +23,33 @@
       :first-day-of-week="1" :locale="$i18n.locale" :no-title="true" :weekday-format="getWeekday"
       @click:date="getAppointmentsOfDay(date)"></v-date-picker>
 
-    <v-alert v-if="dateError" :color="$store.state.settings.theme.error">
-      {{ dateError }}
-    </v-alert>
-
+    <div v-if="dateError"
+      class="m-component m-component-callout m-component-callout--warning m-component-callout--fullwidth">
+      <div>
+        <div class="m-component__grid">
+          <div class="m-component__column">
+            <div class="m-callout m-callout--warning">
+              <div class="m-callout__inner">
+                <div class="m-callout__icon">
+                  <svg aria-hidden="true" class="icon">
+                    <use xlink:href="#icon-warning"></use>
+                  </svg>
+                  <span class="visually-hidden"></span>
+                </div>
+                <div class="m-callout__body">
+                  <div class="m-callout__body__inner">
+                    <h2 class="m-callout__headline">{{ $t('noAppointmentsAvailableHeader') }}</h2>
+                    <div class="m-callout__content">
+                      <p>{{ $t('noAppointmentsAvailable') }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div id="appointments" tabindex="0">
       <div v-if="timeDialog" class="appointment-container" activator="parent" width="500">
         <div>
@@ -37,17 +60,37 @@
           <div class="appointment-container-subtitle lighten-2">
             <h4 tabindex="0">{{ formatDay(date) }}</h4>
           </div>
-
-          <div>
-            <v-alert v-if="timeSlotError" :color="$store.state.settings.theme.error">
-              {{ timeSlotError }}
-            </v-alert>
+          <div v-if="timeSlotError"
+            class="m-component m-component-callout m-component-callout--warning m-component-callout--fullwidth">
+            <div>
+              <div class="m-component__grid">
+                <div class="m-component__column">
+                  <div class="m-callout m-callout--warning">
+                    <div class="m-callout__inner">
+                      <div class="m-callout__icon">
+                        <svg aria-hidden="true" class="icon">
+                          <use xlink:href="#icon-warning"></use>
+                        </svg>
+                        <span class="visually-hidden"></span>
+                      </div>
+                      <div class="m-callout__body">
+                        <div class="m-callout__body__inner">
+                          <div class="m-callout__content">
+                            <p>{{ timeSlotError }}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-
           <div v-for="(times, index) in timeSlotsInHours()" :key="index">
             <div class="appointments-in-hours">
               <div class="time-hour" tabindex="0">
-                {{ times[0].format('H') }}:00-{{ times[0].format('H') }}:59
+                <span class="time-start">{{ times[0].format('H') }}:00</span><span class="time-dash">-</span><span
+                  class="time-end">{{ times[0].format('H') }}:59</span>
               </div>
               <div class="select-appointment" tabindex="0" v-for="timeSlot in times" :key="timeSlot.unix()"
                 v-on:keyup.enter="chooseAppointment(timeSlot)" v-on:keyup.space="chooseAppointment(timeSlot)"
@@ -83,7 +126,7 @@ export default {
     missingSlotsInARow: false
   }),
   methods: {
-    formatDay: function(date) {
+    formatDay: function (date) {
       return moment(date).locale('de').format('dddd, DD.MM.YYYY')
     },
     timeSlotsInHours: function () {
@@ -109,7 +152,7 @@ export default {
 
       return provider.id === this.$store.state.preselectedProvider.id
     },
-    getWeekday: function(date) {
+    getWeekday: function (date) {
       return moment(date).format('dddd').slice(0, 2)
     },
     getAppointmentsOfDay: function (date, focus = true) {
@@ -184,7 +227,7 @@ export default {
           this.$emit('next')
           window.scrollTo(0, 0)
         }, () => {
-          this.timeSlotError = this.$t('appointmentNotAvailable')
+          this.timeSlotError = this.$t('noAppointmentsAvailable')
         })
 
       if (!this.timeSlotError && oldAppointment && !this.$store.state.isRebooking) {
@@ -232,7 +275,6 @@ export default {
 }
 </script>
 <style>
-
 .v-btn--rounded {
   border-radius: 0.25rem;
   width: 100% !important;
@@ -300,7 +342,7 @@ export default {
 .time-hour {
   position: absolute;
   left: 12px;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 34px;
 }
 
