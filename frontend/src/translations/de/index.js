@@ -32,6 +32,7 @@ export default {
   contactData: "Kontaktdaten",
   typeContactData: "Kontaktdaten eingeben",
   pleaseCheckOnceAgain: "Bitte überprüfen Sie noch einmal Ihre Daten und schließen Sie die Reservierung ab.",
+  maintenanceMode: "Die Terminvereinbarung befindet sich aktuell in Wartung, bitte versuchen Sie es später erneut.",
   name: "Vor - und Nachname*",
   nameIsRequired:'Bitte geben Sie einen gültigen Namen ein.',
   email: "E-Mail-Adresse*",

@@ -1,5 +1,11 @@
 import moment from "moment"
 
+function handleMaintenanceMode(store, response) {
+    if (response.status === 503) {
+        store.rootState.maintenanceMode = true
+    }
+}
+
 export default {
     confirmReservation(store, { processId, authKey, scope }) {
         return new Promise((resolve, reject) => {
@@ -14,6 +20,8 @@ export default {
             };
             fetch(store.rootState.settings.endpoints.VUE_APP_ZMS_API_BASE + store.rootState.settings.endpoints.VUE_APP_ZMS_API_CONFIRM_RESERVATION_ENDPOINT, requestOptions)
                 .then((response) => {
+                    handleMaintenanceMode(store, response)
+
                     return response.json();
                 })
                 .then(data => {
@@ -41,6 +49,8 @@ export default {
 
             fetch(store.rootState.settings.endpoints.VUE_APP_ZMS_API_BASE + store.rootState.settings.endpoints.VUE_APP_ZMS_API_PRECONFIRM_RESERVATION_ENDPOINT, requestOptions)
                 .then((response) => {
+                    handleMaintenanceMode(store, response)
+
                     return response.json();
                 })
                 .then(data => {
@@ -98,6 +108,8 @@ export default {
             fetch(store.rootState.settings.endpoints.VUE_APP_ZMS_API_BASE + store.rootState.settings.endpoints.VUE_APP_ZMS_API_CALENDAR_ENDPOINT
                 + '?' + new URLSearchParams(params).toString())
                 .then((response) => {
+                    handleMaintenanceMode(store, response)
+
                     return response.json();
                 })
                 .then(data => {
@@ -117,6 +129,8 @@ export default {
                 + store.rootState.settings.endpoints.VUE_APP_ZMS_API_PROVIDERS_AND_SERVICES_ENDPOINT
             )
                 .then((response) => {
+                    handleMaintenanceMode(store, response)
+
                     return response.json();
                 })
                 .then(data => {
@@ -140,6 +154,8 @@ export default {
             fetch(store.rootState.settings.endpoints.VUE_APP_ZMS_API_BASE + store.rootState.settings.endpoints.VUE_APP_ZMS_API_APPOINTMENT_ENDPOINT
                 + '?' + new URLSearchParams(params).toString())
                 .then((response) => {
+                    handleMaintenanceMode(store, response)
+
                     return response.json();
                 })
                 .then(data => {
@@ -165,6 +181,8 @@ export default {
             fetch(store.rootState.settings.endpoints.VUE_APP_ZMS_API_BASE + store.rootState.settings.endpoints.VUE_APP_ZMS_API_AVAILABLE_TIME_SLOTS_ENDPOINT
                 + '?' + new URLSearchParams(params).toString())
                 .then((response) => {
+                    handleMaintenanceMode(store, response)
+
                     return response.json();
                 })
                 .then(data => {
@@ -201,6 +219,8 @@ export default {
                 requestOptions
             )
             .then((response) => {
+                handleMaintenanceMode(store, response)
+
                 return response.json();
             })
             .then(data => {
@@ -228,6 +248,8 @@ export default {
             };
             fetch(store.rootState.settings.endpoints.VUE_APP_ZMS_API_BASE + store.rootState.settings.endpoints.VUE_APP_ZMS_API_RESERVE_APPOINTMENT_ENDPOINT, requestOptions)
                 .then((response) => {
+                    handleMaintenanceMode(store, response)
+
                     return response.json();
                 })
                 .then(data => {

@@ -16,6 +16,7 @@ const store = new Vuex.Store({
         locale: 'de',
         step: 1,
         openedPanel: 0,
+        maintenanceMode: false,
         confirmedAppointment: null,
         activatedAppointment: null,
         isRebooking: false,
