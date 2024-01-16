@@ -27,12 +27,18 @@ public class GuiConfiguration {
         RouterFunction<ServerResponse> indexRoute = route(GET("/buergeransicht"),
                 request -> ok().contentType(MediaType.TEXT_HTML).bodyValue(indexHtml));
 
+        // Serve index.html at /buergeransicht/
+        RouterFunction<ServerResponse> indexRouteWithSlash = route(GET("/buergeransicht/"),
+                request -> ok().contentType(MediaType.TEXT_HTML).bodyValue(indexHtml));
+
         // Serve static files from /buergeransicht/**
         RouterFunction<ServerResponse> staticResourceRoute = resources("/buergeransicht/**",
                 new ClassPathResource("static/"));
 
         // Combine the routes
-        return indexRoute.and(staticResourceRoute);
+        return indexRoute
+                .and(indexRouteWithSlash)
+                .and(staticResourceRoute);
     }
 
 }
