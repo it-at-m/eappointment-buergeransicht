@@ -103,5 +103,3 @@ spring:
         - RemoveRequestHeader=x-xsrf-token
 config:
   map5xxto400: true
-
-info.appswitcher.url: https://rbs-appswitcher.muenchen.de
