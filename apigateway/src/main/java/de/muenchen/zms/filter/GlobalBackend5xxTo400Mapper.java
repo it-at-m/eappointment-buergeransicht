@@ -67,7 +67,7 @@ public class GlobalBackend5xxTo400Mapper implements GlobalFilter, Ordered {
 
                 final Flux<? extends DataBuffer> flux = (Flux<? extends DataBuffer>) body;
 
-                if (body instanceof Flux && responseHttpStatus.is5xxServerError()) {
+                if (body instanceof Flux && responseHttpStatus.is5xxServerError() && responseHttpStatus.value() != 503) {
 
                     return super.writeWith(flux.buffer().map(
                             // replace old body represented by dataBuffer by the new one
