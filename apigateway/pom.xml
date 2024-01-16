@@ -167,10 +167,6 @@
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-tracing-bridge-brave</artifactId>
         </dependency>
-        <dependency>
-            <groupId>io.zipkin.brave</groupId>
-            <artifactId>brave</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>net.logstash.logback</groupId>
