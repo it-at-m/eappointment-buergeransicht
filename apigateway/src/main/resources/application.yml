@@ -34,11 +34,11 @@ spring:
             maxAge: 3600
       routes:
         - id: backend
-          uri: ${BACKEND_URI}
+          uri: ${BACKEND_URI:http://localhost:8081}
           predicates:
-            - Path=${BACKEND_URI_PREDICATE}
+            - Path=/buergeransicht/api/backend/**
           filters:
-            - RewritePath=${BACKEND_URI_REWRITE_PATH}
+            - RewritePath=/buergeransicht/api/backend/(?<segment>.*), /api/$\{segment}/
             - RemoveResponseHeader=WWW-Authenticate
       default-filters:
         - RemoveResponseHeader=Expires
