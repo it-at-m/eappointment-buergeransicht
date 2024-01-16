@@ -34,7 +34,7 @@ spring:
             maxAge: 3600
       routes:
         - id: backend
-          uri: ${BACKEND_URI:http://localhost:8081}
+          uri: ${BACKEND_URI}
           predicates:
             - Path=/buergeransicht/api/backend/**
           filters:
