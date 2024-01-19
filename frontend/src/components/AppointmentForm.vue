@@ -201,25 +201,32 @@
                 </div>
               </div>
             </div>
-            <div class="m-banner m-banner--success appointment-activated" role="alert" aria-label="Warnung"
-              v-if="activatedAppointment && !appointmentCancelled">
-              <div class="container-fluid">
-                <svg aria-hidden="true" class="icon">
-                  <use xlink:href="#icon-warning"></use>
-                </svg>
-                <p>{{ $t('appointmentIsConfirmed') }}</p>
-              </div>
-            </div>
+
+            <InfoMessage
+                v-if="activatedAppointment && !appointmentCancelled"
+                :type="'success'"
+                :title="$t('appointmentIsConfirmed')"
+                :text="$t('appointmentIsConfirmedDescription')"
+            ></InfoMessage>
+
+            <InfoMessage
+                v-if="appointmentCancelled === true"
+                :type="'success'"
+                :title="$t('appointmentIsCanceled')"
+                :text="$t('appointmentIsCanceledDescription')"
+            ></InfoMessage>
+
             <div class="m-banner m-banner--success appointment-cancel" role="alert" aria-label="Warnung"
-              v-if="appointmentCancelled !== null"
-              :color="appointmentCancelled ? $store.state.settings.theme.success : $store.state.settings.theme.error">
+                 v-if="appointmentCancelled === false"
+                 :color="$store.state.settings.theme.error">
               <div class="container-fluid">
                 <svg aria-hidden="true" class="icon">
                   <use xlink:href="#icon-warning"></use>
                 </svg>
-                <p>{{ appointmentCancelled? $t('appointmentCanceled'): $t('appointmentCanNotBeCanceled') }}</p>
+                <p>{{ $t('appointmentCanNotBeCanceled') }}</p>
               </div>
             </div>
+
             <button v-if="$store.state.isRebooking"
               class="m-button m-button--secondary m-button--animated-right button-submit" @click="stopRebooking">
               <span>{{ $t('cancel') }}</span>
@@ -301,6 +308,7 @@
 <script>
 import SwitchLanguage from './SwitchLanguage.vue'
 import ServiceFinder from './ServiceFinder.vue'
+import InfoMessage from './InfoMessage.vue'
 import TheCalendar from './TheCalendar.vue'
 import CustomerInfo from './CustomerInfo.vue'
 import moment from "moment"
@@ -310,6 +318,7 @@ export default {
   components: {
     SwitchLanguage,
     ServiceFinder,
+    InfoMessage,
     TheCalendar,
     CustomerInfo
   },
