@@ -11123,6 +11123,16 @@ p span[data-bs-toggle=tooltip] {
     box-shadow: 0 .3125rem .625rem rgba(252, 170, 103, .4)
 }
 
+.m-callout--success {
+    background-color: rgba(241, 246, 243, 1);
+    border-color: rgba(58, 127, 83, 1)
+}
+
+.m-callout--success .m-callout__icon {
+    background-color: rgba(58, 127, 83, 1);
+    box-shadow: 0 .3125rem .625rem rgba(58, 127, 83, .4);
+}
+
 .m-component-contact {
     padding-top: 3rem;
     padding-bottom: 0;
