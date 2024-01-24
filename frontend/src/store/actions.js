@@ -143,6 +143,7 @@ export default {
     },
     startRebooking (store) {
         store.state.isRebooking = true
+        store.state.preselectedProvider = null
         store.state.step = 2
         store.state.openedPanel = 1
         store.state.confirmedAppointment = null
