@@ -268,6 +268,12 @@ export default {
       return
     }
 
+    console.log(this.$store.state.data)
+
+    if (this.$store.state.data.service) {
+      this.showForProvider(this.$store.state.data.service.providers[0])
+    }
+
     if (this.$store.state.data.appointment && this.$store.state.data.appointment.locationId) {
       this.showForProvider({
         id: this.$store.state.data.appointment.locationId,
@@ -275,10 +281,6 @@ export default {
       })
 
       return
-    }
-
-    if (this.$store.state.data.service) {
-      this.showForProvider(this.$store.state.data.service.providers[0])
     }
   }
 }
