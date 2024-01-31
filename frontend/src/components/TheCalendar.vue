@@ -8,7 +8,7 @@
             <template v-for="provider in $store.state.data.service.providers">
               <v-tab v-if="shouldShowProvider(provider)" :key="provider.id + provider.name"
                 @change="showForProvider(provider)"
-                v-bind`:class="{'v-tab--selected': this.provider && this.provider.id === provider.id }"
+                v-bind:class="{'v-tab--selected': this.provider && this.provider.id === provider.id }"
               >
                 {{ provider.name }}
               </v-tab>
