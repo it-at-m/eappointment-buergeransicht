@@ -3,7 +3,7 @@
     <v-container>
       <v-row>
         <v-col class="col-sm-12 col-lg-12 p-0">
-          <v-tabs v-if="$store.state.data.service && $store.state.data.service.providers.length > 0" color="primary"
+          <v-tabs :key="this.provider.id" v-if="$store.state.data.service && $store.state.data.service.providers.length > 0" color="primary"
             show-arrows="mobile" id="location-tabs" ref="locationTabs">
             <template v-for="provider in $store.state.data.service.providers">
               <v-tab v-if="shouldShowProvider(provider)" :key="provider.id + provider.name"
@@ -270,11 +270,6 @@ export default {
 
     console.log(this.$store.state.data)
 
-    if (this.$store.state.data.service) {
-      console.log('showForProvider from service')
-      this.showForProvider(this.$store.state.data.service.providers[0])
-    }
-
     if (this.$store.state.data.appointment && this.$store.state.data.appointment.locationId) {
       console.log('showForProvider from appointment')
 
@@ -284,6 +279,11 @@ export default {
       })
 
       return
+    }
+
+    if (this.$store.state.data.service) {
+      console.log('showForProvider from service')
+      this.showForProvider(this.$store.state.data.service.providers[0])
     }
   }
 }
