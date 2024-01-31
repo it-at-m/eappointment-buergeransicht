@@ -270,13 +270,10 @@ export default {
 
     console.log(this.$store.state.data)
 
-    if (this.$store.state.data.service) {
-      console.log('showForProvider from service')
-      this.showForProvider(this.$store.state.data.service.providers[0])
-    }
-
     if (this.$store.state.data.appointment && this.$store.state.data.appointment.locationId) {
       console.log('showForProvider from appointment')
+      console.log(this.$store.state.data.appointment.locationId)
+      console.log(this.$store.state.data.appointment.location)
 
       this.showForProvider({
         id: parseInt(this.$store.state.data.appointment.locationId),
@@ -284,6 +281,11 @@ export default {
       })
 
       return
+    }
+
+    if (this.$store.state.data.service) {
+      console.log('showForProvider from service')
+      this.showForProvider(this.$store.state.data.service.providers[0])
     }
   }
 }
