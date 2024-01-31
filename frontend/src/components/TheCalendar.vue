@@ -3,10 +3,16 @@
     <v-container>
       <v-row>
         <v-col class="col-sm-12 col-lg-12 p-0">
-          <v-tabs v-if="$store.state.data.service && $store.state.data.service.providers.length > 0" color="primary"
-            show-arrows="mobile" id="location-tabs" ref="locationTabs">
+          <v-tabs
+              v-if="$store.state.data.service && $store.state.data.service.providers.length > 0"
+              color="primary"
+              show-arrows="mobile"
+              id="location-tabs"
+              ref="locationTabs"
+              v-model="activeProviderTab"
+          >
             <template v-for="provider in $store.state.data.service.providers">
-              <v-tab v-if="shouldShowProvider(provider)" :key="provider.id + provider.name"
+              <v-tab v-if="shouldShowProvider(provider)" :key="provider.id"
                 @change="showForProvider(provider)"
                 v-bind:class="getProviderClass()"
               >
@@ -115,6 +121,7 @@ import 'moment/locale/de';
 export default {
   name: 'TheCalendar',
   data: () => ({
+    activeProviderTab: 0,
     date: moment().format("YYYY-MM-DD"),
     currentDate: moment().format("YYYY-MM-DD"),
     maxDate: moment().add(6, 'M'),
@@ -286,6 +293,8 @@ export default {
         id: parseInt(this.$store.state.data.appointment.locationId),
         name: this.$store.state.data.appointment.location
       })
+
+      this.activeProviderTab = 1
 
       return
     }
