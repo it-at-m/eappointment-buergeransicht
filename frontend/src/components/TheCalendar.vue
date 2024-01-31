@@ -276,15 +276,9 @@ export default {
       return
     }
 
-    console.log(this.$store.state.data)
-
     if (this.$store.state.data.appointment && this.$store.state.data.appointment.locationId) {
-      console.log('showForProvider from appointment')
-      console.log(this.$store.state.data.appointment.locationId)
-      console.log(this.$store.state.data.appointment.location)
-
       this.showForProvider({
-        id: parseInt(this.$store.state.data.appointment.locationId),
+        id: this.$store.state.data.appointment.locationId,
         name: this.$store.state.data.appointment.location
       })
 
