@@ -288,7 +288,17 @@ export default {
         name: this.$store.state.data.appointment.location
       })
 
-      this.activeProviderTab = 1
+      let activeTab = 0
+
+      this.$store.state.data.service.providers.forEach((provider) => {
+        if (provider.id === this.$store.state.data.appointment.locationId) {
+          return
+        }
+
+        activeTab++
+      })
+
+      this.activeProviderTab = activeTab
 
       return
     }
