@@ -131,9 +131,9 @@ export default {
     formatDay: function (date) {
       return moment(date).locale('de').format('dddd, DD.MM.YYYY')
     },
-    getProviderClass(id){
+    getProviderClass: function (id) {
       return {
-        'v-tab--selected': this.provider && this.provider.id === id,
+        'v-tab--selected': true,
       }
     },
     timeSlotsInHours: function () {
