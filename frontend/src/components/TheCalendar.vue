@@ -14,7 +14,6 @@
             <template v-for="provider in $store.state.data.service.providers">
               <v-tab v-if="shouldShowProvider(provider)" :key="provider.id"
                 @change="showForProvider(provider)"
-                v-bind:class="getProviderClass()"
               >
                 {{ provider.name }}
               </v-tab>
@@ -137,11 +136,6 @@ export default {
   methods: {
     formatDay: function (date) {
       return moment(date).locale('de').format('dddd, DD.MM.YYYY')
-    },
-    getProviderClass: function () {
-      return {
-        'v-tab--selected': true,
-      }
     },
     timeSlotsInHours: function () {
       const timesByHours = {}
