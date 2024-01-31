@@ -135,7 +135,7 @@ export default {
       return {
         'v-tab--selected': this.provider && this.provider.id === id,
       }
-    }
+    },
     timeSlotsInHours: function () {
       const timesByHours = {}
 
