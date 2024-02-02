@@ -312,8 +312,8 @@ export default {
       });
 
       console.log(this.$store.state.data.service.providers)
-      this.selectedProviderIndex = 0
-
+      this.selectedProviderIndex = -1
+      
       return
     }
 
