@@ -282,21 +282,16 @@ export default {
         name: this.$store.state.data.appointment.location
       })
 
-      let activeTab = 0
-
       console.log(this.$store.state.data.service.providers)
       console.log(this.$store.state.data.appointment.locationId)
-      
+
       this.$store.state.data.service.providers.forEach((provider) => {
-        console.log(activeTab)
         if (provider.id === this.$store.state.data.appointment.locationId) {
+          this.activeProviderTab = provider
+
           return
         }
-
-        activeTab++
       })
-
-      this.activeProviderTab = activeTab
 
       return
     }
