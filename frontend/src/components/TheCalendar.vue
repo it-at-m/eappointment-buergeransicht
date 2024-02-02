@@ -284,7 +284,11 @@ export default {
 
       let activeTab = 0
 
+      console.log(this.$store.state.data.service.providers)
+      console.log(this.$store.state.data.appointment.locationId)
+      
       this.$store.state.data.service.providers.forEach((provider) => {
+        console.log(activeTab)
         if (provider.id === this.$store.state.data.appointment.locationId) {
           return
         }
