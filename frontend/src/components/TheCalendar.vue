@@ -143,6 +143,10 @@ export default {
     filteredProviders: function () {
       let filteredProviders = []
 
+      if (!this.$store.state.data.service) {
+        return filteredProviders
+      }
+
       this.$store.state.data.service.providers.forEach((provider) => {
         if (this.shouldShowProvider(provider)) {
           filteredProviders.push(provider)
