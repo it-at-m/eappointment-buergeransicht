@@ -9,7 +9,6 @@
               show-arrows="mobile"
               id="location-tabs"
               ref="locationTabs"
-              :key="selectedProviderIndex"
               v-model="selectedProviderIndex"
           >
             <v-tab
@@ -21,7 +20,9 @@
             </v-tab>
           </v-tabs>
 
-          <v-tab-items>
+          <v-tab-items
+              v-model="selectedProviderIndex"
+          >
             <v-tab-item
                 v-for="provider in filteredProviders"
                 :key="provider.index">
@@ -299,6 +300,13 @@ export default {
     }
 
     if (this.$store.state.data.appointment && this.$store.state.data.appointment.locationId) {
+      this.showForProvider({
+        id: this.$store.state.data.appointment.locationId,
+        name: this.$store.state.data.appointment.location
+      })
+
+      console.log(this.$store.state.data.service.providers)
+      console.log(this.$store.state.data.appointment.locationId)
       let providerId = this.$store.state.data.appointment.locationId
 
       this.$store.state.data.service.providers.sort(function(x,y) {
