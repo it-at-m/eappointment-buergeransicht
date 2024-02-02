@@ -11,17 +11,24 @@
               ref="locationTabs"
               v-model="activeProviderTab"
           >
-            <template v-for="provider in $store.state.data.service.providers">
-              <v-tab v-if="shouldShowProvider(provider)" :key="provider.index"
-                @change="showForProvider(provider)"
-              >
-                {{ provider.name }}
-              </v-tab>
-
-              <v-tab-item v-if="shouldShowProvider(provider)" :key="provider.index">
-              </v-tab-item>
-            </template>
+            <v-tab
+              v-for="provider in $store.state.data.service.providers"
+              v-if="shouldShowProvider(provider)" :key="provider.index"
+              @change="showForProvider(provider)"
+            >
+              {{ provider.name }}
+            </v-tab>
           </v-tabs>
+
+          <v-tab-items
+              v-model="activeProviderTab"
+          >
+            <v-tab-item
+                v-for="provider in $store.state.data.service.providers"
+                v-if="shouldShowProvider(provider)"
+                :key="provider.index">
+            </v-tab-item>
+          </v-tab-items>
         </v-col>
       </v-row>
     </v-container>
