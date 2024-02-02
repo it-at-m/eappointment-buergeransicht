@@ -285,13 +285,18 @@ export default {
       console.log(this.$store.state.data.service.providers)
       console.log(this.$store.state.data.appointment.locationId)
 
+      let activeTab = 0
+
       this.$store.state.data.service.providers.forEach((provider) => {
+        console.log(activeTab)
         if (provider.id === this.$store.state.data.appointment.locationId) {
-          this.activeProviderTab = provider
+          activeTab = provider.id
 
           return
         }
       })
+
+      this.activeProviderTab = activeTab
 
       return
     }
