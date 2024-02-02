@@ -307,19 +307,15 @@ export default {
 
       console.log(this.$store.state.data.service.providers)
       console.log(this.$store.state.data.appointment.locationId)
+      let providerId = this.$store.state.data.appointment.locationId
 
-      let activeTab = 0
+      this.$store.state.data.service.providers.sort(function(x,y) {
+        return x.id === providerId ? -1 : y.id === providerId ? 1 : 0;
+      });
 
-      this.$store.state.data.service.providers.forEach((provider) => {
-        console.log(activeTab)
-        if (provider.id === this.$store.state.data.appointment.locationId) {
-          return
-        }
+      console.log(this.$store.state.data.service.providers)
 
-        activeTab++
-      })
-
-      this.activeProviderTab = activeTab
+      this.activeProviderTab = 0
 
       return
     }
