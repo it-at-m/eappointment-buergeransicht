@@ -9,6 +9,7 @@
               show-arrows="mobile"
               id="location-tabs"
               ref="locationTabs"
+              :key="selectedProviderIndex"
               v-model="selectedProviderIndex"
           >
             <v-tab
@@ -298,22 +299,14 @@ export default {
     }
 
     if (this.$store.state.data.appointment && this.$store.state.data.appointment.locationId) {
-      this.showForProvider({
-        id: this.$store.state.data.appointment.locationId,
-        name: this.$store.state.data.appointment.location
-      })
-
-      console.log(this.$store.state.data.service.providers)
-      console.log(this.$store.state.data.appointment.locationId)
       let providerId = this.$store.state.data.appointment.locationId
 
       this.$store.state.data.service.providers.sort(function(x,y) {
         return x.id === providerId ? -1 : y.id === providerId ? 1 : 0;
       });
 
-      console.log(this.$store.state.data.service.providers)
       this.selectedProviderIndex = -1
-      
+
       return
     }
 
