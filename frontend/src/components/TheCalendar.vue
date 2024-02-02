@@ -9,7 +9,6 @@
               show-arrows="mobile"
               id="location-tabs"
               ref="locationTabs"
-              v-model="activeProviderTab"
           >
             <v-tab
               v-for="provider in filteredProviders"
@@ -20,9 +19,7 @@
             </v-tab>
           </v-tabs>
 
-          <v-tab-items
-              v-model="activeProviderTab"
-          >
+          <v-tab-items>
             <v-tab-item
                 v-for="provider in filteredProviders"
                 :key="provider.index">
@@ -126,7 +123,6 @@ import 'moment/locale/de';
 export default {
   name: 'TheCalendar',
   data: () => ({
-    activeProviderTab: 0,
     date: moment().format("YYYY-MM-DD"),
     currentDate: moment().format("YYYY-MM-DD"),
     maxDate: moment().add(6, 'M'),
@@ -315,7 +311,6 @@ export default {
 
       console.log(this.$store.state.data.service.providers)
 
-      this.activeProviderTab = 0
 
       return
     }
