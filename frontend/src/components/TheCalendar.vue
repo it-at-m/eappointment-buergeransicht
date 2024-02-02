@@ -11,17 +11,23 @@
               ref="locationTabs"
               v-model="activeProviderTab"
           >
-            <template v-for="provider in $store.state.data.service.providers">
-              <v-tab v-if="shouldShowProvider(provider)" :key="provider.index"
-                @change="showForProvider(provider)"
-              >
-                {{ provider.name }}
-              </v-tab>
-
-              <v-tab-item v-if="shouldShowProvider(provider)" :key="provider.index">
-              </v-tab-item>
-            </template>
+            <v-tab
+              v-for="provider in filteredProviders"
+              :key="provider.index"
+              @change="showForProvider(provider)"
+            >
+              {{ provider.name }}
+            </v-tab>
           </v-tabs>
+
+          <v-tab-items
+              v-model="activeProviderTab"
+          >
+            <v-tab-item
+                v-for="provider in filteredProviders"
+                :key="provider.index">
+            </v-tab-item>
+          </v-tab-items>
         </v-col>
       </v-row>
     </v-container>
@@ -133,6 +139,23 @@ export default {
     provider: null,
     missingSlotsInARow: false
   }),
+  computed: {
+    filteredProviders: function () {
+      let filteredProviders = []
+
+      if (!this.$store.state.data.service) {
+        return filteredProviders
+      }
+
+      this.$store.state.data.service.providers.forEach((provider) => {
+        if (this.shouldShowProvider(provider)) {
+          filteredProviders.push(provider)
+        }
+      })
+
+      return filteredProviders
+    }
+  },
   methods: {
     formatDay: function (date) {
       return moment(date).locale('de').format('dddd, DD.MM.YYYY')
