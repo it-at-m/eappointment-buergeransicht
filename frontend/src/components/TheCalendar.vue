@@ -12,13 +12,13 @@
               v-model="activeProviderTab"
           >
             <template v-for="provider in $store.state.data.service.providers">
-              <v-tab v-if="shouldShowProvider(provider)" :key="provider.id"
+              <v-tab v-if="shouldShowProvider(provider)" :key="provider.index"
                 @change="showForProvider(provider)"
               >
                 {{ provider.name }}
               </v-tab>
 
-              <v-tab-item v-if="shouldShowProvider(provider)" :key="provider.id">
+              <v-tab-item v-if="shouldShowProvider(provider)" :key="provider.index">
               </v-tab-item>
             </template>
           </v-tabs>
@@ -290,10 +290,10 @@ export default {
       this.$store.state.data.service.providers.forEach((provider) => {
         console.log(activeTab)
         if (provider.id === this.$store.state.data.appointment.locationId) {
-          activeTab = provider.id
-
           return
         }
+
+        activeTab++
       })
 
       this.activeProviderTab = activeTab

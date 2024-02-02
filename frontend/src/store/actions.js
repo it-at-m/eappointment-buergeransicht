@@ -23,6 +23,7 @@ export default {
 
                     let requests = data.services.map(service => {
                         service.providers = []
+                        let index = 0
 
                         data.relations.forEach(relation => {
                             if (relation.serviceId === service.id) {
@@ -32,6 +33,9 @@ export default {
                                 const foundProvider = data.offices.filter(office => {
                                     return office.id === relation.officeId
                                 })[0]
+
+                                foundProvider.index = index
+                                index++
 
                                 foundProvider.slots = relation.slots
                                 service.providers.push(foundProvider)
