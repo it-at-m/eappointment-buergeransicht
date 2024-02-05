@@ -306,8 +306,6 @@ export default {
         name: this.$store.state.data.appointment.location
       })
 
-      console.log(this.$store.state.data.service.providers)
-      console.log(this.$store.state.data.appointment.locationId)
       let providerId = this.$store.state.data.appointment.locationId
 
       this.$store.state.data.service.providers.sort(function(x,y) {
@@ -320,7 +318,6 @@ export default {
     }
 
     if (this.$store.state.data.service) {
-      console.log('showForProvider from service')
       this.showForProvider(this.$store.state.data.service.providers[0])
     }
   }
