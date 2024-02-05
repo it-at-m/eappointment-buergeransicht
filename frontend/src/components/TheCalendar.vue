@@ -9,6 +9,7 @@
               show-arrows="mobile"
               id="location-tabs"
               ref="locationTabs"
+              :key="selectedProviderIndex === -1"
               v-model="selectedProviderIndex"
           >
             <v-tab
