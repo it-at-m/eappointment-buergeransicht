@@ -188,9 +188,11 @@
                         </div>
                         <div class="m-callout__body">
                           <div class="m-callout__body__inner">
-                            <h2 class="m-callout__headline appointment-confirmation">{{
-                              confirmedAppointment?
-                            $t('appointmentIsPreconfirmed'): $t('errorTryAgainLater') }}</h2>
+                            <h2
+                              tabindex="5"
+                              class="m-callout__headline appointment-confirmation">
+                              {{ confirmedAppointment? $t('appointmentIsPreconfirmed'): $t('errorTryAgainLater') }}
+                            </h2>
                             <div class="m-callout__content appointment-confirmation-notice"
                               v-if="!appointmentCancelled && confirmedAppointment !== null && $store.state.preselectedAppointment === null && $store.state.data.appointment !== null"
                               :color="confirmedAppointment ? $store.state.settings.theme.notice : $store.state.settings.theme.error">
