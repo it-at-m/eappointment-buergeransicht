@@ -14,7 +14,7 @@
       <v-row class="content" v-else>
         <v-col cols="12">
 
-          <div class="appointment-number" v-if="$store.state.preselectedAppointment">
+          <div class="appointment-number" v-if="$store.state.preselectedAppointment" tabindex="1">
             {{ $t('yourAppointmentNumber') }}: <b>{{ $store.state.preselectedAppointment.processId }}</b>
           </div>
           <div v-if="$store.state.errorCode || $store.state.errorMessage"
@@ -40,7 +40,7 @@
                     <v-col cols="12" md="9" class="text--secondary">
                       <v-fade-transition leave-absolute>
                         <span v-if="!open" key="1">
-                          <b>{{ getSelectedServices() }}</b>
+                          <b tabindex="2">{{ getSelectedServices() }}</b>
                         </span>
                       </v-fade-transition>
                     </v-col>
@@ -70,7 +70,7 @@
                     <v-col cols="12" md="9" class="text--secondary">
                       <v-fade-transition leave-absolute>
                         <span v-if="!open" key="1">
-                          <b>{{ getSelectedAppointment() }}</b>
+                          <b tabindex="3">{{ getSelectedAppointment() }}</b>
                         </span>
                       </v-fade-transition>
                     </v-col>
@@ -97,7 +97,7 @@
                       <v-fade-transition leave-absolute>
                         <span v-if="!open" key="1">
                           <span v-if="$store.state.data.customer.name">
-                            <b>{{ $store.state.data.customer.name }} ({{ $store.state.data.customer.email }}<span
+                            <b tabindex="4">{{ $store.state.data.customer.name }} ({{ $store.state.data.customer.email }}<span
                                 v-if="$store.state.data.customer.telephone">, {{
                                   $store.state.data.customer.telephone
                                 }}</span><span v-if="$store.state.data.customer.customTextfield">, {{
@@ -141,9 +141,13 @@
             <span v-if="appointmentCanBeStartedOver">
               <v-dialog v-model="starOverDialog" persistent max-width="290">
                 <template v-slot:activator="{ on, attrs }">
-                  <button v-if="!$store.state.isRebooking"
-                    class="m-button m-button--secondary m-button--animated-right button-submit" v-bind="attrs"
-                    v-on="on">
+                  <button
+                    v-if="!$store.state.isRebooking"
+                    class="m-button m-button--secondary m-button--animated-right button-submit"
+                    v-bind="attrs"
+                    v-on="on"
+                    tabindex="6"
+                  >
                     <span>{{ $t('cancel') }}</span>
                   </button>
                 </template>
@@ -207,6 +211,7 @@
                 :type="'success'"
                 :title="$t('appointmentIsConfirmed')"
                 :text="$t('appointmentIsConfirmedDescription')"
+                :tabindex="5"
             ></InfoMessage>
 
             <InfoMessage
@@ -214,6 +219,7 @@
                 :type="'success'"
                 :title="$t('appointmentIsCanceled')"
                 :text="$t('appointmentIsCanceledDescription')"
+                :tabindex="5"
             ></InfoMessage>
 
             <div class="m-banner m-banner--success appointment-cancel" role="alert" aria-label="Warnung"
@@ -223,21 +229,25 @@
                 <svg aria-hidden="true" class="icon">
                   <use xlink:href="#icon-warning"></use>
                 </svg>
-                <p>{{ $t('appointmentCanNotBeCanceled') }}</p>
+                <p tabindex="5">{{ $t('appointmentCanNotBeCanceled') }}</p>
               </div>
             </div>
 
             <button v-if="$store.state.isRebooking"
               class="m-button m-button--secondary m-button--animated-right button-submit" @click="stopRebooking">
-              <span>{{ $t('cancel') }}</span>
+              <span tabindex="6">{{ $t('cancel') }}</span>
             </button>
             <div
               v-if="$store.state.preselectedAppointment !== null && $store.state.errorMessage === null && !$store.state.isRebooking">
               <v-dialog v-model="rebookDialog" persistent max-width="290">
                 <template v-slot:activator="{ on, attrs }">
-                  <button class="m-button m-button--primary m-button--animated-right button-submit"
+                  <button
+                    class="m-button m-button--primary m-button--animated-right button-submit"
                     v-if="appointmentCancelled === null && $store.state.errorCode !== 'appointmentCanNotBeCanceled'"
-                    v-bind="attrs" v-on="on">
+                    v-bind="attrs"
+                    v-on="on"
+                    tabindex="6"
+                  >
                     <span>{{ $t('rebookAppointment') }}</span>
                     <svg aria-hidden="true" class="m-button__icon">
                       <use xlink:href="#icon-arrow-right"></use>
@@ -269,8 +279,11 @@
 
                   <button
                     v-if="appointmentCancelled === null && $store.state.errorCode !== 'appointmentCanNotBeCanceled'"
-                    class="m-button m-button--primary m-button--animated-right button-submit" v-bind="attrs"
-                    v-on="on">
+                    class="m-button m-button--primary m-button--animated-right button-submit"
+                    v-bind="attrs"
+                    v-on="on"
+                    tabindex="6"
+                  >
                     <span>{{ $t('cancelAppointment') }}</span>
                     <svg aria-hidden="true" class="m-button__icon">
                         <use xlink:href="#icon-arrow-right"></use>

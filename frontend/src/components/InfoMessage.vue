@@ -15,9 +15,9 @@
               </div>
               <div class="m-callout__body">
                 <div class="m-callout__body__inner">
-                  <h2 class="m-callout__headline appointment-confirmation">{{ title }}</h2>
+                  <h2 class="m-callout__headline appointment-confirmation" :tabindex="tabindex">{{ title }}</h2>
                   <div class="m-callout__content appointment-confirmation-notice">
-                    <p>{{ text }}</p>
+                    <p :tabindex="tabindex">{{ text }}</p>
                   </div>
                 </div>
               </div>
@@ -44,6 +44,10 @@ export default {
     text: {
       default: '',
       type: String
+    },
+    tabindex: {
+      default: 1,
+      type: Number
     }
   }
 }
