@@ -194,7 +194,7 @@
                             <div class="m-callout__content appointment-confirmation-notice"
                               v-if="!appointmentCancelled && confirmedAppointment !== null && $store.state.preselectedAppointment === null && $store.state.data.appointment !== null"
                               :color="confirmedAppointment ? $store.state.settings.theme.notice : $store.state.settings.theme.error">
-                              <p>{{ confirmedAppointment? $t('appointmentPreconfirmedNotice'): $t('errorTryAgainLater')
+                              <p tabindex="5">{{ confirmedAppointment? $t('appointmentPreconfirmedNotice'): $t('errorTryAgainLater')
                               }}</p>
                             </div>
                           </div>
