@@ -35,8 +35,13 @@
 
     <p>Hinweis: Die mit * gekennzeichneten Eingabefelder sind Pflichtfelder.</p>
 
-    <button id="customer-submit-button" class="m-button m-button--primary m-button--animated-right button-next"
-      color="white" @click="saveCustomer()">
+    <button
+      id="customer-submit-button"
+      class="m-button m-button--primary m-button--animated-right button-next"
+      color="white"
+      tabindex="4"
+      @click="saveCustomer()"
+    >
       <span class="desktop">{{ $t('nextToReservation') }}</span>
       <span class="mobile">{{ $t('next') }}</span>
       <svg aria-hidden="true" class="m-button__icon">

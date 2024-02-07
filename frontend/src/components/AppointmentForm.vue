@@ -128,8 +128,12 @@
                 </div>
               </div>
 
-              <button class="m-button m-button--primary m-button--animated-right button-submit" color="white"
-                @click="submit">
+              <button
+                class="m-button m-button--primary m-button--animated-right button-submit"
+                color="white"
+                @click="submit"
+                tabindex="6"
+              >
                 <span>{{ $store.state.isRebooking ? $t('rebookAppointment') : $t('confirmAppointment') }}</span>
                 <svg aria-hidden="true" class="m-button__icon">
                   <use xlink:href="#icon-arrow-right"></use>
