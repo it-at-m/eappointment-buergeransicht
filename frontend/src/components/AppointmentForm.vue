@@ -193,7 +193,6 @@
                         <div class="m-callout__body">
                           <div class="m-callout__body__inner">
                             <h2
-                              ref="confirmationMessage"
                               tabindex="5"
                               class="m-callout__headline appointment-confirmation">
                               {{ confirmedAppointment? $t('appointmentIsPreconfirmed'): $t('errorTryAgainLater') }}
@@ -332,7 +331,6 @@ import InfoMessage from './InfoMessage.vue'
 import TheCalendar from './TheCalendar.vue'
 import CustomerInfo from './CustomerInfo.vue'
 import moment from "moment"
-import ref from 'vue'
 
 export default {
   name: 'AppointmentForm',
@@ -424,9 +422,6 @@ export default {
         }, () => {
           this.desabled = false
           this.$store.state.confirmedAppointment = false
-
-          const confirmationMessage = ref(null);
-          confirmationMessage.focus()
         })
     },
     openPanel(step) {

@@ -4,8 +4,7 @@
       <v-text-field v-model="customer.name" id="customer-name" :error-messages="nameErrors" @blur="$v.name.$touch()"
         @change="changed" counter="50" :maxlength="50" filled :label="$t('name')"
         :disabled="isPreselectedAppointment"
-        ref="customerName"
-        tabindex="4"
+        tabindex="0"
       ></v-text-field>
     </div>
 
@@ -13,7 +12,7 @@
       <v-text-field v-model="customer.email" id="customer-email" counter="50" :maxlength="50" filled
         :error-messages="emailErrors" @blur="$v.email.$touch()" @change="changed" required :label="$t('email')"
         :disabled="isPreselectedAppointment"
-        tabindex="4"
+        tabindex="0"
       ></v-text-field>
     </div>
 
@@ -22,7 +21,7 @@
         :error-messages="telephoneErrors" @blur="$v.telephone.$touch()" @change="changed"
         :label="(isTelephoneRequired) ? $t('telephoneRequired') : $t('telephone')"
         :disabled="isPreselectedAppointment"
-        tabindex="4"
+        tabindex="0"
       ></v-text-field>
     </div>
     <div id="customer-custom-textfield-section" v-if="isCustomTextfieldActivated">
@@ -30,14 +29,14 @@
         filled :error-messages="customTextfieldErrors" @blur="$v.customTextfield.$touch()" @change="changed"
         :label="(isCustomTextfieldRequired ? customTextfieldLabel + '*' : customTextfieldLabel)"
         :disabled="isPreselectedAppointment"
-        tabindex="4"
+        tabindex="0"
       ></v-text-field>
     </div>
 
     <v-checkbox id="customer-data-protection" v-model="customer.dataProtection" label=""
       :error-messages="dataProtectionErrors" required @input="$v.dataProtection.$touch()"
       @blur="$v.dataProtection.$touch()" @change="changed"
-      tabindex="4"
+      tabindex="0"
     >
       <template v-slot:label>
         <div v-html="$t('privacyPolicyAccepted')" @click.stop></div>
@@ -50,7 +49,7 @@
       id="customer-submit-button"
       class="m-button m-button--primary m-button--animated-right button-next"
       color="white"
-      tabindex="4"
+      tabindex="0"
       @click="saveCustomer()"
     >
       <span class="desktop">{{ $t('nextToReservation') }}</span>
@@ -66,7 +65,6 @@
 <script>
 import { validationMixin } from "vuelidate";
 import { required, email, maxLength } from "vuelidate/lib/validators";
-import ref from 'vue'
 
 export default {
   name: 'CustomerInfo',
@@ -242,8 +240,6 @@ export default {
   },
   mounted() {
     this.customer = this.$store.state.data.customer
-    const customerName = ref(null);
-    customerName.focus()
   }
 }
 </script>
