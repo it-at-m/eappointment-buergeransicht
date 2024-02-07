@@ -124,7 +124,7 @@
                   <svg aria-hidden="true" class="icon">
                     <use xlink:href="#icon-information"></use>
                   </svg>
-                  <p tabindex="5">{{ $t('pleaseCheckOnceAgain') }}</p>
+                  <p tabindex="0">{{ $t('pleaseCheckOnceAgain') }}</p>
                 </div>
               </div>
 
@@ -132,7 +132,7 @@
                 class="m-button m-button--primary m-button--animated-right button-submit"
                 color="white"
                 @click="submit"
-                tabindex="6"
+                tabindex="0"
               >
                 <span>{{ $store.state.isRebooking ? $t('rebookAppointment') : $t('confirmAppointment') }}</span>
                 <svg aria-hidden="true" class="m-button__icon">
@@ -150,7 +150,7 @@
                     class="m-button m-button--secondary m-button--animated-right button-submit"
                     v-bind="attrs"
                     v-on="on"
-                    tabindex="6"
+                    tabindex="0"
                   >
                     <span>{{ $t('cancel') }}</span>
                   </button>
@@ -193,14 +193,14 @@
                         <div class="m-callout__body">
                           <div class="m-callout__body__inner">
                             <h2
-                              tabindex="5"
+                              tabindex="0"
                               class="m-callout__headline appointment-confirmation">
                               {{ confirmedAppointment? $t('appointmentIsPreconfirmed'): $t('errorTryAgainLater') }}
                             </h2>
                             <div class="m-callout__content appointment-confirmation-notice"
                               v-if="!appointmentCancelled && confirmedAppointment !== null && $store.state.preselectedAppointment === null && $store.state.data.appointment !== null"
                               :color="confirmedAppointment ? $store.state.settings.theme.notice : $store.state.settings.theme.error">
-                              <p tabindex="5">{{ confirmedAppointment? $t('appointmentPreconfirmedNotice'): $t('errorTryAgainLater')
+                              <p tabindex="0">{{ confirmedAppointment? $t('appointmentPreconfirmedNotice'): $t('errorTryAgainLater')
                               }}</p>
                             </div>
                           </div>
