@@ -3,31 +3,41 @@
     <div id="customer-name-section">
       <v-text-field v-model="customer.name" id="customer-name" :error-messages="nameErrors" @blur="$v.name.$touch()"
         @change="changed" counter="50" :maxlength="50" filled :label="$t('name')"
-        :disabled="isPreselectedAppointment"></v-text-field>
+        :disabled="isPreselectedAppointment"
+        tabindex="4"
+      ></v-text-field>
     </div>
 
     <div id="customer-email-section">
       <v-text-field v-model="customer.email" id="customer-email" counter="50" :maxlength="50" filled
         :error-messages="emailErrors" @blur="$v.email.$touch()" @change="changed" required :label="$t('email')"
-        :disabled="isPreselectedAppointment"></v-text-field>
+        :disabled="isPreselectedAppointment"
+        tabindex="4"
+      ></v-text-field>
     </div>
 
     <div id="customer-telephone-section" v-if="isTelephoneActivated">
       <v-text-field v-model="customer.telephone" id="customer-telephone" counter="20" :maxlength="20" filled
         :error-messages="telephoneErrors" @blur="$v.telephone.$touch()" @change="changed"
         :label="(isTelephoneRequired) ? $t('telephoneRequired') : $t('telephone')"
-        :disabled="isPreselectedAppointment"></v-text-field>
+        :disabled="isPreselectedAppointment"
+        tabindex="4"
+      ></v-text-field>
     </div>
     <div id="customer-custom-textfield-section" v-if="isCustomTextfieldActivated">
       <v-text-field v-model="customer.customTextfield" id="customer-custom-textfield" counter="20" :maxlength="20"
         filled :error-messages="customTextfieldErrors" @blur="$v.customTextfield.$touch()" @change="changed"
         :label="(isCustomTextfieldRequired ? customTextfieldLabel + '*' : customTextfieldLabel)"
-        :disabled="isPreselectedAppointment"></v-text-field>
+        :disabled="isPreselectedAppointment"
+        tabindex="4"
+      ></v-text-field>
     </div>
 
     <v-checkbox id="customer-data-protection" v-model="customer.dataProtection" label=""
       :error-messages="dataProtectionErrors" required @input="$v.dataProtection.$touch()"
-      @blur="$v.dataProtection.$touch()" @change="changed">
+      @blur="$v.dataProtection.$touch()" @change="changed"
+      tabindex="4"
+    >
       <template v-slot:label>
         <div v-html="$t('privacyPolicyAccepted')" @click.stop></div>
       </template>
