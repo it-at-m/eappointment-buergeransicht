@@ -66,6 +66,7 @@
 <script>
 import { validationMixin } from "vuelidate";
 import { required, email, maxLength } from "vuelidate/lib/validators";
+import ref from 'vue'
 
 export default {
   name: 'CustomerInfo',
@@ -241,7 +242,8 @@ export default {
   },
   mounted() {
     this.customer = this.$store.state.data.customer
-    this.$refs.customerName.focus()
+    const customerName = ref(null);
+    customerName.focus()
   }
 }
 </script>

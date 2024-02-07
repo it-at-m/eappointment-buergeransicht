@@ -332,6 +332,7 @@ import InfoMessage from './InfoMessage.vue'
 import TheCalendar from './TheCalendar.vue'
 import CustomerInfo from './CustomerInfo.vue'
 import moment from "moment"
+import ref from 'vue'
 
 export default {
   name: 'AppointmentForm',
@@ -423,7 +424,9 @@ export default {
         }, () => {
           this.desabled = false
           this.$store.state.confirmedAppointment = false
-          this.$refs.confirmationMessage.focus()
+
+          const confirmationMessage = ref(null);
+          confirmationMessage.focus()
         })
     },
     openPanel(step) {
