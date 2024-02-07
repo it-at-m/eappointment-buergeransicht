@@ -124,7 +124,7 @@
                   <svg aria-hidden="true" class="icon">
                     <use xlink:href="#icon-information"></use>
                   </svg>
-                  <p>{{ $t('pleaseCheckOnceAgain') }}</p>
+                  <p tabindex="5">{{ $t('pleaseCheckOnceAgain') }}</p>
                 </div>
               </div>
 
