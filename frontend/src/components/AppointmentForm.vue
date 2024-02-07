@@ -124,7 +124,7 @@
                   <svg aria-hidden="true" class="icon">
                     <use xlink:href="#icon-information"></use>
                   </svg>
-                  <p tabindex="5">{{ $t('pleaseCheckOnceAgain') }}</p>
+                  <p tabindex="0">{{ $t('pleaseCheckOnceAgain') }}</p>
                 </div>
               </div>
 
@@ -132,7 +132,7 @@
                 class="m-button m-button--primary m-button--animated-right button-submit"
                 color="white"
                 @click="submit"
-                tabindex="6"
+                tabindex="0"
               >
                 <span>{{ $store.state.isRebooking ? $t('rebookAppointment') : $t('confirmAppointment') }}</span>
                 <svg aria-hidden="true" class="m-button__icon">
@@ -150,7 +150,7 @@
                     class="m-button m-button--secondary m-button--animated-right button-submit"
                     v-bind="attrs"
                     v-on="on"
-                    tabindex="6"
+                    tabindex="0"
                   >
                     <span>{{ $t('cancel') }}</span>
                   </button>
