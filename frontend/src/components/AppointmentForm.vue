@@ -193,6 +193,7 @@
                         <div class="m-callout__body">
                           <div class="m-callout__body__inner">
                             <h2
+                              ref="confirmationMessage"
                               tabindex="5"
                               class="m-callout__headline appointment-confirmation">
                               {{ confirmedAppointment? $t('appointmentIsPreconfirmed'): $t('errorTryAgainLater') }}
@@ -422,6 +423,7 @@ export default {
         }, () => {
           this.desabled = false
           this.$store.state.confirmedAppointment = false
+          this.$refs.confirmationMessage.focus()
         })
     },
     openPanel(step) {

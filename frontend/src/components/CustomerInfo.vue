@@ -4,6 +4,7 @@
       <v-text-field v-model="customer.name" id="customer-name" :error-messages="nameErrors" @blur="$v.name.$touch()"
         @change="changed" counter="50" :maxlength="50" filled :label="$t('name')"
         :disabled="isPreselectedAppointment"
+        ref="customerName"
         tabindex="4"
       ></v-text-field>
     </div>
@@ -239,7 +240,8 @@ export default {
     }
   },
   mounted() {
-    this.customer = this.$store.state.data.customer;
+    this.customer = this.$store.state.data.customer
+    this.$refs.customerName.focus()
   }
 }
 </script>
