@@ -1,207 +1,209 @@
 <template>
   <div>
     <v-container>
-      <v-row class="content" v-if="showLanguageSwitch">
-        <v-col cols="12">
-          <SwitchLanguage />
-        </v-col>
-      </v-row>
+      <v-locale-provider locale="de">
+        <v-row class="content" v-if="showLanguageSwitch">
+          <v-col cols="12">
+            <SwitchLanguage />
+          </v-col>
+        </v-row>
 
-      <v-alert v-if="maintenanceMode" border="right" color="blue-grey" dark>
-        {{ $t('maintenanceMode') }}
-      </v-alert>
+        <v-alert v-if="maintenanceMode" border="right" color="blue-grey" dark>
+          {{ $t('maintenanceMode') }}
+        </v-alert>
 
-      <v-row class="content" v-else>
-        <v-col cols="12">
+        <v-row class="content" v-else>
+          <v-col cols="12">
 
-          <div class="appointment-number" v-if="$store.state.preselectedAppointment" tabindex="1">
-            {{ $t('yourAppointmentNumber') }}: <b>{{ $store.state.preselectedAppointment.processId }}</b>
-          </div>
-          <div v-if="$store.state.errorCode || $store.state.errorMessage"
-            class="m-banner m-banner--emergency error-message" role="alert" aria-label="Emergency">
-            <div class="container-fluid">
-              <svg aria-hidden="true" class="icon">
-                <use xlink:href="#icon-warning"></use>
-              </svg>
-              <p>{{ $store.state.errorMessage ? $store.state.errorMessage : $t($store.state.errorCode) }}</p>
+            <div class="appointment-number" v-if="$store.state.preselectedAppointment" tabindex="1">
+              {{ $t('yourAppointmentNumber') }}: <b>{{ $store.state.preselectedAppointment.processId }}</b>
             </div>
-          </div>
-
-          <v-expansion-panels v-model="$store.state.openedPanel" accordion>
-            <v-expansion-panel id="panel1" :disabled="confirmedAppointment || $store.state.isRebooking">
-              <v-expansion-panel-header>
-                <template v-slot:default="{ open }">
-                  <v-row no-gutters>
-                    <v-col cols="12" md="3">
-                      {{ $t('stepFrom').replace('{step}', 1).replace('{stepTotal}', 3) }}:<br />{{
-                        $t('chooseService')
-                      }}
-                    </v-col>
-                    <v-col cols="12" md="9" class="text--secondary">
-                      <v-fade-transition leave-absolute>
-                        <span v-if="!open" key="1">
-                          <b tabindex="2">{{ getSelectedServices() }}</b>
-                        </span>
-                      </v-fade-transition>
-                    </v-col>
-                  </v-row>
-                </template>
-
-                {{ $t('services') }}
-              </v-expansion-panel-header>
-              <v-expansion-panel-content>
-                <ServiceFinder @next="openPanel(2)" @changed="openPanel(1)" />
-              </v-expansion-panel-content>
-            </v-expansion-panel>
-
-            <v-expansion-panel id="panel2" :disabled="$store.state.step < 2
-              || !$store.state.data.service
-              || $store.state.data.appointmentCount === 0
-              || this.confirmedAppointment
-            ">
-              <v-expansion-panel-header>
-                <template v-slot:default="{ open }">
-                  <v-row no-gutters>
-                    <v-col cols="12" md="3">
-                      {{ $t('stepFrom').replace('{step}', 2).replace('{stepTotal}', 3) }}:<br />{{
-                        $t('chooseAppointment')
-                      }}
-                    </v-col>
-                    <v-col cols="12" md="9" class="text--secondary">
-                      <v-fade-transition leave-absolute>
-                        <span v-if="!open" key="1">
-                          <b tabindex="3">{{ getSelectedAppointment() }}</b>
-                        </span>
-                      </v-fade-transition>
-                    </v-col>
-                  </v-row>
-                </template>
-
-                {{ $t('appointment') }}
-              </v-expansion-panel-header>
-              <v-expansion-panel-content>
-                <TheCalendar @next="openPanel(3)" :key="$store.state.data.service ? $store.state.data.service.id : 0" />
-              </v-expansion-panel-content>
-            </v-expansion-panel>
-
-            <v-expansion-panel id="panel3" :disabled="$store.state.step < 3 || this.confirmedAppointment">
-              <v-expansion-panel-header>
-                <template v-slot:default="{ open }">
-                  <v-row no-gutters>
-                    <v-col cols="12" md="3">
-                      {{ $t('stepFrom').replace('{step}', 3).replace('{stepTotal}', 3) }}:<br />{{
-                        $t('typeContactData')
-                      }}
-                    </v-col>
-                    <v-col cols="12" md="9" class="text--secondary">
-                      <v-fade-transition leave-absolute>
-                        <span v-if="!open" key="1">
-                          <span v-if="$store.state.data.customer.name">
-                            <b tabindex="4">{{ $store.state.data.customer.name }} ({{ $store.state.data.customer.email }}<span
-                                v-if="$store.state.data.customer.telephone">, {{
-                                  $store.state.data.customer.telephone
-                                }}</span><span v-if="$store.state.data.customer.customTextfield">, {{
-  $store.state.data.customer.customTextfield
-}}</span>)</b>
-                          </span>
-                        </span>
-                      </v-fade-transition>
-                    </v-col>
-                  </v-row>
-                </template>
-                {{ $t('contactData') }}
-              </v-expansion-panel-header>
-              <v-expansion-panel-content>
-                <CustomerInfo @next="openPanel(4)" @changed="openPanel(3)" />
-              </v-expansion-panel-content>
-            </v-expansion-panel>
-          </v-expansion-panels>
-
-          <div class="confirm-action">
-            <span v-if="appointmentCanBeConfirmed">
-              <div class="m-banner m-banner--info" role="dialog" aria-label="Information">
-                <div class="container-fluid">
-                  <svg aria-hidden="true" class="icon">
-                    <use xlink:href="#icon-information"></use>
-                  </svg>
-                  <p tabindex="0">{{ $t('pleaseCheckOnceAgain') }}</p>
-                </div>
-              </div>
-
-              <button
-                class="m-button m-button--primary m-button--animated-right button-submit"
-                color="white"
-                @click="submit"
-                tabindex="0"
-              >
-                <span>{{ $store.state.isRebooking ? $t('rebookAppointment') : $t('confirmAppointment') }}</span>
-                <svg aria-hidden="true" class="m-button__icon">
-                  <use xlink:href="#icon-arrow-right"></use>
+            <div v-if="$store.state.errorCode || $store.state.errorMessage"
+              class="m-banner m-banner--emergency error-message" role="alert" aria-label="Emergency">
+              <div class="container-fluid">
+                <svg aria-hidden="true" class="icon">
+                  <use xlink:href="#icon-warning"></use>
                 </svg>
-              </button>
+                <p>{{ $store.state.errorMessage ? $store.state.errorMessage : $t($store.state.errorCode) }}</p>
+              </div>
+            </div>
 
-            </span>
+            <v-expansion-panels v-model="$store.state.openedPanel" accordion>
+              <v-expansion-panel id="panel1" :disabled="confirmedAppointment || $store.state.isRebooking">
+                <v-expansion-panel-header>
+                  <template v-slot:default="{ open }">
+                    <v-row no-gutters>
+                      <v-col cols="12" md="3">
+                        {{ $t('stepFrom').replace('{step}', 1).replace('{stepTotal}', 3) }}:<br />{{
+                          $t('chooseService')
+                        }}
+                      </v-col>
+                      <v-col cols="12" md="9" class="text--secondary">
+                        <v-fade-transition leave-absolute>
+                          <span v-if="!open" key="1">
+                            <b tabindex="2">{{ getSelectedServices() }}</b>
+                          </span>
+                        </v-fade-transition>
+                      </v-col>
+                    </v-row>
+                  </template>
 
-            <span v-if="appointmentCanBeStartedOver">
-              <v-dialog v-model="starOverDialog" persistent max-width="290">
-                <template v-slot:activator="{ on, attrs }">
-                  <button
-                    v-if="!$store.state.isRebooking"
-                    class="m-button m-button--secondary m-button--animated-right button-submit"
-                    v-bind="attrs"
-                    v-on="on"
-                    tabindex="0"
-                  >
-                    <span>{{ $t('cancel') }}</span>
-                  </button>
-                </template>
-                <v-card>
-                  <div class="popup-content">
-                    {{ $t('wantToStartOverAppointment') }}<br>
-                    {{ $t('currentAppointmentWillBeCanceled') }}
+                  {{ $t('services') }}
+                </v-expansion-panel-header>
+                <v-expansion-panel-content>
+                  <ServiceFinder @next="openPanel(2)" @changed="openPanel(1)" />
+                </v-expansion-panel-content>
+              </v-expansion-panel>
+
+              <v-expansion-panel id="panel2" :disabled="$store.state.step < 2
+                || !$store.state.data.service
+                || $store.state.data.appointmentCount === 0
+                || this.confirmedAppointment
+              ">
+                <v-expansion-panel-header>
+                  <template v-slot:default="{ open }">
+                    <v-row no-gutters>
+                      <v-col cols="12" md="3">
+                        {{ $t('stepFrom').replace('{step}', 2).replace('{stepTotal}', 3) }}:<br />{{
+                          $t('chooseAppointment')
+                        }}
+                      </v-col>
+                      <v-col cols="12" md="9" class="text--secondary">
+                        <v-fade-transition leave-absolute>
+                          <span v-if="!open" key="1">
+                            <b tabindex="3">{{ getSelectedAppointment() }}</b>
+                          </span>
+                        </v-fade-transition>
+                      </v-col>
+                    </v-row>
+                  </template>
+
+                  {{ $t('appointment') }}
+                </v-expansion-panel-header>
+                <v-expansion-panel-content>
+                  <TheCalendar @next="openPanel(3)" :key="$store.state.data.service ? $store.state.data.service.id : 0" />
+                </v-expansion-panel-content>
+              </v-expansion-panel>
+
+              <v-expansion-panel id="panel3" :disabled="$store.state.step < 3 || this.confirmedAppointment">
+                <v-expansion-panel-header>
+                  <template v-slot:default="{ open }">
+                    <v-row no-gutters>
+                      <v-col cols="12" md="3">
+                        {{ $t('stepFrom').replace('{step}', 3).replace('{stepTotal}', 3) }}:<br />{{
+                          $t('typeContactData')
+                        }}
+                      </v-col>
+                      <v-col cols="12" md="9" class="text--secondary">
+                        <v-fade-transition leave-absolute>
+                          <span v-if="!open" key="1">
+                            <span v-if="$store.state.data.customer.name">
+                              <b tabindex="4">{{ $store.state.data.customer.name }} ({{ $store.state.data.customer.email }}<span
+                                  v-if="$store.state.data.customer.telephone">, {{
+                                    $store.state.data.customer.telephone
+                                  }}</span><span v-if="$store.state.data.customer.customTextfield">, {{
+    $store.state.data.customer.customTextfield
+  }}</span>)</b>
+                            </span>
+                          </span>
+                        </v-fade-transition>
+                      </v-col>
+                    </v-row>
+                  </template>
+                  {{ $t('contactData') }}
+                </v-expansion-panel-header>
+                <v-expansion-panel-content>
+                  <CustomerInfo @next="openPanel(4)" @changed="openPanel(3)" />
+                </v-expansion-panel-content>
+              </v-expansion-panel>
+            </v-expansion-panels>
+
+            <div class="confirm-action">
+              <span v-if="appointmentCanBeConfirmed">
+                <div class="m-banner m-banner--info" role="dialog" aria-label="Information">
+                  <div class="container-fluid">
+                    <svg aria-hidden="true" class="icon">
+                      <use xlink:href="#icon-information"></use>
+                    </svg>
+                    <p tabindex="0">{{ $t('pleaseCheckOnceAgain') }}</p>
                   </div>
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <button class="m-button m-button--primary m-button--animated-right button-yes" @click="startOver">
-                      <span>{{ $t('yes') }}</span>
-                      <svg aria-hidden="true" class="m-button__icon">
-                        <use xlink:href="#icon-arrow-right"></use>
-                      </svg>
+                </div>
+
+                <button
+                  class="m-button m-button--primary m-button--animated-right button-submit"
+                  color="white"
+                  @click="submit"
+                  tabindex="0"
+                >
+                  <span>{{ $store.state.isRebooking ? $t('rebookAppointment') : $t('confirmAppointment') }}</span>
+                  <svg aria-hidden="true" class="m-button__icon">
+                    <use xlink:href="#icon-arrow-right"></use>
+                  </svg>
+                </button>
+
+              </span>
+
+              <span v-if="appointmentCanBeStartedOver">
+                <v-dialog v-model="starOverDialog" persistent max-width="290">
+                  <template v-slot:activator="{ on, attrs }">
+                    <button
+                      v-if="!$store.state.isRebooking"
+                      class="m-button m-button--secondary m-button--animated-right button-submit"
+                      v-bind="attrs"
+                      v-on="on"
+                      tabindex="0"
+                    >
+                      <span>{{ $t('cancel') }}</span>
                     </button>
-                    <button class="m-button m-button--secondary m-button--animated-right"
-                      @click="starOverDialog = false">
-                      <span>{{ $t('no') }}</span>
-                    </button>
-                  </v-card-actions>
-                </v-card>
-              </v-dialog>
-            </span>
-            <div class="m-component m-component-callout m-component-callout--fullwidth"
-              v-if="!appointmentCancelled && confirmedAppointment !== null && $store.state.preselectedAppointment === null && $store.state.data.appointment !== null"
-              :color="confirmedAppointment ? $store.state.settings.theme.success : $store.state.settings.theme.error">
-              <div>
-                <div class="m-component__grid">
-                  <div class="m-component__column">
-                    <div class="m-callout m-callout--default">
-                      <div class="m-callout__inner">
-                        <div class="m-callout__icon">
-                          <svg aria-hidden="true" class="icon">
-                            <use xlink:href="#icon-information"></use>
-                          </svg>
-                          <span class="visually-hidden"></span>
-                        </div>
-                        <div class="m-callout__body">
-                          <div class="m-callout__body__inner">
-                            <h2
-                              tabindex="0"
-                              class="m-callout__headline appointment-confirmation">
-                              {{ confirmedAppointment? $t('appointmentIsPreconfirmed'): $t('errorTryAgainLater') }}
-                            </h2>
-                            <div class="m-callout__content appointment-confirmation-notice"
-                              v-if="!appointmentCancelled && confirmedAppointment !== null && $store.state.preselectedAppointment === null && $store.state.data.appointment !== null"
-                              :color="confirmedAppointment ? $store.state.settings.theme.notice : $store.state.settings.theme.error">
-                              <p tabindex="0">{{ confirmedAppointment? $t('appointmentPreconfirmedNotice'): $t('errorTryAgainLater')
-                              }}</p>
+                  </template>
+                  <v-card>
+                    <div class="popup-content">
+                      {{ $t('wantToStartOverAppointment') }}<br>
+                      {{ $t('currentAppointmentWillBeCanceled') }}
+                    </div>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <button class="m-button m-button--primary m-button--animated-right button-yes" @click="startOver">
+                        <span>{{ $t('yes') }}</span>
+                        <svg aria-hidden="true" class="m-button__icon">
+                          <use xlink:href="#icon-arrow-right"></use>
+                        </svg>
+                      </button>
+                      <button class="m-button m-button--secondary m-button--animated-right"
+                        @click="starOverDialog = false">
+                        <span>{{ $t('no') }}</span>
+                      </button>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+              </span>
+              <div class="m-component m-component-callout m-component-callout--fullwidth"
+                v-if="!appointmentCancelled && confirmedAppointment !== null && $store.state.preselectedAppointment === null && $store.state.data.appointment !== null"
+                :color="confirmedAppointment ? $store.state.settings.theme.success : $store.state.settings.theme.error">
+                <div>
+                  <div class="m-component__grid">
+                    <div class="m-component__column">
+                      <div class="m-callout m-callout--default">
+                        <div class="m-callout__inner">
+                          <div class="m-callout__icon">
+                            <svg aria-hidden="true" class="icon">
+                              <use xlink:href="#icon-information"></use>
+                            </svg>
+                            <span class="visually-hidden"></span>
+                          </div>
+                          <div class="m-callout__body">
+                            <div class="m-callout__body__inner">
+                              <h2
+                                tabindex="0"
+                                class="m-callout__headline appointment-confirmation">
+                                {{ confirmedAppointment? $t('appointmentIsPreconfirmed'): $t('errorTryAgainLater') }}
+                              </h2>
+                              <div class="m-callout__content appointment-confirmation-notice"
+                                v-if="!appointmentCancelled && confirmedAppointment !== null && $store.state.preselectedAppointment === null && $store.state.data.appointment !== null"
+                                :color="confirmedAppointment ? $store.state.settings.theme.notice : $store.state.settings.theme.error">
+                                <p tabindex="0">{{ confirmedAppointment? $t('appointmentPreconfirmedNotice'): $t('errorTryAgainLater')
+                                }}</p>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -210,116 +212,116 @@
                   </div>
                 </div>
               </div>
-            </div>
 
-            <InfoMessage
-                v-if="activatedAppointment && !appointmentCancelled"
-                :type="'success'"
-                :title="$t('appointmentIsConfirmed')"
-                :text="$t('appointmentIsConfirmedDescription')"
-                :tabindex="5"
-            ></InfoMessage>
+              <InfoMessage
+                  v-if="activatedAppointment && !appointmentCancelled"
+                  :type="'success'"
+                  :title="$t('appointmentIsConfirmed')"
+                  :text="$t('appointmentIsConfirmedDescription')"
+                  :tabindex="5"
+              ></InfoMessage>
 
-            <InfoMessage
-                v-if="appointmentCancelled === true"
-                :type="'success'"
-                :title="$t('appointmentIsCanceled')"
-                :text="$t('appointmentIsCanceledDescription')"
-                :tabindex="5"
-            ></InfoMessage>
+              <InfoMessage
+                  v-if="appointmentCancelled === true"
+                  :type="'success'"
+                  :title="$t('appointmentIsCanceled')"
+                  :text="$t('appointmentIsCanceledDescription')"
+                  :tabindex="5"
+              ></InfoMessage>
 
-            <div class="m-banner m-banner--success appointment-cancel" role="alert" aria-label="Warnung"
-                 v-if="appointmentCancelled === false"
-                 :color="$store.state.settings.theme.error">
-              <div class="container-fluid">
-                <svg aria-hidden="true" class="icon">
-                  <use xlink:href="#icon-warning"></use>
-                </svg>
-                <p tabindex="5">{{ $t('appointmentCanNotBeCanceled') }}</p>
+              <div class="m-banner m-banner--success appointment-cancel" role="alert" aria-label="Warnung"
+                   v-if="appointmentCancelled === false"
+                   :color="$store.state.settings.theme.error">
+                <div class="container-fluid">
+                  <svg aria-hidden="true" class="icon">
+                    <use xlink:href="#icon-warning"></use>
+                  </svg>
+                  <p tabindex="5">{{ $t('appointmentCanNotBeCanceled') }}</p>
+                </div>
+              </div>
+
+              <button v-if="$store.state.isRebooking"
+                class="m-button m-button--secondary m-button--animated-right button-submit" @click="stopRebooking">
+                <span tabindex="6">{{ $t('cancel') }}</span>
+              </button>
+              <div
+                v-if="$store.state.preselectedAppointment !== null && $store.state.errorMessage === null && !$store.state.isRebooking">
+                <v-dialog v-model="rebookDialog" persistent max-width="290">
+                  <template v-slot:activator="{ on, attrs }">
+                    <button
+                      class="m-button m-button--primary m-button--animated-right button-submit"
+                      v-if="appointmentCancelled === null && $store.state.errorCode !== 'appointmentCanNotBeCanceled'"
+                      v-bind="attrs"
+                      v-on="on"
+                      tabindex="6"
+                    >
+                      <span>{{ $t('rebookAppointment') }}</span>
+                      <svg aria-hidden="true" class="m-button__icon">
+                        <use xlink:href="#icon-arrow-right"></use>
+                      </svg>
+                    </button>
+
+                  </template>
+                  <v-card>
+                    <div class="popup-content">
+                      {{ $t('wantToRebookAppointment') }}
+                    </div>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <button class="m-button m-button--primary m-button--animated-right button-yes" @click="startRebooking">
+                        <span>{{ $t('yes') }}</span>
+                        <svg aria-hidden="true" class="m-button__icon">
+                          <use xlink:href="#icon-arrow-right"></use>
+                        </svg>
+                      </button>
+                      <button class="m-button m-button--secondary m-button--animated-right"
+                        @click="rebookDialog = false">
+                        <span>{{ $t('no') }}</span>
+                      </button>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+                <v-dialog v-model="cancelDialog" persistent max-width="290">
+                  <template v-slot:activator="{ on, attrs }">
+
+                    <button
+                      v-if="appointmentCancelled === null && $store.state.errorCode !== 'appointmentCanNotBeCanceled'"
+                      class="m-button m-button--primary m-button--animated-right button-submit"
+                      v-bind="attrs"
+                      v-on="on"
+                      tabindex="6"
+                    >
+                      <span>{{ $t('cancelAppointment') }}</span>
+                      <svg aria-hidden="true" class="m-button__icon">
+                          <use xlink:href="#icon-arrow-right"></use>
+                      </svg>
+                    </button>
+                  </template>
+                  <v-card>
+                    <div class="popup-content">
+                      {{ $t('wantToCancelAppointment') }}
+                    </div>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <button class="m-button m-button--primary m-button--animated-right button-yes" @click="cancelAppointment">
+                        <span>{{ $t('yes') }}</span>
+                        <svg aria-hidden="true" class="m-button__icon">
+                          <use xlink:href="#icon-arrow-right"></use>
+                        </svg>
+                      </button>
+                      <button class="m-button m-button--secondary m-button--animated-right"
+                        @click="cancelDialog = false">
+                        <span>{{ $t('no') }}</span>
+                      </button>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
               </div>
             </div>
 
-            <button v-if="$store.state.isRebooking"
-              class="m-button m-button--secondary m-button--animated-right button-submit" @click="stopRebooking">
-              <span tabindex="6">{{ $t('cancel') }}</span>
-            </button>
-            <div
-              v-if="$store.state.preselectedAppointment !== null && $store.state.errorMessage === null && !$store.state.isRebooking">
-              <v-dialog v-model="rebookDialog" persistent max-width="290">
-                <template v-slot:activator="{ on, attrs }">
-                  <button
-                    class="m-button m-button--primary m-button--animated-right button-submit"
-                    v-if="appointmentCancelled === null && $store.state.errorCode !== 'appointmentCanNotBeCanceled'"
-                    v-bind="attrs"
-                    v-on="on"
-                    tabindex="6"
-                  >
-                    <span>{{ $t('rebookAppointment') }}</span>
-                    <svg aria-hidden="true" class="m-button__icon">
-                      <use xlink:href="#icon-arrow-right"></use>
-                    </svg>
-                  </button>
-
-                </template>
-                <v-card>
-                  <div class="popup-content">
-                    {{ $t('wantToRebookAppointment') }}
-                  </div>
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <button class="m-button m-button--primary m-button--animated-right button-yes" @click="startRebooking">
-                      <span>{{ $t('yes') }}</span>
-                      <svg aria-hidden="true" class="m-button__icon">
-                        <use xlink:href="#icon-arrow-right"></use>
-                      </svg>
-                    </button>
-                    <button class="m-button m-button--secondary m-button--animated-right"
-                      @click="rebookDialog = false">
-                      <span>{{ $t('no') }}</span>
-                    </button>
-                  </v-card-actions>
-                </v-card>
-              </v-dialog>
-              <v-dialog v-model="cancelDialog" persistent max-width="290">
-                <template v-slot:activator="{ on, attrs }">
-
-                  <button
-                    v-if="appointmentCancelled === null && $store.state.errorCode !== 'appointmentCanNotBeCanceled'"
-                    class="m-button m-button--primary m-button--animated-right button-submit"
-                    v-bind="attrs"
-                    v-on="on"
-                    tabindex="6"
-                  >
-                    <span>{{ $t('cancelAppointment') }}</span>
-                    <svg aria-hidden="true" class="m-button__icon">
-                        <use xlink:href="#icon-arrow-right"></use>
-                    </svg>
-                  </button>
-                </template>
-                <v-card>
-                  <div class="popup-content">
-                    {{ $t('wantToCancelAppointment') }}
-                  </div>
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <button class="m-button m-button--primary m-button--animated-right button-yes" @click="cancelAppointment">
-                      <span>{{ $t('yes') }}</span>
-                      <svg aria-hidden="true" class="m-button__icon">
-                        <use xlink:href="#icon-arrow-right"></use>
-                      </svg>
-                    </button>
-                    <button class="m-button m-button--secondary m-button--animated-right"
-                      @click="cancelDialog = false">
-                      <span>{{ $t('no') }}</span>
-                    </button>
-                  </v-card-actions>
-                </v-card>
-              </v-dialog>
-            </div>
-          </div>
-
-        </v-col>
-      </v-row>
+          </v-col>
+        </v-row>
+      </v-locale-provider>
     </v-container>
   </div>
 </template>
