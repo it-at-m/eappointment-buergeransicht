@@ -35,7 +35,10 @@
 
     <v-date-picker full-width v-model="date" :allowed-dates="allowedDates" class="mt-0" :min="currentDate"
       :first-day-of-week="1" :locale="$i18n.locale" :no-title="true" :weekday-format="getWeekday"
-      @click:date="getAppointmentsOfDay(date)"></v-date-picker>
+      @click:date="getAppointmentsOfDay(date)"
+      :prev-month-aria-label="$t('previousMonth')"
+      :next-month-aria-label="$t('nextMonth')"
+    ></v-date-picker>
 
     <div v-if="dateError"
       class="m-component m-component-callout m-component-callout--warning m-component-callout--fullwidth">

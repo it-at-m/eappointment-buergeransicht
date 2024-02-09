@@ -10,6 +10,8 @@ export default {
   finishReservation: "Reservierung abschließen",
   availableTimes: "Verfügbare Uhrzeiten",
   cancel: "Abbrechen",
+  nextMonth: "Nächster Monat",
+  previousMonth: "Vorheriger Monat",
   yes: "Ja",
   no: "Nein",
   cancelAppointment: "Termin absagen",
