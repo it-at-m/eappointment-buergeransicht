@@ -188,7 +188,7 @@ export default {
       return provider.id === this.$store.state.preselectedProvider.id
     },
     getWeekday: function (date) {
-      return moment(date).format('dddd').slice(0, 2)
+      return moment(date).format('dddd').slice(0, 3)
     },
     getAppointmentsOfDay: function (date, focus = true) {
       this.timeSlotError = false
