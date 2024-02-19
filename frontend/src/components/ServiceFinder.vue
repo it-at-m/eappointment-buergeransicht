@@ -64,7 +64,7 @@
               <v-icon>{{ minusSvg }}</v-icon>
             </v-btn>
             <h3 tabindex="0"
-              :aria-label="$store.state.data.service.name + ` Anzahl: ` + appointmentCounts[$store.state.data.service.id]"
+              :aria-label="`Akuelle Anzahl ausgewählter Dienstleistungen ` + appointmentCounts[$store.state.data.service.id]"
               class="appointment-count" :key="appointmentCounts[$store.state.data.service.id]">
               {{ appointmentCounts[$store.state.data.service.id] }}
             </h3>
