@@ -91,8 +91,17 @@ describe('Customer info', () => {
     })
 
     it('customer data is saved', async () => {
-        const dispatch = jest.fn()
-        store.dispatch = dispatch
+        const mockCallback = jest.fn((method, parameters) => {
+            if (method === 'API/updateAppointmentData') {
+                return new Promise((resolve, reject) => {
+                    resolve({
+                        'success': true
+                    })
+                })
+            }
+        })
+
+        store.dispatch = mockCallback
 
         store.state.data.appointment = {}
 

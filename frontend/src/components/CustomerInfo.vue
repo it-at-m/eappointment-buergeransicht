@@ -73,10 +73,14 @@
 <script>
 import { validationMixin } from "vuelidate";
 import { required, email, maxLength } from "vuelidate/lib/validators";
+import InfoMessage from './InfoMessage.vue'
 
 export default {
   name: 'CustomerInfo',
   mixins: [validationMixin],
+  components: {
+    InfoMessage
+  },
   validations() {
     return {
       name: {
@@ -235,8 +239,7 @@ export default {
             ...this.customer,
           }
         }
-      })
-        .then(() => {
+      }).then(() => {
           this.$emit('next')
           window.scrollTo(0, 0)
           this.$v.$reset()
