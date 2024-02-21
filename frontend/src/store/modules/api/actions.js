@@ -54,7 +54,7 @@ export default {
                     return response.json();
                 })
                 .then(data => {
-                    if (data.error) {
+                    if (data.error || data.errorCode) {
                         reject(data)
                     }
 
