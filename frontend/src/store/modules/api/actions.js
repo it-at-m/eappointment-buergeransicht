@@ -224,7 +224,7 @@ export default {
                 return response.json();
             })
             .then(data => {
-                if (data.error) {
+                if (data.errorCode) {
                     reject(data)
                 }
 
