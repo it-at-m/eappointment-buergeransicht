@@ -240,6 +240,7 @@ export default {
           }
         }
       }).then(() => {
+        this.$store.state.confirmedAppointment = null
         this.$store.state.error = null
           this.$emit('next')
           window.scrollTo(0, 0)
