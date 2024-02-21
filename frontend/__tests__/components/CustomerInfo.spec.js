@@ -92,7 +92,7 @@ describe('Customer info', () => {
 
     it('customer data is saved', async () => {
         const mockCallback = jest.fn((method, parameters) => {
-            if (method === 'API/updateAppointmentData') {
+            if (method === 'updateAppointmentData') {
                 return new Promise((resolve, reject) => {
                     resolve({
                         'success': true
