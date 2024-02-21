@@ -115,7 +115,7 @@ describe('Customer info', () => {
         console.log(store.state.data.appointment);
 
         expect(wrapper.emitted().next).toBeDefined()
-        expect(dispatch).toHaveBeenCalledTimes(1)
+        expect(mockCallback).toHaveBeenCalledTimes(1)
         /*expect(dispatch.mock.calls[0]).toStrictEqual([
             'updateAppointmentData',
             {"client": {"dataProtection": true, "email": "max@test.de", "name": "Max"}}
