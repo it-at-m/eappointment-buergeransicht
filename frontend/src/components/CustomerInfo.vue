@@ -47,7 +47,7 @@
 
     <InfoMessage
         v-if="$store.state.error === 'tooManyAppointmentsWithSameMail'"
-        :type="'alert'"
+        :type="'warning'"
         :title="$t('tooManyAppointmentsWithSameMail')"
         :text="$t('cancelSomeAppointments')"
         :tabindex="5"
@@ -240,6 +240,7 @@ export default {
           }
         }
       }).then(() => {
+        this.$store.state.error = null
           this.$emit('next')
           window.scrollTo(0, 0)
           this.$v.$reset()
