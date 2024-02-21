@@ -46,8 +46,8 @@
     <p>Hinweis: Die mit * gekennzeichneten Eingabefelder sind Pflichtfelder.</p>
 
     <InfoMessage
-        v-if="$store.state.error = 'tooManyAppointmentsWithSameMail'"
-        :type="'error'"
+        v-if="$store.state.error === 'tooManyAppointmentsWithSameMail'"
+        :type="'alert'"
         :title="$t('tooManyAppointmentsWithSameMail')"
         :text="$t('cancelSomeAppointments')"
         :tabindex="5"
