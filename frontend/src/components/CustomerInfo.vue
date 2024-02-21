@@ -45,6 +45,14 @@
 
     <p>Hinweis: Die mit * gekennzeichneten Eingabefelder sind Pflichtfelder.</p>
 
+    <InfoMessage
+        v-if="$store.state.error = 'tooManyAppointmentsWithSameMail'"
+        :type="'error'"
+        :title="$t('tooManyAppointmentsWithSameMail')"
+        :text="$t('cancelSomeAppointments')"
+        :tabindex="5"
+    ></InfoMessage>
+
     <button
       id="customer-submit-button"
       class="m-button m-button--primary m-button--animated-right button-next"
@@ -227,11 +235,15 @@ export default {
             ...this.customer,
           }
         }
-      });
-
-      this.$emit('next')
-      window.scrollTo(0, 0)
-      this.$v.$reset()
+      })
+        .then(() => {
+          this.$emit('next')
+          window.scrollTo(0, 0)
+          this.$v.$reset()
+        }, (error) => {
+          console.log(error)
+          this.$store.state.error = 'tooManyAppointmentsWithSameMail'
+        })
     },
     validTelephoneFormat(value) {
       const phoneRegex = /^\+?\d+$/;
