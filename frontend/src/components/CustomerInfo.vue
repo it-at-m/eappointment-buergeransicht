@@ -45,6 +45,14 @@
 
     <p>Hinweis: Die mit * gekennzeichneten Eingabefelder sind Pflichtfelder.</p>
 
+    <InfoMessage
+        v-if="$store.state.error === 'tooManyAppointmentsWithSameMail'"
+        :type="'warning'"
+        :title="$t('tooManyAppointmentsWithSameMail')"
+        :text="$t('cancelSomeAppointments')"
+        :tabindex="5"
+    ></InfoMessage>
+
     <button
       id="customer-submit-button"
       class="m-button m-button--primary m-button--animated-right button-next"
@@ -65,10 +73,14 @@
 <script>
 import { validationMixin } from "vuelidate";
 import { required, email, maxLength } from "vuelidate/lib/validators";
+import InfoMessage from './InfoMessage.vue'
 
 export default {
   name: 'CustomerInfo',
   mixins: [validationMixin],
+  components: {
+    InfoMessage
+  },
   validations() {
     return {
       name: {
@@ -227,11 +239,16 @@ export default {
             ...this.customer,
           }
         }
-      });
-
-      this.$emit('next')
-      window.scrollTo(0, 0)
-      this.$v.$reset()
+      }).then(() => {
+        this.$store.state.confirmedAppointment = null
+        this.$store.state.error = null
+          this.$emit('next')
+          window.scrollTo(0, 0)
+          this.$v.$reset()
+        }, (error) => {
+          console.log(error)
+          this.$store.state.error = 'tooManyAppointmentsWithSameMail'
+        })
     },
     validTelephoneFormat(value) {
       const phoneRegex = /^\+?\d+$/;

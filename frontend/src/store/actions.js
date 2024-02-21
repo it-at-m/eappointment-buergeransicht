@@ -2,17 +2,24 @@ import moment from "moment"
 
 export default {
     updateAppointmentData(store, appointment) {
-        appointment.familyName = appointment.client.name
-        appointment.email = appointment.client.email
-        appointment.telephone = appointment.client.telephone
-        appointment.customTextfield = appointment.client.customTextfield
+        return new Promise((resolve, reject) => {
+            appointment.familyName = appointment.client.name
+            appointment.email = appointment.client.email
+            appointment.telephone = appointment.client.telephone
+            appointment.customTextfield = appointment.client.customTextfield
 
-        store.dispatch('API/updateAppointmentData', appointment)
-            .then((data) => {
-                appointment.data = data
-                store.commit('data/setCustomerData', appointment.client)
-                store.commit('data/setAppointment', appointment)
-            })
+            store.dispatch('API/updateAppointmentData', appointment)
+                .then((data) => {
+                    appointment.data = data
+                    store.commit('data/setCustomerData', appointment.client)
+                    store.commit('data/setAppointment', appointment)
+
+                    resolve(true)
+                }, (error) => {
+                    console.log(error)
+                    reject(error)
+                })
+        })
     },
     setUpServicesAndProviders(store, { preselectedService, preselectedProvider }) {
         return new Promise((resolve) => {

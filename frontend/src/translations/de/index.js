@@ -16,6 +16,8 @@ export default {
   no: "Nein",
   cancelAppointment: "Termin absagen",
   rebookAppointment: "Termin umbuchen",
+  tooManyAppointmentsWithSameMail: "Zu viele Termine mit gleicher E-Mail-Adresse",
+  cancelSomeAppointments: "Bitte stornieren Sie gegebenenfalls bereits gebuchte Termine, damit eine neue Reservierung möglich ist.",
   confirmAppointment: "Reservierung abschließen",
   services: "Dienstleistungen",
   chooseService: "Dienstleistungen wählen",
