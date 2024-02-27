@@ -29,7 +29,7 @@ export default {
   appointmentIsPreconfirmed: "Ihr Termin wurde vorgemerkt.",
   activationLinkExpired: "Ihr Aktivierungslink ist abgelaufen.",
   errorTryAgainLater: "Etwas ist schief gelaufen. Bitte versuchen Sie es mit einem anderen Termin.",
-  noAppointmentsAvailableHeader: "Keine freien Termine verfügbar",
+  noAppointmentsAvailableHeader: "Keine freien Termine verfügbar.",
   noAppointmentsAvailable: "Leider gibt es zu Ihrer Leistung aktuell keine freien Termine.\nVersuchen Sie es bitte ein andermal noch einmal.",
   appointmentPreconfirmedNotice: "Um die Reservierung abzuschließen, erhalten Sie innerhalb von wenigen Minuten eine E-Mail mit einem Aktivierungslink. Bitte beachten Sie, dass die Reservierung verfällt, wenn Sie den Termin nicht mit diesem Link bestätigen.",
   appointment: "Termin",
