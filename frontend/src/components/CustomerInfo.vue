@@ -25,7 +25,7 @@
       ></v-text-field>
     </div>
     <div id="customer-custom-textfield-section" v-if="isCustomTextfieldActivated" :aria-label="$t('customField') + $t('fieldLengthTwenty')">
-      <v-text-field v-model="customer.customTextfield" id="customer-custom-textfield" counter="20" :maxlength="20"
+      <v-text-field v-model="customer.customTextfield" id="customer-custom-textfield" counter="50" :maxlength="50"
         filled :error-messages="customTextfieldErrors" @blur="$v.customTextfield.$touch()" @change="changed"
         :label="(isCustomTextfieldRequired ? customTextfieldLabel + '*' : customTextfieldLabel)"
         :disabled="isPreselectedAppointment"
