@@ -182,6 +182,7 @@
               <div>
                 <div class="m-component__grid">
                   <div class="m-component__column">
+                    <div :class="['m-callout', 'm-callout--' + (confirmedAppointment ? 'default' : 'warning') ]">
                     <div class="m-callout m-callout--default">
                       <div class="m-callout__inner">
                         <div class="m-callout__icon">
@@ -195,7 +196,7 @@
                             <h2
                               tabindex="0"
                               class="m-callout__headline appointment-confirmation">
-                              {{ confirmedAppointment? $t('appointmentIsPreconfirmed'): $t('errorTryAgainLater') }}
+                              {{ confirmedAppointment ? $t('appointmentIsPreconfirmed'): $t('errorTryAgainLater') }}
                             </h2>
                             <div class="m-callout__content appointment-confirmation-notice"
                               v-if="!appointmentCancelled && confirmedAppointment !== null && $store.state.preselectedAppointment === null && $store.state.data.appointment !== null"
