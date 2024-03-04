@@ -183,7 +183,6 @@
                 <div class="m-component__grid">
                   <div class="m-component__column">
                     <div :class="['m-callout', 'm-callout--' + (confirmedAppointment ? 'default' : 'warning') ]">
-                    <div class="m-callout m-callout--default">
                       <div class="m-callout__inner">
                         <div class="m-callout__icon">
                           <svg aria-hidden="true" class="icon">
