@@ -8,7 +8,7 @@
       ></v-text-field>
     </div>
 
-    <div id="customer-email-section" :aria-label="$t('emailField') + $t('fieldLengthFifty')">
+    <div id="customer-email-section" :aria-label="getEmailAriaLabel()">
       <v-text-field v-model="customer.email" id="customer-email" counter="50" :maxlength="50" filled
         :error-messages="emailErrors" @blur="$v.email.$touch()" @change="changed" required :label="$t('email')"
         :disabled="isPreselectedAppointment"
@@ -16,7 +16,7 @@
       ></v-text-field>
     </div>
 
-    <div id="customer-telephone-section" v-if="isTelephoneActivated" :aria-label="$t('telephoneField') + $t('fieldLengthTwenty')">
+    <div id="customer-telephone-section" v-if="isTelephoneActivated" :aria-label="getTelephoneAriaLabel()">
       <v-text-field v-model="customer.telephone" id="customer-telephone" counter="20" :maxlength="20" filled
         :error-messages="telephoneErrors" @blur="$v.telephone.$touch()" @change="changed"
         :label="(isTelephoneRequired) ? $t('telephoneRequired') : $t('telephone')"
@@ -24,7 +24,7 @@
         tabindex="0"
       ></v-text-field>
     </div>
-    <div id="customer-custom-textfield-section" v-if="isCustomTextfieldActivated" :aria-label="$t('customField') + $t('fieldLengthTwenty')">
+    <div id="customer-custom-textfield-section" v-if="isCustomTextfieldActivated" :aria-label="getCustomTextAriaLabel()">
       <v-text-field v-model="customer.customTextfield" id="customer-custom-textfield" counter="50" :maxlength="50"
         filled :error-messages="customTextfieldErrors" @blur="$v.customTextfield.$touch()" @change="changed"
         :label="(isCustomTextfieldRequired ? customTextfieldLabel + '*' : customTextfieldLabel)"
@@ -253,6 +253,18 @@ export default {
     validTelephoneFormat(value) {
       const phoneRegex = /^\+?\d+$/;
       return !value || phoneRegex.test(value);
+    },
+    getEmailAriaLabel() {
+      const previousFieldError = this.nameErrors.length > 0 ? this.$t('nameIsRequired') : '';
+      return `${previousFieldError} ${this.$t('emailField') + this.$t('fieldLengthFifty')}`;
+    },
+    getTelephoneAriaLabel() {
+      const previousFieldError = this.nameErrors.length > 0 ? this.$t('emailIsRequired') : '';
+      return `${previousFieldError} ${this.$t('telephoneField') + this.$t('fieldLengthTwenty')}`;
+    },
+    getCustomTextAriaLabel() {
+      const previousFieldError = this.nameErrors.length > 0 ? this.$t('telephoneIsRequired') : '';
+      return `${previousFieldError} ${this.$t('customField') + this.$t('fieldLengthFifty')}`;
     }
   },
   mounted() {
