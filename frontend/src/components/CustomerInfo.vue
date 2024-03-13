@@ -259,11 +259,11 @@ export default {
       return `${previousFieldError} ${this.$t('emailField') + this.$t('fieldLengthFifty')}`;
     },
     getTelephoneAriaLabel() {
-      const previousFieldError = this.nameErrors.length > 0 ? this.$t('emailIsRequired') : '';
+      const previousFieldError = this.emailErrors.length > 0 ? this.$t('emailIsRequired') : '';
       return `${previousFieldError} ${this.$t('telephoneField') + this.$t('fieldLengthTwenty')}`;
     },
     getCustomTextAriaLabel() {
-      const previousFieldError = this.nameErrors.length > 0 ? this.$t('telephoneIsRequired') : '';
+      const previousFieldError = this.telephoneErrors.length > 0 ? this.$t('telephoneIsRequired') : '';
       return `${previousFieldError} ${this.$t('customField') + this.$t('fieldLengthFifty')}`;
     }
   },
