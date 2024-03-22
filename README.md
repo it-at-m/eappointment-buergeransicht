@@ -118,7 +118,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-it@m - opensource@muenchendigital.io
+it@m - opensource@muenchen.de
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
