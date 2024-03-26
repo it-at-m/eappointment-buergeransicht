@@ -37,6 +37,7 @@
       :error-messages="dataProtectionErrors" required @input="$v.dataProtection.$touch()"
       @blur="$v.dataProtection.$touch()" @change="changed"
       tabindex="0"
+      :disabled="isPreselectedAppointment"
     >
       <template v-slot:label>
         <div v-html="$t('privacyPolicyAccepted')" @click.stop></div>
