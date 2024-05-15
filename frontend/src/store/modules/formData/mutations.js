@@ -5,12 +5,10 @@ const checkMaxSlots = (state) => {
     let maxSlotsByProviders = 0
     for (var selectedServiceId in state.appointmentCounts) {
         let selectedService = state.servicesById[selectedServiceId]
-        console.log('selectedService: ' + selectedService)
         if (typeof selectedService.providers !== 'undefined') {
             selectedService.providers.forEach((provider) => {
                 if (typeof provider.maxSlotsPerAppointment !== 'undefined' && provider.maxSlotsPerAppointment > 0) {
                     maxSlotsByProviders = Math.max(maxSlotsByProviders, parseInt(provider.maxSlotsPerAppointment))
-                    console.log('change: ' + maxSlotsByProviders)
                 }
             })
         }
@@ -22,8 +20,6 @@ const checkMaxSlots = (state) => {
         maxSlots = Math.min(maxSlotsByProviders, MAX_SLOTS)
     }
 
-    console.log('min slots: ' + minSlots)
-    console.log('max slots: ' + maxSlots)
     if (minSlots > maxSlots) {
         state.maxSlotsExceeded = true
     } else {
