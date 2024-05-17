@@ -1,4 +1,5 @@
 export default {
+  backToHome: "Back to Appointments",
   appointmentDoesntExist: "Appointment doesn't exist",
   appointmentCanNotBeCanceled: "The Appointment can't be canceled because the appointment time is in the past",
   appointmentCanceled: "Appointment has been canceled",
