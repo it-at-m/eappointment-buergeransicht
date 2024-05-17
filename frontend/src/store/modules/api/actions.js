@@ -132,9 +132,6 @@ export default {
                 apiUrl += `?serviceId=${serviceId}&locationId=${locationId}`;
             }
     
-            // Log the complete API route
-            console.log('Fetching services and providers from:', apiUrl);
-    
             fetch(apiUrl)
                 .then((response) => {
                     handleMaintenanceMode(store, response);
