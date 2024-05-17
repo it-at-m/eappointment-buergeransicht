@@ -22,11 +22,11 @@ const checkMaxSlots = (state) => {
     }
 
     for (var selectedServiceId in state.appointmentCounts) {
-        if (state.appointmentCounts[selectedServiceId] === 0) {
+        let selectedService = state.servicesById[selectedServiceId]
+        if (state.appointmentCounts[selectedServiceId] === 0 || ! selectedService.providers) {
             continue
         }
 
-        let selectedService = state.servicesById[selectedServiceId]
         console.log('selectedService providers: ' + selectedService.providers.length)
         if (typeof selectedService.providers !== 'undefined') {
             selectedService.providers.forEach((provider) => {
