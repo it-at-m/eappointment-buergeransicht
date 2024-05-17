@@ -8,7 +8,7 @@ const checkMaxSlots = (state) => {
     for (var serviceId in state.appointmentCounts) {
         let selectedService = state.servicesById[serviceId]
 
-        if (state.appointmentCounts[serviceId] === 0) {
+        if (state.appointmentCounts[serviceId] === 0 || ! selectedService.providers) {
             continue
         }
 
