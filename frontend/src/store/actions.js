@@ -62,8 +62,7 @@ export default {
                     resolve()
                 })
                 .catch(error => {
-                    console.error('Error fetching services and providers:', error);
-                    store.commit('setError', 'not-found'); // Set error state to show 404 page
+                    store.commit('setError', 'not-found');
                 })
         })
     },
