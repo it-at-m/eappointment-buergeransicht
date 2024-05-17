@@ -61,7 +61,7 @@ export default {
     
                     resolve()
                 })
-                .catch(error => {
+                .catch(() => {
                     store.commit('setError', 'not-found');
                 })
         })
