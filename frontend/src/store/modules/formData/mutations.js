@@ -31,10 +31,13 @@ const checkMaxSlots = (state) => {
         let minSlotsForAllProviders = MAX_SLOTS
         if (typeof selectedService.providers !== 'undefined') {
             selectedService.providers.forEach((provider) => {
+                if (! providerIds.includes(provider.id)) {
+                    return
+                }
+
                 if (typeof provider.maxSlotsPerAppointment !== 'undefined'
-                    && provider.maxSlotsPerAppointment > 0
-                    && providerIds.includes(provider.id)
-                ) {
+                    && provider.maxSlotsPerAppointment > 0)
+                {
                     maxSlotsByProviders = Math.max(maxSlotsByProviders, parseInt(provider.maxSlotsPerAppointment))
                     console.log('change: ' + maxSlotsByProviders)
                 }
