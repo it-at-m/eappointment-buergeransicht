@@ -30,13 +30,12 @@ export default {
 
                     let requests = data.services.map(service => {
                         service.providers = []
+                        service.minSlots = {}
                         let index = 0
 
                         data.relations.forEach(relation => {
                             if (relation.serviceId === service.id) {
-                                service.minSlots = service.minSlots
-                                    ? Math.min(service.minSlots, relation.slots)
-                                    : relation.slots
+                                service.minSlots[relation.officeId] = relation.slots
                                 const foundProvider = data.offices.filter(office => {
                                     return office.id === relation.officeId
                                 })[0]
