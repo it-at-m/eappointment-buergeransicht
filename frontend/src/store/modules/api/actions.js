@@ -123,26 +123,29 @@ export default {
                 })
         })
     },
-    fetchServicesAndProviders(store) {
+    fetchServicesAndProviders(store, { serviceId, locationId } = {}) {
         return new Promise((resolve, reject) => {
-            fetch(store.rootState.settings.endpoints.VUE_APP_ZMS_API_BASE
-                + store.rootState.settings.endpoints.VUE_APP_ZMS_API_PROVIDERS_AND_SERVICES_ENDPOINT
-            )
+            let apiUrl = store.rootState.settings.endpoints.VUE_APP_ZMS_API_BASE
+                + store.rootState.settings.endpoints.VUE_APP_ZMS_API_PROVIDERS_AND_SERVICES_ENDPOINT;
+    
+            if (serviceId && locationId) {
+                apiUrl += `?serviceId=${serviceId}&locationId=${locationId}`;
+            }
+    
+            fetch(apiUrl)
                 .then((response) => {
-                    handleMaintenanceMode(store, response)
-
+                    handleMaintenanceMode(store, response);
                     return response.json();
                 })
                 .then(data => {
                     if (data.error) {
-                        reject(data)
+                        reject(data);
                     }
-
-                    resolve(data)
+                    resolve(data);
                 }, error => {
-                    reject(error)
-                })
-        })
+                    reject(error);
+                });
+        });
     },
     fetchAppointment(store, { processId, authKey, scope }) {
         const params = {

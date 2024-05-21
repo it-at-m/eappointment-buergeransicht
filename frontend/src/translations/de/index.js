@@ -1,4 +1,5 @@
 export default {
+  backToHome: "Zurück zur Terminvereinbarung",
   appointmentDoesntExist: "Der Termin konnte nicht gefunden werden.",
   appointmentCanNotBeCanceled: "Der Termin kann nicht mehr storniert werden, da der Terminzeitpunkt in der Vergangenheit liegt.",
   appointmentCanceled: "Ihr Termin wurde storniert.",

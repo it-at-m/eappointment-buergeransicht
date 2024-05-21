@@ -5,13 +5,15 @@
     <link :href="`${linkBaseUrl}css/materialdesignicons.min.css`" rel="stylesheet">
     <link :href="`${linkBaseUrl}css/style.css`" rel="stylesheet">
     <link :href="`${linkBaseUrl}css/patternlab.css`" rel="stylesheet">
-    <AppointmentForm v-if="stylesLoaded"/>
+    <AppointmentForm v-if="stylesLoaded && !error"/>
+    <NotFound v-if="error === 'not-found'" />
   </v-app>
 </template>
 
 <script>
 import AppointmentForm from '@/components/AppointmentForm';
-import SvgSprite from '@/components/SvgSprite'; // Import the SvgSprite component
+import NotFound from '@/components/NotFound';
+import SvgSprite from '@/components/SvgSprite';
 import store from "@/store";
 import translations from "@/translations";
 import Vue from "vue";
@@ -40,6 +42,7 @@ export default {
   props: ['baseUrl', 'serviceId', 'locationId', 'appointmentHash', 'confirmAppointmentHash'],
   components: {
     AppointmentForm,
+    NotFound,
     SvgSprite
   },
   data() {
@@ -54,7 +57,10 @@ export default {
       }
 
       return this.baseUrl + '/'
-    }
+    },
+    error() {
+      return this.$store.state.error;
+    },
   },
   mounted () {
     this.loadStylesHackyWay();

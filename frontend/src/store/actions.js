@@ -23,15 +23,14 @@ export default {
     },
     setUpServicesAndProviders(store, { preselectedService, preselectedProvider }) {
         return new Promise((resolve) => {
-            store.dispatch('API/fetchServicesAndProviders')
+            store.dispatch('API/fetchServicesAndProviders', { serviceId: preselectedService, locationId: preselectedProvider })
                 .then(data => {
-
                     store.commit('setProviders', data.offices)
-
+    
                     let requests = data.services.map(service => {
                         service.providers = []
                         let index = 0
-
+    
                         data.relations.forEach(relation => {
                             if (relation.serviceId === service.id) {
                                 service.minSlots = service.minSlots
@@ -40,30 +39,34 @@ export default {
                                 const foundProvider = data.offices.filter(office => {
                                     return office.id === relation.officeId
                                 })[0]
-
+    
                                 foundProvider.index = index
                                 index++
-
+    
                                 foundProvider.slots = relation.slots
                                 service.providers.push(foundProvider)
                             }
                         })
-
+    
                         return service
                     })
                     store.commit('setServices', requests)
-
+    
                     if (preselectedService !== null) {
                         store.commit('data/reset')
                         store.commit('selectServiceWithId', { id: preselectedService })
                     }
-
+    
                     store.commit('selectProviderWithId', preselectedProvider)
-
+    
                     resolve()
+                })
+                .catch(() => {
+                    store.commit('setError', 'not-found');
                 })
         })
     },
+    
     confirmReservation(store, { appointmentHash }) {
         let appointmentData = null
 
