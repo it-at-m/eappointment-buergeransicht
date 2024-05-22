@@ -225,8 +225,9 @@ export default {
 
       this.$store.commit('data/setService', value)
       this.filteredServices = null
-
-      value.subServices.filter(subservice => {
+      let service = this.$store.state.servicesById[value.id]
+      
+      this.filteredSubServices = service.subServices.filter(subservice => {
         let providerIds = subservice.providers.map(provider => provider.id)
         if (this.$store.state.preselectedProvider) {
           return providerIds.includes(this.$store.state.preselectedProvider)
