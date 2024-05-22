@@ -84,7 +84,10 @@
         <template v-if="$store.state.data.service.subServices">
           <h3 tabindex="0" v-if="$store.state.data.service.subServices.length">{{ $t('oftenBookedTogether') }}</h3>
 
-          <template v-for="(subService) in $store.state.data.service.subServices">
+          <template
+              v-for="(subService) in $store.state.data.service.subServices"
+              v-if="shouldShowService(subService.id)"
+          >
             <v-list-item :key="subService.id + ' ' + appointmentCountTriggered">
               <v-card-actions>
                 <v-btn ref="buttonDown" class="appointment-count-button button-down"
@@ -228,6 +231,16 @@ export default {
     },
     getServiceName(serviceId) {
       return this.$store.state.servicesById[serviceId].name
+    },
+    shouldShowService(serviceId) {
+      let service = this.$store.state.servicesById[serviceId]
+      let providerIds = service.providers.map(provider => provider.id)
+
+      if (this.$store.state.preselectedProvider) {
+        return providerIds.includes(this.$store.state.preselectedProvider)
+      }
+
+      return true
     },
     suggest(event) {
       if (!event.target.value) {
