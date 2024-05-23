@@ -31,14 +31,16 @@ export default {
                     let requests = data.services.map(service => {
                         service.providers = []
                         let index = 0
+                        let foundProvider = null
 
                         data.relations.forEach(relation => {
                             if (relation.serviceId === service.id) {
                                 service.minSlots = service.minSlots
                                     ? Math.min(service.minSlots, relation.slots)
                                     : relation.slots
-                                const foundProvider = data.offices.filter(office => {
+                                foundProvider = data.offices.filter(office => {
                                     return office.id === relation.officeId
+                                        && (! preselectedProvider || preselectedProvider === relation.officeId)
                                 })[0]
 
                                 foundProvider.index = index
@@ -49,9 +51,13 @@ export default {
                             }
                         })
 
-                        return service
+                        if (! foundProvider) {
+                            return null
+                        }
+
+                        return foundProvider
                     })
-                    store.commit('setServices', requests)
+                    store.commit('setServices', requests.filter(request => request))
 
                     if (preselectedService !== null) {
                         store.commit('data/reset')

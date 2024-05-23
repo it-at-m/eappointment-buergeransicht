@@ -180,7 +180,6 @@ export default {
   data: function () {
     return {
       filteredServices: null,
-      filteredSubServices: null,
       serviceSvg: mdiDomain,
       searchSvg: mdiMagnify,
       plusSvg: mdiPlus,
@@ -223,34 +222,12 @@ export default {
         return
       }
 
-      this.$store.commit('data/setService', value).then(() => {
-        this.filteredServices = null
-        let service = this.$store.state.servicesById[value.id]
-
-        this.filteredSubServices = service.subServices.filter(subservice => {
-          let providerIds = subservice.providers.map(provider => provider.id)
-          if (this.$store.state.preselectedProvider) {
-            return providerIds.includes(this.$store.state.preselectedProvider)
-          }
-
-          return true
-        })
-      })
-
+      this.$store.commit('data/setService', value)
+      this.filteredServices = null
       this.$emit('changed')
     },
     getServiceName(serviceId) {
       return this.$store.state.servicesById[serviceId].name
-    },
-    shouldShowService(serviceId) {
-      let service = this.$store.state.servicesById[serviceId]
-      let providerIds = service.providers.map(provider => provider.id)
-
-      if (this.$store.state.preselectedProvider) {
-        return providerIds.includes(this.$store.state.preselectedProvider)
-      }
-
-      return true
     },
     suggest(event) {
       if (!event.target.value) {
