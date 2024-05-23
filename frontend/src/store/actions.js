@@ -31,7 +31,7 @@ export default {
 
                     data.offices.each(office => {
                         if (preselectedProvider && preselectedProvider !== office.id) {
-                            continue
+                            return
                         }
                         officesById[office.id] = office
                     })
@@ -74,7 +74,7 @@ export default {
 
                         return service
                     })
-                    
+
                     console.log(requests)
                     store.commit('setServices', requests.filter(request => request))
 
