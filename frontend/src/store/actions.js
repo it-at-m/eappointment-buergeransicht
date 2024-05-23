@@ -29,7 +29,7 @@ export default {
                     store.commit('setProviders', data.offices)
                     let officesById = {}
 
-                    data.offices.each(office => {
+                    data.offices.forEach(office => {
                         if (preselectedProvider && preselectedProvider !== office.id) {
                             return
                         }
