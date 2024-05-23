@@ -120,7 +120,7 @@ describe('Form data mutations', () => {
             appointmentCount: 2
         }
 
-        mutations.setService(state, null)
+        mutations.setService(state, { service: null, provider: null })
 
         expect(state.appointmentCounts).toStrictEqual({})
         expect(state.appointmentCount).toBe(1)
@@ -149,17 +149,20 @@ describe('Form data mutations', () => {
         }
 
         mutations.setService(state, {
-            id: 1,
-            name: 'Service 1',
-            count: 2,
-            combinable: [
-                1,
-                2
-            ],
-            subServiceCounts: {
-                2: 1,
-                3: 1
-            }
+            service: {
+                id: 1,
+                name: 'Service 1',
+                count: 2,
+                combinable: [
+                    1,
+                    2
+                ],
+                subServiceCounts: {
+                    2: 1,
+                    3: 1
+                }
+            },
+            provider: null
         })
 
         expect(state.appointmentCounts).toStrictEqual({
@@ -214,15 +217,18 @@ describe('Form data mutations', () => {
         }
 
         mutations.setService(state, {
-            id: 1,
-            name: 'Service 1',
-            count: 2,
-            combinable: [
-                1,
-                2,
-                3
-            ],
-            subServiceCounts: {}
+            service: {
+                id: 1,
+                    name: 'Service 1',
+                count: 2,
+                combinable: [
+                    1,
+                    2,
+                    3
+                ],
+                subServiceCounts: {}
+            },
+            provider: null
         })
 
         expect(state.appointmentCounts).toStrictEqual({
