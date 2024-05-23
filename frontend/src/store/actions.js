@@ -27,6 +27,16 @@ export default {
                 .then(data => {
 
                     store.commit('setProviders', data.offices)
+                    let officesById = {}
+
+                    data.offices.each(office => {
+                        if (preselectedProvider && preselectedProvider !== office.id) {
+                            continue
+                        }
+                        officesById[office.id] = office
+                    })
+
+                    console.log(officesById)
 
                     let requests = data.services.map(service => {
                         service.providers = []
@@ -35,19 +45,13 @@ export default {
 
                         data.relations.forEach(relation => {
                             if (relation.serviceId === service.id) {
+                                console.log('SERVICE: ' + service.id)
+                                console.log('OFFICE: ' + relation.officeId)
+                                console.log('-')
                                 service.minSlots = service.minSlots
                                     ? Math.min(service.minSlots, relation.slots)
                                     : relation.slots
-                                foundProvider = data.offices.filter(office => {
-                                    console.log(preselectedProvider)
-                                    console.log('-')
-                                    console.log(relation.officeId)
-                                    return office.id === relation.officeId
-                                        && (
-                                            ! preselectedProvider
-                                            || parseInt(preselectedProvider) === parseInt(relation.officeId)
-                                        )
-                                })[0]
+                                foundProvider = officesById[relation.officeId]
 
                                 if (! foundProvider) {
                                     return
@@ -70,6 +74,8 @@ export default {
 
                         return service
                     })
+                    
+                    console.log(requests)
                     store.commit('setServices', requests.filter(request => request))
 
                     if (preselectedService !== null) {
