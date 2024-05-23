@@ -227,7 +227,9 @@ export default {
       this.$emit('changed')
     },
     getServiceName(serviceId) {
-      return this.$store.state.servicesById[serviceId].name
+      return typeof this.$store.state.servicesById[serviceId] !== "undefined"
+          ? this.$store.state.servicesById[serviceId].name
+          : null
     },
     suggest(event) {
       if (!event.target.value) {
