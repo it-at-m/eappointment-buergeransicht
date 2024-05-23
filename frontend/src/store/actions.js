@@ -46,7 +46,7 @@ export default {
                                 if (! foundProvider) {
                                     return
                                 }
-                                
+
                                 foundProvider.index = index
                                 index++
 
@@ -59,7 +59,7 @@ export default {
                             return null
                         }
 
-                        return foundProvider
+                        return service
                     })
                     store.commit('setServices', requests.filter(request => request))
 
