@@ -39,13 +39,22 @@ export default {
                                     ? Math.min(service.minSlots, relation.slots)
                                     : relation.slots
                                 foundProvider = data.offices.filter(office => {
+                                    console.log(preselectedProvider)
+                                    console.log('-')
+                                    console.log(relation.officeId)
                                     return office.id === relation.officeId
-                                        && (! preselectedProvider || preselectedProvider === relation.officeId)
+                                        && (
+                                            ! preselectedProvider
+                                            || parseInt(preselectedProvider) === parseInt(relation.officeId)
+                                        )
                                 })[0]
 
                                 if (! foundProvider) {
                                     return
                                 }
+
+                                console.log('FOUND')
+                                console.log(foundProvider.id)
 
                                 foundProvider.index = index
                                 index++
