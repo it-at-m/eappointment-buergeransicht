@@ -121,7 +121,7 @@ export default {
                         : 0,
                     providers: providers
                 }
-            }).filter((subservice) => {y
+            }).filter((subservice) => {
                 if (provider) {
                     return subservice.providers.includes(provider)
                 }
