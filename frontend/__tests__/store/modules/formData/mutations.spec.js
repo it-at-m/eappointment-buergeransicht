@@ -177,7 +177,8 @@ describe('Form data mutations', () => {
             name: 'Service 1',
             count: 2,
             combinable: {
-                2: [1]
+                2: [1],
+                3: [1]
             },
             subServiceCounts: {
                 2: 1,
@@ -186,11 +187,13 @@ describe('Form data mutations', () => {
             subServices: [
                 {
                     id: 2,
-                    count: 1
+                    count: 1,
+                    providers: [1]
                 },
                 {
                     id: 3,
-                    count: 1
+                    count: 1,
+                    providers: [1]
                 }
             ]
         })
@@ -247,7 +250,18 @@ describe('Form data mutations', () => {
                 3: [1]
             },
             subServiceCounts: {},
-            subServices: []
+            subServices: [
+                {
+                    id: 2,
+                    count: 0,
+                    providers: [1]
+                },
+                {
+                    id: 3,
+                    count: 0,
+                    providers: [1]
+                }
+            ]
         })
     })
 

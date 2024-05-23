@@ -115,7 +115,7 @@ export default {
         if (! service.subServices) {
             service.subServices = Object.entries(combinable).map(([subServiceId, providers]) => {
                 return {
-                    id: subServiceId,
+                    id: parseInt(subServiceId),
                     count: service.subServiceCounts && service.subServiceCounts[subServiceId]
                         ? service.subServiceCounts[subServiceId]
                         : 0,
