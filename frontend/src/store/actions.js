@@ -43,6 +43,10 @@ export default {
                                         && (! preselectedProvider || preselectedProvider === relation.officeId)
                                 })[0]
 
+                                if (! foundProvider) {
+                                    return
+                                }
+                                
                                 foundProvider.index = index
                                 index++
 
