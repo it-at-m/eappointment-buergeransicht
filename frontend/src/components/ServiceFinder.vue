@@ -85,7 +85,10 @@
           <h3 tabindex="0" v-if="$store.state.data.service.subServices.length">{{ $t('oftenBookedTogether') }}</h3>
 
           <template v-for="(subService) in $store.state.data.service.subServices">
-            <v-list-item :key="subService.id + ' ' + appointmentCountTriggered" v-if="getServiceName(subService.id)">
+            <v-list-item
+                :key="subService.id + ' ' + appointmentCountTriggered"
+                v-if="getServiceName(subService.id)"
+            >
               <v-card-actions>
                 <v-btn ref="buttonDown" class="appointment-count-button button-down"
                   :aria-label="`Anzahl der Dienstleistung verringern auf ` + (appointmentCounts[subService.id] - 1)"
@@ -222,7 +225,7 @@ export default {
         return
       }
 
-      this.$store.commit('data/setService', value)
+      this.$store.commit('data/setService', { service: value, provider: this.$store.state.preselectedProvider })
       this.filteredServices = null
       this.$emit('changed')
     },

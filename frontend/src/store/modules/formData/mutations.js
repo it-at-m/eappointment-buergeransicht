@@ -90,7 +90,7 @@ export default {
         state.appointmentCounts = {}
         state.appointmentCount = 1
     },
-    setService (state, service) {
+    setService (state, { service, provider = null }) {
         state.appointmentCounts = {}
         state.appointmentCount = service && service.count !== undefined ? service.count : 1
         state.service = service
@@ -108,28 +108,32 @@ export default {
         }
 
         let combinable = service.combinable
-        if (combinable.indexOf(parseInt(service.id) !== -1)) {
-            combinable.splice(combinable.indexOf(parseInt(service.id)), 1)
+        if (typeof combinable[parseInt(service.id)] !== "undefined") {
+            delete combinable[parseInt(service.id)]
         }
 
         if (! service.subServices) {
-            if (service.subServiceCounts) {
-                service.subServices = []
-                for (const [subServiceId, subServiceCount] of Object.entries(service.subServiceCounts)) {
-                    service.subServices.push({
-                        id: parseInt(subServiceId),
-                        count: subServiceCount
-                    })
+            service.subServices = Object.entries(combinable).map(([subServiceId, providers]) => {
+                return {
+                    id: subServiceId,
+                    count: service.subServiceCounts && service.subServiceCounts[subServiceId]
+                        ? service.subServiceCounts[subServiceId]
+                        : 0,
+                    providers: providers
                 }
-            } else {
-                service.subServices = combinable.map((subServiceId) => {
-                    return {
-                        id: subServiceId,
-                        count: 0
-                    }
-                })
-            }
+            }).filter((subservice) => {y
+                if (provider) {
+                    return subservice.providers.includes(provider)
+                }
+
+                return true
+            })
+
+            console.log(service.subServices)
         }
+
+        console.log('SERVICE')
+        console.log(service.subServices)
 
         service.subServices.forEach((service) => {
             state.appointmentCounts[service.id] = service.count
