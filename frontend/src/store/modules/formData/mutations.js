@@ -123,7 +123,7 @@ export default {
                 }
             }).filter((subservice) => {
                 if (provider) {
-                    return subservice.providers.includes(provider)
+                    return subservice.providers.includes(String(provider))
                 }
 
                 return true
