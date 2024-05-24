@@ -95,6 +95,9 @@ export default {
         state.appointmentCount = service && service.count !== undefined ? service.count : 1
         state.service = service
 
+        console.log('PRESELECTED PROVIDER')
+        console.log(provider)
+
         if (! service) {
             return
         }
@@ -123,6 +126,8 @@ export default {
                 }
             }).filter((subservice) => {
                 if (provider) {
+                    console.log('providers')
+                    console.log(subservice.providers)
                     return subservice.providers.includes(String(provider))
                 }
 
