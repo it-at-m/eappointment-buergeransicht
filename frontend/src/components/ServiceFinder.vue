@@ -225,6 +225,10 @@ export default {
         return
       }
 
+      console.log('onChange')
+      console.log(value)
+      console.log(this.$store.state.preselectedProvider)
+
       this.$store.commit('data/setService', { service: value, provider: this.$store.state.preselectedProvider })
       this.filteredServices = null
       this.$emit('changed')
