@@ -410,7 +410,7 @@ describe('AppointmentForm', () => {
         wrapper.vm.openPanel(1)
         await wrapper.vm.$nextTick()
 
-        expect(commitMethods).toHaveBeenCalledTimes(0)
+        expect(commitMethods).toHaveBeenCalledTimes(1)
         //expect(commitMethods.mock.calls[0]).toStrictEqual(['goToStep', 1])
         expect(wrapper.vm.$store.state.openedPanel).toBe(0)
     })
