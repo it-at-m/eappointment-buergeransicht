@@ -452,7 +452,7 @@ export default {
         return ''
       }
 
-      return moment.unix(appointment.timestamp).format('DD.MM.YYYY H:mm') + ' ' + this.getProviderName(appointment.locationId)
+      return moment.unix(appointment.timestamp).tz('Europe/Berlin').format('DD.MM.YYYY H:mm') + ' ' + this.getProviderName(appointment.locationId)
     },
     getProviderName(id) {
       let providerName = ''
