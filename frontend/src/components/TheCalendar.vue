@@ -175,7 +175,6 @@ export default {
         }
         timesByHours[berlinTime.format('H')].push(berlinTime);
       });
-      console.log(timesByHours);
       return timesByHours;
     },
     allowedDates: function (val) {
