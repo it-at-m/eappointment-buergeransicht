@@ -522,7 +522,7 @@ describe('AppointmentForm', () => {
         const selectedAppointment = wrapper.vm.getSelectedAppointment()
         await wrapper.vm.$nextTick()
 
-        expect(selectedAppointment).toBe(time.format('DD.MM.YYYY H:mm') + ' Service Name 1')
+        expect(selectedAppointment).toBe(berlinTime.format('DD.MM.YYYY H:mm') + ' Service Name 1')
 
         wrapper.vm.getProviderName = realGetProviderName
     })
