@@ -345,7 +345,7 @@ describe('AppointmentForm', () => {
         expect(mockCallback.mock.calls[2][0]).toBe('data/setAppointment')
         expect(mockCallback.mock.calls[2][1]).toBeNull()
         expect(mockCallback.mock.calls[3][0]).toBe('data/setService')
-        expect(mockCallback.mock.calls[3][1]).toBeNull()
+        expect(mockCallback.mock.calls[3][1]).toStrictEqual({service: null, provider: null})
         expect(openPanelMock.mock.calls[0][0]).toBe(1)
         expect(wrapper.vm.$store.state.confirmedAppointment).toBeNull()
         expect(wrapper.vm.starOverDialog).toBeFalsy()

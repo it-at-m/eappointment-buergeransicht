@@ -108,7 +108,7 @@ describe('Form data mutations', () => {
                 id: 1,
                 name: 'Service',
                 maxQuantity: 2,
-                combinable: []
+                combinable: {}
             },
             appointment: {
                 authKey: 'aaa',
@@ -120,7 +120,7 @@ describe('Form data mutations', () => {
             appointmentCount: 2
         }
 
-        mutations.setService(state, null)
+        mutations.setService(state, { service: null, provider: null })
 
         expect(state.appointmentCounts).toStrictEqual({})
         expect(state.appointmentCount).toBe(1)
@@ -133,10 +133,10 @@ describe('Form data mutations', () => {
                 id: 1,
                 name: 'Service',
                 maxQuantity: 3,
-                combinable: [
-                    2,
-                    3
-                ]
+                combinable: {
+                    2: [1],
+                    3: [1]
+                }
             },
             appointment: {
                 authKey: 'aaa',
@@ -149,17 +149,21 @@ describe('Form data mutations', () => {
         }
 
         mutations.setService(state, {
-            id: 1,
-            name: 'Service 1',
-            count: 2,
-            combinable: [
-                1,
-                2
-            ],
-            subServiceCounts: {
-                2: 1,
-                3: 1
-            }
+            service: {
+                id: 1,
+                name: 'Service 1',
+                count: 2,
+                combinable: {
+                    1: [1],
+                    2: [1],
+                    3: [1]
+                },
+                subServiceCounts: {
+                    2: 1,
+                    3: 1
+                }
+            },
+            provider: null
         })
 
         expect(state.appointmentCounts).toStrictEqual({
@@ -172,9 +176,10 @@ describe('Form data mutations', () => {
             id: 1,
             name: 'Service 1',
             count: 2,
-            combinable: [
-                2
-            ],
+            combinable: {
+                2: [1],
+                3: [1]
+            },
             subServiceCounts: {
                 2: 1,
                 3: 1
@@ -182,11 +187,13 @@ describe('Form data mutations', () => {
             subServices: [
                 {
                     id: 2,
-                    count: 1
+                    count: 1,
+                    providers: [1]
                 },
                 {
                     id: 3,
-                    count: 1
+                    count: 1,
+                    providers: [1]
                 }
             ]
         })
@@ -198,10 +205,10 @@ describe('Form data mutations', () => {
                 id: 1,
                 name: 'Service',
                 maxQuantity: 3,
-                combinable: [
-                    2,
-                    3
-                ]
+                combinable: {
+                    2: [1],
+                    3: [1]
+                }
             },
             appointment: {
                 authKey: 'aaa',
@@ -214,31 +221,47 @@ describe('Form data mutations', () => {
         }
 
         mutations.setService(state, {
-            id: 1,
-            name: 'Service 1',
-            count: 2,
-            combinable: [
-                1,
-                2,
-                3
-            ],
-            subServiceCounts: {}
+            service: {
+                id: 1,
+                    name: 'Service 1',
+                count: 2,
+                combinable: {
+                    1: [1],
+                    2: [1],
+                    3: [1]
+                },
+                subServiceCounts: {}
+            },
+            provider: null
         })
 
         expect(state.appointmentCounts).toStrictEqual({
-            1: 2
+            1: 2,
+            2: 0,
+            3: 0
         })
         expect(state.appointmentCount).toBe(2)
         expect(state.service).toStrictEqual({
             id: 1,
             name: 'Service 1',
             count: 2,
-            combinable: [
-                2,
-                3
-            ],
+            combinable: {
+                2: [1],
+                3: [1]
+            },
             subServiceCounts: {},
-            subServices: []
+            subServices: [
+                {
+                    id: 2,
+                    count: 0,
+                    providers: [1]
+                },
+                {
+                    id: 3,
+                    count: 0,
+                    providers: [1]
+                }
+            ]
         })
     })
 
