@@ -403,7 +403,7 @@ export default {
       this.$store.commit('data/setCustomerData', {})
       this.$store.commit('preselectAppointment', null)
       this.$store.commit('data/setAppointment', null)
-      this.$store.commit('data/setService', null)
+      this.$store.commit('data/setService', { service: null, provider: null })
       this.$store.state.confirmedAppointment = null
       this.starOverDialog = false
 
@@ -452,7 +452,7 @@ export default {
         return ''
       }
 
-      return moment.unix(appointment.timestamp).format('DD.MM.YYYY H:mm') + ' ' + this.getProviderName(appointment.locationId)
+      return moment.unix(appointment.timestamp).tz('Europe/Berlin').format('DD.MM.YYYY H:mm') + ' ' + this.getProviderName(appointment.locationId)
     },
     getProviderName(id) {
       let providerName = ''

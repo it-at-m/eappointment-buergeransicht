@@ -51,7 +51,12 @@ const store = new Vuex.Store({
         }
     },
     actions,
-    mutations,
+    mutations: {
+        ...mutations,
+        setError(state, error) {
+            state.error = error;
+        }
+    },
     modules: {
         data: FormData,
         API: Api

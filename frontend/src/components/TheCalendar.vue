@@ -123,6 +123,7 @@
 
 <script>
 import moment from 'moment'
+import 'moment-timezone'
 import { mdiCalendarClock } from '@mdi/js';
 import 'moment/locale/de';
 
@@ -167,12 +168,14 @@ export default {
       const timesByHours = {}
 
       this.timeSlots.forEach((time) => {
-        if (!Object.prototype.hasOwnProperty.call(timesByHours, time.format('H'))) {
-          timesByHours[time.format('H')] = [];
+        const berlinTime = moment(time).tz('Europe/Berlin');
+
+        if (!Object.prototype.hasOwnProperty.call(timesByHours, berlinTime.format('H'))) {
+          timesByHours[berlinTime.format('H')] = [];
         }
-        timesByHours[time.format('H')].push(time)
-      })
-      return timesByHours
+        timesByHours[berlinTime.format('H')].push(berlinTime);
+      });
+      return timesByHours;
     },
     allowedDates: function (val) {
       const currentDate = moment(val, 'YYYY-MM-DD')

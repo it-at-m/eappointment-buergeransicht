@@ -36,7 +36,7 @@ export default {
                     service.subServiceCounts = subServiceCountsById
                 }
 
-                this.commit('data/setService', service)
+                this.commit('data/setService', { service: service, provider: state.preselectedProvider })
             }
         })
     },

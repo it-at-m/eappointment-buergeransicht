@@ -23,9 +23,8 @@ export default {
     },
     setUpServicesAndProviders(store, { preselectedService, preselectedProvider }) {
         return new Promise((resolve) => {
-            store.dispatch('API/fetchServicesAndProviders')
+            store.dispatch('API/fetchServicesAndProviders', { serviceId: preselectedService, locationId: preselectedProvider })
                 .then(data => {
-
                     store.commit('setProviders', data.offices)
                     let officesById = {}
 
@@ -37,12 +36,11 @@ export default {
                     })
 
                     console.log(officesById)
-
                     let requests = data.services.map(service => {
                         service.providers = []
+                        service.minSlots = {}
                         let index = 0
                         let foundProvider = null
-
                         data.relations.forEach(relation => {
                             if (relation.serviceId === service.id) {
                                 console.log('SERVICE: ' + service.id)
@@ -62,7 +60,7 @@ export default {
 
                                 foundProvider.index = index
                                 index++
-
+    
                                 foundProvider.slots = relation.slots
                                 service.providers.push(foundProvider)
                             }
@@ -71,24 +69,26 @@ export default {
                         if (! foundProvider) {
                             return null
                         }
-
                         return service
                     })
 
                     console.log(requests)
                     store.commit('setServices', requests.filter(request => request))
-
+                    store.commit('selectProviderWithId', preselectedProvider)
+    
                     if (preselectedService !== null) {
                         store.commit('data/reset')
                         store.commit('selectServiceWithId', { id: preselectedService })
                     }
-
-                    store.commit('selectProviderWithId', preselectedProvider)
-
+    
                     resolve()
+                })
+                .catch(() => {
+                    store.commit('setError', 'not-found');
                 })
         })
     },
+    
     confirmReservation(store, { appointmentHash }) {
         let appointmentData = null
 
