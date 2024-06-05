@@ -26,19 +26,38 @@ export default {
             store.dispatch('API/fetchServicesAndProviders', { serviceId: preselectedService, locationId: preselectedProvider })
                 .then(data => {
                     store.commit('setProviders', data.offices)
-    
+                    let officesById = {}
+
+                    data.offices.forEach(office => {
+                        if (preselectedProvider && preselectedProvider !== office.id) {
+                            return
+                        }
+                        officesById[office.id] = office
+                    })
+
+                    console.log(officesById)
                     let requests = data.services.map(service => {
                         service.providers = []
                         service.minSlots = {}
                         let index = 0
-    
+                        let foundProvider = null
                         data.relations.forEach(relation => {
                             if (relation.serviceId === service.id) {
-                                service.minSlots[relation.officeId] = relation.slots
-                                const foundProvider = data.offices.filter(office => {
-                                    return office.id === relation.officeId
-                                })[0]
-    
+                                console.log('SERVICE: ' + service.id)
+                                console.log('OFFICE: ' + relation.officeId)
+                                console.log('-')
+                                service.minSlots = service.minSlots
+                                    ? Math.min(service.minSlots, relation.slots)
+                                    : relation.slots
+                                foundProvider = officesById[relation.officeId]
+
+                                if (! foundProvider) {
+                                    return
+                                }
+
+                                console.log('FOUND')
+                                console.log(foundProvider.id)
+
                                 foundProvider.index = index
                                 index++
     
@@ -46,10 +65,15 @@ export default {
                                 service.providers.push(foundProvider)
                             }
                         })
-    
+
+                        if (! foundProvider) {
+                            return null
+                        }
                         return service
                     })
-                    store.commit('setServices', requests)
+
+                    console.log(requests)
+                    store.commit('setServices', requests.filter(request => request))
                     store.commit('selectProviderWithId', preselectedProvider)
     
                     if (preselectedService !== null) {

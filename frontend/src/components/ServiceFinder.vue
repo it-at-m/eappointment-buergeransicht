@@ -85,9 +85,7 @@
           <h3 tabindex="0" v-if="$store.state.data.service.subServices.length">{{ $t('oftenBookedTogether') }}</h3>
 
           <template v-for="(subService) in $store.state.data.service.subServices">
-            <v-list-item
-                :key="subService.id + ' ' + appointmentCountTriggered"
-                v-if="getServiceName(subService.id)"
+            <v-list-item :key="subService.id + ' ' + appointmentCountTriggered" v-if="getServiceName(subService.id)"
             >
               <v-card-actions>
                 <v-btn ref="buttonDown" class="appointment-count-button button-down"
@@ -234,7 +232,7 @@ export default {
       this.$emit('changed')
     },
     getServiceName(serviceId) {
-      return typeof this.$store.state.servicesById[serviceId] != 'undefined'
+      return typeof this.$store.state.servicesById[serviceId] !== "undefined"
           ? this.$store.state.servicesById[serviceId].name
           : null
     },
