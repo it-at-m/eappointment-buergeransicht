@@ -128,7 +128,8 @@ export default {
                 if (provider) {
                     console.log('providers')
                     console.log(subservice.providers)
-                    return subservice.providers.includes(String(provider))
+                    console.log(subservice.providers.includes(String(provider.id)))
+                    return subservice.providers.includes(String(provider.id))
                 }
 
                 return true
