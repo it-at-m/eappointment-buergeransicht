@@ -7,6 +7,7 @@ import translations from './../../src/translations'
 import store from './../../src/store'
 import Vue from 'vue'
 import moment from "moment"
+import 'moment-timezone'
 
 Vue.use(VueI18n)
 Vue.use(Vuetify)
@@ -511,16 +512,17 @@ describe('AppointmentForm', () => {
             return 'Service Name 1'
         })
         const time = moment.unix(1684830081)
+        const berlinTime = moment(time).tz('Europe/Berlin');
 
         wrapper.vm.$store.state.data.appointment = {
-            timestamp: time.unix(),
+            timestamp: berlinTime.unix(),
             locationId: 1
         }
 
         const selectedAppointment = wrapper.vm.getSelectedAppointment()
         await wrapper.vm.$nextTick()
 
-        expect(selectedAppointment).toBe(time.format('DD.MM.YYYY H:mm') + ' Service Name 1')
+        expect(selectedAppointment).toBe(berlinTime.format('DD.MM.YYYY H:mm') + ' Service Name 1')
 
         wrapper.vm.getProviderName = realGetProviderName
     })
