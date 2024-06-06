@@ -27,7 +27,6 @@ const checkMaxSlots = (state) => {
             continue
         }
 
-        console.log('selectedService providers: ' + selectedService.providers.length)
         let minSlotsForAllProviders = MAX_SLOTS
         if (typeof selectedService.providers !== 'undefined') {
             selectedService.providers.forEach((provider) => {
@@ -39,7 +38,6 @@ const checkMaxSlots = (state) => {
                     && provider.maxSlotsPerAppointment > 0)
                 {
                     maxSlotsByProviders = Math.max(maxSlotsByProviders, parseInt(provider.maxSlotsPerAppointment))
-                    console.log('change: ' + maxSlotsByProviders)
                 }
 
                 minSlotsForAllProviders = Math.min(minSlotsForAllProviders, selectedService.minSlots[provider.id])
@@ -53,8 +51,6 @@ const checkMaxSlots = (state) => {
         maxSlots = Math.min(maxSlotsByProviders, MAX_SLOTS)
     }
 
-    console.log('min slots: ' + minSlots)
-    console.log('max slots: ' + maxSlots)
     if (minSlots > maxSlots) {
         state.maxSlotsExceeded = true
     } else {
@@ -95,9 +91,6 @@ export default {
         state.appointmentCount = service && service.count !== undefined ? service.count : 1
         state.service = service
 
-        console.log('PRESELECTED PROVIDER')
-        console.log(provider)
-
         if (! service) {
             return
         }
@@ -126,20 +119,12 @@ export default {
                 }
             }).filter((subservice) => {
                 if (provider) {
-                    console.log('providers')
-                    console.log(subservice.providers)
-                    console.log(subservice.providers.includes(String(provider.id)))
                     return subservice.providers.includes(String(provider.id))
                 }
 
                 return true
             })
-
-            console.log(service.subServices)
         }
-
-        console.log('SERVICE')
-        console.log(service.subServices)
 
         service.subServices.forEach((service) => {
             state.appointmentCounts[service.id] = service.count
