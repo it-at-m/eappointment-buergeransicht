@@ -99,6 +99,8 @@ export default {
 
         if (service.combinable === undefined) {
             service.combinable = []
+            service.subServices = []
+            state.service = service
 
             return
         }
