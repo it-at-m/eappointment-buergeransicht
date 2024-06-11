@@ -7,6 +7,57 @@ function handleMaintenanceMode(store, response) {
 }
 
 export default {
+
+    fetchCaptchaDetails(store) {
+        return new Promise((resolve, reject) => {
+            let apiUrl = store.rootState.settings.endpoints.VUE_APP_ZMS_API_BASE
+                + store.rootState.settings.endpoints.VUE_APP_ZMS_API_CAPTCHA_DETAILS_ENDPOINT;
+    
+            fetch(apiUrl)
+                .then((response) => {
+                    handleMaintenanceMode(store, response);
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.error) {
+                        reject(data);
+                    }
+                    resolve(data);
+                }, error => {
+                    reject(error);
+                });
+        });
+    },
+
+    verifyCaptcha(store, { solution, puzzle }) {
+        return new Promise((resolve, reject) => {
+            const requestOptions = {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    solution: solution,
+                    puzzle: puzzle
+                })
+            };
+
+            fetch(store.rootState.settings.endpoints.VUE_APP_ZMS_API_BASE + store.rootState.settings.endpoints.VUE_APP_ZMS_API_CAPTCHA_VERIFY_ENDPOINT, requestOptions)
+                .then((response) => {
+                    if (response.status === 503) {
+                        store.commit('setError', 'Service Unavailable');
+                        store.rootState.maintenanceMode = true;
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.error) {
+                        reject(data);
+                    }
+                    resolve(data);
+                }, error => {
+                    reject(error);
+                });
+        });
+    },
     confirmReservation(store, { processId, authKey, scope }) {
         return new Promise((resolve, reject) => {
             const requestOptions = {

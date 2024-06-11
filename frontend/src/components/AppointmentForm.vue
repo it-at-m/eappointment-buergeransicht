@@ -12,6 +12,7 @@
       </v-alert>
 
       <v-row class="content" v-else>
+
         <v-col cols="12">
 
           <div class="appointment-number" v-if="$store.state.preselectedAppointment" tabindex="1">
@@ -139,7 +140,6 @@
                   <use xlink:href="#icon-arrow-right"></use>
                 </svg>
               </button>
-
             </span>
 
             <span v-if="appointmentCanBeStartedOver">
@@ -320,6 +320,19 @@
 
         </v-col>
       </v-row>
+      <v-row>
+        <v-col cols="12">
+          <div v-if="captchaDetails && captchaDetails.siteKey && captchaDetails.puzzle">
+            <vue-friendly-captcha 
+              :sitekey="captchaDetails.siteKey"
+              :puzzleEndpoint="captchaDetails.puzzle"
+              language="de"
+              @done="handleCaptchaDone"
+              @error="handleCaptchaError"
+            />
+          </div>
+        </v-col>
+      </v-row>
     </v-container>
   </div>
 </template>
@@ -331,6 +344,7 @@ import InfoMessage from './InfoMessage.vue'
 import TheCalendar from './TheCalendar.vue'
 import CustomerInfo from './CustomerInfo.vue'
 import moment from "moment"
+import VueFriendlyCaptcha from '@somushq/vue-friendly-captcha';
 
 export default {
   name: 'AppointmentForm',
@@ -339,7 +353,8 @@ export default {
     ServiceFinder,
     InfoMessage,
     TheCalendar,
-    CustomerInfo
+    CustomerInfo,
+    VueFriendlyCaptcha
   },
   data: () => ({
     rebookDialog: false,
@@ -363,6 +378,9 @@ export default {
     },
     maintenanceMode () {
       return this.$store.state.maintenanceMode
+    },
+    captchaDetails() {
+      return this.$store.state.captchaDetails;
     }
   },
   methods: {
@@ -469,6 +487,14 @@ export default {
       this.$store.commit('selectServiceWithId', { id: id })
       this.openPanel(1)
       this.$store.state.confirmedAppointment = null
+    },
+    handleCaptchaDone(solution) {
+      console.log("Captcha solved with solution:", solution);
+      // Handle the solution, possibly update your Vuex store or submit it with a form
+    },
+    handleCaptchaError(error) {
+      console.error("Captcha error:", error);
+      // Handle the error, possibly show a message to the user
     }
   }
 }

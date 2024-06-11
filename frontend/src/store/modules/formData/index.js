@@ -4,6 +4,7 @@ import mutations from './mutations.js'
 const state = {
     service: null,
     providers: [],
+    captchaDetails: [],
     appointment: null,
     appointmentCounts: {},
     appointmentCount: 1,

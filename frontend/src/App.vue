@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import 'regenerator-runtime/runtime';
 import AppointmentForm from '@/components/AppointmentForm';
 import NotFound from '@/components/NotFound';
 import SvgSprite from '@/components/SvgSprite';
@@ -103,6 +104,7 @@ export default {
             this.$store.state.confirmedAppointment = true
           })
         }
+        this.$store.dispatch('setUpCaptchaDetails');
       })
     },
     loadStylesHackyWay() {
