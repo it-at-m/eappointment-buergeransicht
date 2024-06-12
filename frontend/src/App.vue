@@ -12,7 +12,6 @@
 </template>
 
 <script>
-import 'regenerator-runtime/runtime';
 import AppointmentForm from '@/components/AppointmentForm';
 import NotFound from '@/components/NotFound';
 import SvgSprite from '@/components/SvgSprite';

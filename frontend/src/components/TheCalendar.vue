@@ -131,6 +131,7 @@ import moment from 'moment'
 import 'moment-timezone'
 import { mdiCalendarClock } from '@mdi/js';
 import 'moment/locale/de';
+import 'regenerator-runtime/runtime';
 import VueFriendlyCaptcha from '@somushq/vue-friendly-captcha';
 
 export default {
