@@ -247,6 +247,7 @@ export default {
           window.scrollTo(0, 0)
           this.$v.$reset()
         }, (error) => {
+          console.error(error)
           this.$store.state.error = 'tooManyAppointmentsWithSameMail'
         })
     },

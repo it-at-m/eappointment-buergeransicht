@@ -316,6 +316,7 @@ export default {
         })
     },
     handleCaptchaDone(solution) {
+      console.log(solution);
       if (this.selectedTimeSlot) {
         this.chooseAppointment(this.selectedTimeSlot);
       }
