@@ -16,7 +16,6 @@ export default {
 
                     resolve(true)
                 }, (error) => {
-                    console.log(error)
                     reject(error)
                 })
         })

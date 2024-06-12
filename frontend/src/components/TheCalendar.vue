@@ -103,20 +103,20 @@
             </div>
           </div>
           <div v-for="(times, index) in timeSlotsInHours()" :key="index">
-            <div class="appointments-in-hours">
-              <h4 class="time-hour" tabindex="0">
-                {{ times[0].format('H') }}:00-{{ times[0].format('H') }}:59
-              </h4>
-              <div class="select-appointment" tabindex="0" v-for="timeSlot in times" :key="timeSlot.unix()"
-                v-on:keyup.enter="handleTimeSlotSelection(timeSlot)" v-on:keyup.space="handleTimeSlotSelection(timeSlot)"
-                @click="handleTimeSlotSelection(timeSlot)">
-                {{ timeSlot.format('H:mm') }}
+            <div class="captcha-hour-wrapper">
+              <div class="appointments-in-hours">
+                <h4 class="time-hour" tabindex="0">
+                  {{ times[0].format('H') }}:00-{{ times[0].format('H') }}:59
+                </h4>
+                <div class="select-appointment" tabindex="0" v-for="timeSlot in times" :key="timeSlot.unix()"
+                  v-on:keyup.enter="handleTimeSlotSelection(timeSlot)" v-on:keyup.space="handleTimeSlotSelection(timeSlot)"
+                  @click="handleTimeSlotSelection(timeSlot)">
+                  {{ timeSlot.format('H:mm') }}
+                </div>
               </div>
-              <v-col v-if="showCaptcha && selectedTimeSlot && selectedTimeSlot.format('H') === times[0].format('H')" cols="12" class="d-flex pl-0 col col-12">
-                <div v-if="captchaDetails && captchaDetails.siteKey && captchaDetails.puzzle">
+              <v-col v-if="showCaptcha && selectedTimeSlot && selectedTimeSlot.format('H') === times[0].format('H') && captchaDetails && captchaDetails.siteKey && captchaDetails.puzzle" cols="12" class="d-flex justify-center align-center">
                   <vue-friendly-captcha :key="captchaKey" :sitekey="captchaDetails.siteKey" :puzzleEndpoint="captchaDetails.puzzle"
                     language="de" @done="handleCaptchaDone" @error="handleCaptchaError" />
-                </div>
               </v-col>
             </div>
           </div>
@@ -316,7 +316,6 @@ export default {
         })
     },
     handleCaptchaDone(solution) {
-      console.log("Captcha solved with solution:", solution);
       if (this.selectedTimeSlot) {
         this.chooseAppointment(this.selectedTimeSlot);
       }
