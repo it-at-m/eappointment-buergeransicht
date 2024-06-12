@@ -73,13 +73,6 @@
           <div class="appointment-container-title">
             <h2 tabindex="0">{{ $t('availableTimes') }}</h2>
           </div>
-          <v-col cols="12" class="d-flex justify-center align-center">
-            <div v-if="captchaDetails && captchaDetails.siteKey && captchaDetails.puzzle">
-              <vue-friendly-captcha :sitekey="captchaDetails.siteKey" :puzzleEndpoint="captchaDetails.puzzle"
-                language="de" @done="handleCaptchaDone" @error="handleCaptchaError" />
-            </div>
-          </v-col>
-
           <div class="appointment-container-subtitle lighten-2">
             <h4 tabindex="0">{{ formatDay(date) }}</h4>
           </div>
@@ -115,10 +108,16 @@
                 {{ times[0].format('H') }}:00-{{ times[0].format('H') }}:59
               </h4>
               <div class="select-appointment" tabindex="0" v-for="timeSlot in times" :key="timeSlot.unix()"
-                v-on:keyup.enter="chooseAppointment(timeSlot)" v-on:keyup.space="chooseAppointment(timeSlot)"
-                @click="chooseAppointment(timeSlot)">
+                v-on:keyup.enter="handleTimeSlotSelection(timeSlot)" v-on:keyup.space="handleTimeSlotSelection(timeSlot)"
+                @click="handleTimeSlotSelection(timeSlot)">
                 {{ timeSlot.format('H:mm') }}
               </div>
+              <v-col v-if="showCaptcha && selectedTimeSlot && selectedTimeSlot.format('H') === times[0].format('H')" cols="12" class="d-flex pl-0 col col-12">
+                <div v-if="captchaDetails && captchaDetails.siteKey && captchaDetails.puzzle">
+                  <vue-friendly-captcha :key="captchaKey" :sitekey="captchaDetails.siteKey" :puzzleEndpoint="captchaDetails.puzzle"
+                    language="de" @done="handleCaptchaDone" @error="handleCaptchaError" />
+                </div>
+              </v-col>
             </div>
           </div>
         </div>
@@ -151,7 +150,10 @@ export default {
     timeSlotError: false,
     dateError: false,
     provider: null,
-    missingSlotsInARow: false
+    missingSlotsInARow: false,
+    showCaptcha: false,
+    selectedTimeSlot: null,
+    captchaKey: 0
   }),
   computed: {
     filteredProviders: function () {
@@ -245,6 +247,11 @@ export default {
           }
         })
     },
+    handleTimeSlotSelection: function (timeSlot) {
+      this.selectedTimeSlot = timeSlot;
+      this.showCaptcha = true;
+      this.captchaKey += 1;
+    },
     chooseAppointment: function (timeSlot) {
       this.timeSlotError = false
       const selectedServices = {}
@@ -310,7 +317,9 @@ export default {
     },
     handleCaptchaDone(solution) {
       console.log("Captcha solved with solution:", solution);
-      // Handle the solution, possibly update your Vuex store or submit it with a form
+      if (this.selectedTimeSlot) {
+        this.chooseAppointment(this.selectedTimeSlot);
+      }
     },
     handleCaptchaError(error) {
       console.error("Captcha error:", error);
