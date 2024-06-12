@@ -73,6 +73,12 @@
           <div class="appointment-container-title">
             <h2 tabindex="0">{{ $t('availableTimes') }}</h2>
           </div>
+          <v-col cols="12" class="d-flex justify-center align-center">
+            <div v-if="captchaDetails && captchaDetails.siteKey && captchaDetails.puzzle">
+              <vue-friendly-captcha :sitekey="captchaDetails.siteKey" :puzzleEndpoint="captchaDetails.puzzle"
+                language="de" @done="handleCaptchaDone" @error="handleCaptchaError" />
+            </div>
+          </v-col>
 
           <div class="appointment-container-subtitle lighten-2">
             <h4 tabindex="0">{{ formatDay(date) }}</h4>
@@ -126,9 +132,13 @@ import moment from 'moment'
 import 'moment-timezone'
 import { mdiCalendarClock } from '@mdi/js';
 import 'moment/locale/de';
+import VueFriendlyCaptcha from '@somushq/vue-friendly-captcha';
 
 export default {
   name: 'TheCalendar',
+  components: {
+    VueFriendlyCaptcha
+  },
   data: () => ({
     selectedProviderIndex: null,
     date: moment().format("YYYY-MM-DD"),
@@ -158,6 +168,9 @@ export default {
       })
 
       return filteredProviders
+    },
+    captchaDetails() {
+      return this.$store.state.captchaDetails;
     }
   },
   methods: {
@@ -294,6 +307,14 @@ export default {
 
           this.getAppointmentsOfDay(availableDays[0], false)
         })
+    },
+    handleCaptchaDone(solution) {
+      console.log("Captcha solved with solution:", solution);
+      // Handle the solution, possibly update your Vuex store or submit it with a form
+    },
+    handleCaptchaError(error) {
+      console.error("Captcha error:", error);
+      // Handle the error, possibly show a message to the user
     }
   },
   mounted: function () {
