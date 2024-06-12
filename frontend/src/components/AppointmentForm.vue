@@ -322,15 +322,15 @@
       </v-row>
       <v-row>
         <v-col cols="12">
-          <div v-if="captchaDetails && captchaDetails.siteKey && captchaDetails.puzzle">
-            <vue-friendly-captcha 
-              :sitekey="captchaDetails.siteKey"
-              :puzzleEndpoint="captchaDetails.puzzle"
-              language="de"
-              @done="handleCaptchaDone"
-              @error="handleCaptchaError"
-            />
-          </div>
+            <div v-if="captchaDetails && captchaDetails.siteKey && captchaDetails.puzzle">
+              <vue-friendly-captcha 
+                :sitekey="captchaDetails.siteKey"
+                :puzzleEndpoint="captchaDetails.puzzle"
+                language="de"
+                @done="handleCaptchaDone"
+                @error="handleCaptchaError"
+              />
+            </div>
         </v-col>
       </v-row>
     </v-container>
