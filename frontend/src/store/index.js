@@ -17,6 +17,7 @@ const store = new Vuex.Store({
         step: 1,
         openedPanel: 0,
         maintenanceMode: false,
+        captchaEnabled: false,
         confirmedAppointment: null,
         activatedAppointment: null,
         isRebooking: false,
@@ -48,8 +49,7 @@ const store = new Vuex.Store({
                 'VUE_APP_ZMS_API_CONFIRM_RESERVATION_ENDPOINT': '/api/backend/confirm-appointment',
                 'VUE_APP_ZMS_API_CANCEL_APPOINTMENT_ENDPOINT': '/api/backend/cancel-appointment',
                 'VUE_APP_ZMS_API_PRECONFIRM_RESERVATION_ENDPOINT': '/api/backend/preconfirm-appointment',
-                'VUE_APP_ZMS_API_CAPTCHA_DETAILS_ENDPOINT': '/api/backend/captcha-details',
-                'VUE_APP_ZMS_API_CAPTCHA_VERIFY_ENDPOINT': '/api/backend/captcha-verify'
+                'VUE_APP_ZMS_API_CAPTCHA_DETAILS_ENDPOINT': '/api/backend/captcha-details'
             }
         }
     },
