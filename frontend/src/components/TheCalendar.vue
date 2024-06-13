@@ -154,7 +154,8 @@ export default {
     missingSlotsInARow: false,
     showCaptcha: false,
     selectedTimeSlot: null,
-    captchaKey: 0
+    captchaKey: 0,
+    captchaSolution: null 
   }),
   computed: {
     filteredProviders: function () {
@@ -252,6 +253,7 @@ export default {
       this.selectedTimeSlot = timeSlot;
       this.showCaptcha = true;
       this.captchaKey += 1;
+      this.captchaSolution = null;
     },
     chooseAppointment: function (timeSlot) {
       this.timeSlotError = false
@@ -265,7 +267,7 @@ export default {
 
       const oldAppointment = this.$store.state.data.appointment
 
-      this.$store.dispatch('API/reserveAppointment', { timeSlot, serviceIds: Object.keys(selectedServices), serviceCounts: Object.values(selectedServices), providerId: this.provider.id })
+      this.$store.dispatch('API/reserveAppointment', { timeSlot, serviceIds: Object.keys(selectedServices), serviceCounts: Object.values(selectedServices), providerId: this.provider.id, captchaSolution: this.captchaSolution })
         .then(data => {
           if (data.errorMessage) {
             this.timeSlotError = data.errorMessage
@@ -317,7 +319,7 @@ export default {
         })
     },
     handleCaptchaDone(solution) {
-      console.log(solution);
+      this.captchaSolution = solution;
       if (this.selectedTimeSlot) {
         this.chooseAppointment(this.selectedTimeSlot);
       }
