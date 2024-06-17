@@ -6,8 +6,8 @@
     <link :href="`${linkBaseUrl}css/style.css`" rel="stylesheet">
     <link :href="`${linkBaseUrl}css/patternlab.css`" rel="stylesheet">
     <link :href="`${linkBaseUrl}css/friendlycaptcha.css`" rel="stylesheet">
-    <AppointmentForm v-if="stylesLoaded && !error"/>
-    <NotFound v-if="error === 'not-found'" />
+    <AppointmentForm v-if="stylesLoaded && !errorNotFound"/>
+    <NotFound v-if="stylesLoaded && errorNotFound" />
   </v-app>
 </template>
 
