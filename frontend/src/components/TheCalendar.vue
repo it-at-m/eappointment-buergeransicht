@@ -1,7 +1,6 @@
 <template>
   <div class="calendar-container">
     <v-container>
-      {{ filteredProviders }}
       <v-row>
         <v-col class="col-sm-12 col-lg-12 p-0">
           <v-tabs v-if="$store.state.data.service && $store.state.data.service.providers.length > 0" color="primary"
