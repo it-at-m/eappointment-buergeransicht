@@ -243,9 +243,6 @@ export default {
       }).then(() => {
         this.$store.state.confirmedAppointment = null
         this.$store.state.error = null
-        this.$store.state.data.appointment.reserved = true
-        this.$store.state.data.appointment.updated = true
-        this.$store.state.data.appointment.preconfirmed = false
           this.$emit('next')
           window.scrollTo(0, 0)
           this.$v.$reset()

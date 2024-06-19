@@ -19,7 +19,6 @@ const store = new Vuex.Store({
         maintenanceMode: false,
         reserved: null,
         updated: null,
-        preconfirmed: null,
         confirmedAppointment: null,
         activatedAppointment: null,
         isRebooking: false,

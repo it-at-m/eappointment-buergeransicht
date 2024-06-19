@@ -276,7 +276,6 @@ export default {
           appointment.locationId = appointment.officeId
           appointment.reserved = true
           appointment.updated = false
-          appointment.preconfirmed = false
           this.$store.commit('data/setAppointment', appointment)
           this.$emit('next')
           window.scrollTo(0, 0)
@@ -331,7 +330,7 @@ export default {
       return
     }
 
-    if (this.$store.state.data.appointment && this.$store.state.data.appointment.locationId && !this.$store.state.data.appointment.reserved && !this.$store.state.data.appointment.updated && !this.$store.state.data.appointment.preconfirmed) {
+    if (this.$store.state.data.appointment && this.$store.state.data.appointment.locationId && !this.$store.state.data.appointment.reserved && !this.$store.state.data.appointment.updated) {
       this.showForProvider(this.$store.state.data.appointment.provider)
 
       let providerId = this.$store.state.data.appointment.locationId
