@@ -422,8 +422,6 @@ export default {
         }, () => {
           this.disabled = false
           this.$store.state.confirmedAppointment = false
-          this.$store.state.data.appointment.reserved = true
-          this.$store.state.data.appointment.updated = true
         })
     },
     openPanel(step) {
