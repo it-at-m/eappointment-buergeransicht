@@ -1,32 +1,19 @@
 <template>
   <div class="calendar-container">
     <v-container>
+      {{ filteredProviders }}
       <v-row>
         <v-col class="col-sm-12 col-lg-12 p-0">
-          <v-tabs
-              v-if="$store.state.data.service && $store.state.data.service.providers.length > 0"
-              color="primary"
-              show-arrows="mobile"
-              id="location-tabs"
-              ref="locationTabs"
-              :key="selectedProviderIndex === -1"
-              v-model="selectedProviderIndex"
-          >
-            <v-tab
-              v-for="provider in filteredProviders"
-              :key="provider.index"
-              @change="showForProvider(provider)"
-            >
+          <v-tabs v-if="$store.state.data.service && $store.state.data.service.providers.length > 0" color="primary"
+            show-arrows="mobile" id="location-tabs" ref="locationTabs" :key="selectedProviderIndex === -1"
+            v-model="selectedProviderIndex">
+            <v-tab v-for="provider in filteredProviders" :key="provider.index" @change="showForProvider(provider)">
               {{ provider.name }}
             </v-tab>
           </v-tabs>
 
-          <v-tab-items
-              v-model="selectedProviderIndex"
-          >
-            <v-tab-item
-                v-for="provider in filteredProviders"
-                :key="provider.index">
+          <v-tab-items v-model="selectedProviderIndex">
+            <v-tab-item v-for="provider in filteredProviders" :key="provider.index">
             </v-tab-item>
           </v-tab-items>
         </v-col>
@@ -35,10 +22,8 @@
 
     <v-date-picker full-width v-model="date" :allowed-dates="allowedDates" class="mt-0" :min="currentDate"
       :first-day-of-week="1" :locale="$i18n.locale" :no-title="true" :weekday-format="getWeekday"
-      @click:date="getAppointmentsOfDay(date)"
-      :prev-month-aria-label="$t('previousMonth')"
-      :next-month-aria-label="$t('nextMonth')"
-    ></v-date-picker>
+      @click:date="getAppointmentsOfDay(date)" :prev-month-aria-label="$t('previousMonth')"
+      :next-month-aria-label="$t('nextMonth')"></v-date-picker>
 
     <div v-if="dateError"
       class="m-component m-component-callout m-component-callout--warning m-component-callout--fullwidth">
@@ -109,14 +94,17 @@
                   {{ times[0].format('H') }}:00-{{ times[0].format('H') }}:59
                 </h4>
                 <div class="select-appointment" tabindex="0" v-for="timeSlot in times" :key="timeSlot.unix()"
-                  v-on:keyup.enter="handleTimeSlotSelection(timeSlot)" v-on:keyup.space="handleTimeSlotSelection(timeSlot)"
-                  @click="handleTimeSlotSelection(timeSlot)">
+                  v-on:keyup.enter="handleTimeSlotSelection(timeSlot)"
+                  v-on:keyup.space="handleTimeSlotSelection(timeSlot)" @click="handleTimeSlotSelection(timeSlot)">
                   {{ timeSlot.format('H:mm') }}
                 </div>
               </div>
-              <v-col v-if="captchaDetails.captchaEnabled && showCaptcha && selectedTimeSlot && selectedTimeSlot.format('H') === times[0].format('H') && captchaDetails && captchaDetails.siteKey && captchaDetails.puzzle" cols="12" class="d-flex justify-center align-center">
-                  <vue-friendly-captcha :key="captchaKey" :sitekey="captchaDetails.siteKey" :puzzleEndpoint="captchaDetails.puzzle"
-                    language="de" @done="handleCaptchaDone" @error="handleCaptchaError" />
+              <v-col
+                v-if="provider.scope.captchaActivatedRequired === '1' && captchaDetails.captchaEnabled && showCaptcha && selectedTimeSlot && selectedTimeSlot.format('H') === times[0].format('H') && captchaDetails && captchaDetails.siteKey && captchaDetails.puzzle"
+                cols="12" class="d-flex justify-center align-center">
+                <vue-friendly-captcha :key="captchaKey" :sitekey="captchaDetails.siteKey"
+                  :puzzleEndpoint="captchaDetails.puzzle" language="de" @done="handleCaptchaDone"
+                  @error="handleCaptchaError" />
               </v-col>
             </div>
           </div>
@@ -155,7 +143,7 @@ export default {
     showCaptcha: false,
     selectedTimeSlot: null,
     captchaKey: 0,
-    captchaSolution: null 
+    captchaSolution: null
   }),
   computed: {
     filteredProviders: function () {
@@ -175,9 +163,6 @@ export default {
     },
     captchaDetails() {
       return this.$store.state.captchaDetails;
-    },
-    captchaEnabled () {
-      return this.$store.state.captchaEnabled
     }
   },
   methods: {
@@ -254,7 +239,7 @@ export default {
     },
     handleTimeSlotSelection: function (timeSlot) {
       this.selectedTimeSlot = timeSlot;
-      this.showCaptcha = this.captchaDetails.captchaEnabled;
+      this.showCaptcha = this.captchaDetails.captchaEnabled && (this.provider.scope.captchaActivatedRequired === '1');
       if (this.showCaptcha) {
         this.captchaKey += 1;
         this.captchaSolution = null;
@@ -289,7 +274,9 @@ export default {
           appointment.provider = this.provider
           appointment.officeName = this.provider.name
           appointment.locationId = appointment.officeId
-
+          appointment.reserved = true
+          appointment.updated = false
+          appointment.preconfirmed = false
           this.$store.commit('data/setAppointment', appointment)
           this.$emit('next')
           window.scrollTo(0, 0)
@@ -312,7 +299,6 @@ export default {
           selectedServices[serviceId] = this.$store.state.data.appointmentCounts[serviceId]
         }
       })
-
       this.$store.dispatch('API/fetchAvailableDays', { provider: provider, serviceIds: Object.keys(selectedServices), serviceCounts: Object.values(selectedServices) })
         .then(data => {
           let availableDays = data.availableDays ?? []
@@ -345,15 +331,12 @@ export default {
       return
     }
 
-    if (this.$store.state.data.appointment && this.$store.state.data.appointment.locationId) {
-      this.showForProvider({
-        id: this.$store.state.data.appointment.locationId,
-        name: this.$store.state.data.appointment.location
-      })
+    if (this.$store.state.data.appointment && this.$store.state.data.appointment.locationId && !this.$store.state.data.appointment.reserved && !this.$store.state.data.appointment.updated && !this.$store.state.data.appointment.preconfirmed) {
+      this.showForProvider(this.$store.state.data.appointment.provider)
 
       let providerId = this.$store.state.data.appointment.locationId
 
-      this.$store.state.data.service.providers.sort(function(x,y) {
+      this.$store.state.data.service.providers.sort(function (x, y) {
         return x.id === providerId ? -1 : y.id === providerId ? 1 : 0;
       });
 
