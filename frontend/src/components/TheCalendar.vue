@@ -3,30 +3,16 @@
     <v-container>
       <v-row>
         <v-col class="col-sm-12 col-lg-12 p-0">
-          <v-tabs
-              v-if="$store.state.data.service && $store.state.data.service.providers.length > 0"
-              color="primary"
-              show-arrows="mobile"
-              id="location-tabs"
-              ref="locationTabs"
-              :key="selectedProviderIndex === -1"
-              v-model="selectedProviderIndex"
-          >
-            <v-tab
-              v-for="provider in filteredProviders"
-              :key="provider.index"
-              @change="showForProvider(provider)"
-            >
+          <v-tabs v-if="$store.state.data.service && $store.state.data.service.providers.length > 0" color="primary"
+            show-arrows="mobile" id="location-tabs" ref="locationTabs" :key="selectedProviderIndex === -1"
+            v-model="selectedProviderIndex">
+            <v-tab v-for="provider in filteredProviders" :key="provider.index" @change="showForProvider(provider)">
               {{ provider.name }}
             </v-tab>
           </v-tabs>
 
-          <v-tab-items
-              v-model="selectedProviderIndex"
-          >
-            <v-tab-item
-                v-for="provider in filteredProviders"
-                :key="provider.index">
+          <v-tab-items v-model="selectedProviderIndex">
+            <v-tab-item v-for="provider in filteredProviders" :key="provider.index">
             </v-tab-item>
           </v-tab-items>
         </v-col>
@@ -35,10 +21,8 @@
 
     <v-date-picker full-width v-model="date" :allowed-dates="allowedDates" class="mt-0" :min="currentDate"
       :first-day-of-week="1" :locale="$i18n.locale" :no-title="true" :weekday-format="getWeekday"
-      @click:date="getAppointmentsOfDay(date)"
-      :prev-month-aria-label="$t('previousMonth')"
-      :next-month-aria-label="$t('nextMonth')"
-    ></v-date-picker>
+      @click:date="getAppointmentsOfDay(date)" :prev-month-aria-label="$t('previousMonth')"
+      :next-month-aria-label="$t('nextMonth')"></v-date-picker>
 
     <div v-if="dateError"
       class="m-component m-component-callout m-component-callout--warning m-component-callout--fullwidth">
@@ -73,7 +57,6 @@
           <div class="appointment-container-title">
             <h2 tabindex="0">{{ $t('availableTimes') }}</h2>
           </div>
-
           <div class="appointment-container-subtitle lighten-2">
             <h4 tabindex="0">{{ formatDay(date) }}</h4>
           </div>
@@ -104,15 +87,24 @@
             </div>
           </div>
           <div v-for="(times, index) in timeSlotsInHours()" :key="index">
-            <div class="appointments-in-hours">
-              <h4 class="time-hour" tabindex="0">
-                {{ times[0].format('H') }}:00-{{ times[0].format('H') }}:59
-              </h4>
-              <div class="select-appointment" tabindex="0" v-for="timeSlot in times" :key="timeSlot.unix()"
-                v-on:keyup.enter="chooseAppointment(timeSlot)" v-on:keyup.space="chooseAppointment(timeSlot)"
-                @click="chooseAppointment(timeSlot)">
-                {{ timeSlot.format('H:mm') }}
+            <div class="captcha-hour-wrapper">
+              <div class="appointments-in-hours">
+                <h4 class="time-hour" tabindex="0">
+                  {{ times[0].format('H') }}:00-{{ times[0].format('H') }}:59
+                </h4>
+                <div class="select-appointment" tabindex="0" v-for="timeSlot in times" :key="timeSlot.unix()"
+                  v-on:keyup.enter="handleTimeSlotSelection(timeSlot)"
+                  v-on:keyup.space="handleTimeSlotSelection(timeSlot)" @click="handleTimeSlotSelection(timeSlot)">
+                  {{ timeSlot.format('H:mm') }}
+                </div>
               </div>
+              <v-col
+                v-if="provider.scope.captchaActivatedRequired === '1' && captchaDetails.captchaEnabled && showCaptcha && selectedTimeSlot && selectedTimeSlot.format('H') === times[0].format('H') && captchaDetails && captchaDetails.siteKey && captchaDetails.puzzle"
+                cols="12" class="d-flex justify-center align-center">
+                <vue-friendly-captcha :key="captchaKey" :sitekey="captchaDetails.siteKey"
+                  :puzzleEndpoint="captchaDetails.puzzle" language="de" @done="handleCaptchaDone"
+                  @error="handleCaptchaError" />
+              </v-col>
             </div>
           </div>
         </div>
@@ -126,9 +118,14 @@ import moment from 'moment'
 import 'moment-timezone'
 import { mdiCalendarClock } from '@mdi/js';
 import 'moment/locale/de';
+import 'regenerator-runtime/runtime';
+import VueFriendlyCaptcha from '@somushq/vue-friendly-captcha';
 
 export default {
   name: 'TheCalendar',
+  components: {
+    VueFriendlyCaptcha
+  },
   data: () => ({
     selectedProviderIndex: null,
     date: moment().format("YYYY-MM-DD"),
@@ -141,7 +138,11 @@ export default {
     timeSlotError: false,
     dateError: false,
     provider: null,
-    missingSlotsInARow: false
+    missingSlotsInARow: false,
+    showCaptcha: false,
+    selectedTimeSlot: null,
+    captchaKey: 0,
+    captchaSolution: null
   }),
   computed: {
     filteredProviders: function () {
@@ -158,6 +159,9 @@ export default {
       })
 
       return filteredProviders
+    },
+    captchaDetails() {
+      return this.$store.state.captchaDetails;
     }
   },
   methods: {
@@ -232,6 +236,16 @@ export default {
           }
         })
     },
+    handleTimeSlotSelection: function (timeSlot) {
+      this.selectedTimeSlot = timeSlot;
+      this.showCaptcha = this.captchaDetails.captchaEnabled && (this.provider.scope.captchaActivatedRequired === '1');
+      if (this.showCaptcha) {
+        this.captchaKey += 1;
+        this.captchaSolution = null;
+      } else {
+        this.chooseAppointment(timeSlot);
+      }
+    },
     chooseAppointment: function (timeSlot) {
       this.timeSlotError = false
       const selectedServices = {}
@@ -244,7 +258,7 @@ export default {
 
       const oldAppointment = this.$store.state.data.appointment
 
-      this.$store.dispatch('API/reserveAppointment', { timeSlot, serviceIds: Object.keys(selectedServices), serviceCounts: Object.values(selectedServices), providerId: this.provider.id })
+      this.$store.dispatch('API/reserveAppointment', { timeSlot, serviceIds: Object.keys(selectedServices), serviceCounts: Object.values(selectedServices), providerId: this.provider.id, captchaSolution: this.captchaSolution })
         .then(data => {
           if (data.errorMessage) {
             this.timeSlotError = data.errorMessage
@@ -259,7 +273,8 @@ export default {
           appointment.provider = this.provider
           appointment.officeName = this.provider.name
           appointment.locationId = appointment.officeId
-
+          appointment.reserved = true
+          appointment.updated = false
           this.$store.commit('data/setAppointment', appointment)
           this.$emit('next')
           window.scrollTo(0, 0)
@@ -282,7 +297,6 @@ export default {
           selectedServices[serviceId] = this.$store.state.data.appointmentCounts[serviceId]
         }
       })
-
       this.$store.dispatch('API/fetchAvailableDays', { provider: provider, serviceIds: Object.keys(selectedServices), serviceCounts: Object.values(selectedServices) })
         .then(data => {
           let availableDays = data.availableDays ?? []
@@ -294,6 +308,16 @@ export default {
 
           this.getAppointmentsOfDay(availableDays[0], false)
         })
+    },
+    handleCaptchaDone(solution) {
+      this.captchaSolution = solution;
+      if (this.selectedTimeSlot) {
+        this.chooseAppointment(this.selectedTimeSlot);
+      }
+    },
+    handleCaptchaError(error) {
+      console.error("Captcha error:", error);
+      // Handle the error, possibly show a message to the user
     }
   },
   mounted: function () {
@@ -305,15 +329,12 @@ export default {
       return
     }
 
-    if (this.$store.state.data.appointment && this.$store.state.data.appointment.locationId) {
-      this.showForProvider({
-        id: this.$store.state.data.appointment.locationId,
-        name: this.$store.state.data.appointment.location
-      })
+    if (this.$store.state.data.appointment && this.$store.state.data.appointment.locationId && !this.$store.state.data.appointment.reserved && !this.$store.state.data.appointment.updated) {
+      this.showForProvider(this.$store.state.data.appointment.provider)
 
       let providerId = this.$store.state.data.appointment.locationId
 
-      this.$store.state.data.service.providers.sort(function(x,y) {
+      this.$store.state.data.service.providers.sort(function (x, y) {
         return x.id === providerId ? -1 : y.id === providerId ? 1 : 0;
       });
 

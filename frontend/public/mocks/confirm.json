@@ -287,7 +287,8 @@
           "telephoneActivated": "0",
           "telephoneRequired": 0,
           "customTextfieldActivated": "0",
-          "customTextfieldRequired": 0
+          "customTextfieldRequired": 0,
+          "captchaActivatedRequired": "0"
         },
         "notifications": {
           "confirmationContent": "",

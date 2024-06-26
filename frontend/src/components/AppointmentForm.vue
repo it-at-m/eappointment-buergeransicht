@@ -410,7 +410,7 @@ export default {
       this.openPanel(1)
     },
     submit() {
-      this.desabled = true
+      this.disabled = true
       this.$store.dispatch('API/preconfirmReservation', this.$store.state.data.appointment)
         .then(() => {
           if (this.$store.state.isRebooking) {
@@ -420,7 +420,7 @@ export default {
         .then(() => {
           this.$store.state.confirmedAppointment = true
         }, () => {
-          this.desabled = false
+          this.disabled = false
           this.$store.state.confirmedAppointment = false
         })
     },

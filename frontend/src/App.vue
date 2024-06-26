@@ -103,6 +103,7 @@ export default {
             this.$store.state.confirmedAppointment = true
           })
         }
+        this.$store.dispatch('setUpCaptchaDetails');
       })
     },
     loadStylesHackyWay() {

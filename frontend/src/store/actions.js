@@ -16,10 +16,22 @@ export default {
 
                     resolve(true)
                 }, (error) => {
-                    console.log(error)
                     reject(error)
                 })
         })
+    },
+    setUpCaptchaDetails(store) {
+        return new Promise((resolve, reject) => {
+            store.dispatch('API/fetchCaptchaDetails')
+                .then(data => {
+                    store.commit('setCaptchaDetails', data);
+                    resolve(data);
+                })
+                .catch(error => {
+                    store.commit('setError', 'captcha-details-error');
+                    reject(error);
+                });
+        });
     },
     setUpServicesAndProviders(store, { preselectedService, preselectedProvider }) {
         return new Promise((resolve) => {
