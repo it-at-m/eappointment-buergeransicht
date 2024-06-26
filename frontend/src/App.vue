@@ -5,9 +5,8 @@
     <link :href="`${linkBaseUrl}css/materialdesignicons.min.css`" rel="stylesheet">
     <link :href="`${linkBaseUrl}css/style.css`" rel="stylesheet">
     <link :href="`${linkBaseUrl}css/patternlab.css`" rel="stylesheet">
-    <link :href="`${linkBaseUrl}css/friendlycaptcha.css`" rel="stylesheet">
     <AppointmentForm v-if="stylesLoaded && !errorNotFound"/>
-    <NotFound v-if="stylesLoaded && errorNotFound" />
+    <NotFound v-if="errorNotFound" />
   </v-app>
 </template>
 
@@ -59,8 +58,8 @@ export default {
 
       return this.baseUrl + '/'
     },
-    error() {
-      return this.$store.state.error;
+    errorNotFound() {
+      return this.$store.state.error === 'not-found';
     },
   },
   mounted () {
