@@ -99,7 +99,7 @@
                 </div>
               </div>
               <v-col
-                v-if="provider.scope.captchaActivatedRequired === '1' && captchaDetails.captchaEnabled && showCaptcha && selectedTimeSlot && selectedTimeSlot.format('H') === times[0].format('H') && captchaDetails && captchaDetails.siteKey && captchaDetails.puzzle"
+                v-if="provider.scope && provider.scope.captchaActivatedRequired && provider.scope.captchaActivatedRequired === '1' && captchaDetails.captchaEnabled && showCaptcha && selectedTimeSlot && selectedTimeSlot.format('H') === times[0].format('H') && captchaDetails && captchaDetails.siteKey && captchaDetails.puzzle"
                 cols="12" class="d-flex justify-center align-center">
                 <vue-friendly-captcha :key="captchaKey" :sitekey="captchaDetails.siteKey"
                   :puzzleEndpoint="captchaDetails.puzzle" language="de" @done="handleCaptchaDone"
@@ -238,7 +238,7 @@ export default {
     },
     handleTimeSlotSelection: function (timeSlot) {
       this.selectedTimeSlot = timeSlot;
-      this.showCaptcha = this.captchaDetails.captchaEnabled && (this.provider.scope.captchaActivatedRequired === '1');
+      this.showCaptcha = this.captchaDetails.captchaEnabled && (this.provider.scope) && (this.provider.scope.captchaActivatedRequired) && (this.provider.scope.captchaActivatedRequired === '1');
       if (this.showCaptcha) {
         this.captchaKey += 1;
         this.captchaSolution = null;
@@ -330,7 +330,10 @@ export default {
     }
 
     if (this.$store.state.data.appointment && this.$store.state.data.appointment.locationId && !this.$store.state.data.appointment.reserved && !this.$store.state.data.appointment.updated) {
-      this.showForProvider(this.$store.state.data.appointment.provider)
+      this.showForProvider({
+        id: this.$store.state.data.appointment.locationId,
+        name: this.$store.state.data.appointment.location
+      });
 
       let providerId = this.$store.state.data.appointment.locationId
 
