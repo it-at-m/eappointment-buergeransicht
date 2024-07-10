@@ -38,6 +38,7 @@
       @blur="$v.dataProtection.$touch()" @change="changed"
       tabindex="0"
       :disabled="isPreselectedAppointment"
+      :key="customer.dataProtection ?? 'data-protection'"
     >
       <template v-slot:label>
         <div v-html="$t('privacyPolicyAccepted')" @click.stop></div>
