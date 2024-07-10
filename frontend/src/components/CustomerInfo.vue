@@ -34,6 +34,7 @@
     </div>
 
     <v-checkbox id="customer-data-protection" v-model="customer.dataProtection" label=""
+      :key="customer.dataProtection"
       :error-messages="dataProtectionErrors" required @input="$v.dataProtection.$touch()"
       @blur="$v.dataProtection.$touch()" @change="changed"
       tabindex="0"
