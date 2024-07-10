@@ -33,17 +33,18 @@
       ></v-text-field>
     </div>
 
-    <v-checkbox id="customer-data-protection" v-model="customer.dataProtection" label=""
-      :error-messages="dataProtectionErrors" required @input="$v.dataProtection.$touch()"
-      @blur="$v.dataProtection.$touch()" @change="changed"
-      tabindex="0"
-      :disabled="isPreselectedAppointment"
-      :key="customer.dataProtection ?? 'data-protection'"
-    >
-      <template v-slot:label>
-        <div v-html="$t('privacyPolicyAccepted')" @click.stop></div>
-      </template>
-    </v-checkbox>
+    <div :key="customer.dataProtection ?? 'data-protection'">
+      <v-checkbox id="customer-data-protection" v-model="customer.dataProtection" label=""
+                  :error-messages="dataProtectionErrors" required @input="$v.dataProtection.$touch()"
+                  @blur="$v.dataProtection.$touch()" @change="changed"
+                  tabindex="0"
+                  :disabled="isPreselectedAppointment"
+      >
+        <template v-slot:label>
+          <div v-html="$t('privacyPolicyAccepted')" @click.stop></div>
+        </template>
+      </v-checkbox>
+    </div>
 
     <p>Hinweis: Die mit * gekennzeichneten Eingabefelder sind Pflichtfelder.</p>
 
