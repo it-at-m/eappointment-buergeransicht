@@ -107,6 +107,7 @@ describe('Customer info', () => {
 
         nameInput.setValue('Max')
         emailInput.setValue('max@test.de')
+        wrapper.vm.customer.dataProtection = true
         dataProtectionCheckbox.setChecked()
 
         submitButton.trigger('click')
