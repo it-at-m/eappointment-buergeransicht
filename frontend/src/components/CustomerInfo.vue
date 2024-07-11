@@ -33,7 +33,7 @@
       ></v-text-field>
     </div>
 
-    <v-checkbox id="customer-data-protection" v-model="customer.dataProtection" label=""
+    <v-checkbox id="customer-data-protection" :key="customer.dataProtection" v-model="customer.dataProtection" label=""
       :error-messages="dataProtectionErrors" required @input="$v.dataProtection.$touch()"
       @blur="$v.dataProtection.$touch()" @change="changed"
       tabindex="0"
