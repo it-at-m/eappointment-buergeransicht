@@ -657,8 +657,8 @@ progress {
 
 @media (min-width:1200px) {
     .m-button--animated-right .m-button__icon {
-        margin-right: .25rem;
-        margin-left: 1rem
+        margin-right: 1rem;
+        margin-left: 0rem
     }
 }
 
@@ -29340,8 +29340,8 @@ progress {
 
 @media (min-width:1200px) {
     .m-button--animated-right .m-button__icon {
-        margin-right: .25rem;
-        margin-left: 1rem
+        margin-right: 1rem;
+        margin-left: 0rem
     }
 }
 

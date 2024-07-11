@@ -13,10 +13,10 @@
               href="https://stadt.muenchen.de/infos/online-terminvereinbarung.html"
               tabindex="0"
             >
-              <span>{{ $t('backToHome') }}</span>
               <svg aria-hidden="true" class="m-button__icon">
-                <use xlink:href="#icon-arrow-right"></use>
+                <use xlink:href="#icon-arrow-left"></use>
               </svg>
+              <span>{{ $t('backToHome') }}</span>
             </a>
           </span>
         </div>
