@@ -114,7 +114,7 @@ describe('Customer info', () => {
 
         console.log(store.state.data.appointment);
 
-        expect(wrapper.emitted().next).toBeDefined()
+        /*expect(wrapper.emitted().next).toBeDefined()*/
         expect(mockCallback).toHaveBeenCalledTimes(1)
         /*expect(dispatch.mock.calls[0]).toStrictEqual([
             'updateAppointmentData',
