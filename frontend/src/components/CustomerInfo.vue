@@ -151,8 +151,9 @@ export default {
         return this.customer.dataProtection
       },
       set(newValue) {
-        this.$refs.dataProtection.focus()
-        return this.customer.dataProtection = newValue
+        this.customer.dataProtection = newValue
+        this.focusOnDataProtection()
+        return true
       }
     },
     isCustomTextfieldActivated() {
@@ -221,13 +222,18 @@ export default {
       return errors;
     },
     isPreselectedAppointment() {
-
       return this.$store.state.preselectedAppointment !== null;
     }
   },
   methods: {
     changed() {
       this.$emit('changed')
+    },
+    focusOnDataProtection() {
+      this.$nextTick(() => {
+        const dataProtectionCheckbox = this.$refs.dataProtection;
+        dataProtectionCheckbox.focus();
+      });
     },
     saveCustomer() {
       this.$v.$touch()
