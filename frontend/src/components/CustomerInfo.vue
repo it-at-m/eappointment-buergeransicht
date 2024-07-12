@@ -4,7 +4,7 @@
       <v-text-field v-model="customer.name" id="customer-name" :error-messages="nameErrors" @blur="$v.name.$touch()"
         @change="changed" counter="50" :maxlength="50" filled :label="$t('name')"
         :disabled="isPreselectedAppointment"
-        tabindex="0"
+        tabindex="1"
       ></v-text-field>
     </div>
 
@@ -12,7 +12,7 @@
       <v-text-field v-model="customer.email" id="customer-email" counter="50" :maxlength="50" filled
         :error-messages="emailErrors" @blur="$v.email.$touch()" @change="changed" required :label="$t('email')"
         :disabled="isPreselectedAppointment"
-        tabindex="0"
+        tabindex="1"
       ></v-text-field>
     </div>
 
@@ -21,7 +21,7 @@
         :error-messages="telephoneErrors" @blur="$v.telephone.$touch()" @change="changed"
         :label="(isTelephoneRequired) ? $t('telephoneRequired') : $t('telephone')"
         :disabled="isPreselectedAppointment"
-        tabindex="0"
+        tabindex="1"
       ></v-text-field>
     </div>
     <div id="customer-custom-textfield-section" v-if="isCustomTextfieldActivated" :aria-label="getCustomTextAriaLabel()">
@@ -29,14 +29,14 @@
         filled :error-messages="customTextfieldErrors" @blur="$v.customTextfield.$touch()" @change="changed"
         :label="(isCustomTextfieldRequired ? customTextfieldLabel + '*' : customTextfieldLabel)"
         :disabled="isPreselectedAppointment"
-        tabindex="0"
+        tabindex="1"
       ></v-text-field>
     </div>
 
     <v-checkbox id="customer-data-protection" :key="customer.dataProtection" v-model="customer.dataProtection" label=""
       :error-messages="dataProtectionErrors" required @input="$v.dataProtection.$touch()"
       @blur="$v.dataProtection.$touch()" @change="changed"
-      tabindex="0"
+      tabindex="1"
       :disabled="isPreselectedAppointment"
     >
       <template v-slot:label>
@@ -58,7 +58,7 @@
       id="customer-submit-button"
       class="m-button m-button--primary m-button--animated-right button-next"
       color="white"
-      tabindex="0"
+      tabindex="1"
       @click="saveCustomer()"
     >
       <span class="desktop">{{ $t('nextToReservation') }}</span>
