@@ -33,10 +33,10 @@
       ></v-text-field>
     </div>
 
-    <v-checkbox id="customer-data-protection" :key="customer.dataProtection" v-model="customer.dataProtection" label=""
+    <v-checkbox id="customer-data-protection" v-model="customer.dataProtection" label=""
       :error-messages="dataProtectionErrors" required @input="$v.dataProtection.$touch()"
       ref="dataProtection"
-      @blur="$v.dataProtection.$touch()" @change="changed || focusOnDataProtection"
+      @blur="$v.dataProtection.$touch()" @change="changed || changeDataProtection"
       tabindex="0"
       :disabled="isPreselectedAppointment"
     >
@@ -229,10 +229,10 @@ export default {
     changed() {
       this.$emit('changed')
     },
-    focusOnDataProtection() {
+    changeDataProtection() {
       this.$nextTick(() => {
         const dataProtectionCheckbox = this.$refs.dataProtection;
-        dataProtectionCheckbox.focus();
+        dataProtectionCheckbox.checked = !!this.customer.dataProtection
       });
     },
     saveCustomer() {
