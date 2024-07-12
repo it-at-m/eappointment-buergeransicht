@@ -229,13 +229,8 @@ export default {
     },
     saveCustomer() {
       this.$v.$touch()
-      console.log('saveCustomer')
 
       if (this.emailErrors.length || this.nameErrors.length || this.dataProtectionErrors.length || this.telephoneErrors.length || this.customTextfieldErrors.length) {
-        console.log(this.emailErrors)
-        console.log(this.nameErrors)
-        console.log(this.dataProtectionErrors)
-        console.log(this.telephoneErrors)
         return
       }
       this.$store.dispatch('updateAppointmentData', {
