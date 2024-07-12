@@ -36,7 +36,7 @@
     <v-checkbox id="customer-data-protection" :key="customer.dataProtection" v-model="customer.dataProtection" label=""
       :error-messages="dataProtectionErrors" required @input="$v.dataProtection.$touch()"
       ref="dataProtection"
-      @blur="$v.dataProtection.$touch()" @change="changed && $refs.dataProtection.focus()"
+      @blur="$v.dataProtection.$touch()" @change="changed"
       tabindex="0"
       :disabled="isPreselectedAppointment"
     >
@@ -151,6 +151,7 @@ export default {
         return this.customer.dataProtection
       },
       set(newValue) {
+        this.$refs.dataProtection.focus()
         return this.customer.dataProtection = newValue
       }
     },
