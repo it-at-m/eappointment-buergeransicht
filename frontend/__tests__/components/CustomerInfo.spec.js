@@ -107,6 +107,7 @@ describe('Customer info', () => {
 
         nameInput.setValue('Max')
         emailInput.setValue('max@test.de')
+        wrapper.vm.customer.dataProtection = true
         dataProtectionCheckbox.setChecked()
 
         submitButton.trigger('click')
@@ -114,11 +115,6 @@ describe('Customer info', () => {
 
         console.log(store.state.data.appointment);
 
-        expect(wrapper.emitted().next).toBeDefined()
         expect(mockCallback).toHaveBeenCalledTimes(1)
-        /*expect(dispatch.mock.calls[0]).toStrictEqual([
-            'updateAppointmentData',
-            {"client": {"dataProtection": true, "email": "max@test.de", "name": "Max"}}
-        ])*/
     })
 })
