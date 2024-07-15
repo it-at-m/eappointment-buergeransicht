@@ -232,13 +232,6 @@ export default {
     changed() {
       this.$emit('changed')
     },
-    changeDataProtection() {
-      this.$nextTick(() => {
-        console.log('changeDataProtection')
-        const dataProtectionCheckbox = this.$refs.dataProtection;
-        dataProtectionCheckbox.checked = !!this.customer.dataProtection
-      });
-    },
     saveCustomer() {
       this.$v.$touch()
 
