@@ -1,12 +1,5 @@
 <template>
   <div ref="mainDiv">
-    <v-checkbox
-        :key="customer.dataProtection"
-        v-model="customer.dataProtection"
-        :label="`Checkbox 1`"
-        tabindex="0"
-    ></v-checkbox>
-
     <div id="customer-name-section" :aria-label="$t('nameField') + $t('fieldLengthFifty')">
       <v-text-field v-model="customer.name" id="customer-name" :error-messages="nameErrors" @blur="$v.name.$touch()"
         @change="changed" counter="50" :maxlength="50" filled :label="$t('name')"
@@ -42,10 +35,13 @@
 
     <v-checkbox
         :key="customer.dataProtection"
-        id="customer-data-protection" v-model="customer.dataProtection" label=""
-        :error-messages="dataProtectionErrors" required @input="$v.dataProtection.$touch()"
-        ref="dataProtection"
-        @blur="$v.dataProtection.$touch()" @change="changed"
+        id="customer-data-protection"
+        v-model="customer.dataProtection"
+        label=""
+        :error-messages="dataProtectionErrors" required
+        @input="$v.dataProtection.$touch()"
+        @blur="$v.dataProtection.$touch()"
+        @change="changed"
         tabindex="0"
         :disabled="isPreselectedAppointment"
     >
@@ -53,13 +49,6 @@
         <div v-html="$t('privacyPolicyAccepted')" @click.stop></div>
       </template>
     </v-checkbox>
-
-    <v-checkbox
-        :key="customer.dataProtection"
-        v-model="customer.dataProtection"
-        :label="`Checkbox 1`"
-        tabindex="0"
-    ></v-checkbox>
 
     <p>Hinweis: Die mit * gekennzeichneten Eingabefelder sind Pflichtfelder.</p>
 
@@ -126,8 +115,7 @@ export default {
   },
   data() {
     return {
-      customer: {},
-      checkbox: false
+      customer: {}
     };
   },
   computed: {
@@ -168,9 +156,7 @@ export default {
         return this.customer.dataProtection
       },
       set(newValue) {
-        this.customer.dataProtection = newValue
-        this.focusOnDataProtection()
-        return true
+        return this.customer.dataProtection = newValue
       }
     },
     isCustomTextfieldActivated() {
