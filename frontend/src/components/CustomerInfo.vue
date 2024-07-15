@@ -1,5 +1,13 @@
 <template>
   <div ref="mainDiv">
+
+    <v-checkbox
+        :key="checkbox"
+        v-model="checkbox"
+        :label="`Checkbox 1: ${checkbox.toString()}`"
+        tabindex="0"
+    ></v-checkbox>
+
     <div id="customer-name-section" :aria-label="$t('nameField') + $t('fieldLengthFifty')">
       <v-text-field v-model="customer.name" id="customer-name" :error-messages="nameErrors" @blur="$v.name.$touch()"
         @change="changed" counter="50" :maxlength="50" filled :label="$t('name')"
@@ -110,7 +118,8 @@ export default {
   },
   data() {
     return {
-      customer: {}
+      customer: {},
+      checkbox: false
     };
   },
   computed: {
