@@ -51,6 +51,53 @@
         tabindex="0"
     ></v-checkbox>
 
+    <v-checkbox id="customer-data-protection" v-model="checkbox" label=""
+                :error-messages="dataProtectionErrors" required @input="$v.dataProtection.$touch() || changeDataProtection"
+                ref="dataProtection"
+                @blur="$v.dataProtection.$touch()" @change="changed || changeDataProtection"
+                tabindex="0"
+                :disabled="isPreselectedAppointment"
+    >
+      <template v-slot:label>
+        <div v-html="$t('privacyPolicyAccepted')" @click.stop></div>
+      </template>
+    </v-checkbox>
+
+    <v-checkbox id="customer-data-protection" v-model="checkbox" label=""
+                :error-messages="dataProtectionErrors" required
+                ref="dataProtection"
+                @blur="$v.dataProtection.$touch()" @change="changed || changeDataProtection"
+                tabindex="0"
+                :disabled="isPreselectedAppointment"
+    >
+      <template v-slot:label>
+        <div v-html="$t('privacyPolicyAccepted')" @click.stop></div>
+      </template>
+    </v-checkbox>
+
+    <v-checkbox id="customer-data-protection" v-model="checkbox" label=""
+                :error-messages="dataProtectionErrors" required
+                ref="dataProtection"
+                @blur="$v.dataProtection.$touch()" @change="changed || changeDataProtection"
+                tabindex="0"
+                :disabled="isPreselectedAppointment"
+    >
+      <template v-slot:label>
+        <div v-html="$t('privacyPolicyAccepted')"></div>
+      </template>
+    </v-checkbox>
+
+    <v-checkbox id="customer-data-protection" v-model="checkbox" label=""
+                :error-messages="dataProtectionErrors" required
+                ref="dataProtection"
+                tabindex="0"
+                :disabled="isPreselectedAppointment"
+    >
+      <template v-slot:label>
+        <div v-html="$t('privacyPolicyAccepted')"></div>
+      </template>
+    </v-checkbox>
+
     <p>Hinweis: Die mit * gekennzeichneten Eingabefelder sind Pflichtfelder.</p>
 
     <InfoMessage
