@@ -40,12 +40,14 @@
       ></v-text-field>
     </div>
 
-    <v-checkbox id="customer-data-protection" v-model="customer.dataProtection" label=""
-      :error-messages="dataProtectionErrors" required @input="$v.dataProtection.$touch()"
-      ref="dataProtection"
-      @blur="$v.dataProtection.$touch()" @change="changed"
-      tabindex="0"
-      :disabled="isPreselectedAppointment"
+    <v-checkbox
+        :key="customer.dataProtection"
+        id="customer-data-protection" v-model="customer.dataProtection" label=""
+        :error-messages="dataProtectionErrors" required @input="$v.dataProtection.$touch()"
+        ref="dataProtection"
+        @blur="$v.dataProtection.$touch()" @change="changed"
+        tabindex="0"
+        :disabled="isPreselectedAppointment"
     >
       <template v-slot:label>
         <div v-html="$t('privacyPolicyAccepted')" @click.stop></div>
