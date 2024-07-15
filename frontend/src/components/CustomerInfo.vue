@@ -35,7 +35,9 @@
       ></v-text-field>
     </div>
 
-    <v-checkbox id="customer-data-protection" v-model="checkbox" label="$t('privacyPolicyAccepted')"
+    <v-checkbox
+        :key="checkbox"
+        id="customer-data-protection" v-model="checkbox" label="$t('privacyPolicyAccepted')"
       :error-messages="dataProtectionErrors" required
       ref="dataProtection"
       tabindex="0"
