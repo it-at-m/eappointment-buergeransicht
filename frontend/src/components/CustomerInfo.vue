@@ -42,9 +42,9 @@
     </div>
 
     <v-checkbox id="customer-data-protection" v-model="checkbox" label=""
-      :error-messages="dataProtectionErrors" required @input="$v.dataProtection.$touch() || changeDataProtection"
+      :error-messages="dataProtectionErrors" required @input="changeDataProtection || $v.dataProtection.$touch()"
       ref="dataProtection"
-      @blur="$v.dataProtection.$touch()" @change="changed || changeDataProtection"
+      @blur="$v.dataProtection.$touch()" @change="changeDataProtection || changed"
       tabindex="0"
       :disabled="isPreselectedAppointment"
     >
