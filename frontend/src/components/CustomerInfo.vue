@@ -42,7 +42,7 @@
     </div>
 
     <v-checkbox id="customer-data-protection" v-model="checkbox" label=""
-      :error-messages="dataProtectionErrors" required @input="$v.dataProtection.$touch()"
+      :error-messages="dataProtectionErrors" required @input="$v.dataProtection.$touch() || changeDataProtection"
       ref="dataProtection"
       @blur="$v.dataProtection.$touch()" @change="changed || changeDataProtection"
       tabindex="0"
@@ -240,6 +240,7 @@ export default {
     },
     changeDataProtection() {
       this.$nextTick(() => {
+        console.log('changeDataProtection')
         const dataProtectionCheckbox = this.$refs.dataProtection;
         dataProtectionCheckbox.checked = !!this.customer.dataProtection
       });
