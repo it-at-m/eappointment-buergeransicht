@@ -1,12 +1,6 @@
 <template>
   <div ref="mainDiv">
 
-    <v-checkbox
-        :key="checkbox"
-        v-model="checkbox"
-        :label="`Checkbox 1: ${checkbox.toString()}`"
-        tabindex="0"
-    ></v-checkbox>
 
     <div id="customer-name-section" :aria-label="$t('nameField') + $t('fieldLengthFifty')">
       <v-text-field v-model="customer.name" id="customer-name" :error-messages="nameErrors" @blur="$v.name.$touch()"
@@ -41,16 +35,19 @@
       ></v-text-field>
     </div>
 
-    <v-checkbox id="customer-data-protection" v-model="checkbox" label=""
+    <v-checkbox id="customer-data-protection" v-model="checkbox" label="$t('privacyPolicyAccepted')"
       :error-messages="dataProtectionErrors" required
       ref="dataProtection"
       tabindex="0"
       :disabled="isPreselectedAppointment"
-    >
-      <template v-slot:label>
-        <div v-html="$t('privacyPolicyAccepted')" @click.stop></div>
-      </template>
-    </v-checkbox>
+    ></v-checkbox>
+
+    <v-checkbox
+        :key="checkbox"
+        v-model="checkbox"
+        :label="`Checkbox 1: ${checkbox.toString()}`"
+        tabindex="0"
+    ></v-checkbox>
 
     <p>Hinweis: Die mit * gekennzeichneten Eingabefelder sind Pflichtfelder.</p>
 
