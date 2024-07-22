@@ -456,10 +456,14 @@ export default {
       return moment.unix(appointment.timestamp).tz('Europe/Berlin').format('DD.MM.YYYY H:mm') + ' ' + this.getProviderName(appointment.locationId)
     },
     getLocationInfo() {
-      return this.$store.state.data.appointment &&
-          this.$store.state.data.appointment.scope &&
-          this.$store.state.data.appointment.scope.displayInfo ?? false;
-    }
+      if (!this.$store.state.data.appointment ||
+          !this.$store.state.data.appointment.scope ||
+          !this.$store.state.data.appointment.scope.displayInfo) {
+        return false
+      }
+
+      return this.$store.state.data.appointment.scope.displayInfo;
+    },
     getProviderName(id) {
       let providerName = ''
       this.$store.state.providers.forEach((provider) => {
