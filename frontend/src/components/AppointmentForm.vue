@@ -13,7 +13,13 @@
 
       <v-row class="content" v-else>
         <v-col cols="12">
-          <div v-if="getLocationInfo()" v-html="getLocationInfo()"></div>
+
+          <InfoMessage
+              v-if="$store.state.displayInfo"
+              :type="'default'"
+              :text="$store.state.displayInfo"
+              :tabindex="5"
+          ></InfoMessage>
 
           <div class="appointment-number" v-if="$store.state.preselectedAppointment" tabindex="1">
             {{ $t('yourAppointmentNumber') }}: <b>{{ $store.state.preselectedAppointment.processId }}</b>
@@ -454,15 +460,6 @@ export default {
       }
 
       return moment.unix(appointment.timestamp).tz('Europe/Berlin').format('DD.MM.YYYY H:mm') + ' ' + this.getProviderName(appointment.locationId)
-    },
-    getLocationInfo() {
-      if (!this.$store.state.data.appointment ||
-          !this.$store.state.data.appointment.scope ||
-          !this.$store.state.data.appointment.scope.displayInfo) {
-        return false
-      }
-
-      return this.$store.state.data.appointment.scope.displayInfo;
     },
     getProviderName(id) {
       let providerName = ''
