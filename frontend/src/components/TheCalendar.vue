@@ -292,7 +292,7 @@ export default {
       this.provider = provider
       const selectedServices = {}
 
-      if (provider.scope.displayInfo && provider.scope.displayInfo.length > 0) {
+      if (provider.scope && provider.scope.displayInfo && provider.scope.displayInfo.length > 0) {
         this.$store.state.displayInfo = provider.scope.displayInfo
       } else {
         this.$store.state.displayInfo = null
