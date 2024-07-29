@@ -66,6 +66,7 @@ const increaseAppointmentCount = (state, serviceId) => {
     }
 
     checkMaxSlots(state)
+    buildSelectedIds(state)
 }
 
 const decreaseAppointmentCount = (state, serviceId) => {
@@ -75,6 +76,19 @@ const decreaseAppointmentCount = (state, serviceId) => {
     }
 
     checkMaxSlots(state)
+    buildSelectedIds(state)
+}
+
+const buildSelectedIds = (state) => {
+    let selectedServiceIds = []
+
+    Object.entries(state.appointmentCounts).map(([serviceId, count]) => {
+        if (count > 0) {
+            selectedServiceIds.push(parseInt(serviceId))
+        }
+    })
+
+    state.selectedServices = selectedServiceIds.join('-')
 }
 
 export default {
@@ -130,6 +144,7 @@ export default {
 
         service.subServices.forEach((service) => {
             state.appointmentCounts[service.id] = service.count
+            state.selectedServices = service.id + '-'
         })
 
         state.service = service
