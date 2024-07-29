@@ -163,13 +163,14 @@ export default {
       return selectedServiceIds
     },
     filteredProviders: function () {
-      let providers = this.$store.state.data.service.providers
-      if (! providers) {
+      if (! this.$store.state.data.service || ! this.$store.state.data.service.providers) {
         return []
       }
 
+      let providers = this.$store.state.data.service.providers
+
       this.$store.state.data.service.subServices.map((subservice) => {
-        if (subservice && this.selectedServiceIds().indexOf(parseInt(subservice.id)) !== -1) {
+        if (this.selectedServiceIds().indexOf(parseInt(subservice.id)) !== -1) {
           providers = providers.filter(function(provider) {
             return subservice.providers.indexOf(provider.id) !== -1;
           });
