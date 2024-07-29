@@ -164,6 +164,9 @@ export default {
     },
     filteredProviders: function () {
       let providers = this.$store.state.data.service.providers
+      if (! providers) {
+        return []
+      }
 
       this.$store.state.data.service.subServices.map((subservice) => {
         if (this.selectedServiceIds().indexOf(parseInt(subservice.id)) !== -1) {
