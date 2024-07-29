@@ -169,7 +169,7 @@ export default {
       }
 
       this.$store.state.data.service.subServices.map((subservice) => {
-        if (this.selectedServiceIds().indexOf(parseInt(subservice.id)) !== -1) {
+        if (subservice && this.selectedServiceIds().indexOf(parseInt(subservice.id)) !== -1) {
           providers = providers.filter(function(provider) {
             return subservice.providers.indexOf(provider.id) !== -1;
           });
