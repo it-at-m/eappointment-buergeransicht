@@ -4,17 +4,12 @@
       <v-row>
         <v-col class="col-sm-12 col-lg-12 p-0">
           <v-tabs v-if="$store.state.data.service && $store.state.data.service.providers.length > 0" color="primary"
-            show-arrows="mobile" id="location-tabs" ref="locationTabs" :key="selectedProviderIndex === -1"
+            show-arrows="mobile" id="location-tabs" ref="locationTabs" :key="$store.state.data.selectedProvider + $store.state.data.selectedServices + selectedProviderIndex === -1"
             v-model="selectedProviderIndex">
-            <v-tab v-for="provider in filteredProviders()" :key="$store.state.data.selectedProvider + $store.state.data.selectedServices + provider.index" @change="showForProvider(provider)">
+            <v-tab v-for="provider in filteredProviders()" :key="provider.id" @change="showForProvider(provider)">
               {{ provider.name }}
             </v-tab>
           </v-tabs>
-
-          <v-tab-items v-model="selectedProviderIndex">
-            <v-tab-item v-for="provider in filteredProviders()" :key="'tabs' + $store.state.data.selectedProvider + $store.state.data.selectedServices + provider.index">
-            </v-tab-item>
-          </v-tab-items>
         </v-col>
       </v-row>
     </v-container>
