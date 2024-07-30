@@ -316,8 +316,8 @@ export default {
       })
 
       if (this.selectedProviderIndex === -1) {
-        provider = this.filteredProviders()[0]
-        this.$store.state.data.selectedProvider = provider
+        this.provider = this.filteredProviders()[0]
+        this.$store.state.data.selectedProvider = this.provider
       }
 
       this.$store.dispatch('API/fetchAvailableDays', { provider: provider, serviceIds: Object.keys(selectedServices), serviceCounts: Object.values(selectedServices) })
