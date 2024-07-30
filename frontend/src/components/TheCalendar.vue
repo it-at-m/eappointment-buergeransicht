@@ -320,7 +320,7 @@ export default {
         this.$store.state.data.selectedProvider = this.provider
       }
 
-      this.$store.dispatch('API/fetchAvailableDays', { provider: provider, serviceIds: Object.keys(selectedServices), serviceCounts: Object.values(selectedServices) })
+      this.$store.dispatch('API/fetchAvailableDays', { provider: this.provider, serviceIds: Object.keys(selectedServices), serviceCounts: Object.values(selectedServices) })
         .then(data => {
           let availableDays = data.availableDays ?? []
           if (data.errorMessage) {
