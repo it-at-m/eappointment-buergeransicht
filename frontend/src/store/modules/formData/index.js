@@ -7,6 +7,8 @@ const state = {
     captchaDetails: [],
     appointment: null,
     appointmentCounts: {},
+    selectedServices: '',
+    selectedProvider: null,
     appointmentCount: 1,
     maxSlotsExceeded: false,
     customer: {

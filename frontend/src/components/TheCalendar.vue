@@ -4,17 +4,12 @@
       <v-row>
         <v-col class="col-sm-12 col-lg-12 p-0">
           <v-tabs v-if="$store.state.data.service && $store.state.data.service.providers.length > 0" color="primary"
-            show-arrows="mobile" id="location-tabs" ref="locationTabs" :key="selectedProviderIndex === -1"
+            show-arrows="mobile" id="location-tabs" ref="locationTabs" :key="$store.state.data.selectedProvider + $store.state.data.selectedServices + selectedProviderIndex === -1"
             v-model="selectedProviderIndex">
-            <v-tab v-for="provider in filteredProviders" :key="provider.index" @change="showForProvider(provider)">
+            <v-tab v-for="provider in filteredProviders()" :key="provider.id" @change="showForProvider(provider)">
               {{ provider.name }}
             </v-tab>
           </v-tabs>
-
-          <v-tab-items v-model="selectedProviderIndex">
-            <v-tab-item v-for="provider in filteredProviders" :key="provider.index">
-            </v-tab-item>
-          </v-tab-items>
         </v-col>
       </v-row>
     </v-container>
@@ -142,29 +137,45 @@ export default {
     showCaptcha: false,
     selectedTimeSlot: null,
     captchaKey: 0,
-    captchaSolution: null
+    captchaSolution: null,
+    appointmentCounts: []
   }),
   computed: {
-    filteredProviders: function () {
-      let filteredProviders = []
-
-      if (!this.$store.state.data.service) {
-        return filteredProviders
-      }
-
-      this.$store.state.data.service.providers.forEach((provider) => {
-        if (this.shouldShowProvider(provider)) {
-          filteredProviders.push(provider)
-        }
-      })
-
-      return filteredProviders
-    },
     captchaDetails() {
       return this.$store.state.captchaDetails;
     }
   },
   methods: {
+    selectedServiceIds: function() {
+      let selectedServiceIds = []
+
+      Object.entries(this.$store.state.data.appointmentCounts).map(([serviceId, count]) => {
+        if (count > 0) {
+          selectedServiceIds.push(parseInt(serviceId))
+        }
+      })
+
+      return selectedServiceIds
+    },
+    filteredProviders: function () {
+      if (! this.$store.state.data.service || ! this.$store.state.data.service.providers) {
+        return []
+      }
+
+      let providers = this.$store.state.data.service.providers
+
+      if (this.$store.state.data.service.subServices) {
+        this.$store.state.data.service.subServices.map((subservice) => {
+          if (this.selectedServiceIds().indexOf(parseInt(subservice.id)) !== -1) {
+            providers = providers.filter(function(provider) {
+              return subservice.providers.indexOf(provider.id) !== -1;
+            });
+          }
+        })
+      }
+
+      return providers
+    },
     formatDay: function (date) {
       return moment(date).locale('de').format('dddd, DD.MM.YYYY')
     },
@@ -289,7 +300,9 @@ export default {
     showForProvider: function (provider) {
       this.dateError = false
       this.timeSlotError = false
+
       this.provider = provider
+      this.$store.state.data.selectedProvider = provider
       const selectedServices = {}
 
       if (provider.scope && provider.scope.displayInfo && provider.scope.displayInfo.length > 0) {
@@ -303,7 +316,17 @@ export default {
           selectedServices[serviceId] = this.$store.state.data.appointmentCounts[serviceId]
         }
       })
-      this.$store.dispatch('API/fetchAvailableDays', { provider: provider, serviceIds: Object.keys(selectedServices), serviceCounts: Object.values(selectedServices) })
+
+      this.selectedProviderIndex = this.filteredProviders().findIndex((currentProvider) => {
+        return currentProvider.id === provider.id
+      })
+
+      if (this.selectedProviderIndex === -1) {
+        this.provider = this.filteredProviders()[0]
+        this.$store.state.data.selectedProvider = this.provider
+      }
+
+      this.$store.dispatch('API/fetchAvailableDays', { provider: this.provider, serviceIds: Object.keys(selectedServices), serviceCounts: Object.values(selectedServices) })
         .then(data => {
           let availableDays = data.availableDays ?? []
           if (data.errorMessage) {
@@ -329,7 +352,17 @@ export default {
   mounted: function () {
     moment.locale('de')
 
-    if (this.$store.state.preselectedProvider) {
+    this.appointmentCounts = this.$store.state.data.appointmentCounts
+
+    if (this.$store.state.data.selectedProvider) {
+      this.showForProvider(this.$store.state.data.selectedProvider)
+
+      return
+    }
+
+    if (this.$store.state.preselectedProvider
+        && (!this.provider || this.$store.state.preselectedProvider.id !== this.provider.id)) {
+
       this.showForProvider(this.$store.state.preselectedProvider)
 
       return

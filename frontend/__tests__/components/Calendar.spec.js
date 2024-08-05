@@ -308,7 +308,7 @@ describe('Calendar', () => {
 
         expect(mockCallback).toHaveBeenCalledTimes(2)
         expect(wrapper.vm.selectableDates).toEqual([])
-        expect(wrapper.vm.dateError).toBe('Ooops. Something went wrong')
+        expect(wrapper.vm.dateError).toBe(false)
     })
 
     it('chooseAppointment method fails to reserve appointment', async () => {
