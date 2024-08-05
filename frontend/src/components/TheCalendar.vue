@@ -292,6 +292,12 @@ export default {
       this.provider = provider
       const selectedServices = {}
 
+      if (provider.scope && provider.scope.displayInfo && provider.scope.displayInfo.length > 0) {
+        this.$store.state.displayInfo = provider.scope.displayInfo
+      } else {
+        this.$store.state.displayInfo = null
+      }
+
       Object.keys(this.$store.state.data.appointmentCounts).forEach((serviceId) => {
         if (this.$store.state.data.appointmentCounts[serviceId] > 0) {
           selectedServices[serviceId] = this.$store.state.data.appointmentCounts[serviceId]

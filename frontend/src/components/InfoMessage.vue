@@ -15,9 +15,9 @@
               </div>
               <div class="m-callout__body">
                 <div class="m-callout__body__inner">
-                  <h2 class="m-callout__headline appointment-confirmation" :tabindex="tabindex">{{ title }}</h2>
+                  <h2 v-if="title" class="m-callout__headline appointment-confirmation" :tabindex="tabindex">{{ title }}</h2>
                   <div class="m-callout__content appointment-confirmation-notice">
-                    <p :tabindex="tabindex">{{ text }}</p>
+                    <p v-html="text" :tabindex="tabindex"></p>
                   </div>
                 </div>
               </div>

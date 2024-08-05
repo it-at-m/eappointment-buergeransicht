@@ -28,6 +28,7 @@ const store = new Vuex.Store({
         scope: [],
         error: null,
         errorMessage: null,
+        displayInfo: null,
         settings: {
             theme: {
                 primary: '#005A9F',

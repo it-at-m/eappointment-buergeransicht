@@ -14,6 +14,13 @@
       <v-row class="content" v-else>
         <v-col cols="12">
 
+          <InfoMessage
+              v-if="$store.state.displayInfo"
+              :type="'default'"
+              :text="$store.state.displayInfo"
+              :tabindex="5"
+          ></InfoMessage>
+
           <div class="appointment-number" v-if="$store.state.preselectedAppointment" tabindex="1">
             {{ $t('yourAppointmentNumber') }}: <b>{{ $store.state.preselectedAppointment.processId }}</b>
           </div>
