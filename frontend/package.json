@@ -25,6 +25,7 @@
     "jest-environment-jsdom": "^27.0.0-alpha.3",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.45",
+    "pump": "^3.0.0",
     "regenerator-runtime": "^0.14.1",
     "vue": "^2.6.14",
     "vue-axios": "^3.4.1",

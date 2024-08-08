@@ -141,7 +141,7 @@
                 @click="submit"
                 tabindex="0"
               >
-                <span>{{ $store.state.isRebooking ? $t('rebookAppointment') : $t('confirmAppointment') }}</span>
+                <span>{{ $t('confirmAppointment') }}</span>
                 <svg aria-hidden="true" class="m-button__icon">
                   <use xlink:href="#icon-arrow-right"></use>
                 </svg>

@@ -185,7 +185,7 @@ describe('AppointmentForm', () => {
         await wrapper.vm.$nextTick()
 
         expect(wrapper.vm.appointmentCanBeStartedOver).toBeTruthy()
-        expect(wrapper.html()).toContain('Termin umbuchen')
+        expect(wrapper.html()).toContain('Reservierung abschließen')
     })
 
     it('confirmedAppointment return right value', async () => {
