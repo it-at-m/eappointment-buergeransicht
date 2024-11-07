@@ -33,11 +33,17 @@ export default {
                 });
         });
     },
-    setUpServicesAndProviders(store, { preselectedService, preselectedProvider }) {
+    setUpServicesAndProviders(store, { preselectedService, preselectedProvider, isExclusiveProvider }) {
         return new Promise((resolve) => {
             store.dispatch('API/fetchServicesAndProviders', { serviceId: preselectedService, locationId: preselectedProvider })
                 .then(data => {
-                    store.commit('setProviders', data.offices)
+                    let providers = data.offices
+                    if (isExclusiveProvider) {
+                        providers = data.offices.filter(office => {
+                            return office.id === preselectedProvider
+                        })
+                    }
+                    store.commit('setProviders', providers)
     
                     let requests = data.services.map(service => {
                         service.providers = []
