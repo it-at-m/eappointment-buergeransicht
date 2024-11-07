@@ -53,9 +53,19 @@ export default {
                         data.relations.forEach(relation => {
                             if (relation.serviceId === service.id) {
                                 service.minSlots[relation.officeId] = relation.slots
-                                const foundProvider = data.offices.filter(office => {
+                                const foundProviders = data.offices.filter(office => {
+                                    if (isExclusiveProvider && office.id !== preselectedProvider) {
+                                        return false
+                                    }
+
                                     return office.id === relation.officeId
-                                })[0]
+                                })
+
+                                if (foundProviders.length == 0) {
+                                    continue
+                                }
+
+                                const foundProvider = foundProviders[0]
     
                                 foundProvider.index = index
                                 index++
