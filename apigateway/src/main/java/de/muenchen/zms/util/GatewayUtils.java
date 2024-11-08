@@ -4,14 +4,12 @@
  */
 package de.muenchen.zms.util;
 
+import java.net.URI;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.authentication.logout.RedirectServerLogoutSuccessHandler;
 import org.springframework.security.web.server.authentication.logout.ServerLogoutSuccessHandler;
-
-import java.net.URI;
-
 
 /**
  * Utility methods and constants which are used in multiple

@@ -1,6 +1,33 @@
 import moment from "moment"
 
+function handleMaintenanceMode(store, response) {
+    if (response.status === 503) {
+        store.rootState.maintenanceMode = true
+    }
+}
+
 export default {
+
+    fetchCaptchaDetails(store) {
+        return new Promise((resolve, reject) => {
+            let apiUrl = store.rootState.settings.endpoints.VUE_APP_ZMS_API_BASE
+                + store.rootState.settings.endpoints.VUE_APP_ZMS_API_CAPTCHA_DETAILS_ENDPOINT;
+    
+            fetch(apiUrl)
+                .then((response) => {
+                    handleMaintenanceMode(store, response);
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.error) {
+                        reject(data);
+                    }
+                    resolve(data);
+                }, error => {
+                    reject(error);
+                });
+        });
+    },
     confirmReservation(store, { processId, authKey, scope }) {
         return new Promise((resolve, reject) => {
             const requestOptions = {
@@ -14,6 +41,8 @@ export default {
             };
             fetch(store.rootState.settings.endpoints.VUE_APP_ZMS_API_BASE + store.rootState.settings.endpoints.VUE_APP_ZMS_API_CONFIRM_RESERVATION_ENDPOINT, requestOptions)
                 .then((response) => {
+                    handleMaintenanceMode(store, response)
+
                     return response.json();
                 })
                 .then(data => {
@@ -27,7 +56,7 @@ export default {
                 })
         })
     },
-    preconfirmReservation(store, { processId, authKey, scope }) {
+    preconfirmReservation(store, { processId, authKey, scope, captchaSolution }) {
         return new Promise((resolve, reject) => {
             const requestOptions = {
                 method: "POST",
@@ -35,24 +64,27 @@ export default {
                 body: JSON.stringify({
                     "processId": processId,
                     "authKey": authKey,
-                    "scope": scope
+                    "scope": scope,
+                    "captchaSolution": captchaSolution // Include captcha solution
                 })
             };
 
             fetch(store.rootState.settings.endpoints.VUE_APP_ZMS_API_BASE + store.rootState.settings.endpoints.VUE_APP_ZMS_API_PRECONFIRM_RESERVATION_ENDPOINT, requestOptions)
                 .then((response) => {
+                    handleMaintenanceMode(store, response);
+
                     return response.json();
                 })
                 .then(data => {
-                    if (data.error) {
-                        reject(data)
+                    if (data.error || data.errorCode) {
+                        reject(data);
                     }
 
-                    resolve(data)
+                    resolve(data);
                 }, error => {
-                    reject(error)
-                })
-        })
+                    reject(error);
+                });
+        });
     },
     cancelAppointment(store, { processId, authKey, scope }) {
         return new Promise((resolve, reject) => {
@@ -98,6 +130,8 @@ export default {
             fetch(store.rootState.settings.endpoints.VUE_APP_ZMS_API_BASE + store.rootState.settings.endpoints.VUE_APP_ZMS_API_CALENDAR_ENDPOINT
                 + '?' + new URLSearchParams(params).toString())
                 .then((response) => {
+                    handleMaintenanceMode(store, response)
+
                     return response.json();
                 })
                 .then(data => {
@@ -111,24 +145,29 @@ export default {
                 })
         })
     },
-    fetchServicesAndProviders(store) {
+    fetchServicesAndProviders(store, { serviceId, locationId } = {}) {
         return new Promise((resolve, reject) => {
-            fetch(store.rootState.settings.endpoints.VUE_APP_ZMS_API_BASE
-                + store.rootState.settings.endpoints.VUE_APP_ZMS_API_PROVIDERS_AND_SERVICES_ENDPOINT
-            )
+            let apiUrl = store.rootState.settings.endpoints.VUE_APP_ZMS_API_BASE
+                + store.rootState.settings.endpoints.VUE_APP_ZMS_API_PROVIDERS_AND_SERVICES_ENDPOINT;
+    
+            if (serviceId && locationId) {
+                apiUrl += `?serviceId=${serviceId}&locationId=${locationId}`;
+            }
+    
+            fetch(apiUrl)
                 .then((response) => {
+                    handleMaintenanceMode(store, response);
                     return response.json();
                 })
                 .then(data => {
                     if (data.error) {
-                        reject(data)
+                        reject(data);
                     }
-
-                    resolve(data)
+                    resolve(data);
                 }, error => {
-                    reject(error)
-                })
-        })
+                    reject(error);
+                });
+        });
     },
     fetchAppointment(store, { processId, authKey, scope }) {
         const params = {
@@ -140,6 +179,8 @@ export default {
             fetch(store.rootState.settings.endpoints.VUE_APP_ZMS_API_BASE + store.rootState.settings.endpoints.VUE_APP_ZMS_API_APPOINTMENT_ENDPOINT
                 + '?' + new URLSearchParams(params).toString())
                 .then((response) => {
+                    handleMaintenanceMode(store, response)
+
                     return response.json();
                 })
                 .then(data => {
@@ -165,6 +206,8 @@ export default {
             fetch(store.rootState.settings.endpoints.VUE_APP_ZMS_API_BASE + store.rootState.settings.endpoints.VUE_APP_ZMS_API_AVAILABLE_TIME_SLOTS_ENDPOINT
                 + '?' + new URLSearchParams(params).toString())
                 .then((response) => {
+                    handleMaintenanceMode(store, response)
+
                     return response.json();
                 })
                 .then(data => {
@@ -201,10 +244,12 @@ export default {
                 requestOptions
             )
             .then((response) => {
+                handleMaintenanceMode(store, response)
+
                 return response.json();
             })
             .then(data => {
-                if (data.error) {
+                if (data.errorCode) {
                     reject(data)
                 }
 
@@ -214,31 +259,35 @@ export default {
             })
         })
     },
-    reserveAppointment(store, { timeSlot, serviceIds, serviceCounts, providerId }) {
+    reserveAppointment(store, { timeSlot, serviceIds, serviceCounts, providerId, captchaSolution }) {
         return new Promise((resolve, reject) => {
-            const requestOptions = {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    "timestamp": timeSlot.unix(),
-                    "serviceCount": serviceCounts,
-                    "officeId": providerId,
-                    "serviceId": serviceIds
-                })
-            };
-            fetch(store.rootState.settings.endpoints.VUE_APP_ZMS_API_BASE + store.rootState.settings.endpoints.VUE_APP_ZMS_API_RESERVE_APPOINTMENT_ENDPOINT, requestOptions)
-                .then((response) => {
-                    return response.json();
-                })
-                .then(data => {
-                    if (data.error) {
-                        reject(data)
-                    }
-                    
-                    resolve(data)
-                }, error => {
-                    reject(error)
-                })
-        })
-    }
+          const requestOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              "timestamp": timeSlot.unix(),
+              "serviceCount": serviceCounts,
+              "officeId": providerId,
+              "serviceId": serviceIds,
+              "captchaSolution": captchaSolution // Include captcha solution in the request
+            })
+          };
+          fetch(store.rootState.settings.endpoints.VUE_APP_ZMS_API_BASE + store.rootState.settings.endpoints.VUE_APP_ZMS_API_RESERVE_APPOINTMENT_ENDPOINT, requestOptions)
+            .then((response) => {
+              if (response.status === 503) {
+                store.commit('setError', 'Service Unavailable');
+                store.rootState.maintenanceMode = true;
+              }
+              return response.json();
+            })
+            .then(data => {
+              if (data.error) {
+                reject(data);
+              }
+              resolve(data);
+            }, error => {
+              reject(error);
+            });
+        });
+      }
 }

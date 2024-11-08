@@ -7,6 +7,7 @@ import translations from './../../src/translations'
 import store from './../../src/store'
 import Vue from 'vue'
 import moment from "moment"
+import 'moment-timezone'
 
 Vue.use(VueI18n)
 Vue.use(Vuetify)
@@ -184,7 +185,7 @@ describe('AppointmentForm', () => {
         await wrapper.vm.$nextTick()
 
         expect(wrapper.vm.appointmentCanBeStartedOver).toBeTruthy()
-        expect(wrapper.html()).toContain('Termin umbuchen')
+        expect(wrapper.html()).toContain('Reservierung abschließen')
     })
 
     it('confirmedAppointment return right value', async () => {
@@ -345,7 +346,7 @@ describe('AppointmentForm', () => {
         expect(mockCallback.mock.calls[2][0]).toBe('data/setAppointment')
         expect(mockCallback.mock.calls[2][1]).toBeNull()
         expect(mockCallback.mock.calls[3][0]).toBe('data/setService')
-        expect(mockCallback.mock.calls[3][1]).toBeNull()
+        expect(mockCallback.mock.calls[3][1]).toStrictEqual({service: null, provider: null})
         expect(openPanelMock.mock.calls[0][0]).toBe(1)
         expect(wrapper.vm.$store.state.confirmedAppointment).toBeNull()
         expect(wrapper.vm.starOverDialog).toBeFalsy()
@@ -511,16 +512,17 @@ describe('AppointmentForm', () => {
             return 'Service Name 1'
         })
         const time = moment.unix(1684830081)
+        const berlinTime = moment(time).tz('Europe/Berlin');
 
         wrapper.vm.$store.state.data.appointment = {
-            timestamp: time.unix(),
+            timestamp: berlinTime.unix(),
             locationId: 1
         }
 
         const selectedAppointment = wrapper.vm.getSelectedAppointment()
         await wrapper.vm.$nextTick()
 
-        expect(selectedAppointment).toBe(time.format('DD.MM.YYYY H:mm') + ' Service Name 1')
+        expect(selectedAppointment).toBe(berlinTime.format('DD.MM.YYYY H:mm') + ' Service Name 1')
 
         wrapper.vm.getProviderName = realGetProviderName
     })

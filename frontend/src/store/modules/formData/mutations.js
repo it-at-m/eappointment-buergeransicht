@@ -2,11 +2,56 @@ const MAX_SLOTS = 25
 
 const checkMaxSlots = (state) => {
     let minSlots = 0
-    for (var selectedServiceId in state.appointmentCounts) {
-        minSlots += state.appointmentCounts[selectedServiceId] * state.servicesById[selectedServiceId].minSlots
+    let maxSlotsByProviders = 0
+    let providerIds = []
+
+    for (var serviceId in state.appointmentCounts) {
+        let selectedService = state.servicesById[serviceId]
+
+        if (state.appointmentCounts[serviceId] === 0 || ! selectedService.providers) {
+            continue
+        }
+
+        let selectedServiceProviderIds = selectedService.providers.map(provider => provider.id)
+        if (providerIds.length === 0) {
+            providerIds = selectedServiceProviderIds
+            continue
+        }
+
+        providerIds = providerIds.filter(value => selectedServiceProviderIds.includes(value));
     }
 
-    if (minSlots > MAX_SLOTS) {
+    for (var selectedServiceId in state.appointmentCounts) {
+        let selectedService = state.servicesById[selectedServiceId]
+        if (state.appointmentCounts[selectedServiceId] === 0 || ! selectedService.providers) {
+            continue
+        }
+
+        let minSlotsForAllProviders = MAX_SLOTS
+        if (typeof selectedService.providers !== 'undefined') {
+            selectedService.providers.forEach((provider) => {
+                if (! providerIds.includes(provider.id)) {
+                    return
+                }
+
+                if (typeof provider.maxSlotsPerAppointment !== 'undefined'
+                    && provider.maxSlotsPerAppointment > 0)
+                {
+                    maxSlotsByProviders = Math.max(maxSlotsByProviders, parseInt(provider.maxSlotsPerAppointment))
+                }
+
+                minSlotsForAllProviders = Math.min(minSlotsForAllProviders, selectedService.minSlots[provider.id])
+            })
+        }
+        minSlots += state.appointmentCounts[selectedServiceId] * minSlotsForAllProviders
+    }
+
+    let maxSlots = MAX_SLOTS
+    if (maxSlotsByProviders > 0) {
+        maxSlots = Math.min(maxSlotsByProviders, MAX_SLOTS)
+    }
+
+    if (minSlots > maxSlots) {
         state.maxSlotsExceeded = true
     } else {
         state.maxSlotsExceeded = false
@@ -21,6 +66,7 @@ const increaseAppointmentCount = (state, serviceId) => {
     }
 
     checkMaxSlots(state)
+    buildSelectedIds(state)
 }
 
 const decreaseAppointmentCount = (state, serviceId) => {
@@ -30,6 +76,19 @@ const decreaseAppointmentCount = (state, serviceId) => {
     }
 
     checkMaxSlots(state)
+    buildSelectedIds(state)
+}
+
+const buildSelectedIds = (state) => {
+    let selectedServiceIds = []
+
+    Object.entries(state.appointmentCounts).map(([serviceId, count]) => {
+        if (count > 0) {
+            selectedServiceIds.push(parseInt(serviceId))
+        }
+    })
+
+    state.selectedServices = selectedServiceIds.join('-')
 }
 
 export default {
@@ -41,7 +100,7 @@ export default {
         state.appointmentCounts = {}
         state.appointmentCount = 1
     },
-    setService (state, service) {
+    setService (state, { service, provider = null }) {
         state.appointmentCounts = {}
         state.appointmentCount = service && service.count !== undefined ? service.count : 1
         state.service = service
@@ -54,36 +113,38 @@ export default {
 
         if (service.combinable === undefined) {
             service.combinable = []
+            service.subServices = []
+            state.service = service
 
             return
         }
 
         let combinable = service.combinable
-        if (combinable.indexOf(parseInt(service.id) !== -1)) {
-            combinable.splice(combinable.indexOf(parseInt(service.id)), 1)
+        if (typeof combinable[parseInt(service.id)] !== "undefined") {
+            delete combinable[parseInt(service.id)]
         }
 
         if (! service.subServices) {
-            if (service.subServiceCounts) {
-                service.subServices = []
-                for (const [subServiceId, subServiceCount] of Object.entries(service.subServiceCounts)) {
-                    service.subServices.push({
-                        id: parseInt(subServiceId),
-                        count: subServiceCount
-                    })
+            service.subServices = Object.entries(combinable).map(([subServiceId, providers]) => {
+                return {
+                    id: parseInt(subServiceId),
+                    count: service.subServiceCounts && service.subServiceCounts[subServiceId]
+                        ? service.subServiceCounts[subServiceId]
+                        : 0,
+                    providers: providers
                 }
-            } else {
-                service.subServices = combinable.map((subServiceId) => {
-                    return {
-                        id: subServiceId,
-                        count: 0
-                    }
-                })
-            }
+            }).filter((subservice) => {
+                if (provider) {
+                    return subservice.providers.includes(String(provider.id))
+                }
+
+                return true
+            })
         }
 
         service.subServices.forEach((service) => {
             state.appointmentCounts[service.id] = service.count
+            state.selectedServices = service.id + '-'
         })
 
         state.service = service

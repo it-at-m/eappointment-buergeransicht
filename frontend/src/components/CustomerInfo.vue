@@ -1,33 +1,50 @@
 <template>
   <div ref="mainDiv">
-    <div id="customer-name-section">
+    <div id="customer-name-section" :aria-label="$t('nameField') + $t('fieldLengthFifty')">
       <v-text-field v-model="customer.name" id="customer-name" :error-messages="nameErrors" @blur="$v.name.$touch()"
         @change="changed" counter="50" :maxlength="50" filled :label="$t('name')"
-        :disabled="isPreselectedAppointment"></v-text-field>
+        :disabled="isPreselectedAppointment"
+        tabindex="0"
+      ></v-text-field>
     </div>
 
-    <div id="customer-email-section">
+    <div id="customer-email-section" :aria-label="getEmailAriaLabel()">
       <v-text-field v-model="customer.email" id="customer-email" counter="50" :maxlength="50" filled
         :error-messages="emailErrors" @blur="$v.email.$touch()" @change="changed" required :label="$t('email')"
-        :disabled="isPreselectedAppointment"></v-text-field>
+        :disabled="isPreselectedAppointment"
+        tabindex="0"
+      ></v-text-field>
     </div>
 
-    <div id="customer-telephone-section" v-if="isTelephoneActivated">
+    <div id="customer-telephone-section" v-if="isTelephoneActivated" :aria-label="getTelephoneAriaLabel()">
       <v-text-field v-model="customer.telephone" id="customer-telephone" counter="20" :maxlength="20" filled
         :error-messages="telephoneErrors" @blur="$v.telephone.$touch()" @change="changed"
         :label="(isTelephoneRequired) ? $t('telephoneRequired') : $t('telephone')"
-        :disabled="isPreselectedAppointment"></v-text-field>
+        :disabled="isPreselectedAppointment"
+        tabindex="0"
+      ></v-text-field>
     </div>
-    <div id="customer-custom-textfield-section" v-if="isCustomTextfieldActivated">
-      <v-text-field v-model="customer.customTextfield" id="customer-custom-textfield" counter="20" :maxlength="20"
+    <div id="customer-custom-textfield-section" v-if="isCustomTextfieldActivated" :aria-label="getCustomTextAriaLabel()">
+      <v-text-field v-model="customer.customTextfield" id="customer-custom-textfield" counter="50" :maxlength="50"
         filled :error-messages="customTextfieldErrors" @blur="$v.customTextfield.$touch()" @change="changed"
         :label="(isCustomTextfieldRequired ? customTextfieldLabel + '*' : customTextfieldLabel)"
-        :disabled="isPreselectedAppointment"></v-text-field>
+        :disabled="isPreselectedAppointment"
+        tabindex="0"
+      ></v-text-field>
     </div>
 
-    <v-checkbox id="customer-data-protection" v-model="customer.dataProtection" label=""
-      :error-messages="dataProtectionErrors" required @input="$v.dataProtection.$touch()"
-      @blur="$v.dataProtection.$touch()" @change="changed">
+    <v-checkbox
+        :key="customer.dataProtection"
+        id="customer-data-protection"
+        v-model="customer.dataProtection"
+        label=""
+        :error-messages="dataProtectionErrors" required
+        @input="$v.dataProtection.$touch()"
+        @blur="$v.dataProtection.$touch()"
+        @change="changed"
+        tabindex="0"
+        :disabled="isPreselectedAppointment"
+    >
       <template v-slot:label>
         <div v-html="$t('privacyPolicyAccepted')" @click.stop></div>
       </template>
@@ -35,8 +52,21 @@
 
     <p>Hinweis: Die mit * gekennzeichneten Eingabefelder sind Pflichtfelder.</p>
 
-    <button id="customer-submit-button" class="m-button m-button--primary m-button--animated-right button-next"
-      color="white" @click="saveCustomer()">
+    <InfoMessage
+        v-if="$store.state.error === 'tooManyAppointmentsWithSameMail'"
+        :type="'warning'"
+        :title="$t('tooManyAppointmentsWithSameMail')"
+        :text="$t('cancelSomeAppointments')"
+        :tabindex="5"
+    ></InfoMessage>
+
+    <button
+      id="customer-submit-button"
+      class="m-button m-button--primary m-button--animated-right button-next"
+      color="white"
+      tabindex="0"
+      @click="saveCustomer()"
+    >
       <span class="desktop">{{ $t('nextToReservation') }}</span>
       <span class="mobile">{{ $t('next') }}</span>
       <svg aria-hidden="true" class="m-button__icon">
@@ -50,10 +80,14 @@
 <script>
 import { validationMixin } from "vuelidate";
 import { required, email, maxLength } from "vuelidate/lib/validators";
+import InfoMessage from './InfoMessage.vue'
 
 export default {
   name: 'CustomerInfo',
   mixins: [validationMixin],
+  components: {
+    InfoMessage
+  },
   validations() {
     return {
       name: {
@@ -191,7 +225,6 @@ export default {
       return errors;
     },
     isPreselectedAppointment() {
-
       return this.$store.state.preselectedAppointment !== null;
     }
   },
@@ -212,19 +245,36 @@ export default {
             ...this.customer,
           }
         }
-      });
-
-      this.$emit('next')
-      window.scrollTo(0, 0)
-      this.$v.$reset()
+      }).then(() => {
+        this.$store.state.confirmedAppointment = null
+        this.$store.state.error = null
+          this.$emit('next')
+          window.scrollTo(0, 0)
+          this.$v.$reset()
+        }, (error) => {
+          console.error(error)
+          this.$store.state.error = 'tooManyAppointmentsWithSameMail'
+        })
     },
     validTelephoneFormat(value) {
       const phoneRegex = /^\+?\d+$/;
       return !value || phoneRegex.test(value);
+    },
+    getEmailAriaLabel() {
+      const previousFieldError = this.nameErrors.length > 0 ? this.$t('nameIsRequired') : '';
+      return `${previousFieldError} ${this.$t('emailField') + this.$t('fieldLengthFifty')}`;
+    },
+    getTelephoneAriaLabel() {
+      const previousFieldError = this.emailErrors.length > 0 ? this.$t('emailIsRequired') : '';
+      return `${previousFieldError} ${this.$t('telephoneField') + this.$t('fieldLengthTwenty')}`;
+    },
+    getCustomTextAriaLabel() {
+      const previousFieldError = this.telephoneErrors.length > 0 ? this.$t('telephoneIsRequired') : '';
+      return `${previousFieldError} ${this.$t('customField') + this.$t('fieldLengthFifty')}`;
     }
   },
   mounted() {
-    this.customer = this.$store.state.data.customer;
+    this.customer = this.$store.state.data.customer
   }
 }
 </script>

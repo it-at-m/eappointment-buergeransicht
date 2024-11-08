@@ -64,7 +64,7 @@
               <v-icon>{{ minusSvg }}</v-icon>
             </v-btn>
             <h3 tabindex="0"
-              :aria-label="$store.state.data.service.name + ` Anzahl: ` + appointmentCounts[$store.state.data.service.id]"
+              :aria-label="`Akuelle Anzahl ausgewählter Dienstleistungen ` + appointmentCounts[$store.state.data.service.id]"
               class="appointment-count" :key="appointmentCounts[$store.state.data.service.id]">
               {{ appointmentCounts[$store.state.data.service.id] }}
             </h3>
@@ -85,7 +85,10 @@
           <h3 tabindex="0" v-if="$store.state.data.service.subServices.length">{{ $t('oftenBookedTogether') }}</h3>
 
           <template v-for="(subService) in $store.state.data.service.subServices">
-            <v-list-item :key="subService.id + ' ' + appointmentCountTriggered">
+            <v-list-item
+                :key="subService.id + ' ' + appointmentCountTriggered"
+                v-if="getServiceName(subService.id)"
+            >
               <v-card-actions>
                 <v-btn ref="buttonDown" class="appointment-count-button button-down"
                   :aria-label="`Anzahl der Dienstleistung verringern auf ` + (appointmentCounts[subService.id] - 1)"
@@ -222,12 +225,14 @@ export default {
         return
       }
 
-      this.$store.commit('data/setService', value)
+      this.$store.commit('data/setService', { service: value, provider: this.$store.state.preselectedProvider })
       this.filteredServices = null
       this.$emit('changed')
     },
     getServiceName(serviceId) {
-      return this.$store.state.servicesById[serviceId].name
+      return typeof this.$store.state.servicesById[serviceId] != 'undefined'
+          ? this.$store.state.servicesById[serviceId].name
+          : null
     },
     suggest(event) {
       if (!event.target.value) {

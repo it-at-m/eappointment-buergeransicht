@@ -2,57 +2,81 @@ import moment from "moment"
 
 export default {
     updateAppointmentData(store, appointment) {
-        appointment.familyName = appointment.client.name
-        appointment.email = appointment.client.email
-        appointment.telephone = appointment.client.telephone
-        appointment.customTextfield = appointment.client.customTextfield
+        return new Promise((resolve, reject) => {
+            appointment.familyName = appointment.client.name
+            appointment.email = appointment.client.email
+            appointment.telephone = appointment.client.telephone
+            appointment.customTextfield = appointment.client.customTextfield
 
-        store.dispatch('API/updateAppointmentData', appointment)
-            .then((data) => {
-                appointment.data = data
-                store.commit('data/setCustomerData', appointment.client)
-                store.commit('data/setAppointment', appointment)
-            })
+            store.dispatch('API/updateAppointmentData', appointment)
+                .then((data) => {
+                    appointment.data = data
+                    store.commit('data/setCustomerData', appointment.client)
+                    store.commit('data/setAppointment', appointment)
+
+                    resolve(true)
+                }, (error) => {
+                    reject(error)
+                })
+        })
+    },
+    setUpCaptchaDetails(store) {
+        return new Promise((resolve, reject) => {
+            store.dispatch('API/fetchCaptchaDetails')
+                .then(data => {
+                    store.commit('setCaptchaDetails', data);
+                    resolve(data);
+                })
+                .catch(error => {
+                    store.commit('setError', 'captcha-details-error');
+                    reject(error);
+                });
+        });
     },
     setUpServicesAndProviders(store, { preselectedService, preselectedProvider }) {
         return new Promise((resolve) => {
-            store.dispatch('API/fetchServicesAndProviders')
+            store.dispatch('API/fetchServicesAndProviders', { serviceId: preselectedService, locationId: preselectedProvider })
                 .then(data => {
-
                     store.commit('setProviders', data.offices)
-
+    
                     let requests = data.services.map(service => {
                         service.providers = []
-
+                        service.minSlots = {}
+                        let index = 0
+    
                         data.relations.forEach(relation => {
                             if (relation.serviceId === service.id) {
-                                service.minSlots = service.minSlots
-                                    ? Math.min(service.minSlots, relation.slots)
-                                    : relation.slots
+                                service.minSlots[relation.officeId] = relation.slots
                                 const foundProvider = data.offices.filter(office => {
                                     return office.id === relation.officeId
                                 })[0]
-
+    
+                                foundProvider.index = index
+                                index++
+    
                                 foundProvider.slots = relation.slots
                                 service.providers.push(foundProvider)
                             }
                         })
-
+    
                         return service
                     })
                     store.commit('setServices', requests)
-
+                    store.commit('selectProviderWithId', preselectedProvider)
+    
                     if (preselectedService !== null) {
                         store.commit('data/reset')
                         store.commit('selectServiceWithId', { id: preselectedService })
                     }
-
-                    store.commit('selectProviderWithId', preselectedProvider)
-
+    
                     resolve()
+                })
+                .catch(() => {
+                    store.commit('setError', 'not-found');
                 })
         })
     },
+    
     confirmReservation(store, { appointmentHash }) {
         let appointmentData = null
 
@@ -143,7 +167,6 @@ export default {
     },
     startRebooking (store) {
         store.state.isRebooking = true
-        store.state.preselectedProvider = null
         store.state.step = 2
         store.state.openedPanel = 1
         store.state.confirmedAppointment = null

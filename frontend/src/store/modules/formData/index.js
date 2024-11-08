@@ -4,8 +4,11 @@ import mutations from './mutations.js'
 const state = {
     service: null,
     providers: [],
+    captchaDetails: [],
     appointment: null,
     appointmentCounts: {},
+    selectedServices: '',
+    selectedProvider: null,
     appointmentCount: 1,
     maxSlotsExceeded: false,
     customer: {

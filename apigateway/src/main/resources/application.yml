@@ -36,9 +36,9 @@ spring:
         - id: backend
           uri: ${BACKEND_URI}
           predicates:
-            - Path=${BACKEND_URI_PREDICATE}
+            - Path=/buergeransicht/api/backend/**
           filters:
-            - RewritePath=${BACKEND_URI_REWRITE_PATH}
+            - RewritePath=/buergeransicht/api/backend/(?<segment>.*), /api/$\{segment}/
             - RemoveResponseHeader=WWW-Authenticate
       default-filters:
         - RemoveResponseHeader=Expires

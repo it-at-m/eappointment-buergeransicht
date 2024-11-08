@@ -5,13 +5,16 @@
     <link :href="`${linkBaseUrl}css/materialdesignicons.min.css`" rel="stylesheet">
     <link :href="`${linkBaseUrl}css/style.css`" rel="stylesheet">
     <link :href="`${linkBaseUrl}css/patternlab.css`" rel="stylesheet">
-    <AppointmentForm v-if="stylesLoaded"/>
+    <link :href="`${linkBaseUrl}css/friendlycaptcha.css`" rel="stylesheet">
+    <AppointmentForm v-if="stylesLoaded && !errorNotFound"/>
+    <NotFound v-if="errorNotFound" />
   </v-app>
 </template>
 
 <script>
 import AppointmentForm from '@/components/AppointmentForm';
-import SvgSprite from '@/components/SvgSprite'; // Import the SvgSprite component
+import NotFound from '@/components/NotFound';
+import SvgSprite from '@/components/SvgSprite';
 import store from "@/store";
 import translations from "@/translations";
 import Vue from "vue";
@@ -40,6 +43,7 @@ export default {
   props: ['baseUrl', 'serviceId', 'locationId', 'appointmentHash', 'confirmAppointmentHash'],
   components: {
     AppointmentForm,
+    NotFound,
     SvgSprite
   },
   data() {
@@ -54,7 +58,10 @@ export default {
       }
 
       return this.baseUrl + '/'
-    }
+    },
+    errorNotFound() {
+      return this.$store.state.error === 'not-found';
+    },
   },
   mounted () {
     this.loadStylesHackyWay();
@@ -97,6 +104,7 @@ export default {
             this.$store.state.confirmedAppointment = true
           })
         }
+        this.$store.dispatch('setUpCaptchaDetails');
       })
     },
     loadStylesHackyWay() {

@@ -657,8 +657,8 @@ progress {
 
 @media (min-width:1200px) {
     .m-button--animated-right .m-button__icon {
-        margin-right: .25rem;
-        margin-left: 1rem
+        margin-right: 1rem;
+        margin-left: 0rem
     }
 }
 
@@ -11121,6 +11121,16 @@ p span[data-bs-toggle=tooltip] {
 .m-callout--warning .m-callout__icon {
     background-color: #fcaa67;
     box-shadow: 0 .3125rem .625rem rgba(252, 170, 103, .4)
+}
+
+.m-callout--success {
+    background-color: rgba(241, 246, 243, 1);
+    border-color: rgba(58, 127, 83, 1)
+}
+
+.m-callout--success .m-callout__icon {
+    background-color: rgba(58, 127, 83, 1);
+    box-shadow: 0 .3125rem .625rem rgba(58, 127, 83, .4);
 }
 
 .m-component-contact {
@@ -29330,8 +29340,8 @@ progress {
 
 @media (min-width:1200px) {
     .m-button--animated-right .m-button__icon {
-        margin-right: .25rem;
-        margin-left: 1rem
+        margin-right: 1rem;
+        margin-left: 0rem
     }
 }
 
