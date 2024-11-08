@@ -127,6 +127,10 @@ it@m - opensource@muenchen.de
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+## Screenshot
+![screenshot](https://github.com/user-attachments/assets/a378bbc9-ba4b-4a36-a968-8e9017f4e96c)
+<p align="right">(<a href="#top">back to top</a>)</p>
+
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/github/contributors/it-at-m/eappointment-buergeransicht.svg?style=for-the-badge
