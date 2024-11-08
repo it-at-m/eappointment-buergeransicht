@@ -35,6 +35,7 @@ export default {
     },
     setUpServicesAndProviders(store, { preselectedService, preselectedProvider, isExclusiveProvider }) {
         return new Promise((resolve) => {
+            console.log(isExclusiveProvider)
             store.dispatch('API/fetchServicesAndProviders', { serviceId: preselectedService, locationId: preselectedProvider })
                 .then(data => {
                     let providers = data.offices
@@ -62,7 +63,7 @@ export default {
                                 })
 
                                 if (foundProviders.length == 0) {
-                                    continue
+                                    return
                                 }
 
                                 const foundProvider = foundProviders[0]
