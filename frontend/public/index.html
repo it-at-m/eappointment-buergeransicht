@@ -34,9 +34,7 @@
             element.setAttribute('appointment-hash', urlElements[2])
         }
 
-        if ((urlElements.length >= 1 && urlElements[1] === 'exclusive') ||
-            (urlElements.length >= 3 && urlElements[3] === 'exclusive')
-        ) {
+        if (urlElements.includes('exclusive')) {
             element.setAttribute('exclusive-location', '1')
         }
     </script>
