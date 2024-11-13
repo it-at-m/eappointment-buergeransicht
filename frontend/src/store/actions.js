@@ -35,14 +35,15 @@ export default {
     },
     setUpServicesAndProviders(store, { preselectedService, preselectedProvider, isExclusiveProvider }) {
         return new Promise((resolve) => {
-            console.log(isExclusiveProvider)
             store.dispatch('API/fetchServicesAndProviders', { serviceId: preselectedService, locationId: preselectedProvider })
                 .then(data => {
                     let providers = data.offices
-                    if (isExclusiveProvider) {
-                        providers = data.offices.filter(office => {
-                            return office.id === preselectedProvider
-                        })
+                    exclusiveProviders = data.offices.filter(office => {
+                        return office.id === preselectedProvider && ! office.showAlternativeLocations
+                    })
+
+                    if (exclusiveProviders.length) {
+                        providers = exclusiveProviders
                     }
                     store.commit('setProviders', providers)
     
@@ -54,11 +55,7 @@ export default {
                         data.relations.forEach(relation => {
                             if (relation.serviceId === service.id) {
                                 service.minSlots[relation.officeId] = relation.slots
-                                const foundProviders = data.offices.filter(office => {
-                                    if (isExclusiveProvider && office.id !== preselectedProvider) {
-                                        return false
-                                    }
-
+                                const foundProviders = providers.filter(office => {
                                     return office.id === relation.officeId
                                 })
 

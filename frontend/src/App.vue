@@ -40,7 +40,7 @@ export default {
       defaultTheme: 'light'
     }
   }),
-  props: ['baseUrl', 'serviceId', 'locationId', 'exclusiveLocation', 'appointmentHash', 'confirmAppointmentHash'],
+  props: ['baseUrl', 'serviceId', 'locationId', 'appointmentHash', 'confirmAppointmentHash'],
   components: {
     AppointmentForm,
     NotFound,
@@ -77,8 +77,7 @@ export default {
 
       this.$store.dispatch('setUpServicesAndProviders', {
         preselectedService: this.serviceId ?? null,
-        preselectedProvider: this.locationId ?? null,
-        isExclusiveProvider: !!this.exclusiveLocation
+        preselectedProvider: this.locationId ?? null
       }).then(() => {
         if (this.appointmentHash) {
           this.$store.dispatch('setUpAppointment', {
