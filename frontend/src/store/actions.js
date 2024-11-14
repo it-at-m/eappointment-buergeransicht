@@ -33,12 +33,12 @@ export default {
                 });
         });
     },
-    setUpServicesAndProviders(store, { preselectedService, preselectedProvider, isExclusiveProvider }) {
+    setUpServicesAndProviders(store, { preselectedService, preselectedProvider }) {
         return new Promise((resolve) => {
             store.dispatch('API/fetchServicesAndProviders', { serviceId: preselectedService, locationId: preselectedProvider })
                 .then(data => {
                     let providers = data.offices
-                    exclusiveProviders = data.offices.filter(office => {
+                    const exclusiveProviders = data.offices.filter(office => {
                         return office.id === preselectedProvider && ! office.showAlternativeLocations
                     })
 
