@@ -33,7 +33,7 @@ export default {
                 });
         });
     },
-    setUpServicesAndProviders(store, { preselectedService, preselectedProvider, resetData: true }) {
+    setUpServicesAndProviders(store, { preselectedService, preselectedProvider, resetData = true }) {
         return new Promise((resolve) => {
             store.dispatch('API/fetchServicesAndProviders', { serviceId: preselectedService, locationId: preselectedProvider })
                 .then(data => {
