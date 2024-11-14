@@ -77,7 +77,8 @@ export default {
 
       this.$store.dispatch('setUpServicesAndProviders', {
         preselectedService: this.serviceId ?? null,
-        preselectedProvider: this.locationId ?? null
+        preselectedProvider: this.locationId ?? null,
+        resetData: true
       }).then(() => {
         if (this.appointmentHash) {
           this.$store.dispatch('setUpAppointment', {

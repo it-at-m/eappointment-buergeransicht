@@ -33,7 +33,7 @@ export default {
                 });
         });
     },
-    setUpServicesAndProviders(store, { preselectedService, preselectedProvider }) {
+    setUpServicesAndProviders(store, { preselectedService, preselectedProvider, resetData }) {
         return new Promise((resolve) => {
             store.dispatch('API/fetchServicesAndProviders', { serviceId: preselectedService, locationId: preselectedProvider })
                 .then(data => {
@@ -179,7 +179,7 @@ export default {
         store.commit('preselectAppointment', appointment)
         store.commit('data/setAppointment', appointment)
 
-        store.dispatch('setUpServicesAndProviders', { preselectedService: appointmentData.serviceId, preselectedProvider: appointmentData.officeId })
+        store.dispatch('setUpServicesAndProviders', { preselectedService: appointmentData.serviceId, preselectedProvider: appointmentData.officeId, resetData: false })
     },
     startRebooking (store) {
         store.state.isRebooking = true
