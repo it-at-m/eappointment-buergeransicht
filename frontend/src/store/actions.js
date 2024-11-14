@@ -33,7 +33,7 @@ export default {
                 });
         });
     },
-    setUpServicesAndProviders(store, { preselectedService, preselectedProvider, resetData = true }) {
+    setUpServicesAndProviders(store, { preselectedService, preselectedProvider }) {
         return new Promise((resolve) => {
             store.dispatch('API/fetchServicesAndProviders', { serviceId: preselectedService, locationId: preselectedProvider })
                 .then(data => {
@@ -78,7 +78,7 @@ export default {
                     store.commit('setServices', requests)
                     store.commit('selectProviderWithId', preselectedProvider)
     
-                    if (preselectedService !== null && resetData) {
+                    if (preselectedService !== null) {
                         store.commit('data/reset')
                         store.commit('selectServiceWithId', { id: preselectedService })
                     }
@@ -147,12 +147,12 @@ export default {
             })
     },
     setAppointmentFromResponse (store, appointmentData) {
+        store.commit('selectProviderWithId', appointmentData.officeId)
         store.commit('selectServiceWithId', {
             id: appointmentData.serviceId,
             count: appointmentData.serviceCount,
             subServiceCounts: appointmentData.subRequestCounts
         })
-        store.commit('selectProviderWithId', appointmentData.officeId)
 
         const customer = {
             name: appointmentData.familyName,
@@ -178,8 +178,6 @@ export default {
         store.commit('data/setCustomerData', customer)
         store.commit('preselectAppointment', appointment)
         store.commit('data/setAppointment', appointment)
-
-        store.dispatch('setUpServicesAndProviders', { preselectedService: appointmentData.serviceId, preselectedProvider: appointmentData.officeId, resetData: false })
     },
     startRebooking (store) {
         store.state.isRebooking = true
