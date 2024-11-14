@@ -78,7 +78,7 @@ export default {
                     store.commit('setServices', requests)
                     store.commit('selectProviderWithId', preselectedProvider)
     
-                    if (preselectedService !== null) {
+                    if (preselectedService !== null && resetData) {
                         store.commit('data/reset')
                         store.commit('selectServiceWithId', { id: preselectedService })
                     }
