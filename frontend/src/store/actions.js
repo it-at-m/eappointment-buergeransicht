@@ -178,6 +178,8 @@ export default {
         store.commit('data/setCustomerData', customer)
         store.commit('preselectAppointment', appointment)
         store.commit('data/setAppointment', appointment)
+
+        store.dispatch('setUpServicesAndProviders', { preselectedService: appointmentData.serviceId, preselectedProvider: appointmentData.officeId })
     },
     startRebooking (store) {
         store.state.isRebooking = true
