@@ -39,6 +39,10 @@ export default {
                     service.subServiceCounts = subServiceCountsById
                 }
 
+                if (state.preselectedProvider && ! state.preselectedProvider.showAlternativeLocations) {
+                    service.providers = [state.preselectedProvider]
+                }
+
                 this.commit('data/setService', { service: service, provider: state.preselectedProvider })
             }
         })

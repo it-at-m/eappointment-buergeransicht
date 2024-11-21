@@ -37,7 +37,15 @@ export default {
         return new Promise((resolve) => {
             store.dispatch('API/fetchServicesAndProviders', { serviceId: preselectedService, locationId: preselectedProvider })
                 .then(data => {
-                    store.commit('setProviders', data.offices)
+                    let providers = data.offices
+                    const exclusiveProviders = data.offices.filter(office => {
+                        return office.id === preselectedProvider && ! office.showAlternativeLocations
+                    })
+
+                    if (exclusiveProviders.length) {
+                        providers = exclusiveProviders
+                    }
+                    store.commit('setProviders', providers)
     
                     let requests = data.services.map(service => {
                         service.providers = []
@@ -47,9 +55,15 @@ export default {
                         data.relations.forEach(relation => {
                             if (relation.serviceId === service.id) {
                                 service.minSlots[relation.officeId] = relation.slots
-                                const foundProvider = data.offices.filter(office => {
+                                const foundProviders = providers.filter(office => {
                                     return office.id === relation.officeId
-                                })[0]
+                                })
+
+                                if (foundProviders.length == 0) {
+                                    return
+                                }
+
+                                const foundProvider = foundProviders[0]
     
                                 foundProvider.index = index
                                 index++
@@ -133,12 +147,12 @@ export default {
             })
     },
     setAppointmentFromResponse (store, appointmentData) {
+        store.commit('selectProviderWithId', appointmentData.officeId)
         store.commit('selectServiceWithId', {
             id: appointmentData.serviceId,
             count: appointmentData.serviceCount,
             subServiceCounts: appointmentData.subRequestCounts
         })
-        store.commit('selectProviderWithId', appointmentData.officeId)
 
         const customer = {
             name: appointmentData.familyName,
