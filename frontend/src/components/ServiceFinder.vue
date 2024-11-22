@@ -63,13 +63,13 @@
               @click="decreaseAppointments($store.state.data.service)">
               <v-icon>{{ minusSvg }}</v-icon>
             </v-btn>
-            <h3 tabindex="0"
-              :aria-label="`Akuelle Anzahl ausgewählter Dienstleistungen ` + appointmentCounts[$store.state.data.service.id]"
+            <span tabindex="0"
+              :aria-label="`Aktuelle Anzahl ausgewählter Dienstleistungen ` + appointmentCounts[$store.state.data.service.id]"
               class="appointment-count" :key="appointmentCounts[$store.state.data.service.id]">
               {{ appointmentCounts[$store.state.data.service.id] }}
-            </h3>
+            </span>
             <v-btn id="button-up" ref="buttonUp" class="appointment-count-button"
-              :aria-label="`Anzahl der Dienstleistung erhöhen auf` + (appointmentCounts[$store.state.data.service.id] + 1)"
+              :aria-label="`Anzahl der Dienstleistung erhöhen auf ` + (appointmentCounts[$store.state.data.service.id] + 1)"
               :aria-describedby="`appointment-count-name-` + $store.state.data.service.id"
               :disabled="!canIncreaseAppointments($store.state.data.service)" fab
               @click="increaseAppointments($store.state.data.service)">
@@ -96,11 +96,11 @@
                   :disabled="!canDecreaseAppointments(subService)" fab @click="decreaseAppointments(subService)">
                   <v-icon>{{ minusSvg }}</v-icon>
                 </v-btn>
-                <h3 tabindex="0"
+                <span tabindex="0"
                   :aria-label="getServiceName(subService.id) + ` Anzahl: ` + appointmentCounts[subService.id]"
                   class="appointment-count" :key="appointmentCounts[subService.id]">
                   {{ appointmentCounts[subService.id] }}
-                </h3>
+                </span>
                 <v-btn id="button-up" ref="buttonUp" class="appointment-count-button"
                   :aria-label="`Anzahl der Dienstleistung erhöhen auf ` + (appointmentCounts[subService.id] + 1)"
                   :aria-describedby="`appointment-count-name-` + subService.id"
