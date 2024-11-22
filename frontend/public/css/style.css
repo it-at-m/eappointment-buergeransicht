@@ -195,6 +195,10 @@ p, span, div, button, td, th, .v-label, .v-list-item__title {
 }
 
 .appointment-count {
+    font-family: Roboto Condensed, Arial, sans-serif;
+    font-weight: 600;
+    font-size: 1.17em;
+    color: #3a5368 !important;
     margin: 0 0.5rem;
 }
 
