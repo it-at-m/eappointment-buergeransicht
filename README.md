@@ -47,6 +47,32 @@ This project is built with:
 <!-- GETTING STARTED -->
 ## Getting Started
 
+## For Mac
+
+Install Java Node and Maven
+
+ `brew install openjdk@17 && brew install nodejs && brew install maven`
+
+Set Env
+```
+/usr/libexec/java_home -v 17
+
+echo 'export PATH="/usr/local/opt/openjdk@17/bin:$PATH"' >> ~/.zshrc
+echo 'export JAVA_HOME=$(/usr/libexec/java_home -v 17)' >> ~/.zshrc
+echo 'export PATH="/usr/local/opt/openjdk@17/bin:$PATH"' >> ~/.bashrc
+echo 'export JAVA_HOME=$(/usr/libexec/java_home -v 17)' >> ~/.bashrc
+
+source ~/.zshrc
+source ~/.bashrc
+```
+
+```
+java -version
+node -v
+npm -v
+mvn -v
+```
+
 _Below is an example of how you can installing and setup up your service_
 
 1. `git clone `
