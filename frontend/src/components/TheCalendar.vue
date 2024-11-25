@@ -257,10 +257,7 @@ export default {
         })
     },
     handleTimeSlotSelection: function (timeSlot) {
-      if (this.isLoading) {
-        console.log("nope");
-        return;
-      } 
+      if (this.isLoading) return;
       this.selectedTimeSlot = timeSlot;
       this.showCaptcha = this.captchaDetails.captchaEnabled && (this.provider.scope) && (this.provider.scope.captchaActivatedRequired) && (this.provider.scope.captchaActivatedRequired === '1');
       if (this.showCaptcha) {
@@ -308,7 +305,9 @@ export default {
         this.timeSlotError = this.$t('noAppointmentsAvailable')
       })
       .finally(() => {
-        this.isLoading = false
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 300);
       });
 
       if (!this.timeSlotError && oldAppointment && !this.$store.state.isRebooking) {
