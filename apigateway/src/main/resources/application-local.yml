@@ -23,7 +23,7 @@ spring:
             maxAge: 3600
       routes:
         - id: backend
-          uri: "http://127.0.0.1:55003/terminvereinbarung/api/citizen"
+          uri: "http://zms.ddev.site/terminvereinbarung/api/citizen"
           predicates:
             - Path=/buergeransicht/api/backend/**
           filters:
