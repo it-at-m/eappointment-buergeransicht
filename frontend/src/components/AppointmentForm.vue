@@ -87,7 +87,7 @@
                 {{ $t('appointment') }}
               </v-expansion-panel-header>
               <v-expansion-panel-content>
-                <TheCalendar v-if="$store.state.step === 2" @next="openPanel(3)" :key="$store.state.data.selectedServices" />
+                <TheCalendar v-if="$store.state.step >= 2" @next="openPanel(3)" :key="$store.state.data.selectedServices" />
               </v-expansion-panel-content>
             </v-expansion-panel>
 

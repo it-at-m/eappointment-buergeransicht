@@ -12,30 +12,11 @@
 <br />
 <div align="center">
   <a href="https://github.com/it-at-m/eappointment-buergeransicht">
-    <img src="images/logo.png" alt="Logo" height="200">
+    <img src="https://assets.muenchen.de/logos/itm/itM_Basislogo_gelb_schwarz-128.png" alt="Logo">
   </a>
 
 <h3 align="center">E-appointment Frontend</h3>
 </div>
-
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-    </li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ol>
-</details>
 
 
 <!-- ABOUT THE PROJECT -->
@@ -66,6 +47,32 @@ This project is built with:
 <!-- GETTING STARTED -->
 ## Getting Started
 
+## For Mac
+
+Install Java Node and Maven
+
+ `brew install openjdk@17 && brew install nodejs && brew install maven`
+
+Set Env
+```
+/usr/libexec/java_home -v 17
+
+echo 'export PATH="/usr/local/opt/openjdk@17/bin:$PATH"' >> ~/.zshrc
+echo 'export JAVA_HOME=$(/usr/libexec/java_home -v 17)' >> ~/.zshrc
+echo 'export PATH="/usr/local/opt/openjdk@17/bin:$PATH"' >> ~/.bashrc
+echo 'export JAVA_HOME=$(/usr/libexec/java_home -v 17)' >> ~/.bashrc
+
+source ~/.zshrc
+source ~/.bashrc
+```
+
+```
+java -version
+node -v
+npm -v
+mvn -v
+```
+
 _Below is an example of how you can installing and setup up your service_
 
 1. `git clone `
@@ -93,20 +100,44 @@ Make sure you have provided all the necessary dependencies in your vuetify proje
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- CONTRIBUTING -->
-## Contributing
+## Branch Naming Convention
+To keep our branch names organized and easily understandable, we follow a specific naming convention for all branches created in this repository. Please adhere to this convention when creating new branches:
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+1. **type**: The type of work the branch represents. This should be one of the following:
+   - `feature`: For new features or enhancements.
+   - `bugfix`: For bug fixes.
+   - `hotfix`: For urgent fixes that need to be applied quickly.
+   - `cleanup`: For code refactoring, or documentation updates.
+   - `docs`: For updating documentation such as the README.md CODE_OF_CONDUCT.md LICENSE.md CHANGELOG.md CONTRIBUTING.md. Providing a ticket number or project for docs is optional.
+   - `chore`: For maintaining and updating dependencies, libraries, PHP/Node/Twig Versions, or other maintenance work.
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
+2. **project**: The project identifier. This should be:
+   - `zms` for the ZMS project.
+   - `mpdzbs` for the MPDZBS project.
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+3. **issue number**: The ticket or issue number related to this branch (use digits only). This helps track the branch to a specific issue in the project management system.
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+4. **description**: A brief, lowercase description of the branch's purpose, using only lowercase letters, numbers, and hyphens (`-`).
+
+- Always use lowercase letters and hyphens for the description.
+- The issue number should be a numeric ID corresponding to the relevant ticket or task.
+- Descriptions should be concise and informative, summarizing the branch's purpose.
+
+#### Examples
+
+- **Feature Branch**: `feature-zms-12345-this-is-a-feature-in-the-zms-project`
+- **Bugfix Branch**: `bugfix-mpdzbs-67890-fix-crash-on-startup`
+- **Hotfix Branch**: `hotfix-zms-98765-critical-fix-for-login`
+- **Cleanup Branch**: `cleanup-mpdzbs-11111-remove-unused-code`
+- **Chore Branch**: `chore-zms-2964-composer-update`
+- **Docs Branch**: `docs-zms-0000-update-readme` `docs-zms-release-40-update-changelog`
+
+#### Regular Expression
+
+The branch name must match the following regular expression:
+`^(feature|hotfix|bugfix|cleanup|maintenance|docs)-(zms|mpdzbs)-[0-9]+-[a-z0-9-]+$`
+
+**For further commit rules please refer to https://www.conventionalcommits.org/en/v1.0.0-beta.4/**
 
 <!-- LICENSE -->
 ## License
@@ -120,6 +151,10 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 it@m - opensource@muenchen.de
 
+<p align="right">(<a href="#top">back to top</a>)</p>
+
+## Screenshot
+![screenshot](https://github.com/user-attachments/assets/a378bbc9-ba4b-4a36-a968-8e9017f4e96c)
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
