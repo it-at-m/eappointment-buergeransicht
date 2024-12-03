@@ -227,8 +227,12 @@ describe('Calendar', () => {
         const mockCallback = jest.fn(() => {
             return new Promise((resolve, reject) => {
                 resolve({
-                    'errorMessage': 'Something went wrong'
-                })
+                    errors: [
+                        {
+                            errorMessage: 'Something went wrong'
+                        }
+                    ]
+                });
             })
         })
 
@@ -246,8 +250,12 @@ describe('Calendar', () => {
         const mockCallback = jest.fn(() => {
             return new Promise((resolve, reject) => {
                 resolve({
-                    'errorMessage': 'Something went wrong'
-                })
+                    errors: [
+                        {
+                            errorMessage: 'Something went wrong'
+                        }
+                    ]
+                });
             })
         })
 
@@ -293,8 +301,12 @@ describe('Calendar', () => {
         const mockCallback = jest.fn((method, parameters) => {
             return new Promise((resolve, reject) => {
                 resolve({
-                    'errorMessage': 'Ooops. Something went wrong'
-                })
+                    errors: [
+                        {
+                            errorMessage: 'Something went wrong'
+                        }
+                    ]
+                });
             })
         })
 
