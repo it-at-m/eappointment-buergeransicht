@@ -205,6 +205,7 @@ describe('Actions', () => {
             appointmentHash: 'eyJpZCI6IDEyMzQ1LCJhdXRoS2V5IjogImJiYmIifQ=='
         })
 
+        console.log(store.state.errorMessage);
         expect(store.state.errorMessage).toBe('Not valid appointment')
     })
 
