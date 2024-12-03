@@ -328,8 +328,12 @@ describe('Calendar', () => {
             if (method === 'API/reserveAppointment') {
                 return new Promise((resolve, reject) => {
                     resolve({
-                        'error': 'Failed.'
-                    })
+                        errors: [
+                            {
+                                'error': 'Failed.'
+                            }
+                        ]
+                    });
                 })
             }
         })
