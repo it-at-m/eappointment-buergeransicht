@@ -195,19 +195,22 @@ describe('Actions', () => {
         const mockMethods = jest.fn(() => {
             return new Promise((resolve) => {
                 resolve({
-                    errorMessage: 'Not valid appointment'
-                })
-            })
-        })
-        store.dispatch = mockMethods
-
+                    errors: [
+                        {
+                            errorMessage: 'Not valid appointment'
+                        }
+                    ]
+                });
+            });
+        });
+        store.dispatch = mockMethods;
+    
         await actions.setUpAppointment(store, {
             appointmentHash: 'eyJpZCI6IDEyMzQ1LCJhdXRoS2V5IjogImJiYmIifQ=='
-        })
-
-        console.log(store.state.errorMessage);
-        expect(store.state.errorMessage).toBe('Not valid appointment')
-    })
+        });
+    
+        expect(store.state.errorMessage).toBe('Not valid appointment');
+    });    
 
     it('setAppointmentFromResponse set up appointment in store', async () => {
         const commitMethods = jest.fn()
