@@ -76,7 +76,7 @@ export default {
                     return response.json();
                 })
                 .then(data => {
-                    if (data.errors || data.errors[0].errorCode) {
+                    if (data.errors) {
                         reject(data);
                     }
 
