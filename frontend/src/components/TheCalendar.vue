@@ -4,7 +4,8 @@
       <v-row>
         <v-col class="col-sm-12 col-lg-12 p-0">
           <v-tabs v-if="$store.state.data.service && $store.state.data.service.providers.length > 0" color="primary"
-            show-arrows="mobile" id="location-tabs" ref="locationTabs" :key="$store.state.data.selectedProvider + $store.state.data.selectedServices + selectedProviderIndex === -1"
+            show-arrows="mobile" id="location-tabs" ref="locationTabs"
+            :key="$store.state.data.selectedProvider + $store.state.data.selectedServices + selectedProviderIndex === -1"
             v-model="selectedProviderIndex">
             <v-tab v-for="provider in filteredProviders()" :key="provider.id" @change="showForProvider(provider)">
               {{ provider.name }}
@@ -146,7 +147,7 @@ export default {
     }
   },
   methods: {
-    selectedServiceIds: function() {
+    selectedServiceIds: function () {
       let selectedServiceIds = []
 
       Object.entries(this.$store.state.data.appointmentCounts).map(([serviceId, count]) => {
@@ -158,7 +159,7 @@ export default {
       return selectedServiceIds
     },
     filteredProviders: function () {
-      if (! this.$store.state.data.service || ! this.$store.state.data.service.providers) {
+      if (!this.$store.state.data.service || !this.$store.state.data.service.providers) {
         return []
       }
 
@@ -167,7 +168,7 @@ export default {
       if (this.$store.state.data.service.subServices) {
         this.$store.state.data.service.subServices.map((subservice) => {
           if (this.selectedServiceIds().indexOf(parseInt(subservice.id)) !== -1) {
-            providers = providers.filter(function(provider) {
+            providers = providers.filter(function (provider) {
               return subservice.providers.indexOf(provider.id) !== -1;
             });
           }
@@ -223,12 +224,12 @@ export default {
 
       this.$store.dispatch('API/fetchAvailableTimeSlots', { date: momentDate, provider: { ...this.provider, slots: 1 }, serviceIds: Object.keys(selectedServices), serviceCounts: Object.values(selectedServices) })
         .then(data => {
-          if (data.errorMessage) {
+          if (data.errors && Array.isArray(data.errors) && data.errors[0] && data.errors[0].errorMessage) {
             this.selectableDates = this.selectableDates.filter(selectableDate => {
               return selectableDate !== date
             })
 
-            this.dateError = data.errorMessage
+            this.dateError = data.errors[0].errorMessage
 
             return
           }
@@ -246,6 +247,13 @@ export default {
             window.location.hash = '#appointments'
           }
         })
+        .catch(error => {
+          if (error.errors && Array.isArray(error.errors)) {
+            this.dateError = error.errors[0]?.errorMessage || this.$t('applicationError');
+          } else {
+            this.dateError = this.$t('networkError');
+          }
+        });
     },
     handleTimeSlotSelection: function (timeSlot) {
       this.selectedTimeSlot = timeSlot;
@@ -271,12 +279,12 @@ export default {
 
       this.$store.dispatch('API/reserveAppointment', { timeSlot, serviceIds: Object.keys(selectedServices), serviceCounts: Object.values(selectedServices), providerId: this.provider.id, captchaSolution: this.captchaSolution })
         .then(data => {
-          if (data.errorMessage) {
-            this.timeSlotError = data.errorMessage
+          if (data.errors && Array.isArray(data.errors) && data.errors[0] && data.errors[0].errorMessage) {
+            this.timeSlotError = data.errors[0].errorMessage
             return
           }
 
-          if (data.error) {
+          if (data.errors) {
             this.timeSlotError = this.$t('errorTryAgainLater')
             return
           }
@@ -292,6 +300,13 @@ export default {
         }, () => {
           this.timeSlotError = this.$t('noAppointmentsAvailable')
         })
+        .catch(error => {
+          if (error.errors && Array.isArray(error.errors)) {
+            this.dateError = error.errors[0]?.errorMessage || this.$t('applicationError');
+          } else {
+            this.dateError = this.$t('networkError');
+          }
+        });
 
       if (!this.timeSlotError && oldAppointment && !this.$store.state.isRebooking) {
         this.$store.dispatch('API/cancelAppointment', oldAppointment)
@@ -329,14 +344,21 @@ export default {
       this.$store.dispatch('API/fetchAvailableDays', { provider: this.provider, serviceIds: Object.keys(selectedServices), serviceCounts: Object.values(selectedServices) })
         .then(data => {
           let availableDays = data.availableDays ?? []
-          if (data.errorMessage) {
-            this.dateError = data.errorMessage
+          if (data.errors && Array.isArray(data.errors) && data.errors[0] && data.errors[0].errorMessage) {
+            this.dateError = data.errors[0].errorMessage
           }
 
           this.selectableDates = availableDays
 
           this.getAppointmentsOfDay(availableDays[0], false)
         })
+        .catch(error => {
+          if (error.errors && Array.isArray(error.errors)) {
+            this.dateError = error.errors[0]?.errorMessage || this.$t('applicationError');
+          } else {
+            this.dateError = this.$t('networkError');
+          }
+        });
     },
     handleCaptchaDone(solution) {
       this.captchaSolution = solution;
@@ -344,8 +366,8 @@ export default {
         this.chooseAppointment(this.selectedTimeSlot);
       }
     },
-    handleCaptchaError(error) {
-      console.error("Captcha error:", error);
+    handleCaptchaError(errors) {
+      console.error("Captcha errors:", errors);
       // Handle the error, possibly show a message to the user
     }
   },
@@ -361,7 +383,7 @@ export default {
     }
 
     if (this.$store.state.preselectedProvider
-        && (!this.provider || this.$store.state.preselectedProvider.id !== this.provider.id)) {
+      && (!this.provider || this.$store.state.preselectedProvider.id !== this.provider.id)) {
 
       this.showForProvider(this.$store.state.preselectedProvider)
 

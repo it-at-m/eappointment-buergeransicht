@@ -430,6 +430,13 @@ export default {
           this.disabled = false
           this.$store.state.confirmedAppointment = false
         })
+        .catch(error => {
+          if (error.errors && Array.isArray(error.errors)) {
+            this.dateError = error.errors[0]?.errorMessage || this.$t('applicationError');
+          } else {
+            this.dateError = this.$t('networkError');
+          }
+        });
     },
     openPanel(step) {
       this.$store.commit('goToStep', step)

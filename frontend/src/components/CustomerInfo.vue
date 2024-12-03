@@ -251,10 +251,17 @@ export default {
           this.$emit('next')
           window.scrollTo(0, 0)
           this.$v.$reset()
-        }, (error) => {
-          console.error(error)
+        }, (errors) => {
+          console.error(errors)
           this.$store.state.error = 'tooManyAppointmentsWithSameMail'
         })
+        .catch(error => {
+          if (error.errors && Array.isArray(error.errors)) {
+            this.dateError = error.errors[0]?.errorMessage || this.$t('applicationError');
+          } else {
+            this.dateError = this.$t('networkError');
+          }
+        });
     },
     validTelephoneFormat(value) {
       const phoneRegex = /^\+?\d+$/;

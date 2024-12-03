@@ -49,5 +49,7 @@ export default {
     de: 'German',
     en: 'English',
   },
-  oftenBookedTogether: 'Often booked together'
+  oftenBookedTogether: 'Often booked together',
+  networkError: 'A network or unexpected error occurred. Please try again.',
+  applicationError: 'Unknown application error.'
 }
