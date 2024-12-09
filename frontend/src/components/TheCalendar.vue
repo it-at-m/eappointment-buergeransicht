@@ -309,17 +309,17 @@ export default {
           this.$emit('next')
           window.scrollTo(0, 0)
         })
-        .catch(error => {
+        .catch((error) => {
           if (error.errors && Array.isArray(error.errors)) {
             this.dateError = error.errors[0]?.errorMessage || this.$t('applicationError');
           } else {
             this.dateError = this.$t('networkError');
           }
-        }).finally(() => {
-        setTimeout(() => {
-          this.isLoading = false;
+        })
+        .finally(() => {
+          setTimeout(() => {
+            this.isLoading = false;
         }, 300);
-      });
 
       if (!this.timeSlotError && oldAppointment && !this.$store.state.isRebooking) {
         this.$store.dispatch('API/cancelAppointment', oldAppointment)
