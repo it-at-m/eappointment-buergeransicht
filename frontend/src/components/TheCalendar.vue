@@ -88,10 +88,18 @@
                 <h4 class="time-hour" tabindex="0">
                   {{ times[0].format('H') }}:00-{{ times[0].format('H') }}:59
                 </h4>
-                <div class="select-appointment" tabindex="0" v-for="timeSlot in times" :key="timeSlot.unix()"
+                <div class="select-appointment" :class="{ 'disabled': isLoading }" tabindex="0" v-for="timeSlot in times" :key="timeSlot.unix()"
                   v-on:keyup.enter="handleTimeSlotSelection(timeSlot)"
                   v-on:keyup.space="handleTimeSlotSelection(timeSlot)" @click="handleTimeSlotSelection(timeSlot)">
                   {{ timeSlot.format('H:mm') }}
+                  <v-progress-circular
+                    v-if="isLoading && selectedTimeSlot && selectedTimeSlot.unix() === timeSlot.unix()"
+                    indeterminate
+                    size="16"
+                    width="2"
+                    color="primary"
+                    class="ms-2"
+                  ></v-progress-circular>
                 </div>
               </div>
               <v-col
@@ -139,7 +147,8 @@ export default {
     selectedTimeSlot: null,
     captchaKey: 0,
     captchaSolution: null,
-    appointmentCounts: []
+    appointmentCounts: [],
+    isLoading: false
   }),
   computed: {
     captchaDetails() {
@@ -256,12 +265,14 @@ export default {
         });
     },
     handleTimeSlotSelection: function (timeSlot) {
+      if (this.isLoading) return;
       this.selectedTimeSlot = timeSlot;
       this.showCaptcha = this.captchaDetails.captchaEnabled && (this.provider.scope) && (this.provider.scope.captchaActivatedRequired) && (this.provider.scope.captchaActivatedRequired === '1');
       if (this.showCaptcha) {
         this.captchaKey += 1;
         this.captchaSolution = null;
       } else {
+        this.isLoading = true;
         this.chooseAppointment(timeSlot);
       }
     },
@@ -297,8 +308,6 @@ export default {
           this.$store.commit('data/setAppointment', appointment)
           this.$emit('next')
           window.scrollTo(0, 0)
-        }, () => {
-          this.timeSlotError = this.$t('noAppointmentsAvailable')
         })
         .catch(error => {
           if (error.errors && Array.isArray(error.errors)) {
@@ -306,7 +315,11 @@ export default {
           } else {
             this.dateError = this.$t('networkError');
           }
-        });
+        }).finally(() => {
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 300);
+      });
 
       if (!this.timeSlotError && oldAppointment && !this.$store.state.isRebooking) {
         this.$store.dispatch('API/cancelAppointment', oldAppointment)
@@ -368,7 +381,7 @@ export default {
     },
     handleCaptchaError(errors) {
       console.error("Captcha errors:", errors);
-      // Handle the error, possibly show a message to the user
+      this.isLoading = false;
     }
   },
   mounted: function () {
@@ -445,6 +458,12 @@ export default {
   margin-right: 8px;
   margin-bottom: 8px;
   float: left;
+}
+
+.select-appointment.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 .v-picker {
