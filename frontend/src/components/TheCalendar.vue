@@ -277,53 +277,60 @@ export default {
       }
     },
     chooseAppointment: function (timeSlot) {
-      this.timeSlotError = false
-      const selectedServices = {}
+        this.timeSlotError = false;
+        const selectedServices = {};
 
-      Object.keys(this.$store.state.data.appointmentCounts).forEach((serviceId) => {
-        if (this.$store.state.data.appointmentCounts[serviceId] > 0) {
-          selectedServices[serviceId] = this.$store.state.data.appointmentCounts[serviceId]
-        }
-      })
+        Object.keys(this.$store.state.data.appointmentCounts).forEach((serviceId) => {
+            if (this.$store.state.data.appointmentCounts[serviceId] > 0) {
+                selectedServices[serviceId] = this.$store.state.data.appointmentCounts[serviceId];
+            }
+        });
 
-      const oldAppointment = this.$store.state.data.appointment
+        const oldAppointment = this.$store.state.data.appointment;
 
-      this.$store.dispatch('API/reserveAppointment', { timeSlot, serviceIds: Object.keys(selectedServices), serviceCounts: Object.values(selectedServices), providerId: this.provider.id, captchaSolution: this.captchaSolution })
-        .then(data => {
-          if (data.errors && Array.isArray(data.errors) && data.errors[0] && data.errors[0].errorMessage) {
-            this.timeSlotError = data.errors[0].errorMessage
-            return
-          }
+        this.$store.dispatch('API/reserveAppointment', {
+            timeSlot,
+            serviceIds: Object.keys(selectedServices),
+            serviceCounts: Object.values(selectedServices),
+            providerId: this.provider.id,
+            captchaSolution: this.captchaSolution
+        })
+        .then((data) => {
+            if (data.errors && Array.isArray(data.errors) && data.errors[0]?.errorMessage) {
+                this.timeSlotError = data.errors[0].errorMessage;
+                return;
+            }
 
-          if (data.errors) {
-            this.timeSlotError = this.$t('errorTryAgainLater')
-            return
-          }
-          const appointment = data
-          appointment.provider = this.provider
-          appointment.officeName = this.provider.name
-          appointment.locationId = appointment.officeId
-          appointment.reserved = true
-          appointment.updated = false
-          this.$store.commit('data/setAppointment', appointment)
-          this.$emit('next')
-          window.scrollTo(0, 0)
+            if (data.errors) {
+                this.timeSlotError = this.$t('errorTryAgainLater');
+                return;
+            }
+
+            const appointment = data;
+            appointment.provider = this.provider;
+            appointment.officeName = this.provider.name;
+            appointment.locationId = appointment.officeId;
+            appointment.reserved = true;
+            appointment.updated = false;
+
+            this.$store.commit('data/setAppointment', appointment);
+            this.$emit('next');
+            window.scrollTo(0, 0);
         })
         .catch((error) => {
-          if (error.errors && Array.isArray(error.errors)) {
-            this.dateError = error.errors[0]?.errorMessage || this.$t('applicationError');
-          } else {
-            this.dateError = this.$t('networkError');
-          }
+            if (error.errors && Array.isArray(error.errors)) {
+                this.timeSlotError = error.errors[0]?.errorMessage || this.$t('applicationError');
+            } else {
+                this.timeSlotError = this.$t('networkError');
+            }
         })
         .finally(() => {
-          setTimeout(() => {
             this.isLoading = false;
-        }, 300);
 
-      if (!this.timeSlotError && oldAppointment && !this.$store.state.isRebooking) {
-        this.$store.dispatch('API/cancelAppointment', oldAppointment)
-      }
+            if (!this.timeSlotError && oldAppointment && !this.$store.state.isRebooking) {
+                this.$store.dispatch('API/cancelAppointment', oldAppointment);
+            }
+        });
     },
     showForProvider: function (provider) {
       this.dateError = false
