@@ -32,7 +32,7 @@
         <jvm.options>-Dorg.conscrypt.native.workdir=$(pwd)</jvm.options>
         <jacoco.version>0.8.12</jacoco.version>
         <sonar.maven.plugin.version>3.9.1.2184</sonar.maven.plugin.version>
-        <checkstyle.version>10.3</checkstyle.version>
+        <checkstyle.version>10.20.2</checkstyle.version>
     </properties>
 
 
