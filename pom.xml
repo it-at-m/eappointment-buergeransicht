@@ -12,7 +12,7 @@
     <name>frontend</name>
 
     <properties>
-        <sonar.scanner.version>3.9.0.2155</sonar.scanner.version>
+        <sonar.scanner.version>3.11.0.3922</sonar.scanner.version>
     </properties>
 
 
@@ -29,7 +29,7 @@
         <plugins>
             <plugin>
                 <artifactId>maven-scm-plugin</artifactId>
-                <version>1.10.0</version>
+                <version>1.13.0</version>
                 <configuration>
                     <tag>RT-REL-${project.version}</tag>
                 </configuration>
