@@ -34,7 +34,7 @@ spring:
             maxAge: 3600
       routes:
         - id: backend
-          uri: http://zmsapi:8080/terminvereinbarung/api/citizen
+          uri: http://zmscitizenapi:8080/terminvereinbarung/api/citizen
           predicates:
             - Path=/buergeransicht/api/backend/**
           filters:
