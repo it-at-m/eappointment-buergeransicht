@@ -82,7 +82,7 @@ store.state.data.servce = {
         }
     ]
 }
-
+window.scrollTo = jest.fn()
 const wrapper = mount(TheCalendar, {
     Vue,
     store,
