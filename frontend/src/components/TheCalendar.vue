@@ -374,7 +374,6 @@ export default {
           } else {
             this.dateError = this.$t('networkError')
           }
-          window.scrollTo(0, 0)
         });
     },
     handleCaptchaDone(solution) {

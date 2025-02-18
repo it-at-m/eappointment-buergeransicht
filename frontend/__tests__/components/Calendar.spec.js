@@ -82,6 +82,7 @@ store.state.data.servce = {
         }
     ]
 }
+
 const wrapper = mount(TheCalendar, {
     Vue,
     store,
@@ -319,7 +320,7 @@ describe('Calendar', () => {
 
         expect(mockCallback).toHaveBeenCalledTimes(1)
         expect(wrapper.vm.selectableDates).toEqual([])
-        expect(wrapper.vm.dateError).toBe(false)
+        expect(wrapper.vm.dateError).toBe("Something went wrong")
     })
 
     it('chooseAppointment method fails to reserve appointment', async () => {
