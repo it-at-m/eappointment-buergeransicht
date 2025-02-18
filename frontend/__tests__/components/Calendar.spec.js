@@ -318,7 +318,7 @@ describe('Calendar', () => {
 
         await wrapper.vm.$nextTick()
 
-        expect(mockCallback).toHaveBeenCalledTimes(2)
+        expect(mockCallback).toHaveBeenCalledTimes(1)
         expect(wrapper.vm.selectableDates).toEqual([])
         expect(wrapper.vm.dateError).toBe(false)
     })

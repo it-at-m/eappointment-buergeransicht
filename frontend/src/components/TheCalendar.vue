@@ -98,7 +98,7 @@
                 </div>
               </div>
               <v-col
-                v-if="provider.scope && provider.scope.captchaActivatedRequired && provider.scope.captchaActivatedRequired === '1' && captchaDetails.captchaEnabled && showCaptcha && selectedTimeSlot && selectedTimeSlot.format('H') === times[0].format('H') && captchaDetails && captchaDetails.siteKey && captchaDetails.puzzle"
+                v-if="provider && provider.scope && provider.scope.captchaActivatedRequired && provider.scope.captchaActivatedRequired === '1' && captchaDetails.captchaEnabled && showCaptcha && selectedTimeSlot && selectedTimeSlot.format('H') === times[0].format('H') && captchaDetails && captchaDetails.siteKey && captchaDetails.puzzle"
                 cols="12" class="d-flex justify-center align-center">
                 <vue-friendly-captcha :key="captchaKey" :sitekey="captchaDetails.siteKey"
                   :puzzleEndpoint="captchaDetails.puzzle" language="de" @done="handleCaptchaDone"
@@ -113,8 +113,8 @@
 </template>
 
 <script>
-import moment from 'moment'
-import 'moment-timezone'
+import moment from 'moment';
+import 'moment-timezone';
 import { mdiCalendarClock } from '@mdi/js';
 import 'moment/locale/de';
 import 'regenerator-runtime/runtime';
