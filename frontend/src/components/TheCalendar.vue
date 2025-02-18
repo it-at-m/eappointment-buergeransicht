@@ -88,18 +88,13 @@
                 <h4 class="time-hour" tabindex="0">
                   {{ times[0].format('H') }}:00-{{ times[0].format('H') }}:59
                 </h4>
-                <div class="select-appointment" :class="{ 'disabled': isLoading }" tabindex="0" v-for="timeSlot in times" :key="timeSlot.unix()"
-                  v-on:keyup.enter="handleTimeSlotSelection(timeSlot)"
+                <div class="select-appointment" :class="{ 'disabled': isLoading }" tabindex="0"
+                  v-for="timeSlot in times" :key="timeSlot.unix()" v-on:keyup.enter="handleTimeSlotSelection(timeSlot)"
                   v-on:keyup.space="handleTimeSlotSelection(timeSlot)" @click="handleTimeSlotSelection(timeSlot)">
                   {{ timeSlot.format('H:mm') }}
                   <v-progress-circular
-                    v-if="isLoading && selectedTimeSlot && selectedTimeSlot.unix() === timeSlot.unix()"
-                    indeterminate
-                    size="16"
-                    width="2"
-                    color="primary"
-                    class="ms-2"
-                  ></v-progress-circular>
+                    v-if="isLoading && selectedTimeSlot && selectedTimeSlot.unix() === timeSlot.unix()" indeterminate
+                    size="16" width="2" color="primary" class="ms-2"></v-progress-circular>
                 </div>
               </div>
               <v-col
@@ -358,20 +353,26 @@ export default {
 
       this.$store.dispatch('API/fetchAvailableDays', { provider: this.provider, serviceIds: Object.keys(selectedServices), serviceCounts: Object.values(selectedServices) })
         .then(data => {
-          let availableDays = data.availableDays ?? []
-          if (data.errors && Array.isArray(data.errors) && data.errors[0] && data.errors[0].errorMessage) {
-            this.dateError = data.errors[0].errorMessage
+          this.selectableDates = []
+
+          if (data.errors && Array.isArray(data.errors)) {
+            const error = data.errors[0]
+            this.dateError = error.errorMessage
+            return
           }
 
-          this.selectableDates = availableDays
-
-          this.getAppointmentsOfDay(availableDays[0], false)
+          const availableDays = data.availableDays ?? []
+          if (availableDays.length > 0) {
+            this.selectableDates = availableDays
+            this.getAppointmentsOfDay(availableDays[0], false)
+          }
         })
         .catch(error => {
+          this.selectableDates = []
           if (error.errors && Array.isArray(error.errors)) {
-            this.dateError = error.errors[0]?.errorMessage || this.$t('applicationError');
+            this.dateError = error.errors[0]?.errorMessage || this.$t('applicationError')
           } else {
-            this.dateError = this.$t('networkError');
+            this.dateError = this.$t('networkError')
           }
         });
     },
