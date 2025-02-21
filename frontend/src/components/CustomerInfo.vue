@@ -10,7 +10,8 @@
 
     <div id="customer-email-section" :aria-label="getEmailAriaLabel()">
       <v-text-field v-model="customer.email" id="customer-email" counter="50" :maxlength="50" filled
-        :error-messages="emailErrors" @blur="$v.email.$touch()" @change="changed" required :label="$t('email')"
+        :error-messages="emailErrors" @blur="$v.email.$touch()" @change="changed"
+        :label="(isEmailRequired) ? $t('emailRequired') : $t('email')"
         :disabled="isPreselectedAppointment"
         tabindex="0"
       ></v-text-field>
@@ -91,7 +92,7 @@ export default {
   validations() {
     return {
       name: {
-        required,
+        required: this.isEmailRequired ? required : () => true,
         maxLength: maxLength(50)
       },
       email: {
@@ -173,6 +174,11 @@ export default {
       return this.$store.state.data.appointment &&
         this.$store.state.data.appointment.scope &&
         this.$store.state.data.appointment.scope.customTextfieldLabel;
+    },
+    isEmailRequired() {
+      return this.$store.state.data.appointment &&
+        this.$store.state.data.appointment.scope &&
+        this.$store.state.data.appointment.scope.emailRequired == 1;
     },
     isTelephoneActivated() {
       return this.$store.state.data.appointment &&
