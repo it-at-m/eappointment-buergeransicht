@@ -443,21 +443,37 @@ export default {
       this.$store.state.openedPanel = step - 1
     },
     getSelectedServices() {
-      let services = []
+      let services = [];
 
       if (!this.$store.state.data.service) {
-        return ''
+        return "";
       }
 
-      services.push(this.$store.state.data.appointmentCounts[this.$store.state.data.service.id] + ' x ' + this.$store.state.servicesById[this.$store.state.data.service.id].name)
+      const mainServiceCount =
+          this.$store.state.data.appointmentCounts[this.$store.state.data.service.id] || 0;
+      if (mainServiceCount > 0) {
+        services.push(
+            mainServiceCount +
+            " x " +
+            this.$store.state.servicesById[this.$store.state.data.service.id].name
+        );
+      }
 
-      this.$store.state.data.service.subServices.forEach((subService) => {
-        if (this.$store.state.data.appointmentCounts[subService.id]) {
-          services.push(this.$store.state.data.appointmentCounts[subService.id] + ' x ' + this.$store.state.servicesById[subService.id].name)
-        }
-      })
+      if (this.$store.state.data.service.subServices) {
+        this.$store.state.data.service.subServices.forEach((subService) => {
+          const subServiceCount =
+              this.$store.state.data.appointmentCounts[subService.id] || 0;
+          if (subServiceCount > 0) {
+            services.push(
+                subServiceCount +
+                " x " +
+                this.$store.state.servicesById[subService.id].name
+            );
+          }
+        });
+      }
 
-      return services.join(', ')
+      return services.join(", ");
     },
     getSelectedAppointment() {
       const appointment = this.$store.state.data.appointment
