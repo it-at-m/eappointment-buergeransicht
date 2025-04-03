@@ -19,12 +19,12 @@ export default {
                     return response.json();
                 })
                 .then(data => {
-                    if (data.error) {
+                    if (data.errors) {
                         reject(data);
                     }
                     resolve(data);
-                }, error => {
-                    reject(error);
+                }, errors => {
+                    reject(errors);
                 });
         });
     },
@@ -46,13 +46,13 @@ export default {
                     return response.json();
                 })
                 .then(data => {
-                    if (data.error) {
+                    if (data.errors) {
                         reject(data)
                     }
 
                     resolve(data)
-                }, error => {
-                    reject(error)
+                }, errors => {
+                    reject(errors)
                 })
         })
     },
@@ -76,13 +76,13 @@ export default {
                     return response.json();
                 })
                 .then(data => {
-                    if (data.error || data.errorCode) {
+                    if (data.errors) {
                         reject(data);
                     }
 
                     resolve(data);
-                }, error => {
-                    reject(error);
+                }, errors => {
+                    reject(errors);
                 });
         });
     },
@@ -106,13 +106,13 @@ export default {
                     })
                 ))
                 .then(data => {
-                    if (data.error) {
+                    if (data.errors) {
                         reject(data)
                     }
 
                     resolve(data)
-                }, error => {
-                    reject(error)
+                }, errors => {
+                    reject(errors)
                 })
         })
     },
@@ -135,13 +135,13 @@ export default {
                     return response.json();
                 })
                 .then(data => {
-                    if (data.error) {
+                    if (data.errors) {
                         reject(data)
                     }
 
                     resolve(data)
-                }, error => {
-                    reject(error)
+                }, errors => {
+                    reject(errors)
                 })
         })
     },
@@ -160,12 +160,12 @@ export default {
                     return response.json();
                 })
                 .then(data => {
-                    if (data.error) {
+                    if (data.errors) {
                         reject(data);
                     }
                     resolve(data);
-                }, error => {
-                    reject(error);
+                }, errors => {
+                    reject(errors);
                 });
         });
     },
@@ -184,13 +184,13 @@ export default {
                     return response.json();
                 })
                 .then(data => {
-                    if (data.error) {
+                    if (data.errors) {
                         reject(data)
                     }
 
                     resolve(data)
-                }, error => {
-                    reject(error)
+                }, errors => {
+                    reject(errors)
                 })
         })
     },
@@ -211,13 +211,13 @@ export default {
                     return response.json();
                 })
                 .then(data => {
-                    if (data.error) {
+                    if (data.errors) {
                         reject(data)
                     }
 
                     resolve(data)
-                }, error => {
-                    reject(error)
+                }, errors => {
+                    reject(errors)
                 })
         })
     },
@@ -249,13 +249,13 @@ export default {
                 return response.json();
             })
             .then(data => {
-                if (data.errorCode) {
+                if (data.errors) {
                     reject(data)
                 }
 
                 resolve(data)
-            }, error => {
-                reject(error)
+            }, errors => {
+                reject(errors)
             })
         })
     },
@@ -281,12 +281,12 @@ export default {
               return response.json();
             })
             .then(data => {
-              if (data.error) {
+              if (data.errors) {
                 reject(data);
               }
               resolve(data);
-            }, error => {
-              reject(error);
+            }, errors => {
+              reject(errors);
             });
         });
       }

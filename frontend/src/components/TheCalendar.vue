@@ -4,7 +4,8 @@
       <v-row>
         <v-col class="col-sm-12 col-lg-12 p-0">
           <v-tabs v-if="$store.state.data.service && $store.state.data.service.providers.length > 0" color="primary"
-            show-arrows="mobile" id="location-tabs" ref="locationTabs" :key="$store.state.data.selectedProvider + $store.state.data.selectedServices + selectedProviderIndex === -1"
+            show-arrows="mobile" id="location-tabs" ref="locationTabs"
+            :key="$store.state.data.selectedProvider + $store.state.data.selectedServices + selectedProviderIndex === -1"
             v-model="selectedProviderIndex">
             <v-tab v-for="provider in filteredProviders()" :key="provider.id" @change="showForProvider(provider)">
               {{ provider.name }}
@@ -87,22 +88,17 @@
                 <h4 class="time-hour" tabindex="0">
                   {{ times[0].format('H') }}:00-{{ times[0].format('H') }}:59
                 </h4>
-                <div class="select-appointment" :class="{ 'disabled': isLoading }" tabindex="0" v-for="timeSlot in times" :key="timeSlot.unix()"
-                  v-on:keyup.enter="handleTimeSlotSelection(timeSlot)"
+                <div class="select-appointment" :class="{ 'disabled': isLoading }" tabindex="0"
+                  v-for="timeSlot in times" :key="timeSlot.unix()" v-on:keyup.enter="handleTimeSlotSelection(timeSlot)"
                   v-on:keyup.space="handleTimeSlotSelection(timeSlot)" @click="handleTimeSlotSelection(timeSlot)">
                   {{ timeSlot.format('H:mm') }}
                   <v-progress-circular
-                    v-if="isLoading && selectedTimeSlot && selectedTimeSlot.unix() === timeSlot.unix()"
-                    indeterminate
-                    size="16"
-                    width="2"
-                    color="primary"
-                    class="ms-2"
-                  ></v-progress-circular>
+                    v-if="isLoading && selectedTimeSlot && selectedTimeSlot.unix() === timeSlot.unix()" indeterminate
+                    size="16" width="2" color="primary" class="ms-2"></v-progress-circular>
                 </div>
               </div>
               <v-col
-                v-if="provider.scope && provider.scope.captchaActivatedRequired && provider.scope.captchaActivatedRequired === '1' && captchaDetails.captchaEnabled && showCaptcha && selectedTimeSlot && selectedTimeSlot.format('H') === times[0].format('H') && captchaDetails && captchaDetails.siteKey && captchaDetails.puzzle"
+                v-if="provider && provider.scope && provider.scope.captchaActivatedRequired && provider.scope.captchaActivatedRequired === '1' && captchaDetails.captchaEnabled && showCaptcha && selectedTimeSlot && selectedTimeSlot.format('H') === times[0].format('H') && captchaDetails && captchaDetails.siteKey && captchaDetails.puzzle"
                 cols="12" class="d-flex justify-center align-center">
                 <vue-friendly-captcha :key="captchaKey" :sitekey="captchaDetails.siteKey"
                   :puzzleEndpoint="captchaDetails.puzzle" language="de" @done="handleCaptchaDone"
@@ -117,8 +113,8 @@
 </template>
 
 <script>
-import moment from 'moment'
-import 'moment-timezone'
+import moment from 'moment';
+import 'moment-timezone';
 import { mdiCalendarClock } from '@mdi/js';
 import 'moment/locale/de';
 import 'regenerator-runtime/runtime';
@@ -155,7 +151,7 @@ export default {
     }
   },
   methods: {
-    selectedServiceIds: function() {
+    selectedServiceIds: function () {
       let selectedServiceIds = []
 
       Object.entries(this.$store.state.data.appointmentCounts).map(([serviceId, count]) => {
@@ -167,7 +163,7 @@ export default {
       return selectedServiceIds
     },
     filteredProviders: function () {
-      if (! this.$store.state.data.service || ! this.$store.state.data.service.providers) {
+      if (!this.$store.state.data.service || !this.$store.state.data.service.providers) {
         return []
       }
 
@@ -176,7 +172,7 @@ export default {
       if (this.$store.state.data.service.subServices) {
         this.$store.state.data.service.subServices.map((subservice) => {
           if (this.selectedServiceIds().indexOf(parseInt(subservice.id)) !== -1) {
-            providers = providers.filter(function(provider) {
+            providers = providers.filter(function (provider) {
               return subservice.providers.indexOf(provider.id) !== -1;
             });
           }
@@ -232,12 +228,12 @@ export default {
 
       this.$store.dispatch('API/fetchAvailableTimeSlots', { date: momentDate, provider: { ...this.provider, slots: 1 }, serviceIds: Object.keys(selectedServices), serviceCounts: Object.values(selectedServices) })
         .then(data => {
-          if (data.errorMessage) {
+          if (data.errors && Array.isArray(data.errors) && data.errors[0] && data.errors[0].errorMessage) {
             this.selectableDates = this.selectableDates.filter(selectableDate => {
               return selectableDate !== date
             })
 
-            this.dateError = data.errorMessage
+            this.dateError = data.errors[0].errorMessage
 
             return
           }
@@ -255,6 +251,13 @@ export default {
             window.location.hash = '#appointments'
           }
         })
+        .catch(error => {
+          if (error.errors && Array.isArray(error.errors)) {
+            this.dateError = error.errors[0]?.errorMessage || this.$t('applicationError');
+          } else {
+            this.dateError = this.$t('networkError');
+          }
+        });
     },
     handleTimeSlotSelection: function (timeSlot) {
       if (this.isLoading) return;
@@ -282,12 +285,12 @@ export default {
 
       this.$store.dispatch('API/reserveAppointment', { timeSlot, serviceIds: Object.keys(selectedServices), serviceCounts: Object.values(selectedServices), providerId: this.provider.id, captchaSolution: this.captchaSolution })
         .then(data => {
-          if (data.errorMessage) {
-            this.timeSlotError = data.errorMessage
+          if (data.errors && Array.isArray(data.errors) && data.errors[0] && data.errors[0].errorMessage) {
+            this.timeSlotError = data.errors[0].errorMessage
             return
           }
 
-          if (data.error) {
+          if (data.errors) {
             this.timeSlotError = this.$t('errorTryAgainLater')
             return
           }
@@ -300,15 +303,20 @@ export default {
           this.$store.commit('data/setAppointment', appointment)
           this.$emit('next')
           window.scrollTo(0, 0)
+        }, () => {
+          this.timeSlotError = this.$t('noAppointmentsAvailable')
         })
-      .catch(() => {
-        this.timeSlotError = this.$t('noAppointmentsAvailable')
-      })
-      .finally(() => {
-        setTimeout(() => {
-          this.isLoading = false;
-        }, 300);
-      });
+        .catch(error => {
+          if (error.errors && Array.isArray(error.errors)) {
+            this.dateError = error.errors[0]?.errorMessage || this.$t('applicationError');
+          } else {
+            this.dateError = this.$t('networkError');
+          }
+        }).finally(() => {
+          setTimeout(() => {
+            this.isLoading = false;
+          }, 300);
+        });
 
       if (!this.timeSlotError && oldAppointment && !this.$store.state.isRebooking) {
         this.$store.dispatch('API/cancelAppointment', oldAppointment)
@@ -345,15 +353,28 @@ export default {
 
       this.$store.dispatch('API/fetchAvailableDays', { provider: this.provider, serviceIds: Object.keys(selectedServices), serviceCounts: Object.values(selectedServices) })
         .then(data => {
-          let availableDays = data.availableDays ?? []
-          if (data.errorMessage) {
-            this.dateError = data.errorMessage
+          this.selectableDates = []
+
+          if (data.errors && Array.isArray(data.errors)) {
+            const error = data.errors[0]
+            this.dateError = error.errorMessage
+            return
           }
 
-          this.selectableDates = availableDays
-
-          this.getAppointmentsOfDay(availableDays[0], false)
+          const availableDays = data.availableDays ?? []
+          if (availableDays.length > 0) {
+            this.selectableDates = availableDays
+            this.getAppointmentsOfDay(availableDays[0], false)
+          }
         })
+        .catch(error => {
+          this.selectableDates = []
+          if (error.errors && Array.isArray(error.errors)) {
+            this.dateError = error.errors[0]?.errorMessage || this.$t('applicationError')
+          } else {
+            this.dateError = this.$t('networkError')
+          }
+        });
     },
     handleCaptchaDone(solution) {
       this.captchaSolution = solution;
@@ -361,10 +382,9 @@ export default {
         this.chooseAppointment(this.selectedTimeSlot);
       }
     },
-    handleCaptchaError(error) {
-      console.error("Captcha error:", error);
+    handleCaptchaError(errors) {
+      console.error("Captcha errors:", errors);
       this.isLoading = false;
-      // Handle the error, possibly show a message to the user
     }
   },
   mounted: function () {
@@ -379,7 +399,7 @@ export default {
     }
 
     if (this.$store.state.preselectedProvider
-        && (!this.provider || this.$store.state.preselectedProvider.id !== this.provider.id)) {
+      && (!this.provider || this.$store.state.preselectedProvider.id !== this.provider.id)) {
 
       this.showForProvider(this.$store.state.preselectedProvider)
 

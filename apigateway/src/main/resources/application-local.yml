@@ -23,11 +23,11 @@ spring:
             maxAge: 3600
       routes:
         - id: backend
-          uri: "http://localhost:3001/"
+          uri: "http://zms.ddev.site/terminvereinbarung/api/citizen"
           predicates:
             - Path=/buergeransicht/api/backend/**
           filters:
-            - RewritePath=/buergeransicht/api/backend/(?<segment>.*), /api/$\{segment}/
+            - RewritePath=/buergeransicht/api/backend/(?<segment>.*), /terminvereinbarung/api/citizen/$\{segment}
             - RemoveResponseHeader=WWW-Authenticate
       default-filters:
         - RemoveResponseHeader=Expires

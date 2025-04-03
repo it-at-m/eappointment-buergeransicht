@@ -15,8 +15,8 @@ export default {
                     store.commit('data/setAppointment', appointment)
 
                     resolve(true)
-                }, (error) => {
-                    reject(error)
+                }, (errors) => {
+                    reject(errors)
                 })
         })
     },
@@ -27,9 +27,9 @@ export default {
                     store.commit('setCaptchaDetails', data);
                     resolve(data);
                 })
-                .catch(error => {
+                .catch(errors => {
                     store.commit('setError', 'captcha-details-error');
-                    reject(error);
+                    reject(errors);
                 });
         });
     },
@@ -100,7 +100,7 @@ export default {
                 store.state.errorCode = 'appointmentDoesntExist'
                 return
             }
-        } catch (error) {
+        } catch (errors) {
             store.state.errorCode = 'appointmentDoesntExist'
             return
         }
@@ -126,15 +126,15 @@ export default {
                 store.state.errorCode = 'appointmentDoesntExist'
                 return
             }
-        } catch (error) {
+        } catch (errors) {
             store.state.errorCode = 'appointmentDoesntExist'
             return
         }
 
         store.dispatch('API/fetchAppointment', { processId: appointmentData.id, authKey: appointmentData.authKey, scope: appointmentData.scope })
             .then(data => {
-                if (data.errorMessage) {
-                    store.state.errorMessage = data.errorMessage
+                if (data.errors && Array.isArray(data.errors) && data.errors[0] && data.errors[0].errorMessage) {
+                    store.state.errorMessage = data.errors[0].errorMessage
 
                     return
                 }

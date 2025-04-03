@@ -227,8 +227,12 @@ describe('Calendar', () => {
         const mockCallback = jest.fn(() => {
             return new Promise((resolve, reject) => {
                 resolve({
-                    'errorMessage': 'Something went wrong'
-                })
+                    errors: [
+                        {
+                            errorMessage: 'Something went wrong'
+                        }
+                    ]
+                });
             })
         })
 
@@ -246,8 +250,12 @@ describe('Calendar', () => {
         const mockCallback = jest.fn(() => {
             return new Promise((resolve, reject) => {
                 resolve({
-                    'errorMessage': 'Something went wrong'
-                })
+                    errors: [
+                        {
+                            errorMessage: 'Something went wrong'
+                        }
+                    ]
+                });
             })
         })
 
@@ -293,8 +301,12 @@ describe('Calendar', () => {
         const mockCallback = jest.fn((method, parameters) => {
             return new Promise((resolve, reject) => {
                 resolve({
-                    'errorMessage': 'Ooops. Something went wrong'
-                })
+                    errors: [
+                        {
+                            errorMessage: 'Something went wrong'
+                        }
+                    ]
+                });
             })
         })
 
@@ -306,9 +318,9 @@ describe('Calendar', () => {
 
         await wrapper.vm.$nextTick()
 
-        expect(mockCallback).toHaveBeenCalledTimes(2)
+        expect(mockCallback).toHaveBeenCalledTimes(1)
         expect(wrapper.vm.selectableDates).toEqual([])
-        expect(wrapper.vm.dateError).toBe(false)
+        expect(wrapper.vm.dateError).toBe("Something went wrong")
     })
 
     it('chooseAppointment method fails to reserve appointment', async () => {
@@ -316,8 +328,12 @@ describe('Calendar', () => {
             if (method === 'API/reserveAppointment') {
                 return new Promise((resolve, reject) => {
                     resolve({
-                        'error': 'Failed.'
-                    })
+                        errors: [
+                            {
+                                'error': 'Failed.'
+                            }
+                        ]
+                    });
                 })
             }
         })

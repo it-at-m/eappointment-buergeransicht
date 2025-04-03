@@ -26,7 +26,8 @@ export default {
   pleaseCheckOnceAgain: "Please check your data once again and reserve appointment",
   name: "Name",
   nameIsRequired: 'Please enter a valid name.',
-  email: "E-mail",
+  email: "E-mail Address",
+  emailRequired: "E-mail Address*",
   emailIsRequired: 'Please enter a valid e-mail.',
   mustBeValidEmail: 'Must be a valid e-mail.',
   telephone: "Telephone",
@@ -49,5 +50,7 @@ export default {
     de: 'German',
     en: 'English',
   },
-  oftenBookedTogether: 'Often booked together'
+  oftenBookedTogether: 'Often booked together',
+  networkError: 'A network or unexpected error occurred. Please try again.',
+  applicationError: 'Unknown application error.'
 }

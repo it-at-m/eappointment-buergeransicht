@@ -49,7 +49,8 @@ export default {
   customField: "Textfeld. ",
   name: "Vor - und Nachname*",
   nameIsRequired:'Bitte geben Sie einen gültigen Namen ein.',
-  email: "E-Mail-Adresse*",
+  email: "E-Mail-Adresse",
+  emailRequired: "E-Mail-Adresse*",
   emailIsRequired: 'Bitte geben Sie eine gültige E-Mail-Adresse ein.',
   mustBeValidEmail: 'Muss eine gültige E-Mail-Adresse sein.',
   telephone: "Telefon",
@@ -73,5 +74,7 @@ export default {
     de: 'Deutsch',
     en: 'Englisch',
   },
-  oftenBookedTogether: 'Oft zusammen gebucht'
+  oftenBookedTogether: 'Oft zusammen gebucht',
+  networkError: 'Es ist ein Netzwerkfehler oder ein unerwarteter Fehler aufgetreten. Bitte versuchen Sie es erneut.',
+  applicationError: 'Unbekannter Anwendungs-Fehler.'
 }

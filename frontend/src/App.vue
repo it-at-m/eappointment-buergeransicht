@@ -103,6 +103,13 @@ export default {
             this.$store.state.openedPanel = 3
             this.$store.state.confirmedAppointment = true
           })
+          .catch(error => {
+            if (error.errors && Array.isArray(error.errors)) {             
+              this.dateError = error.errors[0]?.errorMessage || this.$t('applicationError');
+            } else {             
+              this.dateError = this.$t('networkError');
+            }
+          });          
         }
         this.$store.dispatch('setUpCaptchaDetails');
       })
@@ -128,8 +135,8 @@ export default {
       Promise.all(promises).then(() => {
         this.stylesLoaded = true;
         this.loadData();
-      }).catch((error) => {
-        console.error('Error loading styles:', error);
+      }).catch((errors) => {
+        console.error('Error loading styles:', errors);
       });
     }
   },
