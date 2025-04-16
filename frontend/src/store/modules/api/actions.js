@@ -23,8 +23,11 @@ export default {
                         reject(data);
                     }
                     resolve(data);
-                }, errors => {
-                    reject(errors);
+                })
+                .catch(error => {
+                    // Enable maintenance mode if the endpoint is not reachable
+                    store.rootState.maintenanceMode = true;
+                    reject(error);
                 });
         });
     },
@@ -164,8 +167,11 @@ export default {
                         reject(data);
                     }
                     resolve(data);
-                }, errors => {
-                    reject(errors);
+                })
+                .catch(error => {
+                    // Enable maintenance mode if the endpoint is not reachable
+                    store.rootState.maintenanceMode = true;
+                    reject(error);
                 });
         });
     },
