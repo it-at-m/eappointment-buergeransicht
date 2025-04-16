@@ -168,12 +168,14 @@ export default {
       }
 
       let providers = this.$store.state.data.service.providers
+      let selectedServiceIds = this.selectedServiceIds()
 
       if (this.$store.state.data.service.subServices) {
         this.$store.state.data.service.subServices.map((subservice) => {
-          if (this.selectedServiceIds().indexOf(parseInt(subservice.id)) !== -1) {
+          if (selectedServiceIds.indexOf(parseInt(subservice.id)) !== -1) {
             providers = providers.filter(function (provider) {
-              return subservice.providers.indexOf(provider.id) !== -1;
+              return subservice.providers.indexOf(provider.id) !== -1
+                  && this.shouldShowProvider(provider, selectedServiceIds)
             });
           }
         })
@@ -202,12 +204,19 @@ export default {
       return currentDate < this.maxDate
         && this.selectableDates.includes(currentDate.format('YYYY-MM-DD'))
     },
-    shouldShowProvider: function (provider) {
-      if (!this.$store.state.preselectedProvider) {
+    shouldShowProvider: function (provider, serviceIds) {
+      if (typeof provider.disabledByServices == 'undefined') {
         return true
       }
 
-      return provider.id === this.$store.state.preselectedProvider.id
+      let shouldShow = false
+      serviceIds.forEach((serviceId) => {
+        if (provider.disabledByServices.indexOf(parseInt(serviceId)) === -1) {
+          shouldShow = shouldShow || true
+        }
+      })
+
+      return shouldShow
     },
     getWeekday: function (date) {
       return moment(date).format('dddd').slice(0, 3)
