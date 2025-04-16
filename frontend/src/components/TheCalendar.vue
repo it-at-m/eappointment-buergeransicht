@@ -205,20 +205,14 @@ export default {
         && this.selectableDates.includes(currentDate.format('YYYY-MM-DD'))
     },
     shouldShowProvider: function (provider, serviceIds) {
-      console.log(provider)
-      console.log(serviceIds)
-      console.log(provider.disabledByServices)
-      if (typeof provider.disabledByServices == 'undefined') {
+      if (provider.disabledByServices.length === 0) {
         return true
       }
 
-      console.log("*****")
       let shouldShow = false
       serviceIds.forEach((serviceId) => {
-        if (provider.disabledByServices.indexOf(parseInt(serviceId)) === -1) {
-          console.log("----")
-          console.log(serviceId)
-          shouldShow = shouldShow || true
+        if (!provider.disabledByServices.includes(parseInt(serviceId))) {
+          shouldShow = true
         }
       })
 
