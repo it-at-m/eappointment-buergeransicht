@@ -175,7 +175,7 @@ export default {
           if (selectedServiceIds.indexOf(parseInt(subservice.id)) !== -1) {
             providers = providers.filter((provider) => {
               return subservice.providers.indexOf(provider.id) !== -1
-                  && this.shouldShowProvider(provider, [...selectedServiceIds, this.$store.state.data.service.id])
+                  && this.shouldShowProvider(provider, [...selectedServiceIds, parseInt(this.$store.state.data.service.id]))
             });
           }
         })
