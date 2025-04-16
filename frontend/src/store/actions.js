@@ -37,6 +37,20 @@ export default {
         return new Promise((resolve) => {
             store.dispatch('API/fetchServicesAndProviders', { serviceId: preselectedService, locationId: preselectedProvider })
                 .then(data => {
+                    // Check if the requested service exists
+                    const serviceExists = data.services.some(service => parseInt(service.id) === parseInt(preselectedService));
+                    if (preselectedService && !serviceExists) {
+                        store.commit('setError', 'not-found');
+                        return;
+                    }
+
+                    // Check if the requested provider exists
+                    const providerExists = data.offices.some(office => parseInt(office.id) === parseInt(preselectedProvider));
+                    if (preselectedProvider && !providerExists) {
+                        store.commit('setError', 'not-found');
+                        return;
+                    }
+
                     let providers = data.offices
                     const exclusiveProviders = data.offices.filter(office => {
                         return parseInt(office.id) === parseInt(preselectedProvider) && ! office.showAlternativeLocations
