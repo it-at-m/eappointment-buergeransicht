@@ -8,7 +8,7 @@
             :key="$store.state.data.selectedProvider + $store.state.data.selectedServices + selectedProviderIndex === -1"
             v-model="selectedProviderIndex">
             <v-tab v-for="provider in filteredProviders()" :key="provider.id" @change="showForProvider(provider)">
-              {{ provider.name }}
+              {{ provider.name }}-{{ provider.disabledByServices }}
             </v-tab>
           </v-tabs>
         </v-col>
