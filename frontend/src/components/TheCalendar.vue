@@ -173,7 +173,7 @@ export default {
       if (this.$store.state.data.service.subServices) {
         this.$store.state.data.service.subServices.map((subservice) => {
           if (selectedServiceIds.indexOf(parseInt(subservice.id)) !== -1) {
-            providers = providers.filter(function (provider) {
+            providers = providers.filter((provider) => {
               return subservice.providers.indexOf(provider.id) !== -1
                   && this.shouldShowProvider(provider, selectedServiceIds)
             });
