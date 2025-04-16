@@ -41,6 +41,7 @@ export default {
   typeContactData: "Kontaktdaten eingeben",
   pleaseCheckOnceAgain: "Bitte überprüfen Sie noch einmal Ihre Daten und schließen Sie die Reservierung ab.",
   maintenanceMode: "Die Terminvereinbarung befindet sich aktuell in Wartung, bitte versuchen Sie es später erneut.",
+  maintenanceModeDescription: "Wir arbeiten derzeit an der Verbesserung des Systems. Bitte versuchen Sie es in einigen Minuten erneut.",
   fieldLengthFifty: "Maximal 50 Zeichen zulässig.",
   fieldLengthTwenty: "Maximal 20 Zeichen zulässig.",
   nameField: "Namensfeld. ",

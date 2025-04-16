@@ -6,8 +6,18 @@
     <link :href="`${linkBaseUrl}css/style.css`" rel="stylesheet">
     <link :href="`${linkBaseUrl}css/patternlab.css`" rel="stylesheet">
     <link :href="`${linkBaseUrl}css/friendlycaptcha.css`" rel="stylesheet">
-    <AppointmentForm v-if="stylesLoaded && !errorNotFound"/>
-    <NotFound v-if="errorNotFound" />
+    <AppointmentForm v-if="stylesLoaded && !errorNotFound && !maintenanceMode"/>
+    <NotFound v-if="errorNotFound && !maintenanceMode" />
+    <v-container v-if="maintenanceMode" class="fill-height" fluid>
+      <v-row justify="center" align="center">
+        <v-col cols="12" sm="8" md="6">
+          <div class="text-center">
+            <h1 class="display-2 font-weight-bold mb-2">{{ $t('maintenanceMode') }}</h1>
+            <p>{{ $t('maintenanceModeDescription') }}</p>
+          </div>
+        </v-col>
+      </v-row>
+    </v-container>
   </v-app>
 </template>
 
@@ -61,6 +71,9 @@ export default {
     },
     errorNotFound() {
       return this.$store.state.error === 'not-found';
+    },
+    maintenanceMode() {
+      return this.$store.state.maintenanceMode;
     },
   },
   mounted () {

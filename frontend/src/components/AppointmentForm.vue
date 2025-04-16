@@ -500,6 +500,14 @@ export default {
       this.openPanel(1)
       this.$store.state.confirmedAppointment = null
     }
+  },
+  created() {
+    this.$store.dispatch('API/fetchServicesAndProviders')
+      .catch(error => {
+        if (error.name === 'TypeError' || error.message.includes('Failed to fetch')) {
+          this.$store.state.maintenanceMode = true;
+        }
+      });
   }
 }
 </script>

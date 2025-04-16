@@ -37,9 +37,23 @@ export default {
         return new Promise((resolve) => {
             store.dispatch('API/fetchServicesAndProviders', { serviceId: preselectedService, locationId: preselectedProvider })
                 .then(data => {
+                    // Check if the requested service exists
+                    const serviceExists = data.services.some(service => parseInt(service.id) === parseInt(preselectedService));
+                    if (preselectedService && !serviceExists) {
+                        store.commit('setError', 'not-found');
+                        return;
+                    }
+
+                    // Check if the requested provider exists
+                    const providerExists = data.offices.some(office => parseInt(office.id) === parseInt(preselectedProvider));
+                    if (preselectedProvider && !providerExists) {
+                        store.commit('setError', 'not-found');
+                        return;
+                    }
+
                     let providers = data.offices
                     const exclusiveProviders = data.offices.filter(office => {
-                        return office.id === preselectedProvider && ! office.showAlternativeLocations
+                        return parseInt(office.id) === parseInt(preselectedProvider) && ! office.showAlternativeLocations
                     })
 
                     if (exclusiveProviders.length) {
@@ -53,10 +67,10 @@ export default {
                         let index = 0
     
                         data.relations.forEach(relation => {
-                            if (relation.serviceId === service.id) {
+                            if (parseInt(relation.serviceId) === parseInt(service.id)) {
                                 service.minSlots[relation.officeId] = relation.slots
                                 const foundProviders = providers.filter(office => {
-                                    return office.id === relation.officeId
+                                    return parseInt(office.id) === parseInt(relation.officeId)
                                 })
 
                                 if (foundProviders.length == 0) {
@@ -76,11 +90,11 @@ export default {
                         return service
                     })
                     store.commit('setServices', requests)
-                    store.commit('selectProviderWithId', preselectedProvider)
+                    store.commit('selectProviderWithId', parseInt(preselectedProvider))
     
                     if (preselectedService !== null) {
                         store.commit('data/reset')
-                        store.commit('selectServiceWithId', { id: preselectedService })
+                        store.commit('selectServiceWithId', { id: parseInt(preselectedService) })
                     }
     
                     resolve()

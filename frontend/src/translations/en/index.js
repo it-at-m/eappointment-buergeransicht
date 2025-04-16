@@ -52,5 +52,8 @@ export default {
   },
   oftenBookedTogether: 'Often booked together',
   networkError: 'A network or unexpected error occurred. Please try again.',
-  applicationError: 'Unknown application error.'
+  applicationError: 'Unknown application error.',
+  maintenanceMode: "The appointment system is currently under maintenance, please try again later.",
+  maintenanceModeDescription: "We are currently working on improving the system. Please try again in a few minutes.",
+  fieldLengthFifty: "Maximum 50 characters allowed."
 }
