@@ -28,7 +28,7 @@ export default {
         })
 
         state.services.forEach((service) => {
-            if (service.id === id) {
+            if (parseInt(service.id) === parseInt(id)) {
                 if (count) {
                     service.count = count
                 }
@@ -49,7 +49,7 @@ export default {
     },
     selectProviderWithId (state, id) {
         state.providers.forEach((provider) => {
-            if (provider.id === id) {
+            if (parseInt(provider.id) === parseInt(id)) {
                 state.preselectedProvider = provider;
             }
         })

@@ -39,7 +39,7 @@ export default {
                 .then(data => {
                     let providers = data.offices
                     const exclusiveProviders = data.offices.filter(office => {
-                        return office.id === preselectedProvider && ! office.showAlternativeLocations
+                        return parseInt(office.id) === parseInt(preselectedProvider) && ! office.showAlternativeLocations
                     })
 
                     if (exclusiveProviders.length) {
@@ -53,10 +53,10 @@ export default {
                         let index = 0
     
                         data.relations.forEach(relation => {
-                            if (relation.serviceId === service.id) {
+                            if (parseInt(relation.serviceId) === parseInt(service.id)) {
                                 service.minSlots[relation.officeId] = relation.slots
                                 const foundProviders = providers.filter(office => {
-                                    return office.id === relation.officeId
+                                    return parseInt(office.id) === parseInt(relation.officeId)
                                 })
 
                                 if (foundProviders.length == 0) {
@@ -76,11 +76,11 @@ export default {
                         return service
                     })
                     store.commit('setServices', requests)
-                    store.commit('selectProviderWithId', preselectedProvider)
+                    store.commit('selectProviderWithId', parseInt(preselectedProvider))
     
                     if (preselectedService !== null) {
                         store.commit('data/reset')
-                        store.commit('selectServiceWithId', { id: preselectedService })
+                        store.commit('selectServiceWithId', { id: parseInt(preselectedService) })
                     }
     
                     resolve()
