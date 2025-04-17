@@ -4,7 +4,6 @@
       <v-row>
         <v-col class="col-sm-12 col-lg-12 p-0">
           {{ selectedServiceIds() }}
-          {{ parseInt($store.state.data.service.id) }}
           <v-tabs v-if="$store.state.data.service && $store.state.data.service.providers.length > 0" color="primary"
             show-arrows="mobile" id="location-tabs" ref="locationTabs"
             :key="$store.state.data.selectedProvider + $store.state.data.selectedServices + selectedProviderIndex === -1"
