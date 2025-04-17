@@ -135,7 +135,7 @@ export default {
                 }
             }).filter((subservice) => {
                 if (provider) {
-                    return subservice.providers.includes(String(provider.id))
+                    return subservice.providers.includes(parseInt(provider.id))
                 }
 
                 return true
