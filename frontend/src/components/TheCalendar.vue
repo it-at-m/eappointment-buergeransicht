@@ -208,8 +208,8 @@ export default {
         && this.selectableDates.includes(currentDate.format('YYYY-MM-DD'))
     },
     shouldShowProvider: function (provider, serviceIds) {
-      if (provider.disabledByServices.length === 0) {
-        return true
+      if (!Array.isArray(provider.disabledByServices) || provider.disabledByServices.length === 0) {
+        return true;
       }
 
       let shouldShow = false
