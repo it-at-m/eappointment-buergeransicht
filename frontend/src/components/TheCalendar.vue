@@ -168,15 +168,17 @@ export default {
         return []
       }
 
-      let providers = this.$store.state.data.service.providers
       let selectedServiceIds = this.selectedServiceIds()
+      let providers = this.$store.state.data.service.providers.filter((provider) => {
+        return this.shouldShowProvider(provider, selectedServiceIds)
+      });
 
       if (this.$store.state.data.service.subServices) {
         this.$store.state.data.service.subServices.map((subservice) => {
           if (selectedServiceIds.indexOf(parseInt(subservice.id)) !== -1) {
             providers = providers.filter((provider) => {
               return subservice.providers.indexOf(provider.id) !== -1
-                  && this.shouldShowProvider(provider, [...selectedServiceIds, parseInt(this.$store.state.data.service.id)])
+                  && this.shouldShowProvider(provider, selectedServiceIds)
             });
           }
         })
