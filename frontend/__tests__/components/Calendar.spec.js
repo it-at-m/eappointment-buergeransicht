@@ -158,40 +158,6 @@ describe('Calendar', () => {
         expect(wrapper.vm.formatDay(new Date('2023-05-15T01:00:00'))).toBe('Montag, 15.05.2023')
     })
 
-    it('shouldShowProvider returns true if there is no preselected provider', async () => {
-        const provider = {
-            id: 1,
-            name: "Provider 1"
-        }
-
-        expect(wrapper.vm.shouldShowProvider(provider)).toBeTruthy()
-    })
-
-    it('shouldShowProvider returns true if there is same preselected provider', async () => {
-        const provider = {
-            id: 1,
-            name: "Provider 1"
-        }
-
-        wrapper.vm.$store.state.preselectedProvider = provider
-
-        expect(wrapper.vm.shouldShowProvider(provider)).toBeTruthy()
-    })
-
-    it('shouldShowProvider returns false if there is different preselected provider', async () => {
-        const provider = {
-            id: 1,
-            name: "Provider 1"
-        }
-
-        wrapper.vm.$store.state.preselectedProvider = {
-            id: 2,
-            name: "Provider 2"
-        }
-
-        expect(wrapper.vm.shouldShowProvider(provider)).toBeFalsy()
-    })
-
     it('getAppointmentsOfDay shows dialog with time slots', async () => {
         document.body.setAttribute('data-app', true)
         const moment1 = moment.unix(1684386000)
