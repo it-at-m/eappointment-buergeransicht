@@ -11,6 +11,9 @@ export default {
     setProviders (state, providers) {
         state.providers = providers
     },
+    setRelations(state, relations) {
+        state.relations = relations;
+    },
     setCaptchaDetails(state, captchaDetails) {
         state.captchaDetails = captchaDetails;
     },

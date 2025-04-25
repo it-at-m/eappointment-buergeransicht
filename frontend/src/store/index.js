@@ -24,6 +24,7 @@ const store = new Vuex.Store({
         preselectedService: null,
         preselectedAppointment: null,
         providers: [],
+        relations: [],
         captchaDetails: [],
         scope: [],
         error: null,
