@@ -119,7 +119,7 @@ export default {
                 })
         })
     },
-    fetchAvailableDays(store, { provider, serviceIds, serviceCounts }) {
+    fetchAvailableDays(store, { provider, serviceIds, serviceCounts, captchaToken = null }) {
         return new Promise((resolve, reject) => {
             const dateIn6Months = moment().add(6, 'M')
             const params = {
@@ -130,8 +130,23 @@ export default {
                 'serviceCount': serviceCounts,
             }
 
-            fetch(store.rootState.settings.endpoints.VUE_APP_ZMS_API_BASE + store.rootState.settings.endpoints.VUE_APP_ZMS_API_CALENDAR_ENDPOINT
-                + '?' + new URLSearchParams(params).toString())
+            console.log("captchaToken:", captchaToken);
+
+            if (captchaToken) {
+                params.captchaToken = captchaToken
+            }
+
+            const queryString = new URLSearchParams(params).toString()
+            const fullUrl = store.rootState.settings.endpoints.VUE_APP_ZMS_API_BASE +
+                            store.rootState.settings.endpoints.VUE_APP_ZMS_API_CALENDAR_ENDPOINT +
+                            '?' + queryString
+    
+            console.log("fetchAvailableDays Request:");
+            console.log("URL:", fullUrl);
+            console.log("Query length:", queryString.length);
+            console.log("Params:", params);
+    
+            fetch(fullUrl)
                 .then((response) => {
                     handleMaintenanceMode(store, response)
 

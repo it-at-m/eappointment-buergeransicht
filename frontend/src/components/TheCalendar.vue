@@ -125,6 +125,12 @@ export default {
   components: {
     VueFriendlyCaptcha
   },
+  props: {
+    captchaToken: {
+      type: String,
+      default: null
+    }
+  },
   data: () => ({
     selectedProviderIndex: null,
     date: moment().format("YYYY-MM-DD"),
@@ -333,11 +339,13 @@ export default {
         this.$store.dispatch('API/cancelAppointment', oldAppointment)
       }
     },
-    showForProvider: function (provider) {
+    showForProvider: function (provider, token) {
       this.dateError = false
       this.timeSlotError = false
 
       this.provider = provider
+      this.token = token
+
       this.$store.state.data.selectedProvider = provider
       const selectedServices = {}
 
@@ -362,7 +370,12 @@ export default {
         this.$store.state.data.selectedProvider = this.provider
       }
 
-      this.$store.dispatch('API/fetchAvailableDays', { provider: this.provider, serviceIds: Object.keys(selectedServices), serviceCounts: Object.values(selectedServices) })
+      this.$store.dispatch('API/fetchAvailableDays', {
+        provider: this.provider,
+        serviceIds: Object.keys(selectedServices),
+        serviceCounts: Object.values(selectedServices),
+        captchaToken: this.captchaToken
+      })
         .then(data => {
           this.selectableDates = []
 
