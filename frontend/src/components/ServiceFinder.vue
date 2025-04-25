@@ -141,8 +141,22 @@
           </div>
         </div>
       </div>
-      <button class="m-button m-button--primary m-button--animated-right button-next" color="white" @click="nextStep"
-        :disabled="!$store.state.data.service || $store.state.data.appointmentCount === 0 || $store.state.data.maxSlotsExceeded">
+      <div v-if="showCaptcha" style="margin: 2rem 0 2rem 0">
+        <AltchaCaptcha
+          @validationResult="(valid) => (isCaptchaValid = valid)"
+          @tokenChanged="onCaptchaTokenChanged"
+        />
+      </div>
+      <button
+        class="m-button m-button--primary m-button--animated-right button-next"
+        color="white"
+        @click="nextStep"
+        :disabled="
+          !$store.state.data.service ||
+          $store.state.data.appointmentCount === 0 ||
+          $store.state.data.maxSlotsExceeded ||
+          ( showCaptcha && !isCaptchaValid)"
+      >
         <span>{{ $t('nextToAppointment') }}</span>
         <svg aria-hidden="true" class="m-button__icon">
           <use xlink:href="#icon-arrow-right"></use>
@@ -154,9 +168,13 @@
 
 <script>
 import { mdiDomain, mdiMagnify, mdiPlus, mdiMinus } from '@mdi/js'
+import AltchaCaptcha from './AltchaCaptcha.vue'
 
 export default {
   name: 'ServiceFinder',
+  components: {
+    AltchaCaptcha
+  },
   computed: {
     appointmentCounts() {
       return this.$store.state.data.appointmentCounts
@@ -175,6 +193,23 @@ export default {
       })
 
       return allServices
+    },
+    showCaptcha() {
+      const service = this.$store.state.data.service;
+      const relations = this.$store.state.relations;
+      const offices = this.$store.state.providers;
+
+      if (!service || !relations || !offices) return false;
+
+      const relatedOfficeIds = relations
+        .filter(relation => relation.serviceId === service.id)
+        .map(relation => relation.officeId);
+
+      return offices.some(office =>
+        relatedOfficeIds.includes(office.id) &&
+        office.scope &&
+        office.scope.captchaActivatedRequired === true
+      );
     }
   },
   props: [
@@ -188,6 +223,7 @@ export default {
       plusSvg: mdiPlus,
       minusSvg: mdiMinus,
       appointmentCountTriggered: 0,
+      isCaptchaValid: false
     }
   },
   methods: {
@@ -255,7 +291,10 @@ export default {
       })
 
       this.$refs.autocomplete.isMenuActive = false
-    }
+    },
+    onCaptchaTokenChanged(token) {
+      this.$emit("captchaTokenChanged", token);
+    },
   },
   mounted() {
     this.$store.commit('data/reset')
