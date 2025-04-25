@@ -9,6 +9,8 @@ import Vue from 'vue'
 import moment from "moment"
 import 'moment-timezone'
 
+jest.mock('altcha', () => ({}))
+
 Vue.use(VueI18n)
 Vue.use(Vuetify)
 Vue.use(Vuex)

@@ -7,6 +7,8 @@ import translations from './../../src/translations'
 import store from './../../src/store'
 import Vue from 'vue'
 
+jest.mock('altcha', () => ({}))
+
 Vue.use(VueI18n)
 Vue.use(Vuetify)
 Vue.use(Vuex)
