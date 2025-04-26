@@ -229,11 +229,12 @@ export default {
     getWeekday: function (date) {
       return moment(date).format('dddd').slice(0, 3)
     },
-    getAppointmentsOfDay: function (date, focus = true) {
+    getAppointmentsOfDay: function (date, focus = true, token) {
       this.timeSlotError = false
       this.dateError = false
       this.timeDialog = false
       this.timeSlots = []
+      this.token = token
       const momentDate = moment(date, 'YYYY-MM-DD')
       const selectedServices = {}
 
@@ -243,7 +244,13 @@ export default {
         }
       })
 
-      this.$store.dispatch('API/fetchAvailableTimeSlots', { date: momentDate, provider: { ...this.provider, slots: 1 }, serviceIds: Object.keys(selectedServices), serviceCounts: Object.values(selectedServices) })
+      this.$store.dispatch('API/fetchAvailableTimeSlots', {
+          date: momentDate,
+          provider: { ...this.provider, slots: 1 },
+          serviceIds: Object.keys(selectedServices),
+          serviceCounts: Object.values(selectedServices),
+          captchaToken: this.captchaToken
+        })
         .then(data => {
           if (data.errors && Array.isArray(data.errors) && data.errors[0] && data.errors[0].errorMessage) {
             this.selectableDates = this.selectableDates.filter(selectableDate => {
