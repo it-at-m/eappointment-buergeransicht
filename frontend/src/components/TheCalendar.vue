@@ -229,12 +229,11 @@ export default {
     getWeekday: function (date) {
       return moment(date).format('dddd').slice(0, 3)
     },
-    getAppointmentsOfDay: function (date, focus = true, token) {
+    getAppointmentsOfDay: function (date, focus = true) {
       this.timeSlotError = false
       this.dateError = false
       this.timeDialog = false
       this.timeSlots = []
-      this.token = token
       const momentDate = moment(date, 'YYYY-MM-DD')
       const selectedServices = {}
 
@@ -307,7 +306,14 @@ export default {
 
       const oldAppointment = this.$store.state.data.appointment
 
-      this.$store.dispatch('API/reserveAppointment', { timeSlot, serviceIds: Object.keys(selectedServices), serviceCounts: Object.values(selectedServices), providerId: this.provider.id, captchaSolution: this.captchaSolution })
+      this.$store.dispatch('API/reserveAppointment', {
+          timeSlot,
+          serviceIds: Object.keys(selectedServices),
+          serviceCounts: Object.values(selectedServices),
+          providerId: this.provider.id,
+          captchaSolution: this.captchaSolution,
+          captchaToken: this.captchaToken
+        })
         .then(data => {
           if (data.errors && Array.isArray(data.errors) && data.errors[0] && data.errors[0].errorMessage) {
             this.timeSlotError = data.errors[0].errorMessage
@@ -346,12 +352,11 @@ export default {
         this.$store.dispatch('API/cancelAppointment', oldAppointment)
       }
     },
-    showForProvider: function (provider, token) {
+    showForProvider: function (provider) {
       this.dateError = false
       this.timeSlotError = false
 
       this.provider = provider
-      this.token = token
 
       this.$store.state.data.selectedProvider = provider
       const selectedServices = {}

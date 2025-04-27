@@ -235,7 +235,7 @@ export default {
                             store.rootState.settings.endpoints.VUE_APP_ZMS_API_AVAILABLE_TIME_SLOTS_ENDPOINT +
                             '?' + queryString
 
-            console.log("fetchAvailableDays Request:");
+            console.log("fetchAvailableTimeSlots Request:");
             console.log("URL:", fullUrl);
             console.log("Query length:", queryString.length);
             console.log("Params:", params);
@@ -295,35 +295,50 @@ export default {
             })
         })
     },
-    reserveAppointment(store, { timeSlot, serviceIds, serviceCounts, providerId, captchaSolution }) {
+    reserveAppointment(store, { timeSlot, serviceIds, serviceCounts, providerId, captchaSolution, captchaToken = null }) {
         return new Promise((resolve, reject) => {
-          const requestOptions = {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              "timestamp": timeSlot.unix(),
-              "serviceCount": serviceCounts,
-              "officeId": providerId,
-              "serviceId": serviceIds,
-              "captchaSolution": captchaSolution // Include captcha solution in the request
-            })
-          };
-          fetch(store.rootState.settings.endpoints.VUE_APP_ZMS_API_BASE + store.rootState.settings.endpoints.VUE_APP_ZMS_API_RESERVE_APPOINTMENT_ENDPOINT, requestOptions)
+            const requestBody = {
+                "timestamp": timeSlot.unix(),
+                "serviceCount": serviceCounts,
+                "officeId": providerId,
+                "serviceId": serviceIds,
+                "captchaSolution": captchaSolution
+            };
+        
+            if (captchaToken) {
+                requestBody.captchaToken = captchaToken;
+            }
+        
+            const requestOptions = {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(requestBody)
+            };
+
+            const fullUrl = store.rootState.settings.endpoints.VUE_APP_ZMS_API_BASE +
+                            store.rootState.settings.endpoints.VUE_APP_ZMS_API_RESERVE_APPOINTMENT_ENDPOINT
+
+            console.log("reserveAppointment Request:");
+            console.log("URL:", fullUrl);
+            console.log("Request body length:", requestOptions.body.length);
+            console.log("Request options:", requestOptions);
+
+            fetch(fullUrl, requestOptions)
             .then((response) => {
-              if (response.status === 503) {
+                if (response.status === 503) {
                 store.commit('setError', 'Service Unavailable');
                 store.rootState.maintenanceMode = true;
-              }
-              return response.json();
+                }
+                return response.json();
             })
             .then(data => {
-              if (data.errors) {
+                if (data.errors) {
                 reject(data);
-              }
-              resolve(data);
+                }
+                resolve(data);
             }, errors => {
-              reject(errors);
+                reject(errors);
             });
         });
-      }
+    }
 }
