@@ -77,5 +77,15 @@ export default {
   },
   oftenBookedTogether: 'Oft zusammen gebucht',
   networkError: 'Es ist ein Netzwerkfehler oder ein unerwarteter Fehler aufgetreten. Bitte versuchen Sie es erneut.',
-  applicationError: 'Unbekannter Anwendungs-Fehler.'
+  applicationError: 'Unbekannter Anwendungs-Fehler.',
+  altcha: {
+    loadError: "Das Widget konnte nicht geladen werden.",
+    error: "Verifizierung fehlgeschlagen. Versuche es später noch einmal.",
+    expired: "Verifizierung abgelaufen. Versuche es erneut.",
+    footer: 'Geschützt durch <a href="https://altcha.org/" target="_blank" aria-label="Besuche Altcha.org">ALTCHA</a>',
+    label: "Ich bin kein Bot.",
+    verified: "Erfolgreich verifiziert!",
+    verifying: "Überprüfe...",
+    waitAlert: "Überprüfung läuft... bitte warten.",
+  }
 }

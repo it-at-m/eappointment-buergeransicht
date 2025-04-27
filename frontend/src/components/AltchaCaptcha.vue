@@ -4,14 +4,13 @@
       ref="widget"
       :challengeurl="captchaChallengeUrl"
       :verifyurl="captchaVerifyUrl"
-      :strings="i18n"
-      @load="onLoad"
+      :strings="stringifiedI18n"
       @statechange="handleStateChange"
       @serververification="handleServerVerification"
     />
   </div>
   <div v-else>
-    <p>Das Captcha konnte nicht geladen werden.</p>
+    <p>{{ $t('altcha.loadError') }}</p>
   </div>
 </template>
 
@@ -20,36 +19,37 @@ import "altcha";
 
 export default {
   name: "AltchaCaptcha",
+
   data() {
     const base = this.$store.state.settings.endpoints.VUE_APP_ZMS_API_BASE;
     const challenge = this.$store.state.settings.endpoints.VUE_APP_ZMS_API_CAPTCHA_CHALLENGE_ENDPOINT;
     const verify = this.$store.state.settings.endpoints.VUE_APP_ZMS_API_CAPTCHA_VERIFY_ENDPOINT;
+
     return {
       captchaEnabled: true,
       captchaChallengeUrl: base + challenge,
       captchaVerifyUrl: base + verify,
-      i18n: JSON.stringify({
-        error: "Verifizierung fehlgeschlagen. Versuche es später noch einmal.",
-        expired: "Verifizierung abgelaufen. Versuche es erneut.",
-        footer:
-          'Geschützt durch <a href="https://altcha.org/" target="_blank" aria-label="Besuche Altcha.org">ALTCHA</a>',
-        label: "Ich bin kein Bot.",
-        verified: "Erfolgreich verifiziert!",
-        verifying: "Überprüfe...",
-        waitAlert: "Überprüfung läuft... bitte warten.",
-      }),
     };
   },
-  methods: {
-    onLoad(ev) {
-      try {
-        ev.target.configure({
-          strings: JSON.parse(this.i18n),
-        });
-      } catch (err) {
-        console.error("Fehler bei configure nach load:", err);
-      }
+
+  computed: {
+    i18nObj() {
+      return {
+        error: this.$t('altcha.error'),
+        expired: this.$t('altcha.expired'),
+        footer: this.$t('altcha.footer'),
+        label: this.$t('altcha.label'),
+        verified: this.$t('altcha.verified'),
+        verifying: this.$t('altcha.verifying'),
+        waitAlert: this.$t('altcha.waitAlert'),
+      };
     },
+    stringifiedI18n() {
+      return JSON.stringify(this.i18nObj);
+    },
+  },
+
+  methods: {
     handleStateChange(ev) {
       if (ev.detail && ev.detail.state) {
         this.$emit("validationResult", ev.detail.state === "verified");
@@ -61,23 +61,24 @@ export default {
       }
     },
   },
+
   mounted() {
-    const widget = this.$refs.altchaWidget;
-    if (widget) {
-      widget.setAttribute("challengeurl", this.captchaChallengeUrl);
-      widget.setAttribute("verifyurl", this.captchaVerifyUrl);
-      
-      widget.addEventListener("statechange", this.handleStateChange);
-      widget.addEventListener("serververification", this.handleServerVerification);
-      this.configureWidget();
-    }
+    const widget = this.$refs.widget;
+    if (!widget) return;
+
+    widget.setAttribute("challengeurl", this.captchaChallengeUrl);
+    widget.setAttribute("verifyurl", this.captchaVerifyUrl);
+    widget.setAttribute("strings", this.stringifiedI18n);
+
+    widget.addEventListener("statechange",this.handleStateChange);
+    widget.addEventListener("serververification", this.handleServerVerification);
   },
-  beforeDestroy() {
-    const widget = this.$refs.altchaWidget;
-    if (widget) {
-      widget.removeEventListener("statechange", this.handleStateChange);
-      widget.removeEventListener("serververification", this.handleServerVerification);
-    }
+
+  beforeUnmount() {
+    const widget = this.$refs.widget;
+    if (!widget) return;
+    widget.removeEventListener("statechange", this.handleStateChange);
+    widget.removeEventListener("serververification", this.handleServerVerification);
   },
 };
 </script>
