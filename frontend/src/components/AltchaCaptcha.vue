@@ -21,10 +21,13 @@ import "altcha";
 export default {
   name: "AltchaCaptcha",
   data() {
+    const base = this.$store.state.settings.endpoints.VUE_APP_ZMS_API_BASE;
+    const challenge = this.$store.state.settings.endpoints.VUE_APP_ZMS_API_CAPTCHA_CHALLENGE_ENDPOINT;
+    const verify = this.$store.state.settings.endpoints.VUE_APP_ZMS_API_CAPTCHA_VERIFY_ENDPOINT;
     return {
       captchaEnabled: true,
-      captchaChallengeUrl: "http://localhost:8080/buergeransicht/api/backend/captcha-challenge/",
-      captchaVerifyUrl: "http://localhost:8080/buergeransicht/api/backend/captcha-verify/",
+      captchaChallengeUrl: base + challenge,
+      captchaVerifyUrl: base + verify,
       i18n: JSON.stringify({
         error: "Verifizierung fehlgeschlagen. Versuche es später noch einmal.",
         expired: "Verifizierung abgelaufen. Versuche es erneut.",
