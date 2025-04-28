@@ -512,7 +512,6 @@ export default {
     },
     onCaptchaTokenChanged(token) {
       this.captchaToken = token
-      console.log('Aktueller Captcha-Token in AppointmentView:', token)
     }
   },
   created() {
