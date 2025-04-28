@@ -83,7 +83,7 @@
             </div>
           </div>
           <div v-for="(times, index) in timeSlotsInHours()" :key="index">
-            <div class="captcha-hour-wrapper">
+            <div class="hour-wrapper">
               <div class="appointments-in-hours">
                 <h4 class="time-hour" tabindex="0">
                   {{ times[0].format('H') }}:00-{{ times[0].format('H') }}:59
@@ -97,13 +97,6 @@
                     size="16" width="2" color="primary" class="ms-2"></v-progress-circular>
                 </div>
               </div>
-              <v-col
-                v-if="provider && provider.scope && provider.scope.captchaActivatedRequired && provider.scope.captchaActivatedRequired === '1' && captchaDetails.captchaEnabled && showCaptcha && selectedTimeSlot && selectedTimeSlot.format('H') === times[0].format('H') && captchaDetails && captchaDetails.siteKey && captchaDetails.puzzle"
-                cols="12" class="d-flex justify-center align-center">
-                <vue-friendly-captcha :key="captchaKey" :sitekey="captchaDetails.siteKey"
-                  :puzzleEndpoint="captchaDetails.puzzle" language="de" @done="handleCaptchaDone"
-                  @error="handleCaptchaError" />
-              </v-col>
             </div>
           </div>
         </div>
@@ -118,13 +111,9 @@ import 'moment-timezone';
 import { mdiCalendarClock } from '@mdi/js';
 import 'moment/locale/de';
 import 'regenerator-runtime/runtime';
-import VueFriendlyCaptcha from '@somushq/vue-friendly-captcha';
 
 export default {
   name: 'TheCalendar',
-  components: {
-    VueFriendlyCaptcha
-  },
   props: {
     captchaToken: {
       type: String,
@@ -144,18 +133,10 @@ export default {
     dateError: false,
     provider: null,
     missingSlotsInARow: false,
-    showCaptcha: false,
     selectedTimeSlot: null,
-    captchaKey: 0,
-    captchaSolution: null,
     appointmentCounts: [],
     isLoading: false
   }),
-  computed: {
-    captchaDetails() {
-      return this.$store.state.captchaDetails;
-    }
-  },
   methods: {
     selectedServiceIds: function () {
       let selectedServiceIds = []
@@ -282,17 +263,11 @@ export default {
           }
         });
     },
-    handleTimeSlotSelection: function (timeSlot) {
+    handleTimeSlotSelection(timeSlot) {
       if (this.isLoading) return;
       this.selectedTimeSlot = timeSlot;
-      this.showCaptcha = this.captchaDetails.captchaEnabled && (this.provider.scope) && (this.provider.scope.captchaActivatedRequired) && (this.provider.scope.captchaActivatedRequired === '1');
-      if (this.showCaptcha) {
-        this.captchaKey += 1;
-        this.captchaSolution = null;
-      } else {
-        this.isLoading = true;
-        this.chooseAppointment(timeSlot);
-      }
+      this.isLoading = true;
+      this.chooseAppointment(timeSlot);
     },
     chooseAppointment: function (timeSlot) {
       this.timeSlotError = false
@@ -311,7 +286,6 @@ export default {
           serviceIds: Object.keys(selectedServices),
           serviceCounts: Object.values(selectedServices),
           providerId: this.provider.id,
-          captchaSolution: this.captchaSolution,
           captchaToken: this.captchaToken
         })
         .then(data => {
@@ -412,16 +386,6 @@ export default {
           }
         });
     },
-    handleCaptchaDone(solution) {
-      this.captchaSolution = solution;
-      if (this.selectedTimeSlot) {
-        this.chooseAppointment(this.selectedTimeSlot);
-      }
-    },
-    handleCaptchaError(errors) {
-      console.error("Captcha errors:", errors);
-      this.isLoading = false;
-    }
   },
   mounted: function () {
     moment.locale('de')

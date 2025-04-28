@@ -5,7 +5,6 @@
     <link :href="`${linkBaseUrl}css/materialdesignicons.min.css`" rel="stylesheet">
     <link :href="`${linkBaseUrl}css/style.css`" rel="stylesheet">
     <link :href="`${linkBaseUrl}css/patternlab.css`" rel="stylesheet">
-    <link :href="`${linkBaseUrl}css/friendlycaptcha.css`" rel="stylesheet">
     <AppointmentForm v-if="stylesLoaded && !errorNotFound && !maintenanceMode"/>
     <NotFound v-if="errorNotFound && !maintenanceMode" />
     <v-container v-if="maintenanceMode" class="fill-height" fluid>

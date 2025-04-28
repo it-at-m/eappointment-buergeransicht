@@ -59,7 +59,7 @@ export default {
                 })
         })
     },
-    preconfirmReservation(store, { processId, authKey, scope, captchaSolution }) {
+    preconfirmReservation(store, { processId, authKey, scope }) {
         return new Promise((resolve, reject) => {
             const requestOptions = {
                 method: "POST",
@@ -67,8 +67,7 @@ export default {
                 body: JSON.stringify({
                     "processId": processId,
                     "authKey": authKey,
-                    "scope": scope,
-                    "captchaSolution": captchaSolution // Include captcha solution
+                    "scope": scope
                 })
             };
 
@@ -291,14 +290,13 @@ export default {
             })
         })
     },
-    reserveAppointment(store, { timeSlot, serviceIds, serviceCounts, providerId, captchaSolution, captchaToken = null }) {
+    reserveAppointment(store, { timeSlot, serviceIds, serviceCounts, providerId, captchaToken = null }) {
         return new Promise((resolve, reject) => {
             const requestBody = {
                 "timestamp": timeSlot.unix(),
                 "serviceCount": serviceCounts,
                 "officeId": providerId,
-                "serviceId": serviceIds,
-                "captchaSolution": captchaSolution
+                "serviceId": serviceIds
             };
         
             if (captchaToken) {
