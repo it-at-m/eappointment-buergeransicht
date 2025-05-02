@@ -135,11 +135,6 @@ export default {
                             store.rootState.settings.endpoints.VUE_APP_ZMS_API_CALENDAR_ENDPOINT +
                             '?' + queryString
     
-            // console.log("fetchAvailableDays Request:");
-            // console.log("URL:", fullUrl);
-            // console.log("Query length:", queryString.length);
-            // console.log("Params:", params);
-    
             fetch(fullUrl)
                 .then((response) => {
                     handleMaintenanceMode(store, response, store.rootState.settings.endpoints.VUE_APP_ZMS_API_CALENDAR_ENDPOINT);
@@ -223,11 +218,6 @@ export default {
                             store.rootState.settings.endpoints.VUE_APP_ZMS_API_AVAILABLE_TIME_SLOTS_ENDPOINT +
                             '?' + queryString
 
-            // console.log("fetchAvailableTimeSlots Request:");
-            // console.log("URL:", fullUrl);
-            // console.log("Query length:", queryString.length);
-            // console.log("Params:", params);
-
             fetch(fullUrl)
                 .then((response) => {
                     handleMaintenanceMode(store, response, store.rootState.settings.endpoints.VUE_APP_ZMS_API_AVAILABLE_TIME_SLOTS_ENDPOINT);
@@ -300,11 +290,6 @@ export default {
 
             const fullUrl = store.rootState.settings.endpoints.VUE_APP_ZMS_API_BASE +
                             store.rootState.settings.endpoints.VUE_APP_ZMS_API_RESERVE_APPOINTMENT_ENDPOINT
-
-            // console.log("reserveAppointment Request:");
-            // console.log("URL:", fullUrl);
-            // console.log("Request body length:", requestOptions.body.length);
-            // console.log("Request options:", requestOptions);
 
             fetch(fullUrl, requestOptions)
             .then((response) => {
