@@ -26,6 +26,7 @@ const store = new Vuex.Store({
         providers: [],
         relations: [],
         captchaDetails: [],
+        captchaToken: null,
         scope: [],
         error: null,
         errorMessage: null,

@@ -123,6 +123,9 @@ export default {
         return new Promise((resolve) => {
             store.dispatch('API/confirmReservation', { processId: appointmentData.id, authKey: appointmentData.authKey, scope: appointmentData.scope })
                 .then((data) => {
+                    if (data.captchaToken) {
+                        store.commit('setCaptchaToken', data.captchaToken)
+                    }
                     store.dispatch('setAppointmentFromResponse', data)
 
                     resolve(true)

@@ -17,6 +17,9 @@ export default {
     setCaptchaDetails(state, captchaDetails) {
         state.captchaDetails = captchaDetails;
     },
+    setCaptchaToken(state, captchaToken) {
+        state.captchaToken = captchaToken
+    },
     setSettings (state, settings) {
         state.settings = settings
     },

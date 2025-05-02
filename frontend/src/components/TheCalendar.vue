@@ -247,12 +247,14 @@ export default {
         }
       })
 
+      const captchaToken = this.captchaToken || this.$store.state.captchaToken
+
       this.$store.dispatch('API/fetchAvailableTimeSlots', {
           date: momentDate,
           provider: { ...this.provider, slots: 1 },
           serviceIds: Object.keys(selectedServices),
           serviceCounts: Object.values(selectedServices),
-          captchaToken: this.captchaToken
+          captchaToken: captchaToken
         })
         .then(data => {
           if (data.errors && Array.isArray(data.errors)) {
@@ -311,13 +313,14 @@ export default {
       })
 
       const oldAppointment = this.$store.state.data.appointment
+      const captchaToken = this.captchaToken || this.$store.state.captchaToken
 
       this.$store.dispatch('API/reserveAppointment', {
           timeSlot,
           serviceIds: Object.keys(selectedServices),
           serviceCounts: Object.values(selectedServices),
           providerId: this.provider.id,
-          captchaToken: this.captchaToken
+          captchaToken: captchaToken
         })
         .then(data => {
           if (data.errors && Array.isArray(data.errors)) {
@@ -390,11 +393,13 @@ export default {
         this.$store.state.data.selectedProvider = this.provider
       }
 
+      const captchaToken = this.captchaToken || this.$store.state.captchaToken
+
       this.$store.dispatch('API/fetchAvailableDays', {
         provider: this.provider,
         serviceIds: Object.keys(selectedServices),
         serviceCounts: Object.values(selectedServices),
-        captchaToken: this.captchaToken
+        captchaToken: captchaToken
       })
         .then(data => {
           this.selectableDates = []
