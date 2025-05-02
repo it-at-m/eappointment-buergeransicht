@@ -61,7 +61,7 @@ export default {
     expired: "Verification expired. Try again.",
     invalidCaptchaHeader: "Something went wrong.",
     invalidCaptcha: "Please refresh this page.",
-    footer: 'Protected by <a href="https://altcha.org/" target="_blank" aria-label="Visit Altcha.org">ALTCHA</a>',
+    footer: 'Protected by ALTCHA',
     label: "I'm not a robot",
     loadError: "The widget could not be loaded.",
     verified: "Verified",

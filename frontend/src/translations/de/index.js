@@ -83,7 +83,7 @@ export default {
     expired: "Verifizierung abgelaufen. Versuche es erneut.",
     invalidCaptchaHeader: "Das hat leider nicht geklappt.",
     invalidCaptcha: "Bitte aktualisieren Sie diese Seite.",
-    footer: 'Geschützt durch <a href="https://altcha.org/" target="_blank" aria-label="Besuche Altcha.org">ALTCHA</a>',
+    footer: 'Geschützt durch ALTCHA',
     label: "Ich bin kein Bot.",
     loadError: "Das Widget konnte nicht geladen werden.",
     verified: "Erfolgreich verifiziert!",
