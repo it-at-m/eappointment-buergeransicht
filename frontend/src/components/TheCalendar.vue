@@ -20,6 +20,27 @@
       @click:date="getAppointmentsOfDay(date)" :prev-month-aria-label="$t('previousMonth')"
       :next-month-aria-label="$t('nextMonth')"></v-date-picker>
 
+    <div v-if="errorKey"
+      class="m-component m-component-callout m-component-callout--warning m-component-callout--fullwidth">
+      <div class="m-callout m-callout--warning">
+        <div class="m-callout__inner">
+          <div class="m-callout__icon">
+            <svg aria-hidden="true" class="icon">
+              <use xlink:href="#icon-warning"></use>
+            </svg>
+            <span class="visually-hidden"></span>
+          </div>
+          <div class="m-callout__body">
+            <div class="m-callout__body__inner">
+              <h2 class="m-callout__headline">{{ $t(errorKey + 'Header') }}</h2>
+              <div class="m-callout__content">
+                <p>{{ $t(errorKey) }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div v-if="dateError"
       class="m-component m-component-callout m-component-callout--warning m-component-callout--fullwidth">
       <div>
@@ -135,7 +156,8 @@ export default {
     missingSlotsInARow: false,
     selectedTimeSlot: null,
     appointmentCounts: [],
-    isLoading: false
+    isLoading: false,
+    errorKey: '',
   }),
   methods: {
     selectedServiceIds: function () {
@@ -211,6 +233,7 @@ export default {
       return moment(date).format('dddd').slice(0, 3)
     },
     getAppointmentsOfDay: function (date, focus = true) {
+      this.errorKey = ''
       this.timeSlotError = false
       this.dateError = false
       this.timeDialog = false
@@ -232,13 +255,15 @@ export default {
           captchaToken: this.captchaToken
         })
         .then(data => {
-          if (data.errors && Array.isArray(data.errors) && data.errors[0] && data.errors[0].errorMessage) {
-            this.selectableDates = this.selectableDates.filter(selectableDate => {
-              return selectableDate !== date
-            })
-
-            this.dateError = data.errors[0].errorMessage
-
+          if (data.errors && Array.isArray(data.errors)) {
+            const err = data.errors[0]
+            const tokenErrors = ['captchaMissing','captchaExpired','captchaInvalid']
+            if (tokenErrors.includes(err.errorCode)) {
+              this.errorKey = 'altcha.invalidCaptcha'
+              return
+            }
+            this.selectableDates = this.selectableDates.filter(d => d !== date)
+            this.dateError = err.errorMessage
             return
           }
 
@@ -256,10 +281,15 @@ export default {
           }
         })
         .catch(error => {
-          if (error.errors && Array.isArray(error.errors)) {
-            this.dateError = error.errors[0]?.errorMessage || this.$t('applicationError');
+          const code = error.errors?.[0]?.errorCode
+          const tokenErrors = ['captchaMissing','captchaExpired','captchaInvalid']
+          if (tokenErrors.includes(code)) {
+            this.errorKey = 'altcha.invalidCaptcha'
+          }
+          else if (error.errors && Array.isArray(error.errors)) {
+            this.dateError = error.errors[0]?.errorMessage || this.$t('applicationError')
           } else {
-            this.dateError = this.$t('networkError');
+            this.dateError = this.$t('networkError')
           }
         });
     },
@@ -270,6 +300,7 @@ export default {
       this.chooseAppointment(timeSlot);
     },
     chooseAppointment: function (timeSlot) {
+      this.errorKey = ''
       this.timeSlotError = false
       const selectedServices = {}
 
@@ -289,13 +320,14 @@ export default {
           captchaToken: this.captchaToken
         })
         .then(data => {
-          if (data.errors && Array.isArray(data.errors) && data.errors[0] && data.errors[0].errorMessage) {
-            this.timeSlotError = data.errors[0].errorMessage
-            return
-          }
-
-          if (data.errors) {
-            this.timeSlotError = this.$t('errorTryAgainLater')
+          if (data.errors && Array.isArray(data.errors)) {
+            const err = data.errors[0]
+            const tokenErrors = ['captchaMissing','captchaExpired','captchaInvalid']
+            if (tokenErrors.includes(err.errorCode)) {
+              this.errorKey = 'altcha.invalidCaptcha'
+              return
+            }
+            this.timeSlotError = err.errorMessage || this.$t('errorTryAgainLater')
             return
           }
           const appointment = data
@@ -307,26 +339,28 @@ export default {
           this.$store.commit('data/setAppointment', appointment)
           this.$emit('next')
           window.scrollTo(0, 0)
-        }, () => {
-          this.timeSlotError = this.$t('noAppointmentsAvailable')
         })
         .catch(error => {
-          if (error.errors && Array.isArray(error.errors)) {
-            this.dateError = error.errors[0]?.errorMessage || this.$t('applicationError');
-          } else {
-            this.dateError = this.$t('networkError');
+          const code = error.errors?.[0]?.errorCode
+          const tokenErrors = ['captchaMissing','captchaExpired','captchaInvalid']
+          if (tokenErrors.includes(code)) {
+            this.errorKey = 'altcha.invalidCaptcha'
           }
-        }).finally(() => {
-          setTimeout(() => {
-            this.isLoading = false;
-          }, 300);
-        });
-
-      if (!this.timeSlotError && oldAppointment && !this.$store.state.isRebooking) {
-        this.$store.dispatch('API/cancelAppointment', oldAppointment)
-      }
+          else if (error.errors && Array.isArray(error.errors)) {
+            this.dateError = error.errors[0]?.errorMessage || this.$t('applicationError')
+          } else {
+            this.dateError = this.$t('networkError')
+          }
+        })
+        .finally(() => {
+          setTimeout(() => this.isLoading = false, 300)
+          if (!this.timeSlotError && oldAppointment && !this.$store.state.isRebooking) {
+            this.$store.dispatch('API/cancelAppointment', oldAppointment)
+          }
+        })
     },
     showForProvider: function (provider) {
+      this.errorKey = ''
       this.dateError = false
       this.timeSlotError = false
 
@@ -367,8 +401,15 @@ export default {
 
           if (data.errors && Array.isArray(data.errors)) {
             const error = data.errors[0]
+            const code = error.errorCode
+            const tokenErrors = ['captchaMissing','captchaExpired','captchaInvalid']
+
+            if (tokenErrors.includes(code)) {
+            this.errorKey = 'altcha.invalidCaptcha'
+          } else {
             this.dateError = error.errorMessage
-            return
+          }
+          return
           }
 
           const availableDays = data.availableDays ?? []
@@ -379,7 +420,11 @@ export default {
         })
         .catch(error => {
           this.selectableDates = []
-          if (error.errors && Array.isArray(error.errors)) {
+          const code = error.errors?.[0]?.errorCode
+          const tokenErrors = ['captchaMissing','captchaExpired','captchaInvalid']
+          if (tokenErrors.includes(code)) {
+            this.errorKey = 'altcha.invalidCaptcha'
+          } else if (error.errors && Array.isArray(error.errors)) {
             this.dateError = error.errors[0]?.errorMessage || this.$t('applicationError')
           } else {
             this.dateError = this.$t('networkError')
