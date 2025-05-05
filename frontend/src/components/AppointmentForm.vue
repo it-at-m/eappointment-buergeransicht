@@ -57,7 +57,11 @@
                 {{ $t('services') }}
               </v-expansion-panel-header>
               <v-expansion-panel-content>
-                <ServiceFinder @next="openPanel(2)" @changed="openPanel(1)" />
+                <ServiceFinder
+                  @next="openPanel(2)"
+                  @changed="openPanel(1)"
+                  @captchaTokenChanged="onCaptchaTokenChanged"
+                />
               </v-expansion-panel-content>
             </v-expansion-panel>
 
@@ -87,7 +91,12 @@
                 {{ $t('appointment') }}
               </v-expansion-panel-header>
               <v-expansion-panel-content>
-                <TheCalendar v-if="$store.state.step >= 2" @next="openPanel(3)" :key="$store.state.data.selectedServices" />
+                <TheCalendar
+                  v-if="$store.state.step >= 2"
+                  @next="openPanel(3)"
+                  :key="$store.state.data.selectedServices"
+                  :captcha-token="captchaToken"
+                />
               </v-expansion-panel-content>
             </v-expansion-panel>
 
@@ -353,7 +362,8 @@ export default {
     cancelDialog: false,
     starOverDialog: false,
     appointmentCancelled: null,
-    showLanguageSwitch: false
+    showLanguageSwitch: false,
+    captchaToken: null
   }),
   computed: {
     appointmentCanBeConfirmed() {
@@ -499,6 +509,9 @@ export default {
       this.$store.commit('selectServiceWithId', { id: id })
       this.openPanel(1)
       this.$store.state.confirmedAppointment = null
+    },
+    onCaptchaTokenChanged(token) {
+      this.captchaToken = token
     }
   },
   created() {

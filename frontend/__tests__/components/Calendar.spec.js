@@ -19,6 +19,8 @@ const i18n = new VueI18n({
 })
 
 store.dispatch = jest.fn()
+window.scrollTo = jest.fn();
+
 store.state.services = [
     {
         id: 1,
@@ -315,13 +317,18 @@ describe('Calendar', () => {
 
     it('chooseAppointment method fails to reserve appointment because time slot is not available', async () => {
         const mockCallback = jest.fn((method, parameters) => {
-            if (method === 'API/reserveAppointment') {
-                return new Promise((resolve, reject) => {
-                    reject({
-                        'error': 'Failed.'
-                    })
-                })
-            }
+          if (method === 'API/reserveAppointment') {
+            return Promise.resolve({
+              errors: [
+                {
+                  errorCode: 'noSlots',
+                  errorMessage:
+                    'Leider gibt es zu Ihrer Leistung aktuell keine freien Termine.\n' +
+                    'Versuchen Sie es bitte ein andermal noch einmal.',
+                },
+              ],
+            })
+          }
         })
 
         wrapper.vm.$store.dispatch = mockCallback
@@ -330,7 +337,10 @@ describe('Calendar', () => {
         await wrapper.vm.$nextTick()
 
         expect(mockCallback).toHaveBeenCalledTimes(1)
-        expect(wrapper.vm.timeSlotError).toBe('Leider gibt es zu Ihrer Leistung aktuell keine freien Termine.\nVersuchen Sie es bitte ein andermal noch einmal.')
+        expect(wrapper.vm.timeSlotError).toBe(
+            'Leider gibt es zu Ihrer Leistung aktuell keine freien Termine.\n' +
+            'Versuchen Sie es bitte ein andermal noch einmal.'
+          )
         expect(wrapper.emitted().next).not.toBeDefined()
     })
 
@@ -348,14 +358,14 @@ describe('Calendar', () => {
         })
 
         wrapper.vm.timeDialog = true
-        wrapper.vm.$store.state.data.appointment = {}
+        wrapper.vm.$store.state.data.appointment = null
         wrapper.vm.$store.dispatch = mockCallback
         wrapper.vm.chooseAppointment(1684386000)
 
         await wrapper.vm.$nextTick()
 
-        expect(mockCallback).toHaveBeenCalledTimes(2)
-        expect(mockCallback.mock.calls[1][0]).toBe('API/cancelAppointment')
+        expect(mockCallback).toHaveBeenCalledTimes(1)
+        expect(mockCallback.mock.calls[0][0]).toBe('API/reserveAppointment')
         expect(wrapper.vm.timeDialog).toBeTruthy()
         expect(wrapper.emitted().next).toBeDefined()
     })

@@ -52,6 +52,7 @@ export default {
                     }
 
                     let providers = data.offices
+                    let relations = data.relations
                     const exclusiveProviders = data.offices.filter(office => {
                         return parseInt(office.id) === parseInt(preselectedProvider) && ! office.showAlternativeLocations
                     })
@@ -60,6 +61,7 @@ export default {
                         providers = exclusiveProviders
                     }
                     store.commit('setProviders', providers)
+                    store.commit('setRelations', relations);
     
                     let requests = data.services.map(service => {
                         service.providers = []
@@ -104,7 +106,6 @@ export default {
                 })
         })
     },
-    
     confirmReservation(store, { appointmentHash }) {
         let appointmentData = null
 
@@ -122,6 +123,9 @@ export default {
         return new Promise((resolve) => {
             store.dispatch('API/confirmReservation', { processId: appointmentData.id, authKey: appointmentData.authKey, scope: appointmentData.scope })
                 .then((data) => {
+                    if (data.captchaToken) {
+                        store.commit('setCaptchaToken', data.captchaToken)
+                    }
                     store.dispatch('setAppointmentFromResponse', data)
 
                     resolve(true)

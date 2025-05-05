@@ -55,5 +55,17 @@ export default {
   applicationError: 'Unknown application error.',
   maintenanceMode: "The appointment system is currently under maintenance, please try again later.",
   maintenanceModeDescription: "We are currently working on improving the system. Please try again in a few minutes.",
-  fieldLengthFifty: "Maximum 50 characters allowed."
+  fieldLengthFifty: "Maximum 50 characters allowed.",
+  altcha: {
+    error: "Verification failed. Try again later.",
+    expired: "Verification expired. Try again.",
+    invalidCaptchaHeader: "Something went wrong.",
+    invalidCaptcha: "Please refresh this page.",
+    footer: 'Protected by ALTCHA',
+    label: "I'm not a robot",
+    loadError: "The widget could not be loaded.",
+    verified: "Verified",
+    verifying: "Verifying...",
+    waitAlert: "Verifying... please wait.",
+  }
 }

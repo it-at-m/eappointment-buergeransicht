@@ -20,6 +20,27 @@
       @click:date="getAppointmentsOfDay(date)" :prev-month-aria-label="$t('previousMonth')"
       :next-month-aria-label="$t('nextMonth')"></v-date-picker>
 
+    <div v-if="errorKey"
+      class="m-component m-component-callout m-component-callout--warning m-component-callout--fullwidth">
+      <div class="m-callout m-callout--warning">
+        <div class="m-callout__inner">
+          <div class="m-callout__icon">
+            <svg aria-hidden="true" class="icon">
+              <use xlink:href="#icon-warning"></use>
+            </svg>
+            <span class="visually-hidden"></span>
+          </div>
+          <div class="m-callout__body">
+            <div class="m-callout__body__inner">
+              <h2 class="m-callout__headline">{{ $t(errorKey + 'Header') }}</h2>
+              <div class="m-callout__content">
+                <p>{{ $t(errorKey) }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div v-if="dateError"
       class="m-component m-component-callout m-component-callout--warning m-component-callout--fullwidth">
       <div>
@@ -83,7 +104,7 @@
             </div>
           </div>
           <div v-for="(times, index) in timeSlotsInHours()" :key="index">
-            <div class="captcha-hour-wrapper">
+            <div class="hour-wrapper">
               <div class="appointments-in-hours">
                 <h4 class="time-hour" tabindex="0">
                   {{ times[0].format('H') }}:00-{{ times[0].format('H') }}:59
@@ -97,13 +118,6 @@
                     size="16" width="2" color="primary" class="ms-2"></v-progress-circular>
                 </div>
               </div>
-              <v-col
-                v-if="provider && provider.scope && provider.scope.captchaActivatedRequired && provider.scope.captchaActivatedRequired === '1' && captchaDetails.captchaEnabled && showCaptcha && selectedTimeSlot && selectedTimeSlot.format('H') === times[0].format('H') && captchaDetails && captchaDetails.siteKey && captchaDetails.puzzle"
-                cols="12" class="d-flex justify-center align-center">
-                <vue-friendly-captcha :key="captchaKey" :sitekey="captchaDetails.siteKey"
-                  :puzzleEndpoint="captchaDetails.puzzle" language="de" @done="handleCaptchaDone"
-                  @error="handleCaptchaError" />
-              </v-col>
             </div>
           </div>
         </div>
@@ -118,12 +132,14 @@ import 'moment-timezone';
 import { mdiCalendarClock } from '@mdi/js';
 import 'moment/locale/de';
 import 'regenerator-runtime/runtime';
-import VueFriendlyCaptcha from '@somushq/vue-friendly-captcha';
 
 export default {
   name: 'TheCalendar',
-  components: {
-    VueFriendlyCaptcha
+  props: {
+    captchaToken: {
+      type: String,
+      default: null
+    }
   },
   data: () => ({
     selectedProviderIndex: null,
@@ -138,18 +154,11 @@ export default {
     dateError: false,
     provider: null,
     missingSlotsInARow: false,
-    showCaptcha: false,
     selectedTimeSlot: null,
-    captchaKey: 0,
-    captchaSolution: null,
     appointmentCounts: [],
-    isLoading: false
+    isLoading: false,
+    errorKey: '',
   }),
-  computed: {
-    captchaDetails() {
-      return this.$store.state.captchaDetails;
-    }
-  },
   methods: {
     selectedServiceIds: function () {
       let selectedServiceIds = []
@@ -224,6 +233,7 @@ export default {
       return moment(date).format('dddd').slice(0, 3)
     },
     getAppointmentsOfDay: function (date, focus = true) {
+      this.errorKey = ''
       this.timeSlotError = false
       this.dateError = false
       this.timeDialog = false
@@ -237,15 +247,25 @@ export default {
         }
       })
 
-      this.$store.dispatch('API/fetchAvailableTimeSlots', { date: momentDate, provider: { ...this.provider, slots: 1 }, serviceIds: Object.keys(selectedServices), serviceCounts: Object.values(selectedServices) })
+      const captchaToken = this.captchaToken || this.$store.state.captchaToken
+
+      this.$store.dispatch('API/fetchAvailableTimeSlots', {
+          date: momentDate,
+          provider: { ...this.provider, slots: 1 },
+          serviceIds: Object.keys(selectedServices),
+          serviceCounts: Object.values(selectedServices),
+          captchaToken: captchaToken
+        })
         .then(data => {
-          if (data.errors && Array.isArray(data.errors) && data.errors[0] && data.errors[0].errorMessage) {
-            this.selectableDates = this.selectableDates.filter(selectableDate => {
-              return selectableDate !== date
-            })
-
-            this.dateError = data.errors[0].errorMessage
-
+          if (data.errors && Array.isArray(data.errors)) {
+            const err = data.errors[0]
+            const tokenErrors = ['captchaMissing','captchaExpired','captchaInvalid']
+            if (tokenErrors.includes(err.errorCode)) {
+              this.errorKey = 'altcha.invalidCaptcha'
+              return
+            }
+            this.selectableDates = this.selectableDates.filter(d => d !== date)
+            this.dateError = err.errorMessage
             return
           }
 
@@ -263,26 +283,26 @@ export default {
           }
         })
         .catch(error => {
-          if (error.errors && Array.isArray(error.errors)) {
-            this.dateError = error.errors[0]?.errorMessage || this.$t('applicationError');
+          const code = error.errors?.[0]?.errorCode
+          const tokenErrors = ['captchaMissing','captchaExpired','captchaInvalid']
+          if (tokenErrors.includes(code)) {
+            this.errorKey = 'altcha.invalidCaptcha'
+          }
+          else if (error.errors && Array.isArray(error.errors)) {
+            this.dateError = error.errors[0]?.errorMessage || this.$t('applicationError')
           } else {
-            this.dateError = this.$t('networkError');
+            this.dateError = this.$t('networkError')
           }
         });
     },
-    handleTimeSlotSelection: function (timeSlot) {
+    handleTimeSlotSelection(timeSlot) {
       if (this.isLoading) return;
       this.selectedTimeSlot = timeSlot;
-      this.showCaptcha = this.captchaDetails.captchaEnabled && (this.provider.scope) && (this.provider.scope.captchaActivatedRequired) && (this.provider.scope.captchaActivatedRequired === '1');
-      if (this.showCaptcha) {
-        this.captchaKey += 1;
-        this.captchaSolution = null;
-      } else {
-        this.isLoading = true;
-        this.chooseAppointment(timeSlot);
-      }
+      this.isLoading = true;
+      this.chooseAppointment(timeSlot);
     },
     chooseAppointment: function (timeSlot) {
+      this.errorKey = ''
       this.timeSlotError = false
       const selectedServices = {}
 
@@ -293,16 +313,24 @@ export default {
       })
 
       const oldAppointment = this.$store.state.data.appointment
+      const captchaToken = this.captchaToken || this.$store.state.captchaToken
 
-      this.$store.dispatch('API/reserveAppointment', { timeSlot, serviceIds: Object.keys(selectedServices), serviceCounts: Object.values(selectedServices), providerId: this.provider.id, captchaSolution: this.captchaSolution })
+      this.$store.dispatch('API/reserveAppointment', {
+          timeSlot,
+          serviceIds: Object.keys(selectedServices),
+          serviceCounts: Object.values(selectedServices),
+          providerId: this.provider.id,
+          captchaToken: captchaToken
+        })
         .then(data => {
-          if (data.errors && Array.isArray(data.errors) && data.errors[0] && data.errors[0].errorMessage) {
-            this.timeSlotError = data.errors[0].errorMessage
-            return
-          }
-
-          if (data.errors) {
-            this.timeSlotError = this.$t('errorTryAgainLater')
+          if (data.errors && Array.isArray(data.errors)) {
+            const err = data.errors[0]
+            const tokenErrors = ['captchaMissing','captchaExpired','captchaInvalid']
+            if (tokenErrors.includes(err.errorCode)) {
+              this.errorKey = 'altcha.invalidCaptcha'
+              return
+            }
+            this.timeSlotError = err.errorMessage || this.$t('errorTryAgainLater')
             return
           }
           const appointment = data
@@ -314,30 +342,33 @@ export default {
           this.$store.commit('data/setAppointment', appointment)
           this.$emit('next')
           window.scrollTo(0, 0)
-        }, () => {
-          this.timeSlotError = this.$t('noAppointmentsAvailable')
         })
         .catch(error => {
-          if (error.errors && Array.isArray(error.errors)) {
-            this.dateError = error.errors[0]?.errorMessage || this.$t('applicationError');
-          } else {
-            this.dateError = this.$t('networkError');
+          const code = error.errors?.[0]?.errorCode
+          const tokenErrors = ['captchaMissing','captchaExpired','captchaInvalid']
+          if (tokenErrors.includes(code)) {
+            this.errorKey = 'altcha.invalidCaptcha'
           }
-        }).finally(() => {
-          setTimeout(() => {
-            this.isLoading = false;
-          }, 300);
-        });
-
-      if (!this.timeSlotError && oldAppointment && !this.$store.state.isRebooking) {
-        this.$store.dispatch('API/cancelAppointment', oldAppointment)
-      }
+          else if (error.errors && Array.isArray(error.errors)) {
+            this.dateError = error.errors[0]?.errorMessage || this.$t('applicationError')
+          } else {
+            this.dateError = this.$t('networkError')
+          }
+        })
+        .finally(() => {
+          setTimeout(() => this.isLoading = false, 300)
+          if (!this.timeSlotError && oldAppointment && !this.$store.state.isRebooking) {
+            this.$store.dispatch('API/cancelAppointment', oldAppointment)
+          }
+        })
     },
     showForProvider: function (provider) {
+      this.errorKey = ''
       this.dateError = false
       this.timeSlotError = false
 
       this.provider = provider
+
       this.$store.state.data.selectedProvider = provider
       const selectedServices = {}
 
@@ -362,14 +393,28 @@ export default {
         this.$store.state.data.selectedProvider = this.provider
       }
 
-      this.$store.dispatch('API/fetchAvailableDays', { provider: this.provider, serviceIds: Object.keys(selectedServices), serviceCounts: Object.values(selectedServices) })
+      const captchaToken = this.captchaToken || this.$store.state.captchaToken
+
+      this.$store.dispatch('API/fetchAvailableDays', {
+        provider: this.provider,
+        serviceIds: Object.keys(selectedServices),
+        serviceCounts: Object.values(selectedServices),
+        captchaToken: captchaToken
+      })
         .then(data => {
           this.selectableDates = []
 
           if (data.errors && Array.isArray(data.errors)) {
             const error = data.errors[0]
+            const code = error.errorCode
+            const tokenErrors = ['captchaMissing','captchaExpired','captchaInvalid']
+
+            if (tokenErrors.includes(code)) {
+            this.errorKey = 'altcha.invalidCaptcha'
+          } else {
             this.dateError = error.errorMessage
-            return
+          }
+          return
           }
 
           const availableDays = data.availableDays ?? []
@@ -380,23 +425,17 @@ export default {
         })
         .catch(error => {
           this.selectableDates = []
-          if (error.errors && Array.isArray(error.errors)) {
+          const code = error.errors?.[0]?.errorCode
+          const tokenErrors = ['captchaMissing','captchaExpired','captchaInvalid']
+          if (tokenErrors.includes(code)) {
+            this.errorKey = 'altcha.invalidCaptcha'
+          } else if (error.errors && Array.isArray(error.errors)) {
             this.dateError = error.errors[0]?.errorMessage || this.$t('applicationError')
           } else {
             this.dateError = this.$t('networkError')
           }
         });
     },
-    handleCaptchaDone(solution) {
-      this.captchaSolution = solution;
-      if (this.selectedTimeSlot) {
-        this.chooseAppointment(this.selectedTimeSlot);
-      }
-    },
-    handleCaptchaError(errors) {
-      console.error("Captcha errors:", errors);
-      this.isLoading = false;
-    }
   },
   mounted: function () {
     moment.locale('de')

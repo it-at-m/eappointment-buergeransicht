@@ -92,7 +92,7 @@ describe('Actions', () => {
             preselectedService: null
         })
 
-        expect(commitMethods).toHaveBeenCalledTimes(3)
+        expect(commitMethods).toHaveBeenCalledTimes(4)
         //expect(commitMethods.mock.calls[0]).toStrictEqual(['setProviders', offices])
         //expect(commitMethods.mock.calls[1]).toStrictEqual(['setServices', services])
         //expect(commitMethods.mock.calls[2]).toStrictEqual(['selectProviderWithId', null])
@@ -150,7 +150,7 @@ describe('Actions', () => {
             preselectedService: 2
         })
 
-        expect(commitMethods).toHaveBeenCalledTimes(5)
+        expect(commitMethods).toHaveBeenCalledTimes(6)
         /*expect(commitMethods.mock.calls[0]).toStrictEqual(['setProviders', offices])
         expect(commitMethods.mock.calls[1]).toStrictEqual(['setServices', services])
         expect(commitMethods.mock.calls[2]).toStrictEqual(['data/reset'])
@@ -309,6 +309,4 @@ describe('Actions', () => {
             }
         }])*/
     })
-
-
 })
