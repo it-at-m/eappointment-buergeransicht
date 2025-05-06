@@ -157,6 +157,10 @@ export default {
                     return
                 }
 
+                if (data.captchaToken) {
+                    store.commit('setCaptchaToken', data.captchaToken)
+                }
+
                 store.dispatch('setAppointmentFromResponse', data)
 
                 if (data.timestamp < moment().unix()) {
