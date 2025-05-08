@@ -116,9 +116,14 @@
                             <b tabindex="4">{{ $store.state.data.customer.name }} ({{ $store.state.data.customer.email }}<span
                                 v-if="$store.state.data.customer.telephone">, {{
                                   $store.state.data.customer.telephone
-                                }}</span><span v-if="$store.state.data.customer.customTextfield">, {{
-  $store.state.data.customer.customTextfield
-}}</span>)</b>
+                                }}</span>
+                                <span v-if="$store.state.data.customer.customTextfield">, {{
+                                  $store.state.data.customer.customTextfield
+                                }}</span>
+                                <span v-if="$store.state.data.customer.customTextfield2">, {{
+                                  $store.state.data.customer.customTextfield2
+                                }}</span>)
+                            </b>
                           </span>
                         </span>
                       </v-fade-transition>
