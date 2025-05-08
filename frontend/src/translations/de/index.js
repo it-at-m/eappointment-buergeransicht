@@ -63,7 +63,7 @@ export default {
   customTextfield: "Nachname des Kindes*",
   customTextfieldIsRequired: 'Bitte geben Sie die nötigen Informationen ein.',
   mustBeValidcustomTextfield: 'Bitte geben Sie die nötigen Informationen ein.',
-  customTextfield2: "Bemerkung*",
+  customTextfield2: "Zusätzliche Bemerkung*",
   customTextfield2IsRequired: 'Bitte geben Sie die nötigen Informationen ein.',
   mustBeValidcustomTextfield2: 'Bitte geben Sie die nötigen Informationen ein.',
   location: "Standort",

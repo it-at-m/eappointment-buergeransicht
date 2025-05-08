@@ -39,7 +39,7 @@ export default {
   customTextfield: "Last Name of the Child*",
   customTextfieldIsRequired: 'Please enter valid information.',
   mustBeValidcustomTextfield: 'Please enter a valid information.',
-  customTextfield2: "Some text*",
+  customTextfield2: "Another custom text*",
   customTextfield2IsRequired: 'Please enter valid information.',
   mustBeValidcustomTextfield2: 'Please enter a valid information.',
   location: "Location",
