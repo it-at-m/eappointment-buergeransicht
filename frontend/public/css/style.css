@@ -81,6 +81,16 @@ p, span, div, button, td, th, .v-label, .v-list-item__title {
     color: #3a5368;
 }
 
+.m-breadcrumb-component {
+    margin-top: 33px;
+}
+
+@media (min-width: 1200px) {
+    .m-breadcrumb-component {
+        margin-top: 68px;
+    }
+}
+
 .button-submit {
     margin-right: 1rem;
     margin-top: 1rem;
