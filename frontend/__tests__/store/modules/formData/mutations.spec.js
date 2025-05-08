@@ -290,7 +290,7 @@ describe('Form data mutations', () => {
             email: 'max@gmail.com',
             telephone: "123456789",
             customTextfield: "Smith",
-            customTextfield2: "Nein",
+            customTextfield2: "",
             dataProtection: true
         })
 
