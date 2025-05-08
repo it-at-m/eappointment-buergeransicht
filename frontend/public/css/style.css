@@ -82,12 +82,12 @@ p, span, div, button, td, th, .v-label, .v-list-item__title {
 }
 
 .m-breadcrumb-component {
-    margin-top: 30px;
+    margin-top: 33px;
 }
 
 @media (min-width: 1200px) {
     .m-breadcrumb-component {
-        margin-top: 60px;
+        margin-top: 68px;
     }
 }
 
