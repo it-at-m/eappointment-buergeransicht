@@ -513,14 +513,6 @@ export default {
     onCaptchaTokenChanged(token) {
       this.captchaToken = token
     }
-  },
-  created() {
-    this.$store.dispatch('API/fetchServicesAndProviders')
-      .catch(error => {
-        if (error.name === 'TypeError' || error.message.includes('Failed to fetch')) {
-          this.$store.state.maintenanceMode = true;
-        }
-      });
   }
 }
 </script>
