@@ -157,6 +157,7 @@ export default {
         state.customer.email = customer ? customer.email : null
         state.customer.telephone = customer ? customer.telephone : null
         state.customer.customTextfield = customer ? customer.customTextfield : null
+        state.customer.customTextfield2 = customer ? customer.customTextfield2 : null
         state.customer.dataProtection = customer ? customer.dataProtection : null
     }
 }

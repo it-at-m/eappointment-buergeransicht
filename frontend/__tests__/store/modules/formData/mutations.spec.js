@@ -290,6 +290,7 @@ describe('Form data mutations', () => {
             email: 'max@gmail.com',
             telephone: "123456789",
             customTextfield: "Smith",
+            customTextfield2: "",
             dataProtection: true
         })
 
@@ -298,6 +299,7 @@ describe('Form data mutations', () => {
             email: 'max@gmail.com',
             telephone: "123456789",
             customTextfield: "Smith",
+            customTextfield2: "",
             dataProtection: true
         })
     })
