@@ -365,6 +365,7 @@ export default {
     showForProvider: function (provider) {
       this.errorKey = ''
       this.dateError = false
+      this.timeDialog = false
       this.timeSlotError = false
 
       this.provider = provider
@@ -419,6 +420,7 @@ export default {
 
           const availableDays = data.availableDays ?? []
           if (availableDays.length > 0) {
+            this.timeDialog = true
             this.selectableDates = availableDays
             this.getAppointmentsOfDay(availableDays[0], false)
           }
