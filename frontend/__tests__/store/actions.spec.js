@@ -228,6 +228,7 @@ describe('Actions', () => {
             email: 'max@gmail.com',
             telephone: '+1234567890',
             customTextfield: 'Smith',
+            customTextfield2: '',
             dataProtection: true
         }
 
@@ -246,6 +247,7 @@ describe('Actions', () => {
             email: 'max@gmail.com',
             telephone: '+1234567890',
             customTextfield: 'Smith',
+            customTextfield2: '',
             timestamp: 1589373217,
             processId: 111,
             authKey: 'abc'

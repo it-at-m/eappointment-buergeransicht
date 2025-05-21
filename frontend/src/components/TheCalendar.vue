@@ -7,7 +7,7 @@
             show-arrows="mobile" id="location-tabs" ref="locationTabs"
             :key="$store.state.data.selectedProvider + $store.state.data.selectedServices + selectedProviderIndex === -1"
             v-model="selectedProviderIndex">
-            <v-tab v-for="provider in filteredProviders()" :key="provider.id" @change="showForProvider(provider)">
+            <v-tab v-for="provider in filteredProviders()" :key="provider.id" @change="showForProvider(provider)" :disabled="isLoadingProvider || isLoadingSlots">
               {{ provider.name }}
             </v-tab>
           </v-tabs>
@@ -157,6 +157,8 @@ export default {
     selectedTimeSlot: null,
     appointmentCounts: [],
     isLoading: false,
+    isLoadingProvider: false,
+    isLoadingSlots: false,
     errorKey: '',
   }),
   methods: {
@@ -233,6 +235,7 @@ export default {
       return moment(date).format('dddd').slice(0, 3)
     },
     getAppointmentsOfDay: function (date, focus = true) {
+      this.isLoadingSlots = true;
       this.errorKey = ''
       this.timeSlotError = false
       this.dateError = false
@@ -293,6 +296,8 @@ export default {
           } else {
             this.dateError = this.$t('networkError')
           }
+        }).finally(() => {
+          this.isLoadingSlots = false;
         });
     },
     handleTimeSlotSelection(timeSlot) {
@@ -363,8 +368,10 @@ export default {
         })
     },
     showForProvider: function (provider) {
+      this.isLoadingProvider = true;
       this.errorKey = ''
       this.dateError = false
+      this.timeDialog = false
       this.timeSlotError = false
 
       this.provider = provider
@@ -419,6 +426,7 @@ export default {
 
           const availableDays = data.availableDays ?? []
           if (availableDays.length > 0) {
+            this.timeDialog = true
             this.selectableDates = availableDays
             this.getAppointmentsOfDay(availableDays[0], false)
           }
@@ -434,6 +442,9 @@ export default {
           } else {
             this.dateError = this.$t('networkError')
           }
+        })
+        .finally(() => {
+          this.isLoadingProvider = false;
         });
     },
   },

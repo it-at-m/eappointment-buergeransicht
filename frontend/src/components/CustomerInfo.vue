@@ -33,6 +33,14 @@
         tabindex="0"
       ></v-text-field>
     </div>
+    <div id="customer-custom-textfield2-section" v-if="isCustomTextfield2Activated" :aria-label="getCustomText2AriaLabel()">
+      <v-text-field v-model="customer.customTextfield2" id="customer-custom-textfield2" counter="50" :maxlength="50"
+        filled :error-messages="customTextfield2Errors" @blur="$v.customTextfield2.$touch()" @change="changed"
+        :label="(isCustomTextfield2Required ? customTextfield2Label + '*' : customTextfield2Label)"
+        :disabled="isPreselectedAppointment"
+        tabindex="0"
+      ></v-text-field>
+    </div>
 
     <v-checkbox
         :key="customer.dataProtection"
@@ -109,6 +117,10 @@ export default {
         required: this.isCustomTextfieldRequired ? required : () => true,
         maxLength: maxLength(50)
       },
+      customTextfield2: {
+        required: this.isCustomTextfield2Required ? required : () => true,
+        maxLength: maxLength(50)
+      },
       dataProtection: {
         required
       }
@@ -152,6 +164,14 @@ export default {
         return this.customer.customTextfield = newValue
       }
     },
+    customTextfield2: {
+      get() {
+        return this.customer.customTextfield2
+      },
+      set(newValue) {
+        return this.customer.customTextfield2 = newValue
+      }
+    },
     dataProtection: {
       get() {
         return this.customer.dataProtection
@@ -174,6 +194,21 @@ export default {
       return this.$store.state.data.appointment &&
         this.$store.state.data.appointment.scope &&
         this.$store.state.data.appointment.scope.customTextfieldLabel;
+    },
+    isCustomTextfield2Activated() {
+      return this.$store.state.data.appointment &&
+        this.$store.state.data.appointment.scope &&
+        this.$store.state.data.appointment.scope.customTextfield2Activated == 1;
+    },
+    isCustomTextfield2Required() {
+      return this.$store.state.data.appointment &&
+        this.$store.state.data.appointment.scope &&
+        this.$store.state.data.appointment.scope.customTextfield2Required == 1;
+    },
+    customTextfield2Label() {
+      return this.$store.state.data.appointment &&
+        this.$store.state.data.appointment.scope &&
+        this.$store.state.data.appointment.scope.customTextfield2Label;
     },
     isEmailRequired() {
       return this.$store.state.data.appointment &&
@@ -222,6 +257,13 @@ export default {
       !this.$v.customTextfield.maxLength && errors.push(this.$t('textLengthExceeded'));
       return errors;
     },
+    customTextfield2Errors() {
+      const errors = [];
+      if (!this.$v.customTextfield2.$dirty) return errors;
+      !this.$v.customTextfield2.required && errors.push(this.$t('customTextfield2IsRequired'));
+      !this.$v.customTextfield2.maxLength && errors.push(this.$t('textLengthExceeded'));
+      return errors;
+    },
 
     dataProtectionErrors() {
       const errors = [];
@@ -241,7 +283,7 @@ export default {
     saveCustomer() {
       this.$v.$touch()
 
-      if (this.emailErrors.length || this.nameErrors.length || this.dataProtectionErrors.length || this.telephoneErrors.length || this.customTextfieldErrors.length) {
+      if (this.emailErrors.length || this.nameErrors.length || this.dataProtectionErrors.length || this.telephoneErrors.length || this.customTextfieldErrors.length || this.customTextfield2Errors.length) {
         return
       }
       this.$store.dispatch('updateAppointmentData', {
@@ -284,6 +326,10 @@ export default {
     getCustomTextAriaLabel() {
       const previousFieldError = this.telephoneErrors.length > 0 ? this.$t('telephoneIsRequired') : '';
       return `${previousFieldError} ${this.$t('customField') + this.$t('fieldLengthFifty')}`;
+    },
+    getCustomText2AriaLabel() {
+      const previousFieldError = this.telephoneErrors.length > 0 ? this.$t('telephoneIsRequired') : '';
+      return `${previousFieldError} ${this.$t('customField2') + this.$t('fieldLengthFifty')}`;
     }
   },
   mounted() {
