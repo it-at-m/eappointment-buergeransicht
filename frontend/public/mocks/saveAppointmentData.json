@@ -9,7 +9,6 @@
   "data": {
     "$schema": "https://schema.berlin.de/queuemanagement/process.json",
     "customTextfield": "",
-    "customTextfield2": "",
     "appointments": [
       {
         "date": 0,
@@ -37,8 +36,7 @@
         "emailSendCount": "0",
         "notificationsSendCount": "0",
         "telephone": "",
-        "customTextfield": "",
-        "customTextfield2": ""
+        "customTextfield": ""
       }
     ],
     "createIP": "",
@@ -75,8 +73,7 @@
         "client": {
           "emailRequired": 0,
           "telephoneRequired": 0,
-          "customTextfieldRequired": 0,
-          "customTextfield2Required": 0
+          "customTextfieldRequired": 0
         },
         "workstation": {
           "emergencyRefreshInterval": "5"
