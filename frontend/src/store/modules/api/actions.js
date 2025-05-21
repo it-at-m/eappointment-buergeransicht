@@ -245,8 +245,7 @@ export default {
                     "familyName": appointment.familyName,
                     "email": appointment.email,
                     "telephone": appointment.telephone,
-                    "customTextfield": appointment.customTextfield,
-                    "customTextfield2": appointment.customTextfield2
+                    "customTextfield": appointment.customTextfield
                 })
             };
 

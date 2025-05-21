@@ -109,8 +109,7 @@ describe('API actions', () => {
             familyName: 'Musterman',
             email: 'test@gmail.com',
             telephone: '',
-            customTextfield: '',
-            customTextfield2: ''
+            customTextfield: ''
         })
 
         expect(fetch.mock.calls.length).toEqual(1);
@@ -121,8 +120,7 @@ describe('API actions', () => {
             "familyName": 'Musterman',
             "email": 'test@gmail.com',
             "telephone": '',
-            "customTextfield": '',
-            "customTextfield2": ''
+            "customTextfield": ''
         }))
     })
 
