@@ -32,6 +32,8 @@ const wrapper = mount(CustomerInfo, {
         telephoneActivated: false,
         customTextfieldRequired: false,
         customTextfieldActivated: false,
+        customTextfield2Required: false,
+        customTextfield2Activated: false
     }
 })
 
@@ -40,6 +42,7 @@ describe('Customer info', () => {
     const emailInput = wrapper.find('#customer-email')
     const telephoneInput = wrapper.find('#customer-telephone')
     const customTextfieldInput = wrapper.find('#customer-custom-textfield')
+    const customTextfield2Input = wrapper.find('#customer-custom-textfield2')
     const dataProtectionCheckbox = wrapper.find('#customer-data-protection')
     const submitButton = wrapper.find('#customer-submit-button') 
 
