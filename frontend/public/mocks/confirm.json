@@ -9,6 +9,7 @@
   "data": {
     "$schema": "https://schema.berlin.de/queuemanagement/process.json",
     "customTextfield": "",
+    "customTextfield2": "",
     "appointments": [
       {
         "date": 1648708200,
@@ -67,7 +68,8 @@
         "emailSendCount": "0",
         "notificationsSendCount": "0",
         "telephone": "",
-        "customTextfield": ""
+        "customTextfield": "",
+        "customTextfield2": ""
       }
     ],
     "createIP": "",
@@ -282,12 +284,15 @@
         "client": {
           "alternateAppointmentUrl": "",
           "customTextfieldLabel": "",
+          "customTextfield2Label": "",
           "emailFrom": "",
           "emailRequired": 0,
           "telephoneActivated": "0",
           "telephoneRequired": 0,
           "customTextfieldActivated": "0",
           "customTextfieldRequired": 0,
+          "customTextfield2Activated": "0",
+          "customTextfield2Required": 0,
           "captchaActivatedRequired": "0"
         },
         "notifications": {
@@ -319,6 +324,7 @@
           "confirmationEnabled": "0",
           "deactivatedText": "",
           "notificationscustomTextfieldEnabled": "0",
+          "notificationscustomTextfield2Enabled": "0",
           "notificationsEnabled": "0",
           "notificationsDelay": "0"
         },
