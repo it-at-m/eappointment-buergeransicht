@@ -326,6 +326,24 @@ export default {
 
 .v-menu__content {
   margin-left: 1rem;
+  top: 130px !important;
+  left: 12px;
+}
+
+@media (min-width: 769px) {
+  .v-menu__content {
+    margin-left: 1rem;
+    top: 146px !important;
+    left: 12px;
+  }
+}
+
+@media (min-width: 992px) {
+  .v-menu__content {
+    margin-left: 1rem;
+    top: 121px !important;
+    left: 12px;
+  }
 }
 
 .appointment-count {
