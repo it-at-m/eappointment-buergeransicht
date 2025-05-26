@@ -36,6 +36,7 @@ export default {
   mustBeValidTelephone: 'Please enter a valid phone number.',
   countryCode: "Country Code",
   countryCodeRequired: "Country Code*",
+  showAllServices: "Show all services",
   customTextfield: "Last Name of the Child*",
   customTextfieldIsRequired: 'Please enter valid information.',
   mustBeValidcustomTextfield: 'Please enter a valid information.',
