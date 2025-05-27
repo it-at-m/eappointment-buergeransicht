@@ -60,6 +60,7 @@ export default {
   mustBeValidTelephone: 'Bitte geben Sie eine gültige Telefonnummer ein.',
   countryCode: "Landesvorwahl",
   countryCodeRequired: "Landesvorwahl*",
+  showAllServices: "Alle Leistungen anzeigen",
   customTextfield: "Nachname des Kindes*",
   customTextfieldIsRequired: 'Bitte geben Sie die nötigen Informationen ein.',
   mustBeValidcustomTextfield: 'Bitte geben Sie die nötigen Informationen ein.',

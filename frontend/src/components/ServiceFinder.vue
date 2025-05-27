@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-autocomplete class="align-content-start service-finder-select" v-model="$store.state.data.service"
-      v-if="! $store.state.preselectedService" :attach="$parent.$el" :items="services" :item-text="'name'" return-object
+      v-if="!$store.state.preselectedService" :attach="$parent.$el" :items="services" :item-text="'name'" return-object
       :label="$t('services')" filled @change="onChange" v-on:keyup.enter="suggest" clearable
       :prepend-inner-icon="searchSvg" ref="autocomplete" :menu-props="{ auto: true, overflowY: true }"
       :no-data-text="$t('noServiceFound')"></v-autocomplete>
@@ -32,8 +32,8 @@
       </div>
     </div>
     <v-list two-line v-else>
-      <template v-for="(filteredService) in this.filteredServices">
-        <v-list-item class="filtered-service" :key="filteredService.id" @click="onChange(filteredService)">
+      <div v-for="filteredService in this.filteredServices" :key="filteredService.id">
+        <v-list-item class="filtered-service" @click="onChange(filteredService)">
           <v-list-item-avatar rounded="0">
             <v-icon>{{ serviceSvg }}</v-icon>
           </v-list-item-avatar>
@@ -43,8 +43,8 @@
             <v-list-item-subtitle v-html="filteredService.group"></v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
-        <v-divider :key="'devider' + filteredService.id"></v-divider>
-      </template>
+        <v-divider></v-divider>
+      </div>
     </v-list>
 
     <v-container v-if="$store.state.data.service">
@@ -84,11 +84,8 @@
         <template v-if="$store.state.data.service.subServices">
           <h3 tabindex="0" v-if="$store.state.data.service.subServices.length">{{ $t('oftenBookedTogether') }}</h3>
 
-          <template v-for="(subService) in $store.state.data.service.subServices">
-            <v-list-item
-                :key="subService.id + ' ' + appointmentCountTriggered"
-                v-if="getServiceName(subService.id)"
-            >
+          <div v-for="subService in filteredSubServices" :key="subService.id + ' ' + appointmentCountTriggered">
+            <v-list-item v-if="getServiceName(subService.id)">
               <v-card-actions>
                 <v-btn ref="buttonDown" class="appointment-count-button button-down"
                   :aria-label="`Anzahl der Dienstleistung verringern auf ` + (appointmentCounts[subService.id] - 1)"
@@ -112,9 +109,17 @@
                 {{ getServiceName(subService.id) }}
               </span>
             </v-list-item>
-          </template>
+          </div>
         </template>
       </v-list>
+      <div v-if="shouldShowMoreButton" class="m-button-group m-button-group--secondary">
+        <button class="m-button m-button--secondary m-button--animated-right" @click="showAllServices = true">
+          <span>{{ $t('showAllServices') }}</span>
+          <svg aria-hidden="true" class="m-button__icon m-button__icon--after">
+            <use xlink:href="#icon-chevron-down"></use>
+          </svg>
+        </button>
+      </div>
       <div v-if="$store.state.data.maxSlotsExceeded"
         class="m-component m-component-callout m-component-callout--warning m-component-callout--fullwidth appointment-cancel">
         <div>
@@ -142,21 +147,13 @@
         </div>
       </div>
       <div v-if="showCaptcha" style="margin: 2rem 0 2rem 0">
-        <AltchaCaptcha
-          @validationResult="(valid) => (isCaptchaValid = valid)"
-          @tokenChanged="onCaptchaTokenChanged"
-        />
+        <AltchaCaptcha @validationResult="(valid) => (isCaptchaValid = valid)" @tokenChanged="onCaptchaTokenChanged" />
       </div>
-      <button
-        class="m-button m-button--primary m-button--animated-right button-next"
-        color="white"
-        @click="nextStep"
-        :disabled="
-          !$store.state.data.service ||
+      <button class="m-button m-button--primary m-button--animated-right button-next" color="white" @click="nextStep"
+        :disabled="!$store.state.data.service ||
           $store.state.data.appointmentCount === 0 ||
           $store.state.data.maxSlotsExceeded ||
-          ( showCaptcha && !isCaptchaValid)"
-      >
+          (showCaptcha && !isCaptchaValid)">
         <span>{{ $t('nextToAppointment') }}</span>
         <svg aria-hidden="true" class="m-button__icon">
           <use xlink:href="#icon-arrow-right"></use>
@@ -167,7 +164,7 @@
 </template>
 
 <script>
-import { mdiDomain, mdiMagnify, mdiPlus, mdiMinus } from '@mdi/js'
+import { mdiDomain, mdiMagnify, mdiPlus, mdiMinus, mdiChevronDown } from '@mdi/js'
 import AltchaCaptcha from './AltchaCaptcha.vue'
 
 export default {
@@ -210,6 +207,24 @@ export default {
         office.scope &&
         office.scope.captchaActivatedRequired === true
       );
+    },
+    filteredSubServices() {
+      if (!this.$store.state.data.service?.subServices) return [];
+
+      if (this.$store.state.data.service.subServices.length <= 5) {
+        return this.$store.state.data.service.subServices;
+      }
+
+      return this.showAllServices
+        ? this.$store.state.data.service.subServices
+        : this.$store.state.data.service.subServices.slice(0, 3);
+    },
+    shouldShowMoreButton() {
+      return (
+        this.$store.state.data.service?.subServices &&
+        this.$store.state.data.service.subServices.length > 5 &&
+        !this.showAllServices
+      );
     }
   },
   props: [
@@ -222,8 +237,10 @@ export default {
       searchSvg: mdiMagnify,
       plusSvg: mdiPlus,
       minusSvg: mdiMinus,
+      chevronDownSvg: mdiChevronDown,
       appointmentCountTriggered: 0,
-      isCaptchaValid: false
+      isCaptchaValid: false,
+      showAllServices: false
     }
   },
   methods: {
@@ -267,8 +284,8 @@ export default {
     },
     getServiceName(serviceId) {
       return typeof this.$store.state.servicesById[serviceId] != 'undefined'
-          ? this.$store.state.servicesById[serviceId].name
-          : null
+        ? this.$store.state.servicesById[serviceId].name
+        : null
     },
     suggest(event) {
       if (!event.target.value) {
@@ -278,7 +295,6 @@ export default {
       this.filteredServices = this.$store.state.services.filter(item => {
         const containsService = item.name.toLowerCase().includes(event.target.value.toLowerCase())
         let containsSubService = false
-
         if (item.subServices) {
           item.subServices.forEach((subService) => {
             if (subService.name.toLowerCase().includes(event.target.value.toLowerCase())) {

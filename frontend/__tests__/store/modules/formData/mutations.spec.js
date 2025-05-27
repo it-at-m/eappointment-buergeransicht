@@ -145,7 +145,12 @@ describe('Form data mutations', () => {
             appointmentCounts: {
                 1: 3
             },
-            appointmentCount: 3
+            appointmentCount: 3,
+            servicesById: {
+                1: { id: 1, maxQuantity: 3 },
+                2: { id: 2, maxQuantity: 3 },
+                3: { id: 3, maxQuantity: 3 }
+            }
         }
 
         mutations.setService(state, {
@@ -154,9 +159,9 @@ describe('Form data mutations', () => {
                 name: 'Service 1',
                 count: 2,
                 combinable: {
-                    1: [1],
-                    2: [1],
-                    3: [1]
+                    "1": { "1": [1] },
+                    "2": { "2": [1] },
+                    "3": { "3": [1] }
                 },
                 subServiceCounts: {
                     2: 1,
@@ -177,8 +182,9 @@ describe('Form data mutations', () => {
             name: 'Service 1',
             count: 2,
             combinable: {
-                2: [1],
-                3: [1]
+                "1": { "1": [1] },
+                "2": { "2": [1] },
+                "3": { "3": [1] }
             },
             subServiceCounts: {
                 2: 1,
@@ -199,7 +205,7 @@ describe('Form data mutations', () => {
         })
     })
 
-    it('setService sets service withouth subservices in store', async () => {
+    it('setService sets service without subservices in store', async () => {
         const state = {
             service: {
                 id: 1,
@@ -217,18 +223,23 @@ describe('Form data mutations', () => {
             appointmentCounts: {
                 1: 3
             },
-            appointmentCount: 3
+            appointmentCount: 3,
+            servicesById: {
+                1: { id: 1, maxQuantity: 3 },
+                2: { id: 2, maxQuantity: 3 },
+                3: { id: 3, maxQuantity: 3 }
+            }
         }
 
         mutations.setService(state, {
             service: {
                 id: 1,
-                    name: 'Service 1',
+                name: 'Service 1',
                 count: 2,
                 combinable: {
-                    1: [1],
-                    2: [1],
-                    3: [1]
+                    "1": { "1": [1] },
+                    "2": { "2": [1] },
+                    "3": { "3": [1] }
                 },
                 subServiceCounts: {}
             },
@@ -246,8 +257,9 @@ describe('Form data mutations', () => {
             name: 'Service 1',
             count: 2,
             combinable: {
-                2: [1],
-                3: [1]
+                "1": { "1": [1] },
+                "2": { "2": [1] },
+                "3": { "3": [1] }
             },
             subServiceCounts: {},
             subServices: [

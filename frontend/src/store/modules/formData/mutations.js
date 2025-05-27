@@ -120,12 +120,38 @@ export default {
         }
 
         let combinable = service.combinable
+        let orderedServiceIds = []
+        
+        // Convert new format to old format for compatibility while preserving order
+        if (Object.keys(combinable).every(key => !isNaN(parseInt(key)))) {
+            const oldFormatCombinable = {}
+            // Store the order of services based on the numbered keys
+            orderedServiceIds = Object.entries(combinable)
+                .sort(([a], [b]) => parseInt(a) - parseInt(b))
+                .map(([, entry]) => {
+                    const [[serviceId]] = Object.entries(entry)
+                    return serviceId
+                })
+            
+            Object.values(combinable).forEach(entry => {
+                const [[serviceId, providers]] = Object.entries(entry)
+                oldFormatCombinable[serviceId] = providers
+            })
+            combinable = oldFormatCombinable
+        }
+
         if (typeof combinable[parseInt(service.id)] !== "undefined") {
             delete combinable[parseInt(service.id)]
+            orderedServiceIds = orderedServiceIds.filter(id => id !== service.id.toString())
         }
 
         if (! service.subServices) {
-            service.subServices = Object.entries(combinable).map(([subServiceId, providers]) => {
+            // Use the ordered service IDs if available, otherwise fallback to Object.entries
+            const serviceEntries = orderedServiceIds.length > 0
+                ? orderedServiceIds.map(id => [id, combinable[id]])
+                : Object.entries(combinable)
+                
+            service.subServices = serviceEntries.map(([subServiceId, providers]) => {
                 return {
                     id: parseInt(subServiceId),
                     count: service.subServiceCounts && service.subServiceCounts[subServiceId]
