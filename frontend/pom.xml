@@ -19,7 +19,7 @@
 
     <properties>
         <exec.maven.plugin>3.5.0</exec.maven.plugin>
-        <maven.clean.plugin>3.4.0</maven.clean.plugin>
+        <maven.clean.plugin>3.5.0</maven.clean.plugin>
         <sonar.sources>src,public</sonar.sources>
         <sonar.coverage.exclusions>src,public</sonar.coverage.exclusions>
     </properties>
