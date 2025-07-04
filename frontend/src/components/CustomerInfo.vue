@@ -110,7 +110,6 @@ export default {
       },
       telephone: {
         required: this.isTelephoneRequired ? required : () => true,
-        maxLength: maxLength(20),
         validFormat: this.validTelephoneFormat
       },
       customTextfield: {
@@ -310,7 +309,7 @@ export default {
         });
     },
     validTelephoneFormat(value) {
-      const phoneRegex = /^\+?\d+$/;
+      const phoneRegex = /^\+?[0-9]\d{6,14}$/;
       return !value || phoneRegex.test(value);
     },
     getEmailAriaLabel() {
