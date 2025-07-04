@@ -110,6 +110,7 @@ export default {
       },
       telephone: {
         required: this.isTelephoneRequired ? required : () => true,
+        maxLength: maxLength(16),
         validFormat: this.validTelephoneFormat
       },
       customTextfield: {
