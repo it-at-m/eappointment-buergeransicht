@@ -110,6 +110,7 @@ describe('Customer info', () => {
 
         nameInput.setValue('Max')
         emailInput.setValue('max@test.de')
+        telephoneInput.setValue('+4912345678')
         wrapper.vm.customer.dataProtection = true
         dataProtectionCheckbox.setChecked()
 
