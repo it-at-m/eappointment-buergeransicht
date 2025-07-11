@@ -62,12 +62,12 @@
     <p>Hinweis: Die mit * gekennzeichneten Eingabefelder sind Pflichtfelder.</p>
 
     <InfoMessage
-        v-if="$store.state.error === 'tooManyAppointmentsWithSameMail'"
+        v-if="$store.state.error"
         :type="'warning'"
-        :title="$t('tooManyAppointmentsWithSameMail')"
-        :text="$t('cancelSomeAppointments')"
+        :title="$t(`${$store.state.error}Title`)"
+        :text="$t(`${$store.state.error}Text`)"
         :tabindex="5"
-    ></InfoMessage>
+    />
 
     <button
       id="customer-submit-button"
@@ -247,7 +247,7 @@ export default {
       if (!this.$v.telephone.$dirty) return errors;
       !this.$v.telephone.required && errors.push(this.$t('telephoneIsRequired'));
       !this.$v.telephone.maxLength && errors.push(this.$t('textLengthExceeded'));
-      !this.$v.telephone.validFormat && errors.push(this.$t('mustBeValidTelephone'));
+      !this.$v.telephone.validFormat && errors.push(this.$t('invalidTelephoneText'));
       return errors;
     },
     customTextfieldErrors() {
@@ -299,12 +299,10 @@ export default {
           this.$emit('next')
           window.scrollTo(0, 0)
           this.$v.$reset()
-        }, (errors) => {
-          console.error(errors)
-          this.$store.state.error = 'tooManyAppointmentsWithSameMail'
         })
         .catch(error => {
           if (error.errors && Array.isArray(error.errors)) {
+            this.$store.state.error = error.errors[0]?.errorCode
             this.dateError = error.errors[0]?.errorMessage || this.$t('applicationError');
           } else {
             this.dateError = this.$t('networkError');
