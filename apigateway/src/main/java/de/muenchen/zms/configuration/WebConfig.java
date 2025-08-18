@@ -12,8 +12,8 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/buergeransicht/**")
-                .addResourceLocations("classpath:/public/buergeransicht/")
+        registry.addResourceHandler("/buergeransicht1/**")
+                .addResourceLocations("classpath:/public/buergeransicht1/")
                 .setCachePeriod(3600)
                 .resourceChain(true)
                 .addResolver(new PathResourceResolver() {

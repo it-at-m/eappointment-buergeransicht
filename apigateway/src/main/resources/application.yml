@@ -36,9 +36,9 @@ spring:
         - id: backend
           uri: http://zmscitizenapi:8080/terminvereinbarung/api/citizen
           predicates:
-            - Path=/buergeransicht/api/backend/**
+            - Path=/buergeransicht1/api/backend/**
           filters:
-            - RewritePath=/buergeransicht/api/backend/(?<segment>.*), /terminvereinbarung/api/citizen/$\{segment}
+            - RewritePath=/buergeransicht1/api/backend/(?<segment>.*), /terminvereinbarung/api/citizen/$\{segment}
             - RemoveResponseHeader=WWW-Authenticate
       default-filters:
         - RemoveResponseHeader=Expires

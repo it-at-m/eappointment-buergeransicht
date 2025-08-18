@@ -3,7 +3,7 @@ import WebpackAssetsManifest from 'webpack-assets-manifest'
 
 export default defineConfig({
   transpileDependencies: true,
-  publicPath: '/buergeransicht/',
+  publicPath: '/buergeransicht1/',
   configureWebpack: config => {
     config.plugins = config.plugins.concat(
         new WebpackAssetsManifest({
@@ -13,6 +13,6 @@ export default defineConfig({
   },
   devServer: {
       port: "8082",
-      proxy: 'http://localhost:8082/buergeransicht/'
+      proxy: 'http://localhost:8082/buergeransicht1/'
   }
 })
