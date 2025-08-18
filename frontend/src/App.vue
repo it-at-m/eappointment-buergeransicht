@@ -63,7 +63,7 @@ export default {
   computed: {
     linkBaseUrl () {
       if (process.env.NODE_ENV === 'development' || typeof this.baseUrl === 'undefined') {
-        return '/buergeransicht/'
+        return '/buergeransicht1/'
       }
 
       return this.baseUrl + '/'
@@ -80,9 +80,9 @@ export default {
   },
   methods: {
     loadData() {
-      let baseUrl = this.baseUrl ?? '/buergeransicht'
+      let baseUrl = this.baseUrl ?? '/buergeransicht1'
       if (process.env.NODE_ENV === 'development') {
-        baseUrl = 'http://localhost:8080/buergeransicht'
+        baseUrl = 'http://localhost:8080/buergeransicht1'
       }
 
       this.$store.state.settings.endpoints["VUE_APP_ZMS_API_BASE"] = baseUrl
